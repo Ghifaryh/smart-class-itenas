@@ -1,0 +1,119 @@
+/* Style the links inside the sidenav */
+
+#mySidenav a {
+    /* margin-top: 320px; */
+    margin-top: 10%;
+    position: absolute;
+    /* Position them relative to the browser window */
+    left: -200px;
+    /* Position them outside of the screen */
+    transition: 0.3s;
+    /* Add transition on hover */
+    padding: 15px;
+    /* 15px padding */
+    width: 250px;
+    /* Set a specific width */
+    text-decoration: none;
+    /* Remove underline */
+    font-size: 20px;
+    /* Increase font size */
+    border-radius: 0 15px 15px 0;
+    z-index: 2;
+    /* Rounded corners on the top right and bottom right side */
+}
+
+.teks {
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+#home {
+    color: #000000;
+    outline: 2px solid #ff7b01;
+    top: 20px;
+    /* background-color: #04AA6D; */
+    background-color: #ffffff;
+}
+
+#daftar {
+    color: #ffffff;
+    outline: 2px solid #ffffff;
+    top: 85px;
+    background-color: #ff7b01;
+}
+
+#status {
+    color: #000000;
+    outline: 2px solid #ff7b01;
+    top: 145px;
+    /* background-color: #04AA6D; */
+    background-color: #ffffff;
+}
+
+.logowsidebaro {
+    padding-right: 20px;
+    color: orange;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+    font-size: 1.8vw;
+}
+
+.logowsidebarw {
+    padding-right: 20px;
+    color: white;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+    font-size: 1.8vw;
+}
+
+@media only screen and (min-width: 768px) {
+    #mySidenav a:hover {
+        left: 0px;
+        /* On mouse-over, make the elements appear as they should */
+    }
+}
+
+@media (max-width: 480px) {
+    #mySidenav a {
+        /* top: 20% !important; */
+        width: 35%;
+        padding: 2%;
+        font-size: 0.6rem;
+        /* Position them relative to the browser window */
+        /* left: 200px; */
+        left: -100%;
+        margin: 100%;
+        margin-top: -5%;
+    }
+
+    #mySidenav[disabled]:hover {
+        pointer-events: none;
+    }
+
+    #home {
+        color: #000000;
+        outline: 2px solid #ff7b01;
+        top: 25%;
+        /* background-color: #04AA6D; */
+        background-color: #ffffff;
+    }
+
+    #daftar {
+        color: #ffffff;
+        outline: 2px solid #ffffff;
+        top: 30%;
+        background-color: #ff7b01;
+    }
+
+    #status {
+        color: #000000;
+        outline: 2px solid #ff7b01;
+        top: 35%;
+        /* background-color: #04AA6D; */
+        background-color: #ffffff;
+    }
+
+    .logowsidebaro,
+    .logowsidebarw {
+        font-size: 0.8rem;
+    }
+}
