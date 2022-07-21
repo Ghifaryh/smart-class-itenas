@@ -17,6 +17,7 @@
 
     {{-- Custom css --}}
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/stylesidebar.css">
     <script src="scripts/script.js"></script>
 
 
@@ -29,7 +30,7 @@
     <header>
         {{-- navbar --}}
         @include('partials.navbar')
-
+        @include('partials.sidebardosen')
     </header>
 
     <div class="container my-3">
