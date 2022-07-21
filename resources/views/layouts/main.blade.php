@@ -32,7 +32,7 @@
 
     </header>
 
-    <div class="container my-3">
+    <div class="container-fluid my-3 contents-all px-5">
         @yield('container')
     </div>
 
