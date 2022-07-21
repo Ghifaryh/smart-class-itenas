@@ -2,16 +2,16 @@
 
 #mySidenav a {
     /* margin-top: 320px; */
-    margin-top: 10%;
+    margin-top: 7%;
     position: absolute;
     /* Position them relative to the browser window */
-    left: -200px;
+    left: -250px;
     /* Position them outside of the screen */
     transition: 0.3s;
     /* Add transition on hover */
     padding: 15px;
     /* 15px padding */
-    width: 250px;
+    width: 300px;
     /* Set a specific width */
     text-decoration: none;
     /* Remove underline */
@@ -28,7 +28,7 @@
     font-size: 1rem;
 }
 
-#home {
+#side1 {
     color: #000000;
     outline: 2px solid #ff7b01;
     top: 20px;
@@ -36,17 +36,17 @@
     background-color: #ffffff;
 }
 
-#daftar {
+#side2 {
     color: #ffffff;
     outline: 2px solid #ffffff;
     top: 85px;
     background-color: #ff7b01;
 }
 
-#status {
+#side3 {
     color: #000000;
     outline: 2px solid #ff7b01;
-    top: 145px;
+    top: 150px;
     /* background-color: #04AA6D; */
     background-color: #ffffff;
 }
@@ -89,7 +89,7 @@
         pointer-events: none;
     }
 
-    #home {
+    #side1 {
         color: #000000;
         outline: 2px solid #ff7b01;
         top: 25%;
@@ -97,14 +97,14 @@
         background-color: #ffffff;
     }
 
-    #daftar {
+    #side2 {
         color: #ffffff;
         outline: 2px solid #ffffff;
         top: 30%;
         background-color: #ff7b01;
     }
 
-    #status {
+    #side3 {
         color: #000000;
         outline: 2px solid #ff7b01;
         top: 35%;
