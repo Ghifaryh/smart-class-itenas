@@ -1,8 +1,23 @@
-body {
-    background-color: red;
-}
-
-.navbar-brand .titlewb {
+.navbar-brand .titlewb,
+.content-title {
     color: orange !important;
     /* margin-top: 1000spx !important; */
+}
+
+header {
+    background-color: #ffffff !important;
+}
+
+body:not(header) {
+    background-color: #f5f5f5;
+}
+
+.contents-wrapper {
+    /* background-color: white; */
+    padding: 0 1vw 0;
+}
+
+/* .contents-wrapper h2 { */
+.col .content-title {
+    border-bottom: 2px solid orange;
 }
