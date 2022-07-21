@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="style/stylesidebar.css">
     <script src="scripts/script.js"></script>
 
+    {{-- JQ --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
 
     {{-- icon --}}
     <script src="https://kit.fontawesome.com/57a5f9b5e4.js" crossorigin="anonymous"></script>
