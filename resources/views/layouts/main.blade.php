@@ -19,14 +19,18 @@
     <link rel="stylesheet" href="style/style.css">
     <script src="scripts/script.js"></script>
 
+
+    {{-- icon --}}
+    <script src="https://kit.fontawesome.com/57a5f9b5e4.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
     <header>
+        {{-- navbar --}}
+        @include('partials.navbar')
 
     </header>
-    {{-- navbar --}}
-    @include('partials.navbar')
 
     <div class="container my-3">
         @yield('container')
