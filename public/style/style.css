@@ -21,3 +21,11 @@ body:not(header) {
 .col .content-title {
     border-bottom: 2px solid orange;
 }
+
+.btn-shtable {
+    cursor: pointer;
+}
+
+.sh-table {
+    display: none;
+}
