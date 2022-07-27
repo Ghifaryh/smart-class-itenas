@@ -30,7 +30,12 @@
     <header>
         {{-- navbar --}}
         @include('partials.navbar')
-        @include('partials.sidebardosen')
+        @if ($title === "Home")
+            @include('partials.sidebardosen')
+            
+        @else
+            
+        @endif
     </header>
 
     <div class="container-fluid my-3 contents-all px-5">
