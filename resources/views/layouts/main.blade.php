@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="style/stylesidebar.css">
     <script src="scripts/script.js"></script>
 
+    {{-- JQ --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     {{-- icon --}}
     <script src="https://kit.fontawesome.com/57a5f9b5e4.js" crossorigin="anonymous"></script>
