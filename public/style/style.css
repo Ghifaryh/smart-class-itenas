@@ -53,9 +53,9 @@ body:not(header) {
 }
 
 @media (max-width: 450px) {
-.h-custom {
-    height: 100%;
-}
+    .h-custom {
+        height: 100%;
+    }
 }
 
 @media only screen and (min-width: 768px) {
