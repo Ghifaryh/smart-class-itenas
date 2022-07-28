@@ -71,6 +71,3 @@ body:not(header) {
         display: unset;
     }
 }
-
-@media handheld {
-}
