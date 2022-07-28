@@ -64,3 +64,13 @@ body:not(header) {
         /* On mouse-over, make the elements appear as they should */
     }
 }
+
+/* Mobile */
+@media (max-width: 480px) {
+    .sh-table {
+        display: unset;
+    }
+}
+
+@media handheld {
+}

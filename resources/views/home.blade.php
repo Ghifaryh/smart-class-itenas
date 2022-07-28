@@ -32,7 +32,7 @@
                 <h2 class="content-title text-center mt-3"> List Ruangan</h2>
                 <div class="container r-wrapper">
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable1()">Ruangan 1</button> --}}
-                    <p class="fw-bold btn btn-shtable" onclick="showTable1()">Ruangan 1</p>
+                    <p class="fw-bold btn-shtable" onclick="showTable1()">Ruangan 1</p>
                     <table class="table sh-table" id="table1">
                         <thead class="bg-light">
                             <tr>
@@ -66,7 +66,7 @@
 
                 <div class="container r-wrapper">
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable2()">Ruangan 2</button> --}}
-                    <p class="fw-bold btn btn-shtable" onclick="showTable2()">Ruangan 2</p>
+                    <p class="fw-bold btn-shtable" onclick="showTable2()">Ruangan 2</p>
                     <table class="table sh-table" id="table2">
                         <thead class="bg-light">
                             <tr>
@@ -100,7 +100,7 @@
 
                 <div class="container r-wrapper">
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable2()">Ruangan 2</button> --}}
-                    <p class="fw-bold btn btn-shtable" onclick="showTable3()">Ruangan 3</p>
+                    <p class="fw-bold btn-shtable" onclick="showTable3()">Ruangan 3</p>
                     <table class="table sh-table" id="table3">
                         <thead class="bg-light">
                             <tr>
