@@ -53,9 +53,9 @@ body:not(header) {
 }
 
 @media (max-width: 450px) {
-.h-custom {
-    height: 100%;
-}
+    .h-custom {
+        height: 100%;
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -63,4 +63,14 @@ body:not(header) {
         left: 0px;
         /* On mouse-over, make the elements appear as they should */
     }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .sh-table {
+        display: unset;
+    }
+}
+
+@media handheld {
 }

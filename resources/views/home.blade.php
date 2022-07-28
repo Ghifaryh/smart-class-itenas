@@ -5,7 +5,9 @@
         <div class="col">
             <div class="row">
                 <h2 class="content-title text-center"> About</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat harum autem, quia veniam aliquid fugit
+                <p class="text-about" style="text-align: justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Quaerat harum autem,
+                    quia veniam aliquid fugit
                     qui
                     non, iure rerum sed minus amet, temporibus tempora necessitatibus. Praesentium, quam ducimus
                     necessitatibus
