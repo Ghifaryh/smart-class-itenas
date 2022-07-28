@@ -51,13 +51,6 @@
     background-color: #ffffff;
 }
 
-.logowsidebarnv {
-    padding-right: 5px;
-    color: orange;
-    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
-    font-size: 1vw;
-}
-
 .logowsidebaro {
     padding-right: 20px;
     color: orange;
@@ -78,21 +71,21 @@
     padding: 15px;
     margin: auto;
   }
-  
+
   .form-signin .checkbox {
     font-weight: 400;
   }
-  
+
   .form-signin .form-floating:focus-within {
     z-index: 2;
   }
-  
+
   .form-signin input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
   }
-  
+
   .form-signin input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
@@ -111,9 +104,9 @@
 }
 
 @media (max-width: 450px) {
-.h-custom {
-    height: 100%;
-}
+    .h-custom {
+        height: 100%;
+    }
 }
 
 @media only screen and (min-width: 768px) {
