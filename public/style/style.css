@@ -40,3 +40,27 @@ body:not(header) {
 .sh-table {
     display: none;
 }
+
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+.h-custom {
+    height: 100%;
+}
+}
+
+@media only screen and (min-width: 768px) {
+    #mySidenav a:hover {
+        left: 0px;
+        /* On mouse-over, make the elements appear as they should */
+    }
+}
