@@ -18,6 +18,7 @@
     {{-- Custom css --}}
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/stylesidebar.css">
+    <link rel="stylesheet" href="style/styleujicoba.css">
     <script src="scripts/script.js"></script>
 
     {{-- JQ --}}

@@ -15,31 +15,24 @@
             </form>
 
             <div class="dropdown me-3">
-                {{-- If else login or not --}}
-                <a href="/login" class="d-block link-dark text-decoration-none text-nowrap align-items-center"
-                    href="#"><i class="fa-solid fa-right-to-bracket logowsidebarnv pe-1"
-                        aria-expanded="false"></i>
-                    <span class="login-text fw-bold">
-                        Login
-                    </span>
-                </a>
 
-                {{-- <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
-                    data-bs-toggle="dropdown" aria-expanded="false"> --}}
+                @auth
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                 {{-- If have image --}}
                 {{-- <img src="https://avatars.githubusercontent.com/u/93874441?v=4" alt="mdo" width="32"
                         height="32" class="rounded-circle"> --}}
 
                 {{-- If not --}}
-                {{-- <i class="fa-solid fa-user me-1 logowsidebarnv fs-5"></i>
+                <i class="fa-solid fa-user me-1 logowsidebarnv fs-5"></i>
 
-                    <span class="user-name">
-                        Asep Komaruddin Purnama Syahid Shakespear
+                    <span class="user-name fw-bold">
+                        {{ auth()->user()->name }}
                     </span>
 
-                </a> --}}
+                </a>
 
-                {{-- <ul class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2"
+                <ul class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2"
                     style="">
                     <li><a class="dropdown-item" href="#"><i
                                 class="fa-solid fa-building-circle-exclamation logowsidebarnv me-2"></i>Status
@@ -48,9 +41,26 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#"><i
-                                class="fa-solid fa-right-from-bracket logowsidebarnv me-2"></i>Logout</a></li>
-                </ul> --}}
+                    <li>
+                        <form action="/logout" method="post">
+                            @csrf
+                            <button type="submit" class="dropdown-item"><i class="fa-solid fa-right-from-bracket logowsidebarnv me-2"></i>Logout</button>
+                        </form>
+                    </li>
+                </ul>
+                
+                @else
+                
+                {{-- If else login or not --}}
+                <a href="/login" class="d-block link-dark text-decoration-none text-nowrap align-items-center"
+                    href="#"><i class="fa-solid fa-right-to-bracket logowsidebarnv pe-1"
+                        aria-expanded="false"></i>
+                    <span class="login-text fw-bold">
+                        Login
+                    </span>
+                </a>
+                @endauth
+
             </div>
 
             <img src="https://www.itenas.ac.id/wp-content/uploads/2020/07/Logo-id-Heebo.png" width="5%"
