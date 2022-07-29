@@ -34,31 +34,40 @@
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable1()">Ruangan 1</button> --}}
                     <p class="fw-bold btn-shtable" onclick="showTable1()">Ruangan 1</p>
                     <table class="table sh-table" id="table1">
-                        <thead class="bg-light">
+                        <thead class="bg-light text-center">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Jam Pakai</th>
+                                <th scope="col">Jurusan</th>
+                                <th scope="col">Mata Kuliah</th>
+                                <th scope="col">Dosen</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <tr>
                                 <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td class="">Senin, 18 Juli <br>(07.00 - 10.00)</td>
+                                <td>Sastra Mesin</td>
+                                <td>Engineering enjoy teuing</td>
+                                <td>Asep Komrudin</td>
+                                <td>Booked</td>
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
+                                <td>Senin, 18 Juli <br>(10.00 - 12.00)</td>
+                                <td>Sastra Informatika</td>
+                                <td>Menjadi Si paling IT </td>
+                                <td>Hasby uwu</td>
+                                <td>Booked</td>
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
+                                <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
+                                <td>Cinta Lingkungan</td>
+                                <td>Bomb Nuclear</td>
+                                <td>Arip kon</td>
+                                <td>Booked</td>
                             </tr>
                         </tbody>
                     </table>
@@ -68,31 +77,40 @@
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable2()">Ruangan 2</button> --}}
                     <p class="fw-bold btn-shtable" onclick="showTable2()">Ruangan 2</p>
                     <table class="table sh-table" id="table2">
-                        <thead class="bg-light">
+                        <thead class="bg-light text-center">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Jam Pakai</th>
+                                <th scope="col">Jurusan</th>
+                                <th scope="col">Mata Kuliah</th>
+                                <th scope="col">Dosen</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <tr>
                                 <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td class="">Senin, 18 Juli <br>(07.00 - 10.00)</td>
+                                <td>Sastra Mesin</td>
+                                <td>Engineering enjoy teuing</td>
+                                <td>Asep Komrudin</td>
+                                <td>Booked</td>
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
+                                <td>Senin, 18 Juli <br>(10.00 - 12.00)</td>
+                                <td>Sastra Informatika</td>
+                                <td>Menjadi Si paling IT </td>
+                                <td>Hasby uwu</td>
+                                <td>Booked</td>
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
+                                <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
+                                <td>Cinta Lingkungan</td>
+                                <td>Bomb Nuclear</td>
+                                <td>Arip kon</td>
+                                <td>Booked</td>
                             </tr>
                         </tbody>
                     </table>
@@ -102,31 +120,36 @@
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable2()">Ruangan 2</button> --}}
                     <p class="fw-bold btn-shtable" onclick="showTable3()">Ruangan 3</p>
                     <table class="table sh-table" id="table3">
-                        <thead class="bg-light">
+                        <thead class="bg-light text-center">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Jam Pakai</th>
+                                <th scope="col">Jurusan</th>
+                                <th scope="col">Mata Kuliah</th>
+                                <th scope="col">Dosen</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <tr>
                                 <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td class="">Senin, 18 Juli <br>(07.00 - 10.00)</td>
+                                <td>Sastra Mesin</td>
+                                <td>Engineering enjoy teuing</td>
+                                <td>Asep Komrudin</td>
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
+                                <td>Senin, 18 Juli <br>(10.00 - 12.00)</td>
+                                <td>Sastra Informatika</td>
+                                <td>Menjadi Si paling IT </td>
+                                <td>Hasby uwu</td>
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
+                                <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
+                                <td>Cinta Lingkungan</td>
+                                <td>Bomb Nuclear</td>
+                                <td>Arip kon</td>
                             </tr>
                         </tbody>
                     </table>
