@@ -36,6 +36,9 @@ body:not(header) {
 
 .btn-shtable {
     cursor: pointer;
+    /* background-color: red;    */
+    font-weight: bolder;
+    display: inline;
 }
 
 .sh-table {
@@ -51,6 +54,14 @@ body:not(header) {
 }
 .h-custom {
     height: calc(100% - 73px);
+}
+
+.container-fluid .btn-book {
+    background-color: white;
+    color: orange;
+    border-color: orange;
+    border-width: 0.2vh;
+    font-weight: bold;
 }
 
 @media (max-width: 450px) {
@@ -70,5 +81,20 @@ body:not(header) {
 @media (max-width: 480px) {
     .sh-table {
         display: unset;
+    }
+
+    /* table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    } */
+    .table-responsive {
+        overflow-x: auto;
+    }
+    .btn-shtable {
+        padding-top: 200px !important;
     }
 }
