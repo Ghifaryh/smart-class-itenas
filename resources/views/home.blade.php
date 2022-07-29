@@ -32,9 +32,14 @@
                 <h2 class="content-title text-center mt-3"> List Ruangan</h2>
                 <div class="container r-wrapper">
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable1()">Ruangan 1</button> --}}
-                    <p class="fw-bold btn-shtable" onclick="showTable1()">Ruangan 1</p>
+                    <i class="fa-solid fa-minus" id="icon-btn-shtable1"></i> <span class="fw-bold btn-shtable"
+                        onclick="showTable1()">
+                        Ruangan 1
+                    </span>
+                    {{-- <p class="fw-bold btn-shtable" onclick="showTable1()">Ruangan 1</p> --}}
                     <div class="table-responsive">
-                        <table class="table sh-table" id="table1">
+                        {{-- <table class="table sh-table" id="table1"> --}}
+                        <table class="table" id="table1">
                             <thead class="bg-light text-center">
                                 <tr>
                                     <th scope="col">No</th>
@@ -77,7 +82,11 @@
 
                 <div class="container r-wrapper">
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable2()">Ruangan 2</button> --}}
-                    <p class="fw-bold btn-shtable" onclick="showTable2()">Ruangan 2</p>
+                    <i class="fa-solid fa-list" id="icon-btn-shtable2"></i> <span class="fw-bold btn-shtable"
+                        onclick="showTable2()">
+                        Ruangan 2
+                    </span>
+                    {{-- <p class="fw-bold btn-shtable" onclick="showTable2()">Ruangan 2</p> --}}
                     <div class="table-responsive">
                         <table class="table sh-table" id="table2">
                             <thead class="bg-light text-center">
@@ -122,7 +131,11 @@
 
                 <div class="container r-wrapper">
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable2()">Ruangan 2</button> --}}
-                    <p class="fw-bold btn-shtable" onclick="showTable3()">Ruangan 3</p>
+                    {{-- <p class="fw-bold btn-shtable" onclick="showTable3()">Ruangan 3</p> --}}
+                    <i class="fa-solid fa-list" id="icon-btn-shtable3"></i> <span class="fw-bold btn-shtable"
+                        onclick="showTable3()">
+                        Ruangan 3
+                    </span>
                     <div class="table-responsive">
                         <table class="table sh-table" id="table3">
                             <thead class="bg-light text-center">

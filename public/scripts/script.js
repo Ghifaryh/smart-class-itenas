@@ -7,8 +7,11 @@ function showTable1() {
     // var t4 = document.getElementById("table4");
     // var t5 = document.getElementById("table5");
     // var t6 = document.getElementById("table6");
+    var ticon1 = document.getElementById("icon-btn-shtable1");
 
     t1.classList.toggle("sh-table");
+    ticon1.classList.toggle("fa-list");
+    ticon1.classList.toggle("fa-minus");
     // t2.classList.add("sh-table");
     // t3.classList.add("sh-table");
     // t4.classList.add("sh-table");
@@ -31,8 +34,11 @@ function showTable2() {
     // var t4 = document.getElementById("table4");
     // var t5 = document.getElementById("table5");
     // var t6 = document.getElementById("table6");
+    var ticon2 = document.getElementById("icon-btn-shtable2");
 
     t2.classList.toggle("sh-table");
+    ticon2.classList.toggle("fa-list");
+    ticon2.classList.toggle("fa-minus");
     // t1.classList.add("sh-table");
     // t3.classList.add("sh-table");
     // t4.classList.add("sh-table");
@@ -47,8 +53,11 @@ function showTable3() {
     // var t4 = document.getElementById("table4");
     // var t5 = document.getElementById("table5");
     // var t6 = document.getElementById("table6");
+    var ticon3 = document.getElementById("icon-btn-shtable3");
 
     t3.classList.toggle("sh-table");
+    ticon3.classList.toggle("fa-list");
+    ticon3.classList.toggle("fa-minus");
     // t1.classList.add("sh-table");
     // t2.classList.add("sh-table");
     // t4.classList.add("sh-table");
