@@ -20,7 +20,8 @@ header {
 }
 
 body:not(header) {
-    background-color: #f5f5f5;
+    background-color: #f6f5f0;
+    /* background-image: url(https://www.itenas.ac.id/wp-content/uploads/2020/10/Tentang-Itenas-scaled.jpg); */
 }
 
 .contents-wrapper {
@@ -70,7 +71,4 @@ body:not(header) {
     .sh-table {
         display: unset;
     }
-}
-
-@media handheld {
 }
