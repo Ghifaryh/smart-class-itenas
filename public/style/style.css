@@ -21,8 +21,11 @@ header {
 
 body:not(header) {
     background-color: #f6f5f0;
-    /* background-image: url(https://www.itenas.ac.id/wp-content/uploads/2020/10/Tentang-Itenas-scaled.jpg); */
 }
+/*
+.container-fluid .dashboard-dosen {
+    background-image: url(https://www.itenas.ac.id/wp-content/uploads/2020/10/Tentang-Itenas-scaled.jpg);
+} */
 
 .contents-wrapper {
     /* background-color: white; */
