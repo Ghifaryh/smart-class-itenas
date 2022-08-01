@@ -6,9 +6,10 @@
         background-position: center;
         background-size: cover;
 
+        backdrop-filter: blur(3.5px);
+
+
     }
-
-
 
     .reg-room-wrapper {
         /* background-color: white; */
@@ -44,8 +45,8 @@
     <div class="container-fluid dashboard-dosen ms-5">
         <div class="row">
             <div class="col"></div>
-            <div class="col ms-5">
-                <div class="reg-room-wrapper px-5">
+            <div class="col-md-9 ms-1">
+                <div class="reg-room-wrapper px-5 py-2">
                     <h1 class="fw-bold pt-4">Pendaftaran Ruangan</h1>
                     <div class="reg-room">
                         <h5 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h5>
@@ -78,65 +79,92 @@
                             <div class="col-sm-9">
                                 <p class="reg-room-info">*Pembookingan ruangan akan diproses paling lama 1*24 Jam</p>
                             </div>
-                            <div class="mb-3 text-end">
-                                <button type="submit" class="btn text-white me-5 reg-room-button fw-bold">Daftar</button>
+                            <div class="mb-3 me-3 px-5 text-end">
+                                <button type="submit" class="btn text-white me-5  reg-room-button fw-bold">Daftar</button>
                             </div>
                         </form>
 
                         <div class="table-responsive">
-                            <h2 class="fw-bold border-bottom border-2 border-dark mb-3">List Ruangan</h2>
+                            <h2 class="fw-bold border-bottom border-2 border-dark mb-3">List Proses Pemesanan Ruangan</h2>
                             {{-- <table class="table sh-table" id="table1"> --}}
-                            <table class="table table-striped mb-3" id="table1">
+                            <table class="table table-striped" id="table1">
                                 <thead class="bg-light text-center">
                                     <tr>
                                         <th scope="col">No</th>
+                                        <th scope="col">Ruangan</th>
                                         <th scope="col">Jam Pakai</th>
                                         <th scope="col">Jurusan</th>
                                         <th scope="col">Mata Kuliah</th>
                                         <th scope="col">Dosen</th>
-                                        {{-- <th scope="col">Status</th> --}}
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Opsi</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-center">
+                                <tbody class="text-center align-middle">
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td class="">Senin, 18 Juli <br>(07.00 - 10.00)</td>
+                                        <td>1</td>
+                                        <td>Senin, 18 Juli <br>(07.00 - 10.00)</td>
                                         <td>Sastra Mesin</td>
                                         <td>Engineering enjoy teuing</td>
                                         <td>Asep Komrudin</td>
-                                        {{-- <td>Booked</td> --}}
+                                        <td class="fw-bold">Booked</td>
+                                        <td>
+                                            <a href="" class="btn btn-success">Ubah</a>
+                                            <a href="" class="btn btn-danger">Hapus</a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
+                                        <td>2</td>
                                         <td>Senin, 18 Juli <br>(10.00 - 12.00)</td>
                                         <td>Sastra Informatika</td>
                                         <td>Menjadi Si paling IT </td>
                                         <td>Hasby uwu</td>
-                                        {{-- <td>Booked</td> --}}
+                                        <td class="fw-bold">Booked</td>
+                                        <td>
+                                            <a href="" class="btn btn-success">Ubah</a>
+                                            <a href="" class="btn btn-danger">Hapus</a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
+                                        <td>2</td>
                                         <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
                                         <td>Cinta Lingkungan</td>
                                         <td>Bomb Nuclear</td>
                                         <td>Arip kon</td>
-                                        {{-- <td>Booked</td> --}}
+                                        <td class="fw-bold">Process</td>
+                                        <td>
+                                            <a href="" class="btn btn-success">Ubah</a>
+                                            <a href="" class="btn btn-danger">Hapus</a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
+                                        <td>3</td>
                                         <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
                                         <td>Cinta Lingkungan</td>
                                         <td>Bomb Nuclear</td>
                                         <td>Arip kon</td>
-                                        {{-- <td>Booked</td> --}}
+                                        <td class="text-danger fw-bold">Bentrok</td>
+                                        <td>
+                                            <a href="" class="btn btn-success">Ubah</a>
+                                            <a href="" class="btn btn-danger">Hapus</a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
+                                        <td>4</td>
                                         <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
                                         <td>Cinta Lingkungan</td>
                                         <td>Bomb Nuclear</td>
                                         <td>Arip kon</td>
-                                        {{-- <td>Booked</td> --}}
+                                        <td class="text-danger fw-bold">Bentrok</td>
+                                        <td>
+                                            <a href="" class="btn btn-success">Ubah</a>
+                                            <a href="" class="btn btn-danger">Hapus</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

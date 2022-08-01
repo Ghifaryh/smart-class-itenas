@@ -21,11 +21,11 @@
                     necessitatibus,
                     sequi quam porro dicta, deleniti officia voluptates aut nemo et! Sunt, fuga amet placeat at perferendis
                     pariatur.
-                    <span class="text-danger fw-bold">
+                    {{-- <span class="text-danger fw-bold">
                         <a href="">
                             arip kontol
                         </a>
-                    </span>
+                    </span> --}}
                 </p>
             </div>
             <div class="row">

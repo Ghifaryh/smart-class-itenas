@@ -12,4 +12,11 @@ class DashboardController extends Controller
             'title' => 'Dashboard'
         ]);
     }
+
+    // public function status()
+    // {
+    //     return view('ujicoba.statuspesan', [
+    //         'title' => 'Status Pemesanan'
+    //     ]);
+    // }
 }

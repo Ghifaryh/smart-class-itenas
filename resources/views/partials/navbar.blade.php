@@ -1,7 +1,17 @@
 <header class="py-3 mb-3 border-bottom">
     <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
+        {{-- <div class="logo-header d-flex align-items-center col-lg-4 mb-2 mb-lg-0" aria-expanded="true">
+            <a href="https://www.itenas.ac.id/">
+                <img src="https://www.itenas.ac.id/wp-content/uploads/2021/01/Varian-Logo-Itenas-FULL-02.png"
+                    alt="lah ilang" width="100%">
+            </a>
+            <span class="titlewb fw-bold text-nowrap fs-2">
+                <a href="/" class="text-decoration-none">SMART CLASSROOM</a>
+            </span>
+        </div> --}}
+
         <div class="logo-header">
-            <a href="" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none"
+            <a href="/" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none"
                 aria-expanded="true">
                 <img src="https://www.itenas.ac.id/wp-content/uploads/2021/01/Varian-Logo-Itenas-FULL-02.png"
                     alt="" width="80%">

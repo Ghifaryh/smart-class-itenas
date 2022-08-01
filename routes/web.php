@@ -42,3 +42,5 @@ Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
+
+// Route::get('/statuspesan', [DashboardController::class, 'status']);
