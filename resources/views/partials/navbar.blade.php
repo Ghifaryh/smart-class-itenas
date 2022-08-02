@@ -63,7 +63,7 @@
                 @if (($title == 'Login') Or ($title == 'Register'))
                 {{-- If else login or not --}}
                 @else
-                    <a href="#" class="d-block link-dark text-decoration-none text-nowrap align-items-center"
+                    <a href="/login" class="d-block link-dark text-decoration-none text-nowrap align-items-center"
                         href="#"><i class="fa-solid fa-right-to-bracket logowsidebarnv pe-1"
                             aria-expanded="false"></i>
                         <span class="login-text fw-bold">
