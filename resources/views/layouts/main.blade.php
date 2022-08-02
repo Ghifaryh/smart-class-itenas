@@ -33,8 +33,11 @@
     <header>
         {{-- navbar --}}
         @include('partials.navbar')
-        @if ($title === 'Dashboard')
+        @if (($title === 'Dashboard') Or ($title === 'Home'))
+            @auth
             @include('partials.sidebardosen')
+            @else
+            @endauth
         @else
         @endif
     </header>

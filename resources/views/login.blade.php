@@ -9,10 +9,24 @@
           class="img-fluid" alt="Sample image">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ session('success') }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+      @if (session()->has('loginError'))
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('loginError') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      @endif
+        <div class="d-flex flex-row align-items-center justify-content-center justify-content-center">
+          <p class="lead fw-normal mb-0 text-center">Sign in</p>
+        </div>
+        
         <form>
-          <div class="d-flex flex-row align-items-center justify-content-center justify-content-center">
-            <p class="lead fw-normal mb-0 text-center">Sign in</p>
-          </div>
 
           <div class="divider d-flex align-items-center my-4">
           </div>
