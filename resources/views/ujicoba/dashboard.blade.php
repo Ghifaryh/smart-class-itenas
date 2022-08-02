@@ -108,7 +108,7 @@
                                         <td>Sastra Mesin</td>
                                         <td>Engineering enjoy teuing</td>
                                         <td>Asep Komrudin</td>
-                                        <td class="fw-bold">Booked</td>
+                                        <td class="fw-bold text-success">Booked</td>
                                         <td>
                                             <a href="" class="btn btn-success">Ubah</a>
                                             <a href="" class="btn btn-danger">Hapus</a>
@@ -121,7 +121,7 @@
                                         <td>Sastra Informatika</td>
                                         <td>Menjadi Si paling IT </td>
                                         <td>Hasby uwu</td>
-                                        <td class="fw-bold">Booked</td>
+                                        <td class="fw-bold text-success">Booked</td>
                                         <td>
                                             <a href="" class="btn btn-success">Ubah</a>
                                             <a href="" class="btn btn-danger">Hapus</a>
@@ -134,7 +134,7 @@
                                         <td>Cinta Lingkungan</td>
                                         <td>Bomb Nuclear</td>
                                         <td>Arip kon</td>
-                                        <td class="fw-bold">Process</td>
+                                        <td class="fw-bold text-primary">Process</td>
                                         <td>
                                             <a href="" class="btn btn-success">Ubah</a>
                                             <a href="" class="btn btn-danger">Hapus</a>
