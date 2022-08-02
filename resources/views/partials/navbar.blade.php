@@ -54,23 +54,22 @@
                         <li>
                             <form action="/logout" method="post">
                                 @csrf
-                                <button type="submit" class="dropdown-item"><i
+                                <button type="submit" class="dropdown-item logout" style="margin-bottom: -0.5vw"><i
                                         class="fa-solid fa-right-from-bracket logowsidebarnv me-2"></i>Logout</button>
                             </form>
                         </li>
                     </ul>
                 @else
-                @if (($title == 'Login') Or ($title == 'Register'))
-                {{-- If else login or not --}}
-                @else
-                    <a href="/login" class="d-block link-dark text-decoration-none text-nowrap align-items-center"
-                        href="#"><i class="fa-solid fa-right-to-bracket logowsidebarnv pe-1"
-                            aria-expanded="false"></i>
-                        <span class="login-text fw-bold">
-                            Login
-                        </span>
-                    </a>
-                @endif
+                    @if ($title == 'Login' or $title == 'Register')
+                        {{-- If else login or not --}}
+                    @else
+                        <a href="/login" class="d-block link-dark text-decoration-none text-nowrap align-items-center"><i
+                                class="fa-solid fa-right-to-bracket logowsidebarnv pe-1" aria-expanded="false"></i>
+                            <span class="login-text fw-bold">
+                                Login
+                            </span>
+                        </a>
+                    @endif
                 @endauth
 
             </div>
