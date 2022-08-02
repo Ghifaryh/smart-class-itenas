@@ -1,47 +1,4 @@
 @extends('layouts.main')
-<style>
-    body {
-        background-image: url('https://www.itenas.ac.id/wp-content/uploads/2020/10/Tentang-Itenas-scaled.jpg');
-
-        /* background-position: center; */
-        /* background-size: cover; */
-        /* background-repeat: no-repeat; */
-        background-size: 100%;
-        /* background-position: 100% 75%; */
-        /* backdrop-filter: blur(3.5px); */
-
-
-    }
-
-    .reg-room-wrapper {
-        /* background-color: white; */
-        background: rgba(255, 255, 255, 0.9);
-        /* height: 173%; */
-        /* display: block; */
-    }
-
-
-    .reg-room-button {
-        background-color: orange !important;
-    }
-
-    .reg-room-info {
-        font-size: 0.85rem !important;
-        color: orange;
-        /* font-weight: 300; */
-    }
-
-    .reg-room-button {
-        width: 20%;
-        box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
-        border-radius: 20px !important;
-    }
-
-    input,
-    select {
-        box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
-    }
-</style>
 @section('container')
     <div class="container-fluid dashboard-dosen ms-5">
         <div class="row">

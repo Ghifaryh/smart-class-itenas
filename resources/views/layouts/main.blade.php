@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/stylesidebar.css">
     <link rel="stylesheet" href="style/styleujicoba.css">
+    @if ($title === 'Dashboard')
+        <link rel="stylesheet" href="style/styledashboard.css">
+    @endif
+    {{-- <link rel="stylesheet" href="style/styledashboard.css"> --}}
     <script src="scripts/script.js"></script>
 
     {{-- JQ --}}
@@ -33,9 +37,9 @@
     <header>
         {{-- navbar --}}
         @include('partials.navbar')
-        @if (($title === 'Dashboard') Or ($title === 'Home'))
+        @if ($title === 'Dashboard' or $title === 'Home')
             @auth
-            @include('partials.sidebardosen')
+                @include('partials.sidebardosen')
             @else
             @endauth
         @else
