@@ -176,7 +176,7 @@
 
                 <div class="container-fluid text-center mt-3 pb-4">
                     {{-- <button class="btn btn-dark text-center" >+ Booking Ruangan</button> --}}
-                    <a href="" class="btn btn-book">+ Booking Ruangan</a>
+                    <a href="/dashboard" class="btn btn-book">+ Booking Ruangan</a>
                 </div>
             </div>
         </div>
