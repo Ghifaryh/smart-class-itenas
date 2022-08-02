@@ -44,7 +44,7 @@
 
                     <ul class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2"
                         style="">
-                        <li><a class="dropdown-item" href="#"><i
+                        <li><a class="dropdown-item d-block" href="#"><i
                                     class="fa-solid fa-building-circle-exclamation logowsidebarnv me-2"></i>Status
                                 Pemesanan</a>
                         </li>
@@ -54,8 +54,9 @@
                         <li>
                             <form action="/logout" method="post">
                                 @csrf
-                                <button type="submit" class="dropdown-item logout" style="margin-bottom: -0.5vw"><i
-                                        class="fa-solid fa-right-from-bracket logowsidebarnv me-2"></i>Logout</button>
+                                <button type="submit" class="d-block dropdown-item logout"><i
+                                        class="fa-solid
+                                    fa-right-from-bracket logowsidebarnv me-2"></i>Logout</button>
                             </form>
                         </li>
                     </ul>
