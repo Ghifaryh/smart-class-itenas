@@ -66,7 +66,7 @@
                     @else
                         <a href="/login" class="d-block link-dark text-decoration-none text-nowrap align-items-center"><i
                                 class="fa-solid fa-right-to-bracket logowsidebarnv pe-1" aria-expanded="false"></i>
-                            <span class="login-text fw-bold">
+                            <span class="login-text fw-bold me-5">
                                 Login
                             </span>
                         </a>
