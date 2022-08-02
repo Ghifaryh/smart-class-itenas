@@ -3,10 +3,12 @@
     body {
         background-image: url('https://www.itenas.ac.id/wp-content/uploads/2020/10/Tentang-Itenas-scaled.jpg');
 
-        background-position: center;
-        background-size: cover;
-
-        backdrop-filter: blur(3.5px);
+        /* background-position: center; */
+        /* background-size: cover; */
+        /* background-repeat: no-repeat; */
+        background-size: 100%;
+        /* background-position: 100% 75%; */
+        /* backdrop-filter: blur(3.5px); */
 
 
     }
@@ -41,7 +43,6 @@
     }
 </style>
 @section('container')
-    <div class="background-image"></div>
     <div class="container-fluid dashboard-dosen ms-5">
         <div class="row">
             <div class="col"></div>
@@ -70,6 +71,11 @@
                                     <option value="3">Ruang 6</option>
                                 </select>
                                 <label for="floatingSelect">Ruangan yang dipilih</label>
+                            </div>
+                            <div class="col-sm-9 form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Jurusan"
+                                    required>
+                                <label for="floatingInput">Jurusan</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" class="form-control" id="floatingInput" placeholder="Mata Kuliah"
