@@ -43,7 +43,7 @@ Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
 
-Route::group(['middleware' => ['auth','ceklevel:dosen']], function(){
+Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
 });

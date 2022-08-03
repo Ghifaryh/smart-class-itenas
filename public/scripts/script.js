@@ -26,6 +26,19 @@ function showTable1() {
     //     x.classList.add("shtable");
     // }
 }
+function shwpass(){
+    var spass = document.getElementById("password");
+    var ipass = document.getElementById("eye");
+    
+    ipass.classList.toggle("fa-eye");
+    ipass.classList.toggle("fa-eye-slash");
+
+    if (spass.type === "password") {
+        spass.type = "text";
+      } else {
+        spass.type = "password";
+      }
+  }
 
 function showTable2() {
     // var t1 = document.getElementById("table1");

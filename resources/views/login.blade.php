@@ -45,8 +45,11 @@
           </div>
 
           <!-- Password input -->
-          <div class="form-outline mb-3">
-            <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Password" required/>
+          <div class="form-outline mb-3 form-group">
+            <div class="input-group">
+              <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Password" required>
+              <span class="input-group-text seepas" onclick="shwpass()"><i class="fa-solid fa-eye" aria-hidden="true" id="eye"></i></span>
+            </div>
             <label class="form-label" for="password">Password</label>
           </div>
 
@@ -99,3 +102,7 @@
     </div>
 </div> --}}
 @endsection
+<script>
+  
+  
+</script>
