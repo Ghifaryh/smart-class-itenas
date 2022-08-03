@@ -37,7 +37,10 @@
                         <i class="fa-solid fa-user me-1 logowsidebarnv fs-5"></i>
 
                         <span class="user-name fw-bold">
-                            {{ auth()->user()->name }}
+                            {{auth()->user()->name}} | @if ((auth()->user()->level == "admin")) 
+                            {{str_replace("a","A", auth()->user()->level)}} 
+                            @else {{str_replace("d","D", auth()->user()->level)}}
+                            @endif
                         </span>
 
                     </a>
