@@ -68,6 +68,10 @@ body:not(header) {
     font-weight: bold;
 }
 
+.seepas{
+    cursor: pointer;
+    }
+
 @media (max-width: 450px) {
     .h-custom {
         height: 100%;

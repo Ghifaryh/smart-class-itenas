@@ -16,20 +16,22 @@
     </script>
 
     {{-- Custom css --}}
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/stylesidebar.css">
-    <link rel="stylesheet" href="style/styleujicoba.css">
+    <link rel="stylesheet" href={{ asset('style/style.css') }}>
+    <link rel="stylesheet" href={{ asset('style/stylesidebar.css') }}>
+    <link rel="stylesheet" href={{ asset('style/styleujicoba.css') }}>
     @if ($title === 'Dashboard')
-        <link rel="stylesheet" href="style/styledashboard.css">
+        <link rel="stylesheet" href={{ asset('style/styledashboard.css') }}>
     @endif
     {{-- <link rel="stylesheet" href="style/styledashboard.css"> --}}
-    <script src="scripts/script.js"></script>
+    <script src={{ asset('scripts/script.js') }}></script>
 
     {{-- JQ --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     {{-- icon --}}
     <script src="https://kit.fontawesome.com/57a5f9b5e4.js" crossorigin="anonymous"></script>
+
+    <link href="https://tik.itenas.ac.id/front/assets/img/logo-tik-favicon.png" rel="icon">
 
 </head>
 

@@ -60,7 +60,9 @@
                                         <th scope="col">Mata Kuliah</th>
                                         <th scope="col">Dosen</th>
                                         <th scope="col">Status</th>
+                                        @if (auth()->user()->level == "admin")
                                         <th scope="col">Opsi</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody class="text-center align-middle">
@@ -72,12 +74,14 @@
                                         <td>Engineering enjoy teuing</td>
                                         <td>Asep Komrudin</td>
                                         <td class="fw-bold text-success">Booked</td>
+                                        @if (auth()->user()->level == "admin")
                                         <td>
                                             <a href="" class="btn btn-success">Ubah</a>
                                             <a href="" class="btn btn-danger">Hapus</a>
-                                        </td>
+                                        </td>  
+                                        @endif
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <th scope="row">2</th>
                                         <td>2</td>
                                         <td>Senin, 18 Juli <br>(10.00 - 12.00)</td>
@@ -128,7 +132,7 @@
                                             <a href="" class="btn btn-success">Ubah</a>
                                             <a href="" class="btn btn-danger">Hapus</a>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>
