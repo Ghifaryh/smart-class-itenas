@@ -22,6 +22,12 @@
     @if ($title === 'Dashboard')
         <link rel="stylesheet" href={{ asset('style/styledashboard.css') }}>
     @endif
+
+    @if ($title === 'Login')
+        <link rel="stylesheet" href={{ asset('style/stylelogin.css') }}>
+    @endif
+
+
     {{-- <link rel="stylesheet" href="style/styledashboard.css"> --}}
     <script src={{ asset('scripts/script.js') }}></script>
 
