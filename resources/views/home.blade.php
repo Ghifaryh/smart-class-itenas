@@ -184,7 +184,7 @@
 
         <div class="col">
             <h2 class="content-title text-center"> Lokasi Gedung</h2>
-            <img src="http://map.itenas.ac.id/map-itenas.jpg" width="100%" alt="">
+            <img src="https://map.itenas.ac.id/map-itenas.jpg" width="100%" alt="">
         </div>
     </div>
 @endsection
