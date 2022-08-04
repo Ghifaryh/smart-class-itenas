@@ -26,17 +26,17 @@
                     @enderror
                 </div>
                 <div class="form-floating">
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email" required value="{{ old('email') }}">
-                    <label for="email">Email address</label>
-                    @error('email')
+                    <input type="text" name="kode_dosen" class="form-control @error('kode_dosen') is-invalid @enderror" id="kode_dosen" placeholder="Kode Dosen" required value="{{ old('kode_dosen') }}">
+                    <label for="kode_dosen">Kode Dosen</label>
+                    @error('kode_dosen')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                     @enderror
                 </div>
                 <div class="form-floating">
-                    <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
-                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Kode Pin" required>
+                    <label for="password">Kode Pin</label>
                     @error('password')
                     <div class="invalid-feedback">
                         {{ $message }}

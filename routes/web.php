@@ -1,10 +1,11 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    // Route::get('/dashboard', [RuanganController::class, 'index']);
 
 });
 // Route::get('/statuspesan', [DashboardController::class, 'status']);

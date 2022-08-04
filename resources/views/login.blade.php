@@ -30,16 +30,14 @@
 
                     <form action="/login" method="post">
                         @csrf
-
                         <div class="divider d-flex align-items-center my-4"></div>
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" name="email"
-                                class="form-control form-control-lg @error('email') is-invalid @enderror" id="email"
-                                placeholder="name@example.com" autofocus required value="{{ old('email') }}" />
-                            <label class="form-label" for="email">Email address</label>
-                            @error('email')
+                            <input type="text" name="kode_dosen" class="form-control form-control-lg @error('kode_dosen') is-invalid @enderror" id="kode_dosen"
+                                placeholder="Kode Dosen" autofocus required value="{{ old('kode_dosen') }}" />
+                            <label class="form-label" for="kode_dosen">Kode Dosen</label>
+                            @error('kode_dosen')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -50,11 +48,11 @@
                         <div class="form-outline mb-3 form-group">
                             <div class="input-group">
                                 <input type="password" name="password" class="form-control form-control-lg" id="password"
-                                    placeholder="Password" required>
+                                    placeholder="Kode Pin" required>
                                 <span class="input-group-text seepas" onclick="shwpass()"><i class="fa-solid fa-eye"
                                         aria-hidden="true" id="eye"></i></span>
                             </div>
-                            <label class="form-label" for="password">Password</label>
+                            <label class="form-label" for="password">Kode Pin</label>
                         </div>
 
                         {{-- <div class="d-flex justify-content-between align-items-center"> --}}

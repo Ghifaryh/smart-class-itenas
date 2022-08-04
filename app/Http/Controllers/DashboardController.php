@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -9,7 +10,8 @@ class DashboardController extends Controller
     public function index()
     {
         return view('ujicoba.dashboard', [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            "ruangan" => Ruangan::all()
         ]);
     }
 

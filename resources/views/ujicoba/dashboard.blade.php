@@ -10,7 +10,7 @@
                         <h5 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h5>
                         <form action="" class="reg-room-form">
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="date" class="form-control" id="floatingInput">
+                                <input type="datetime-local" class="form-control" id="floatingInput">
                                 <label for="floatingInput">Tanggal Pemakaian</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
@@ -20,12 +20,19 @@
                             <div class="col-sm-9 form-floating mb-3">
                                 <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
                                     required>
-                                    <option value="1">Ruang 1</option>
-                                    <option value="2">Ruang 2</option>
+                                    @php
+                                        $num = 1;
+                                    @endphp
+                                    @foreach ($ruangan as $rn)
+                                        <tr>
+                                            <option value="{{ $num++ }}">{{ $rn->keterangan }}</option>
+                                        </tr>
+                                    @endforeach
+                                    {{-- <option value="2">Ruang 2</option>
                                     <option value="3">Ruang Guru</option>
                                     <option value="3">Ruang 4</option>
                                     <option value="3">Ruang 5</option>
-                                    <option value="3">Ruang 6</option>
+                                    <option value="3">Ruang 6</option> --}}
                                 </select>
                                 <label for="floatingSelect">Ruangan yang dipilih</label>
                             </div>
