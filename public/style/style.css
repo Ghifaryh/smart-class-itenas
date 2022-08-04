@@ -5,6 +5,10 @@
     /* margin-top: 1000spx !important; */
 }
 
+.login-text {
+    margin-right: 3rem;
+}
+
 .titlewb {
     font-size: 1.5vw;
     margin-left: 1vw;
@@ -68,9 +72,59 @@ body:not(header) {
     font-weight: bold;
 }
 
-.seepas{
+.seepas {
     cursor: pointer;
-    }
+}
+
+/* Footer stuff */
+footer {
+    /* position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0; */
+    border: solid orange;
+    background-color: #fc8e22;
+}
+
+.title-foot {
+    color: white;
+    padding-top: 5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.list-item a {
+    color: black;
+    font-size: 0.92em;
+    text-decoration: none;
+    margin-bottom: 0.3em;
+    transition: color 0.5s;
+}
+
+.list-item a:hover {
+    color: white !important;
+}
+
+.list-item a i {
+    color: #bababa;
+    font-size: 2rem;
+    margin-right: 1em;
+    transition: color 0.5s;
+}
+
+.list-item a i:hover {
+    color: black;
+}
+
+/* hover */
+.cr-text {
+    color: white !important;
+    transition: color 0.5s;
+}
+
+.cr-text:hover {
+    color: black !important;
+}
 
 @media (max-width: 450px) {
     .h-custom {
@@ -87,10 +141,32 @@ body:not(header) {
 
 /* Mobile */
 @media (max-width: 480px) {
+    .login-text {
+        margin-right: 0rem;
+        font-size: 0.8rem;
+    }
+
+    .logowsidebarnv {
+        font-size: 0.8rem !important;
+    }
+
     .sh-table {
         display: unset;
     }
 
+    .titlewb {
+        font-size: 0.8rem !important;
+        /* margin-left: 1vw; */
+        /* align-items: center; */
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .img-goodstart {
+        width: 15% !important;
+    }
     /* table,
     thead,
     tbody,
@@ -103,6 +179,7 @@ body:not(header) {
         overflow-x: auto;
     }
     .btn-shtable {
+        pointer-events: none !important;
         padding-top: 200px !important;
     }
 }

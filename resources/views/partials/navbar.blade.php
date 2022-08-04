@@ -27,22 +27,26 @@
             <div class="dropdown me-3">
 
                 @auth
-                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
+                    <a href="#" class="d-inline-block link-dark text-decoration-none dropdown-toggle" id=""
                         data-bs-toggle="dropdown" aria-expanded="false">
                         {{-- If have image --}}
                         {{-- <img src="https://avatars.githubusercontent.com/u/93874441?v=4" alt="mdo" width="32"
                         height="32" class="rounded-circle"> --}}
 
                         {{-- If not --}}
+                        {{-- <div class="user-wrapper"> --}}
+
                         <i class="fa-solid fa-user me-1 logowsidebarnv fs-5"></i>
 
                         <span class="user-name fw-bold">
-                            {{auth()->user()->name}} | @if ((auth()->user()->level == "admin")) 
-                            {{str_replace("a","A", auth()->user()->level)}} 
-                            @else {{str_replace("d","D", auth()->user()->level)}}
+                            {{ auth()->user()->name }} | @if (auth()->user()->level == 'admin')
+                                {{ str_replace('a', 'A', auth()->user()->level) }}
+                            @else
+                                {{ str_replace('d', 'D', auth()->user()->level) }}
                             @endif
                         </span>
 
+                        {{-- </div> --}}
                     </a>
 
                     <ul class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2"
@@ -69,7 +73,7 @@
                     @else
                         <a href="/login" class="d-block link-dark text-decoration-none text-nowrap align-items-center"><i
                                 class="fa-solid fa-right-to-bracket logowsidebarnv pe-1" aria-expanded="false"></i>
-                            <span class="login-text fw-bold me-5">
+                            <span class="login-text fw-bold">
                                 Login
                             </span>
                         </a>
@@ -79,7 +83,7 @@
             </div>
 
             <img src="https://www.itenas.ac.id/wp-content/uploads/2020/07/Logo-id-Heebo.png" width="5%"
-                alt="">
+                alt="" class="img-goodstart">
         </div>
     </div>
 </header>

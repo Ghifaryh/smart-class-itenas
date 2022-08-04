@@ -66,13 +66,10 @@
 }
 
 @media (max-width: 480px) {
-    #mySidenav a {
-        /* top: 20% !important; */
+    /* #mySidenav a {
         width: 35%;
         padding: 2%;
         font-size: 0.6rem;
-        /* Position them relative to the browser window */
-        /* left: 200px; */
         left: -100%;
         margin: 100%;
         margin-top: -5%;
@@ -86,7 +83,6 @@
         color: #000000;
         outline: 2px solid #ff7b01;
         top: 25%;
-        /* background-color: #04AA6D; */
         background-color: #ffffff;
     }
 
@@ -101,12 +97,14 @@
         color: #000000;
         outline: 2px solid #ff7b01;
         top: 35%;
-        /* background-color: #04AA6D; */
         background-color: #ffffff;
     }
 
     .logowsidebaro,
     .logowsidebarw {
         font-size: 0.8rem;
+    } */
+    #mySidenav {
+        display: none;
     }
 }

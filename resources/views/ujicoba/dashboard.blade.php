@@ -3,7 +3,7 @@
     <div class="container-fluid dashboard-dosen ms-5">
         <div class="row">
             <div class="col"></div>
-            <div class="col-md-9 ms-1">
+            <div class="col">
                 <div class="reg-room-wrapper px-5 py-2">
                     <h1 class="fw-bold pt-4">Pendaftaran Ruangan</h1>
                     <div class="reg-room">
@@ -60,8 +60,8 @@
                                         <th scope="col">Mata Kuliah</th>
                                         <th scope="col">Dosen</th>
                                         <th scope="col">Status</th>
-                                        @if (auth()->user()->level == "admin")
-                                        <th scope="col">Opsi</th>
+                                        @if (auth()->user()->level == 'admin')
+                                            <th scope="col">Opsi</th>
                                         @endif
                                     </tr>
                                 </thead>
@@ -74,11 +74,11 @@
                                         <td>Engineering enjoy teuing</td>
                                         <td>Asep Komrudin</td>
                                         <td class="fw-bold text-success">Booked</td>
-                                        @if (auth()->user()->level == "admin")
-                                        <td>
-                                            <a href="" class="btn btn-success">Ubah</a>
-                                            <a href="" class="btn btn-danger">Hapus</a>
-                                        </td>  
+                                        @if (auth()->user()->level == 'admin')
+                                            <td>
+                                                <a href="" class="btn btn-success">Ubah</a>
+                                                <a href="" class="btn btn-danger">Hapus</a>
+                                            </td>
                                         @endif
                                     </tr>
                                     {{-- <tr>
