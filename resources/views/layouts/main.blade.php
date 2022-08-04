@@ -58,8 +58,156 @@
         @yield('container')
     </div>
 
-    <footer>
+    <footer class="footer">
+        <div class="container top-item">
+            <div class="row mx-1">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <aside>
+                        <p class="text-uppercase title-foot">Sumber Informasi Akademik</p>
+                        <ul class="list-group">
+                            <li class="list-group list-item">
+                                <a href="https://cdc.itenas.ac.id/">Carrier Development Center</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="https://www.itenas.ac.id/mahasiswa-2/kalender-akademik/">Kalender Akademik
+                                    Sarjana</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="https://www.itenas.ac.id/mahasiswa-2/kalender-akademik-magister/">Kalender
+                                    Akademik
+                                    Magister</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="#">SISFO SKK</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="http://bka.itenas.ac.id/">Kemahasiswaan Itenas</a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
 
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <aside>
+                        <p class="text-uppercase title-foot">Sumber Informasi Institut</h4>
+                        <ul class="list-group">
+                            <li class="list-group list-item">
+                                <a href="http://lp2m.itenas.ac.id">Lembaga Penelitian & Pengabdian kepada Masyarakat</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="http://tik.itenas.ac.id">UPT Teknologi Informasi &amp; Komunikasi</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="http://lib.itenas.ac.id">UPT Perpustakaan</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="http://spp.itenas.ac.id" target="_blank" rel="noopener noreferrer">Satuan
+                                    Pengembangan
+                                    Pembelajaran</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="http://spm.itenas.ac.id">Satuan Penjaminan Mutu</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="https://spi.itenas.ac.id/">Satuan Pengawas Internal</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="#">Biro Akademik</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="#">Biro Keuangan &amp; Umum</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="http://bka.itenas.ac.id/">Biro Kemahasiswaan &amp; Alumni</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="http://bsdm.itenas.ac.id">Biro Sumber Daya Manusia</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="http://bkhp.itenas.ac.id">Biro Kerja Sama, Hubungan Masyarakat &amp;
+                                    Pemasaran</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="https://international-office.itenas.ac.id">Kantor Urusan Internasional</a>
+                            </li>
+                        </ul>
+
+                    </aside>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <aside>
+                        <p class="text-uppercase title-foot">Link</h4>
+                        <ul class="list-group">
+                            <li class="list-group list-item">
+                                <a href="https://www.itenas.ac.id/e-magazine/">Itenas e-Magazine</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="http://eprints.itenas.ac.id" target="_blank"
+                                    rel="noopener noreferrer">Repository</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="http://ebook.itenas.ac.id" target="_blank" rel="noopener noreferrer">e-Book</a>
+                            </li>
+                            <li class="list-group list-item">
+                                <a href="https://www.itenas.ac.id/download/">Download</a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <aside>
+                        <p class="text-uppercase title-foot">Follow US</p>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group list-item of-icon">
+                                <a href="https://www.facebook.com/itenas.official/">
+                                    <i class="fa-brands fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li class="list-group list-item of-icon">
+                                <a href="https://twitter.com/@itenas_official">
+                                    <i class="fa-brands fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-group list-item of-icon">
+                                <a href="https://www.instagram.com/itenas.official/">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li class="list-group list-item of-icon">
+                                <a href="https://www.youtube.com/channel/UCXNl5jOSO9os1nOr40oizXg">
+                                    <i class="fa-brands fa-youtube"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                    <aside id="text-29" class="widget widget_text">
+                        <div class="textwidget">
+                            <p>&nbsp;</p>
+                            <p><img class="alignnone size-medium wp-image-20322"
+                                    src="https://www.itenas.ac.id/wp-content/uploads/2021/11/Ranked-2022-300x211.jpg"
+                                    alt="" width="300" height="211"></p>
+                        </div>
+                    </aside>
+                    <aside id="" class="widget widget_text">
+                        <div class="textwidget">
+                            <p>&nbsp;</p>
+                            <p><span style="color: #fbf7f7;">KAMPUS INSTITUT TEKNOLOGI NASIONAL</span><br>
+                                Jl. PH.H. Mustofa No.23 Bandung 40124<br>
+                                Phone: +62 22 7272215, Fax +62 22 7202892<br>
+                                humas[at]itenas.ac.id, http://www.itenas.ac.id</p>
+                        </div>
+                    </aside>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </div>
+        <div class="container bottom-item text-center mb-5">
+            <a href="" class="text-decoration-none cr-text text-white">© Itenas | Institut Teknologi Nasional -
+                Bandung</a>
+            <p>Created by: 152019081 - 152019082 </p>
+        </div>
     </footer>
 
 </body>
