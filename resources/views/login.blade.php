@@ -43,8 +43,9 @@
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="kode_dosen">Kode Dosen</label>
                                 <input type="kode_dosen" name="kode_dosen"
-                                    class="form-control form-control-lg @error('kode_dosen') is-invalid @enderror" id="kode_dosen"
-                                    placeholder="Kode Dosen" autofocus required value="{{ old('kode_dosen') }}" />
+                                    class="form-control form-control-lg @error('kode_dosen') is-invalid @enderror"
+                                    id="kode_dosen" placeholder="Kode Dosen" autofocus required
+                                    value="{{ old('kode_dosen') }}" />
                                 @error('kode_dosen')
                                     <div class="invalid-feedback">
                                         {{ $message }}
