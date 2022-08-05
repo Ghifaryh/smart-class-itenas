@@ -5,27 +5,38 @@
             <div class="col"></div>
             <div class="col">
                 <div class="reg-room-wrapper px-5 py-2">
-                    <h1 class="fw-bold pt-4">Pendaftaran Ruangan</h1>
+                    <h1 class="fw-bold pt-4">Pemesanan Ruangan</h1>
                     <div class="reg-room">
                         <h5 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h5>
-                        <form action="" class="reg-room-form">
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
+                        @if (session()->has('loginError'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('loginError') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        <form action="/dashboard" method="post" class="reg-room-form">
+                            @csrf
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="datetime-local" class="form-control" id="floatingInput">
-                                <label for="floatingInput">Tanggal Pemakaian</label>
+                                <input type="datetime-local" name="jadwal_masuk" class="form-control" id="jadwal_masuk">
+                                <label for="jadwal_masuk">Jadwal Masuk</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="time" class="form-control" id="InputJamPemakaian" required>
-                                <label for="floatingInput">Jam Pemakaian</label>
+                                <input type="datetime-local" name="jadwal_keluar" class="form-control" id="jadwal_keluar" required>
+                                <label for="jadwal_keluar">Jadwal Keluar</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                                    required>
-                                    @php
-                                        $num = 1;
-                                    @endphp
+                                <select class="form-select" name="id_gedung" id="id_gedung" required>
                                     @foreach ($ruangan as $rn)
                                         <tr>
-                                            <option value="{{ $num++ }}">{{ $rn->keterangan }}</option>
+                                            <option value="{{ $rn->id }}">{{ $rn->keterangan }}</option>
                                         </tr>
                                     @endforeach
                                     {{-- <option value="2">Ruang 2</option>
@@ -34,18 +45,20 @@
                                     <option value="3">Ruang 5</option>
                                     <option value="3">Ruang 6</option> --}}
                                 </select>
-                                <label for="floatingSelect">Ruangan yang dipilih</label>
+                                <label for="id_gedung">Ruangan yang dipilih</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Jurusan"
+                                <input type="text" class="form-control" name="jurusan" id="jurusan" placeholder="Jurusan"
                                     required>
-                                <label for="floatingInput">Jurusan</label>
+                                <label for="jurusan">Jurusan</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Mata Kuliah"
+                                <input type="text" class="form-control" name="matakuliah" id="matakuliah" placeholder="Mata Kuliah"
                                     required>
-                                <label for="floatingInput">Mata Kuliah</label>
+                                <label for="matakuliah">Mata Kuliah</label>
                             </div>
+                            <input type="hidden" name="id_dosen" id="id_dosen" value="{{ auth()->user()->id }}">
+                            <input type="hidden" name="id_status" id="id_status" value="1">
                             <div class="col-sm-9">
                                 <p class="reg-room-info">*Pembookingan ruangan akan diproses paling lama 1*24 Jam</p>
                             </div>
@@ -62,7 +75,7 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Ruangan</th>
-                                        <th scope="col">Jam Pakai</th>
+                                        <th scope="col">Waktu Pakai</th>
                                         <th scope="col">Jurusan</th>
                                         <th scope="col">Mata Kuliah</th>
                                         <th scope="col">Dosen</th>
@@ -73,21 +86,58 @@
                                     </tr>
                                 </thead>
                                 <tbody class="text-center align-middle">
+                                    @php
+                                        $num = 1;
+                                        setlocale(LC_TIME, 'id_ID.utf8');
+                                        function hariIndo ($hariInggris) {
+                                            switch ($hariInggris) {
+                                            case 'Sunday':
+                                                return 'Minggu';
+                                            case 'Monday':
+                                                return 'Senin';
+                                            case 'Tuesday':
+                                                return 'Selasa';
+                                            case 'Wednesday':
+                                                return 'Rabu';
+                                            case 'Thursday':
+                                                return 'Kamis';
+                                            case 'Friday':
+                                                return 'Jumat';
+                                            case 'Saturday':
+                                                return 'Sabtu';
+                                            default:
+                                                return 'hari tidak valid';
+                                            }
+                                        }
+                                    @endphp
+                                    @foreach ($jadwals as $jadwal)
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>1</td>
-                                        <td>Senin, 18 Juli <br>(07.00 - 10.00)</td>
-                                        <td>Sastra Mesin</td>
-                                        <td>Engineering enjoy teuing</td>
-                                        <td>Asep Komrudin</td>
-                                        <td class="fw-bold text-success">Booked</td>
+                                        <th scope="row">{{ $num }}</th>
+                                        <td>{{ $jadwal->id_gedung }}</td>
+                                        <td>{{ hariIndo(date('l', strtotime($jadwal->jadwal_masuk))) }}, {{ date('d M', strtotime($jadwal->jadwal_masuk)) }} ({{ date('h:i', strtotime($jadwal->jadwal_masuk)) }} - {{ date('h:i', strtotime($jadwal->jadwal_keluar)) }})</td>
+                                        <td>{{ $jadwal->jurusan }}</td>
+                                        <td>{{ $jadwal->matakuliah }}</td>
+                                        <td>{{ $jadwal->User->name }}</td>
+                                        @if ( $jadwal->Status->keterangan == "Menunggu Konfirmasi")
+                                        <td class="fw-bold text-warning">{{ $jadwal->Status->keterangan }}</td>
+                                            
+                                        @elseif ( $jadwal->Status->keterangan == "Diterima")
+                                        <td class="fw-bold text-success">{{ $jadwal->Status->keterangan }}</td>
+                                        
+                                        @else
+                                        <td class="fw-bold text-danger">{{ $jadwal->Status->keterangan }}</td>
+                                            
+                                        @endif
+                                            
                                         @if (auth()->user()->level == 'admin')
-                                            <td>
-                                                <a href="" class="btn btn-success">Ubah</a>
-                                                <a href="" class="btn btn-danger">Hapus</a>
-                                            </td>
+                                        <td>
+                                            <a href="" class="btn btn-success">Terima</a>
+                                            <a href="" class="btn btn-danger">Batalkan</a>
+                                            <a href="" class="btn btn-primary">Schedule</a>
+                                        </td>
                                         @endif
                                     </tr>
+                                    @endforeach
                                     {{-- <tr>
                                         <th scope="row">2</th>
                                         <td>2</td>

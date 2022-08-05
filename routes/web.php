@@ -46,7 +46,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
-    // Route::get('/dashboard', [RuanganController::class, 'index']);
+    Route::post('/dashboard', [DashboardController::class, 'daftar']);   
 
 });
 // Route::get('/statuspesan', [DashboardController::class, 'status']);

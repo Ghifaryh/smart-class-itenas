@@ -54,10 +54,10 @@
 
                             <!-- Password input -->
                             <div class="form-outline form-group ">
-                                <label class="form-label" for="password">Password</label>
+                                <label class="form-label" for="password">Kode Pin</label>
                                 <div class="input-group">
                                     <input type="password" name="password" class="form-control form-control-lg"
-                                        id="password" placeholder="Password" required>
+                                        id="password" placeholder="Kode Pin" required>
                                     <span class="input-group-text seepas" onclick="shwpass()"><i class="fa-solid fa-eye"
                                             aria-hidden="true" id="eye"></i></span>
                                 </div>

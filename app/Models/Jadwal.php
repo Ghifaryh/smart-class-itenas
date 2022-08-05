@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Status;
 use App\Models\Ruangan;
 use Illuminate\Database\Eloquent\Model;
@@ -20,11 +21,11 @@ class Jadwal extends Model
 
     public function status()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class, 'id_status');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_dosen');
     }
 }
