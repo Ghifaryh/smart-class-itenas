@@ -76,6 +76,11 @@ body:not(header) {
     cursor: pointer;
 }
 
+/* rkgk responsive table */
+.table-list-pesan {
+    overflow-x: auto;
+}
+
 /* Footer stuff */
 footer {
     /* position: fixed;

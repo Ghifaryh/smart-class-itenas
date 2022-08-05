@@ -70,7 +70,7 @@
                         <div class="table-responsive">
                             <h2 class="fw-bold border-bottom border-2 border-dark mb-3">List Proses Pemesanan Ruangan</h2>
                             {{-- <table class="table sh-table" id="table1"> --}}
-                            <table class="table table-striped" id="table1">
+                            <table class="table table-striped table-list-pesan" id="table1">
                                 <thead class="bg-light text-center">
                                     <tr>
                                         <th scope="col">No</th>
