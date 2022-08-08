@@ -85,47 +85,77 @@
                                         @endif
                                     </tr>
                                 </thead>
+                                @php
+                                $num = 1;
+                                function hariIndo ($hariInggris) {
+                                    switch ($hariInggris) {
+                                    case 'Sunday':
+                                        return 'Minggu';
+                                    case 'Monday':
+                                        return 'Senin';
+                                    case 'Tuesday':
+                                        return 'Selasa';
+                                    case 'Wednesday':
+                                        return 'Rabu';
+                                    case 'Thursday':
+                                        return 'Kamis';
+                                    case 'Friday':
+                                        return 'Jumat';
+                                    case 'Saturday':
+                                        return 'Sabtu';
+                                    default:
+                                        return 'hari tidak valid';
+                                    }
+                                }
+                                function bulanIndo ($hariInggris) {
+                                    switch ($hariInggris) {
+                                    case 'Jan':
+                                        return 'Januari';
+                                    case 'Feb':
+                                        return 'Februari';
+                                    case 'Mar':
+                                        return 'Maret';
+                                    case 'Apr':
+                                        return 'April';
+                                    case 'May':
+                                        return 'Mei';
+                                    case 'Jun':
+                                        return 'Juni';
+                                    case 'Jul':
+                                        return 'Juli';
+                                    case 'Aug':
+                                        return 'Agustus';
+                                    case 'Sep':
+                                        return 'September';
+                                    case 'Oct':
+                                        return 'Oktober';
+                                    case 'Nov':
+                                        return 'November';
+                                    case 'Dec':
+                                        return 'Desember';
+                                    default:
+                                        return 'bulan tidak valid';
+                                    }
+                                }
+                                @endphp    
+                                @yield('contol')  
                                 <tbody class="text-center align-middle">
-                                    @php
-                                        $num = 1;
-                                        setlocale(LC_TIME, 'id_ID.utf8');
-                                        function hariIndo ($hariInggris) {
-                                            switch ($hariInggris) {
-                                            case 'Sunday':
-                                                return 'Minggu';
-                                            case 'Monday':
-                                                return 'Senin';
-                                            case 'Tuesday':
-                                                return 'Selasa';
-                                            case 'Wednesday':
-                                                return 'Rabu';
-                                            case 'Thursday':
-                                                return 'Kamis';
-                                            case 'Friday':
-                                                return 'Jumat';
-                                            case 'Saturday':
-                                                return 'Sabtu';
-                                            default:
-                                                return 'hari tidak valid';
-                                            }
-                                        }
-                                    @endphp
                                     @foreach ($jadwals as $jadwal)
                                     <tr>
                                         <th scope="row">{{ $num }}</th>
                                         <td>{{ $jadwal->id_gedung }}</td>
-                                        <td>{{ hariIndo(date('l', strtotime($jadwal->jadwal_masuk))) }}, {{ date('d M', strtotime($jadwal->jadwal_masuk)) }} ({{ date('h:i', strtotime($jadwal->jadwal_masuk)) }} - {{ date('h:i', strtotime($jadwal->jadwal_keluar)) }})</td>
-                                        <td>{{ $jadwal->jurusan }}</td>
-                                        <td>{{ $jadwal->matakuliah }}</td>
-                                        <td>{{ $jadwal->User->name }}</td>
+                                        <td class="text-nowrap">{{ hariIndo(date('l', strtotime($jadwal->jadwal_masuk))) }}, {{ date('d', strtotime($jadwal->jadwal_masuk)) }} {{ bulanIndo(date('M', strtotime($jadwal->jadwal_masuk))) }} <br> ({{ date('h:i', strtotime($jadwal->jadwal_masuk)) }} - {{ date('h:i', strtotime($jadwal->jadwal_keluar)) }})</td>
+                                        <td class="text-nowrap">{{ $jadwal->jurusan }}</td>
+                                        <td class="text-nowrap">{{ $jadwal->matakuliah }}</td>
+                                        <td class="text-nowrap">{{ $jadwal->User->name }}</td>
                                         @if ( $jadwal->Status->keterangan == "Menunggu Konfirmasi")
-                                        <td class="fw-bold text-warning">{{ $jadwal->Status->keterangan }}</td>
+                                        <td class="fw-bold text-warning text-nowrap">{{ $jadwal->Status->keterangan }}</td>
                                             
                                         @elseif ( $jadwal->Status->keterangan == "Diterima")
-                                        <td class="fw-bold text-success">{{ $jadwal->Status->keterangan }}</td>
+                                        <td class="fw-bold text-success text-nowrap">{{ $jadwal->Status->keterangan }}</td>
                                         
                                         @else
-                                        <td class="fw-bold text-danger">{{ $jadwal->Status->keterangan }}</td>
+                                        <td class="fw-bold text-danger text-nowrap">{{ $jadwal->Status->keterangan }}</td>
                                             
                                         @endif
                                             
