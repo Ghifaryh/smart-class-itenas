@@ -1,6 +1,7 @@
 @extends('layouts.main')
-@section('container')
-    <div class="container-fluid dashboard-dosen ms-5">
+{{-- @section('container') --}}
+@section('dashboard-main')
+    <div class="container-fluid dashboard-dosen">
         <div class="row">
             <div class="col"></div>
             <div class="col">
@@ -11,7 +12,8 @@
                         @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
                         @endif
 
@@ -29,7 +31,8 @@
                                 <label for="jadwal_masuk">Jadwal Masuk</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="datetime-local" name="jadwal_keluar" class="form-control" id="jadwal_keluar" required>
+                                <input type="datetime-local" name="jadwal_keluar" class="form-control" id="jadwal_keluar"
+                                    required>
                                 <label for="jadwal_keluar">Jadwal Keluar</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
@@ -48,13 +51,13 @@
                                 <label for="id_gedung">Ruangan yang dipilih</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="text" class="form-control" name="jurusan" id="jurusan" placeholder="Jurusan"
-                                    required>
+                                <input type="text" class="form-control" name="jurusan" id="jurusan"
+                                    placeholder="Jurusan" required>
                                 <label for="jurusan">Jurusan</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="text" class="form-control" name="matakuliah" id="matakuliah" placeholder="Mata Kuliah"
-                                    required>
+                                <input type="text" class="form-control" name="matakuliah" id="matakuliah"
+                                    placeholder="Mata Kuliah" required>
                                 <label for="matakuliah">Mata Kuliah</label>
                             </div>
                             <input type="hidden" name="id_dosen" id="id_dosen" value="{{ auth()->user()->id }}">
@@ -89,54 +92,56 @@
                                     @php
                                         $num = 1;
                                         setlocale(LC_TIME, 'id_ID.utf8');
-                                        function hariIndo ($hariInggris) {
+                                        function hariIndo($hariInggris)
+                                        {
                                             switch ($hariInggris) {
-                                            case 'Sunday':
-                                                return 'Minggu';
-                                            case 'Monday':
-                                                return 'Senin';
-                                            case 'Tuesday':
-                                                return 'Selasa';
-                                            case 'Wednesday':
-                                                return 'Rabu';
-                                            case 'Thursday':
-                                                return 'Kamis';
-                                            case 'Friday':
-                                                return 'Jumat';
-                                            case 'Saturday':
-                                                return 'Sabtu';
-                                            default:
-                                                return 'hari tidak valid';
+                                                case 'Sunday':
+                                                    return 'Minggu';
+                                                case 'Monday':
+                                                    return 'Senin';
+                                                case 'Tuesday':
+                                                    return 'Selasa';
+                                                case 'Wednesday':
+                                                    return 'Rabu';
+                                                case 'Thursday':
+                                                    return 'Kamis';
+                                                case 'Friday':
+                                                    return 'Jumat';
+                                                case 'Saturday':
+                                                    return 'Sabtu';
+                                                default:
+                                                    return 'hari tidak valid';
                                             }
                                         }
                                     @endphp
                                     @foreach ($jadwals as $jadwal)
-                                    <tr>
-                                        <th scope="row">{{ $num }}</th>
-                                        <td>{{ $jadwal->id_gedung }}</td>
-                                        <td>{{ hariIndo(date('l', strtotime($jadwal->jadwal_masuk))) }}, {{ date('d M', strtotime($jadwal->jadwal_masuk)) }} ({{ date('h:i', strtotime($jadwal->jadwal_masuk)) }} - {{ date('h:i', strtotime($jadwal->jadwal_keluar)) }})</td>
-                                        <td>{{ $jadwal->jurusan }}</td>
-                                        <td>{{ $jadwal->matakuliah }}</td>
-                                        <td>{{ $jadwal->User->name }}</td>
-                                        @if ( $jadwal->Status->keterangan == "Menunggu Konfirmasi")
-                                        <td class="fw-bold text-warning">{{ $jadwal->Status->keterangan }}</td>
-                                            
-                                        @elseif ( $jadwal->Status->keterangan == "Diterima")
-                                        <td class="fw-bold text-success">{{ $jadwal->Status->keterangan }}</td>
-                                        
-                                        @else
-                                        <td class="fw-bold text-danger">{{ $jadwal->Status->keterangan }}</td>
-                                            
-                                        @endif
-                                            
-                                        @if (auth()->user()->level == 'admin')
-                                        <td>
-                                            <a href="" class="btn btn-success">Terima</a>
-                                            <a href="" class="btn btn-danger">Batalkan</a>
-                                            <a href="" class="btn btn-primary">Schedule</a>
-                                        </td>
-                                        @endif
-                                    </tr>
+                                        <tr>
+                                            <th scope="row">{{ $num }}</th>
+                                            <td>{{ $jadwal->id_gedung }}</td>
+                                            <td>{{ hariIndo(date('l', strtotime($jadwal->jadwal_masuk))) }},
+                                                {{ date('d M', strtotime($jadwal->jadwal_masuk)) }}
+                                                ({{ date('h:i', strtotime($jadwal->jadwal_masuk)) }} -
+                                                {{ date('h:i', strtotime($jadwal->jadwal_keluar)) }})
+                                            </td>
+                                            <td>{{ $jadwal->jurusan }}</td>
+                                            <td>{{ $jadwal->matakuliah }}</td>
+                                            <td>{{ $jadwal->User->name }}</td>
+                                            @if ($jadwal->Status->keterangan == 'Menunggu Konfirmasi')
+                                                <td class="fw-bold text-warning">{{ $jadwal->Status->keterangan }}</td>
+                                            @elseif ($jadwal->Status->keterangan == 'Diterima')
+                                                <td class="fw-bold text-success">{{ $jadwal->Status->keterangan }}</td>
+                                            @else
+                                                <td class="fw-bold text-danger">{{ $jadwal->Status->keterangan }}</td>
+                                            @endif
+
+                                            @if (auth()->user()->level == 'admin')
+                                                <td>
+                                                    <a href="" class="btn btn-success">Terima</a>
+                                                    <a href="" class="btn btn-danger">Batalkan</a>
+                                                    <a href="" class="btn btn-primary">Schedule</a>
+                                                </td>
+                                            @endif
+                                        </tr>
                                     @endforeach
                                     {{-- <tr>
                                         <th scope="row">2</th>
