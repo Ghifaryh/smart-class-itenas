@@ -47,6 +47,13 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::post('/dashboard', [DashboardController::class, 'daftar']);   
+    Route::delete('/dashboard/{id}', [DashboardController::class, 'destroy']);
+
+});
+
+Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
+    Route::post('/dashboard/terima/{id}', [DashboardController::class, 'accept']);
+    Route::post('/dashboard/batal/{id}', [DashboardController::class, 'cancel']);
 
 });
 // Route::get('/statuspesan', [DashboardController::class, 'status']);

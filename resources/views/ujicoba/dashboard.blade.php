@@ -17,9 +17,9 @@
                             </div>
                         @endif
 
-                        @if (session()->has('loginError'))
+                        @if (session()->has('failed'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ session('loginError') }}
+                                {{ session('failed') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
@@ -83,9 +83,7 @@
                                         <th scope="col">Mata Kuliah</th>
                                         <th scope="col">Dosen</th>
                                         <th scope="col">Status</th>
-                                        @if (auth()->user()->level == 'admin')
-                                            <th scope="col">Opsi</th>
-                                        @endif
+                                        <th scope="col">Opsi</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -144,7 +142,7 @@
                                 <tbody class="text-center align-middle">
                                     @foreach ($jadwals as $jadwal)
                                     <tr>
-                                        <th scope="row">{{ $num }}</th>
+                                        <th scope="row">{{ $num++ }}</th>
                                         <td>{{ $jadwal->id_gedung }}</td>
                                         <td class="text-nowrap">{{ hariIndo(date('l', strtotime($jadwal->jadwal_masuk))) }}, {{ date('d', strtotime($jadwal->jadwal_masuk)) }} {{ bulanIndo(date('M', strtotime($jadwal->jadwal_masuk))) }} <br> ({{ date('h:i', strtotime($jadwal->jadwal_masuk)) }} - {{ date('h:i', strtotime($jadwal->jadwal_keluar)) }})</td>
                                         <td class="text-nowrap">{{ $jadwal->jurusan }}</td>
@@ -161,11 +159,26 @@
                                             
                                         @endif
                                             
-                                        @if (auth()->user()->level == 'admin')
-                                        <td>
-                                            <a href="" class="btn btn-success">Terima</a>
-                                            <a href="" class="btn btn-danger">Batalkan</a>
-                                            <a href="" class="btn btn-primary">Schedule</a>
+                                        @if (auth()->user()->level == 'dosen')
+                                        <td class="text-nowrap">
+                                            <form action="/dashboard/{{ $jadwal->id }}" method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</button>
+                                            </form>
+                                            {{-- <a href="" class="btn btn-danger">Hapus</a> --}}
+                                        </td>
+                                        @else
+                                        <td class="d-inline">
+                                            <form action="/dashboard/terima/{{ $jadwal->id }}" method="post">
+                                                @csrf
+                                                <button class="btn btn-success" onclick="return confirm('Apakah anda yakin?')">Terima</button>
+                                            </form>
+                                            <form action="/dashboard/batal/{{ $jadwal->id }}" method="post">
+                                                @csrf
+                                                <button class="btn btn-danger" onclick="return confirm('Apakah anda yakin?')">Batalkan</button>
+                                            </form>
+                                            {{-- <a href="" class="btn btn-primary">Jadwalkan</a> --}}
                                         </td>
                                         @endif
                                     </tr>
