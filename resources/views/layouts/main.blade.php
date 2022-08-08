@@ -54,9 +54,15 @@
         @endif
     </header>
 
-    <div class="container-fluid my-3 contents-all px-5">
-        @yield('container')
-    </div>
+    @if ($title !== 'Dashboard')
+        <div class="container-fluid my-3 contents-all px-5">
+            @yield('container')
+        </div>
+    @else
+        <div class="dashboard-wrapper-main">
+            @yield('dashboard-main')
+        </div>
+    @endif
 
     <footer class="footer">
         <div class="container top-item">
