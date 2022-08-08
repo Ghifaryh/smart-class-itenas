@@ -138,7 +138,6 @@
                                     }
                                 }
                                 @endphp    
-                                @yield('contol')  
                                 <tbody class="text-center align-middle">
                                     @foreach ($jadwals as $jadwal)
                                     <tr>
