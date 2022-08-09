@@ -153,7 +153,7 @@
                                     <td class="">Senin, 18 Juli <br>(07.00 - 10.00)</td>
                                     <td>Sastra Mesin</td>
                                     <td>Engineering enjoy teuing</td>
-                                    <td>Asep Komrudin</td>
+                                    <td>Aep Komrudin</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">2</th>
@@ -167,7 +167,7 @@
                                     <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
                                     <td>Cinta Lingkungan</td>
                                     <td>Bomb Nuclear</td>
-                                    <td>Arip kon</td>
+                                    <td>Arippu</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -184,7 +184,8 @@
 
         <div class="col">
             <h2 class="content-title text-center"> Lokasi Gedung</h2>
-            <img src="https://map.itenas.ac.id/map-itenas.jpg" width="100%" alt="">
+            {{-- <img src="https://map.itenas.ac.id/map-itenas.jpg" width="100%" alt=""> --}}
+            <img src={{ asset('img/map-itenas.jpg') }} width="100%" alt="" class="rounded-3 shadow-lg">
         </div>
     </div>
 @endsection
