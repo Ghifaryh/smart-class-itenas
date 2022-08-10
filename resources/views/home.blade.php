@@ -221,7 +221,8 @@ function bulanIndo($hariInggris)
 
         <div class="col">
             <h2 class="content-title text-center"> Lokasi Gedung</h2>
-            <img src="https://map.itenas.ac.id/map-itenas.jpg" width="100%" alt="">
+            {{-- <img src="https://map.itenas.ac.id/map-itenas.jpg" width="100%" alt=""> --}}
+            <img src={{ asset('img/map-itenas.jpg') }} width="100%" alt="" class="rounded-3 shadow-lg">
         </div>
     </div>
 @endsection
