@@ -61,19 +61,6 @@
                                     placeholder="Mata Kuliah" required>
                                 <label for="matakuliah">Mata Kuliah</label>
                             </div>
-
-                            @if (auth()->user()->level == 'admin')
-                            <div class="col-sm-9 form-floating mb-3">
-                                <input type="text" class="form-control" name="dosen" id="dosen" placeholder="Dosen"
-                                    required>
-                                <label for="matakuliah">Nama Dosen</label>
-                            </div>
-                                
-                            @else
-                                
-                            @endif
-                            {{-- Only for admin --}}
-
                             <input type="hidden" name="id_dosen" id="id_dosen" value="{{ auth()->user()->id }}">
                             <input type="hidden" name="id_status" id="id_status" value="1">
                             <div class="col-sm-9">
