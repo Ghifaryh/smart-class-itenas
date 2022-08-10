@@ -2,14 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\Status;
-use App\Models\Ruangan;
-use App\Models\Pemesanan;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Jadwal extends Model
+class Pemesanan extends Model
 {
     use HasFactory;
 
@@ -28,10 +24,5 @@ class Jadwal extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_dosen');
-    }
-
-    public function pemesanan()
-    {
-        return $this->belongsTo(Pemesanan::class, 'id_pemesanan');
     }
 }

@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Status;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class StatusSeeder extends Seeder
 {
@@ -14,6 +15,20 @@ class StatusSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Status::create([
+            'keterangan' => 'Menunggu Konfirmasi',
+        ]);
+
+        Status::create([
+            'keterangan' => 'Diterima',
+        ]);
+
+        Status::create([
+            'keterangan' => 'Ditolak',
+        ]);
+
+        Status::create([
+            'keterangan' => 'Dihapus',
+        ]);
     }
 }

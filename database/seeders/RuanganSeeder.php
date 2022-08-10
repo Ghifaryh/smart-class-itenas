@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Ruangan;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RuanganSeeder extends Seeder
 {
@@ -14,6 +15,28 @@ class RuanganSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Ruangan::create([
+            'keterangan' => 'Ruangan 1'
+        ]);
+
+        Ruangan::create([
+            'keterangan' => 'Ruangan 2'
+        ]);
+
+        Ruangan::create([
+            'keterangan' => 'Ruangan 3'
+        ]);
+
+        Ruangan::create([
+            'keterangan' => 'Ruangan 4'
+        ]);
+
+        Ruangan::create([
+            'keterangan' => 'Ruangan 5'
+        ]);
+
+        Ruangan::create([
+            'keterangan' => 'Ruangan 6'
+        ]);
     }
 }

@@ -2,10 +2,13 @@
 
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PemesananController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +25,10 @@ use App\Http\Controllers\DashboardController;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('home', [
-        "title" => "Home"
-    ]);
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/about', function () {
-    return view('about', [
+    return view('welcome', [
         "title" => "About"
     ]);
 });
@@ -46,14 +45,16 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::post('/dashboard', [DashboardController::class, 'daftar']);   
-    Route::delete('/dashboard/{id}', [DashboardController::class, 'destroy']);
-
+    Route::post('/dashboard', [PemesananController::class, 'daftar']);   
+    Route::post('/dashboard/hapus/{id}', [PemesananController::class, 'hapusket']);
+    
 });
 
 Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
-    Route::post('/dashboard/terima/{id}', [DashboardController::class, 'accept']);
-    Route::post('/dashboard/batal/{id}', [DashboardController::class, 'cancel']);
+    Route::post('/dashboard/terima/{id}', [PemesananController::class, 'accept']);
+    Route::post('/dashboard/batal/{id}', [PemesananController::class, 'cancel']);
+    Route::post('/dashboard/hapus/{id}', [JadwalController::class, 'destroy']);
+    Route::delete('/dashboard/{id}', [PemesananController::class, 'destroy']);
 
 });
 // Route::get('/statuspesan', [DashboardController::class, 'status']);

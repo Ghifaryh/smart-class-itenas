@@ -1,5 +1,66 @@
 @extends('layouts.main')
 
+@php
+$num1 = 1;
+$num2 = 1;
+$num3 = 1;
+$num4 = 1;
+$num5 = 1;
+$num6 = 1;
+function hariIndo($hariInggris)
+{
+    switch ($hariInggris) {
+        case 'Sunday':
+            return 'Minggu';
+        case 'Monday':
+            return 'Senin';
+        case 'Tuesday':
+            return 'Selasa';
+        case 'Wednesday':
+            return 'Rabu';
+        case 'Thursday':
+            return 'Kamis';
+        case 'Friday':
+            return 'Jumat';
+        case 'Saturday':
+            return 'Sabtu';
+        default:
+            return 'hari tidak valid';
+    }
+}
+function bulanIndo($hariInggris)
+{
+    switch ($hariInggris) {
+        case 'Jan':
+            return 'Januari';
+        case 'Feb':
+            return 'Februari';
+        case 'Mar':
+            return 'Maret';
+        case 'Apr':
+            return 'April';
+        case 'May':
+            return 'Mei';
+        case 'Jun':
+            return 'Juni';
+        case 'Jul':
+            return 'Juli';
+        case 'Aug':
+            return 'Agustus';
+        case 'Sep':
+            return 'September';
+        case 'Oct':
+            return 'Oktober';
+        case 'Nov':
+            return 'November';
+        case 'Dec':
+            return 'Desember';
+        default:
+            return 'bulan tidak valid';
+    }
+}
+@endphp
+
 @section('container')
     <div class="row contents-wrapper">
         <div class="col">
@@ -51,30 +112,21 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
+                                @foreach ($jdwlrgn1 as $rg1)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td class="">Senin, 18 Juli <br>(07.00 - 10.00)</td>
-                                    <td>Sastra Mesin</td>
-                                    <td>Engineering enjoy teuing</td>
-                                    <td>Asep Komrudin</td>
-                                    {{-- <td>Booked</td> --}}
+                                    <th scope="row">{{ $num1++ }}</th>
+                                    <td class="text-nowrap">
+                                        {{ hariIndo(date('l', strtotime($rg1->jadwal_masuk))) }},
+                                        {{ date('d', strtotime($rg1->jadwal_masuk)) }}
+                                        {{ bulanIndo(date('M', strtotime($rg1->jadwal_masuk))) }} <br>
+                                        ({{ date('h:i', strtotime($rg1->jadwal_masuk)) }} -
+                                        {{ date('h:i', strtotime($rg1->jadwal_keluar)) }})
+                                    </td>
+                                    <td class="text-nowrap">{{ $rg1->jurusan }}</td>
+                                    <td class="text-nowrap">{{ $rg1->matakuliah }}</td>
+                                    <td class="text-nowrap">{{ $rg1->User->name }}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Senin, 18 Juli <br>(10.00 - 12.00)</td>
-                                    <td>Sastra Informatika</td>
-                                    <td>Menjadi Si paling IT </td>
-                                    <td>Hasby uwu</td>
-                                    {{-- <td>Booked</td> --}}
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
-                                    <td>Cinta Lingkungan</td>
-                                    <td>Bomb Nuclear</td>
-                                    <td>Arip kon</td>
-                                    {{-- <td>Booked</td> --}}
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -100,30 +152,21 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
+                                @foreach ($jdwlrgn2 as $rg2)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td class="">Senin, 18 Juli <br>(07.00 - 10.00)</td>
-                                    <td>Sastra Mesin</td>
-                                    <td>Engineering enjoy teuing</td>
-                                    <td>Asep Komrudin</td>
-                                    {{-- <td>Booked</td> --}}
+                                    <th scope="row">{{ $num2++ }}</th>
+                                    <td class="text-nowrap">
+                                        {{ hariIndo(date('l', strtotime($rg2->jadwal_masuk))) }},
+                                        {{ date('d', strtotime($rg2->jadwal_masuk)) }}
+                                        {{ bulanIndo(date('M', strtotime($rg2->jadwal_masuk))) }} <br>
+                                        ({{ date('h:i', strtotime($rg2->jadwal_masuk)) }} -
+                                        {{ date('h:i', strtotime($rg2->jadwal_keluar)) }})
+                                    </td>
+                                    <td class="text-nowrap">{{ $rg2->jurusan }}</td>
+                                    <td class="text-nowrap">{{ $rg2->matakuliah }}</td>
+                                    <td class="text-nowrap">{{ $rg2->User->name }}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Senin, 18 Juli <br>(10.00 - 12.00)</td>
-                                    <td>Sastra Informatika</td>
-                                    <td>Menjadi Si paling IT </td>
-                                    <td>Hasby uwu</td>
-                                    {{-- <td>Booked</td> --}}
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
-                                    <td>Cinta Lingkungan</td>
-                                    <td>Bomb Nuclear</td>
-                                    <td>Arip kon</td>
-                                    {{-- <td>Booked</td> --}}
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -148,27 +191,21 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
+                                @foreach ($jdwlrgn3 as $rg3)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td class="">Senin, 18 Juli <br>(07.00 - 10.00)</td>
-                                    <td>Sastra Mesin</td>
-                                    <td>Engineering enjoy teuing</td>
-                                    <td>Asep Komrudin</td>
+                                    <th scope="row">{{ $num3++ }}</th>
+                                    <td class="text-nowrap">
+                                        {{ hariIndo(date('l', strtotime($rg3->jadwal_masuk))) }},
+                                        {{ date('d', strtotime($rg3->jadwal_masuk)) }}
+                                        {{ bulanIndo(date('M', strtotime($rg3->jadwal_masuk))) }} <br>
+                                        ({{ date('h:i', strtotime($rg3->jadwal_masuk)) }} -
+                                        {{ date('h:i', strtotime($rg3->jadwal_keluar)) }})
+                                    </td>
+                                    <td class="text-nowrap">{{ $rg3->jurusan }}</td>
+                                    <td class="text-nowrap">{{ $rg3->matakuliah }}</td>
+                                    <td class="text-nowrap">{{ $rg3->User->name }}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Senin, 18 Juli <br>(10.00 - 12.00)</td>
-                                    <td>Sastra Informatika</td>
-                                    <td>Menjadi Si paling IT </td>
-                                    <td>Hasby uwu</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
-                                    <td>Cinta Lingkungan</td>
-                                    <td>Bomb Nuclear</td>
-                                    <td>Arip kon</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

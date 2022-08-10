@@ -27,16 +27,15 @@
                         <form action="/dashboard" method="post" class="reg-room-form">
                             @csrf
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="datetime-local" name="jadwal_masuk" class="form-control" id="jadwal_masuk">
+                                <input type="datetime-local" name="jadwal_masuk" class="form-control" id="jadwal_masuk" required>
                                 <label for="jadwal_masuk">Jadwal Masuk</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="datetime-local" name="jadwal_keluar" class="form-control" id="jadwal_keluar"
-                                    required>
+                                <input type="datetime-local" name="jadwal_keluar" class="form-control" id="jadwal_keluar" required>
                                 <label for="jadwal_keluar">Jadwal Keluar</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <select class="form-select" name="id_gedung" id="id_gedung" required>
+                                <select class="form-select" name="id_ruangan" id="id_ruangan" required>
                                     @foreach ($ruangan as $rn)
                                         <tr>
                                             <option value="{{ $rn->id }}">{{ $rn->keterangan }}</option>
@@ -48,7 +47,7 @@
                                     <option value="3">Ruang 5</option>
                                     <option value="3">Ruang 6</option> --}}
                                 </select>
-                                <label for="id_gedung">Ruangan yang dipilih</label>
+                                <label for="id_ruangan">Ruangan yang dipilih</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" class="form-control" name="jurusan" id="jurusan"
@@ -70,6 +69,63 @@
                             </div>
                         </form>
 
+                        @php
+                        $num1 = 1;
+                        $num2 = 1;
+                        function hariIndo($hariInggris)
+                        {
+                            switch ($hariInggris) {
+                                case 'Sunday':
+                                    return 'Minggu';
+                                case 'Monday':
+                                    return 'Senin';
+                                case 'Tuesday':
+                                    return 'Selasa';
+                                case 'Wednesday':
+                                    return 'Rabu';
+                                case 'Thursday':
+                                    return 'Kamis';
+                                case 'Friday':
+                                    return 'Jumat';
+                                case 'Saturday':
+                                    return 'Sabtu';
+                                default:
+                                    return 'hari tidak valid';
+                            }
+                        }
+                        function bulanIndo($hariInggris)
+                        {
+                            switch ($hariInggris) {
+                                case 'Jan':
+                                    return 'Januari';
+                                case 'Feb':
+                                    return 'Februari';
+                                case 'Mar':
+                                    return 'Maret';
+                                case 'Apr':
+                                    return 'April';
+                                case 'May':
+                                    return 'Mei';
+                                case 'Jun':
+                                    return 'Juni';
+                                case 'Jul':
+                                    return 'Juli';
+                                case 'Aug':
+                                    return 'Agustus';
+                                case 'Sep':
+                                    return 'September';
+                                case 'Oct':
+                                    return 'Oktober';
+                                case 'Nov':
+                                    return 'November';
+                                case 'Dec':
+                                    return 'Desember';
+                                default:
+                                    return 'bulan tidak valid';
+                            }
+                        }
+                        @endphp
+
                         <div class="table-responsive">
                             <h2 class="fw-bold border-bottom border-2 border-dark mb-3">List Proses Pemesanan Ruangan</h2>
                             {{-- <table class="table sh-table" id="table1"> --}}
@@ -86,66 +142,94 @@
                                         <th scope="col">Opsi</th>
                                     </tr>
                                 </thead>
-                                @php
-                                    $num = 1;
-                                    function hariIndo($hariInggris)
-                                    {
-                                        switch ($hariInggris) {
-                                            case 'Sunday':
-                                                return 'Minggu';
-                                            case 'Monday':
-                                                return 'Senin';
-                                            case 'Tuesday':
-                                                return 'Selasa';
-                                            case 'Wednesday':
-                                                return 'Rabu';
-                                            case 'Thursday':
-                                                return 'Kamis';
-                                            case 'Friday':
-                                                return 'Jumat';
-                                            case 'Saturday':
-                                                return 'Sabtu';
-                                            default:
-                                                return 'hari tidak valid';
-                                        }
-                                    }
-                                    function bulanIndo($hariInggris)
-                                    {
-                                        switch ($hariInggris) {
-                                            case 'Jan':
-                                                return 'Januari';
-                                            case 'Feb':
-                                                return 'Februari';
-                                            case 'Mar':
-                                                return 'Maret';
-                                            case 'Apr':
-                                                return 'April';
-                                            case 'May':
-                                                return 'Mei';
-                                            case 'Jun':
-                                                return 'Juni';
-                                            case 'Jul':
-                                                return 'Juli';
-                                            case 'Aug':
-                                                return 'Agustus';
-                                            case 'Sep':
-                                                return 'September';
-                                            case 'Oct':
-                                                return 'Oktober';
-                                            case 'Nov':
-                                                return 'November';
-                                            case 'Dec':
-                                                return 'Desember';
-                                            default:
-                                                return 'bulan tidak valid';
-                                        }
-                                    }
-                                @endphp
+                                <tbody class="text-center align-middle">
+                                    @foreach ($pesanans as $pesanan)
+                                        <tr>
+                                            <th scope="row">{{ $num1++ }}</th>
+                                            <td>{{ $pesanan->id_ruangan }}</td>
+                                            <td class="text-nowrap">
+                                                {{ hariIndo(date('l', strtotime($pesanan->jadwal_masuk))) }},
+                                                {{ date('d', strtotime($pesanan->jadwal_masuk)) }}
+                                                {{ bulanIndo(date('M', strtotime($pesanan->jadwal_masuk))) }} <br>
+                                                ({{ date('h:i', strtotime($pesanan->jadwal_masuk)) }} -
+                                                {{ date('h:i', strtotime($pesanan->jadwal_keluar)) }})
+                                            </td>
+                                            <td class="text-nowrap">{{ $pesanan->jurusan }}</td>
+                                            <td class="text-nowrap">{{ $pesanan->matakuliah }}</td>
+                                            <td class="text-nowrap">{{ $pesanan->User->name }}</td>
+                                            @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi')
+                                                <td class="fw-bold text-warning text-nowrap">
+                                                    {{ $pesanan->Status->keterangan }}</td>
+                                            @elseif ($pesanan->Status->keterangan == 'Diterima')
+                                                <td class="fw-bold text-success text-nowrap">
+                                                    {{ $pesanan->Status->keterangan }}</td>
+                                            @elseif ($pesanan->Status->keterangan == 'Dijadwalkan')
+                                                <td class="fw-bold text-primary text-nowrap">
+                                                    {{ $pesanan->Status->keterangan }}</td>
+                                            @else
+                                                <td class="fw-bold text-danger text-nowrap">
+                                                    {{ $pesanan->Status->keterangan }}</td>
+                                            @endif
+
+                                            @if (auth()->user()->level == 'dosen')
+                                                <td class="text-nowrap">
+                                                    <form action="/dashboard/hapus/{{ $pesanan->id }}" method="post">
+                                                        @csrf
+                                                        <button class="badge bg-danger border-0"
+                                                            onclick="return confirm('Apakah anda yakin?')">Hapus</button>
+                                                    </form>
+                                                </td>
+                                            @else
+                                                <td>
+                                                    <form action="/dashboard/terima/{{ $pesanan->id }}" method="post"
+                                                        class="d-block">
+                                                        @csrf
+                                                        <button class="badge bg-success border-0"
+                                                            onclick="return confirm('Apakah anda yakin?')">Terima</button>
+                                                    </form>
+                                                    <form action="/dashboard/batal/{{ $pesanan->id }}" method="post"
+                                                        class="d-block">
+                                                        @csrf
+                                                        <button class="badge bg-danger border-0"
+                                                            onclick="return confirm('Apakah anda yakin?')">Batalkan</button>
+                                                    </form>
+                                                    <form action="/dashboard/{{ $pesanan->id }}" method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button class="badge bg-danger border-0"
+                                                            onclick="return confirm('Apakah anda yakin?')">Hapus</button>
+                                                    </form>
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                        @if (auth()->user()->level == 'admin')
+
+                        <div class="table-responsive">
+                            <h2 class="fw-bold border-bottom border-2 border-dark mb-3">Jadwal Ruangan Yang Disetujui</h2>
+                            {{-- <table class="table sh-table" id="table1"> --}}
+                            <table class="table table-striped table-list-pesan" id="table1">
+                                <thead class="bg-light text-center">
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Ruangan</th>
+                                        <th scope="col">Waktu Pakai</th>
+                                        <th scope="col">Jurusan</th>
+                                        <th scope="col">Mata Kuliah</th>
+                                        <th scope="col">Dosen</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Opsi</th>
+                                    </tr>
+                                </thead>
                                 <tbody class="text-center align-middle">
                                     @foreach ($jadwals as $jadwal)
                                         <tr>
-                                            <th scope="row">{{ $num++ }}</th>
-                                            <td>{{ $jadwal->id_gedung }}</td>
+                                            <th scope="row">{{ $num2++ }}</th>
+                                            <td>{{ $jadwal->id_ruangan }}</td>
                                             <td class="text-nowrap">
                                                 {{ hariIndo(date('l', strtotime($jadwal->jadwal_masuk))) }},
                                                 {{ date('d', strtotime($jadwal->jadwal_masuk)) }}
@@ -162,6 +246,9 @@
                                             @elseif ($jadwal->Status->keterangan == 'Diterima')
                                                 <td class="fw-bold text-success text-nowrap">
                                                     {{ $jadwal->Status->keterangan }}</td>
+                                            @elseif ($jadwal->Status->keterangan == 'Dijadwalkan')
+                                                <td class="fw-bold text-primary text-nowrap">
+                                                    {{ $jadwal->Status->keterangan }}</td>
                                             @else
                                                 <td class="fw-bold text-danger text-nowrap">
                                                     {{ $jadwal->Status->keterangan }}</td>
@@ -175,82 +262,26 @@
                                                         <button class="btn btn-danger"
                                                             onclick="return confirm('Apakah anda yakin?')">Hapus</button>
                                                     </form>
-                                                    {{-- <a href="" class="btn btn-danger">Hapus</a> --}}
                                                 </td>
                                             @else
                                                 <td>
-                                                    <form action="/dashboard/terima/{{ $jadwal->id }}" method="post"
-                                                        class="d-block">
-                                                        @csrf
-                                                        <button class="badge bg-success border-0"
-                                                            onclick="return confirm('Apakah anda yakin?')">Terima</button>
-                                                    </form>
-                                                    <form action="/dashboard/batal/{{ $jadwal->id }}" method="post"
+                                                    <form action="/dashboard/hapus/{{ $jadwal->id }}" method="post"
                                                         class="d-block">
                                                         @csrf
                                                         <button class="badge bg-danger border-0"
-                                                            onclick="return confirm('Apakah anda yakin?')">Batalkan</button>
+                                                            onclick="return confirm('Apakah anda yakin?')">Hapus</button>
                                                     </form>
-                                                    {{-- <a href="" class="btn btn-primary">Jadwalkan</a> --}}
                                                 </td>
                                             @endif
                                         </tr>
                                     @endforeach
-                                    {{-- <tr>
-                                        <th scope="row">2</th>
-                                        <td>2</td>
-                                        <td>Senin, 18 Juli <br>(10.00 - 12.00)</td>
-                                        <td>Sastra Informatika</td>
-                                        <td>Menjadi Si paling IT </td>
-                                        <td>Hasby uwu</td>
-                                        <td class="fw-bold text-success">Booked</td>
-                                        <td>
-                                            <a href="" class="btn btn-success">Ubah</a>
-                                            <a href="" class="btn btn-danger">Hapus</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>2</td>
-                                        <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
-                                        <td>Cinta Lingkungan</td>
-                                        <td>Bomb Nuclear</td>
-                                        <td>Arip kon</td>
-                                        <td class="fw-bold text-primary">Process</td>
-                                        <td>
-                                            <a href="" class="btn btn-success">Ubah</a>
-                                            <a href="" class="btn btn-danger">Hapus</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>3</td>
-                                        <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
-                                        <td>Cinta Lingkungan</td>
-                                        <td>Bomb Nuclear</td>
-                                        <td>Arip kon</td>
-                                        <td class="text-danger fw-bold">Bentrok</td>
-                                        <td>
-                                            <a href="" class="btn btn-success">Ubah</a>
-                                            <a href="" class="btn btn-danger">Hapus</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>4</td>
-                                        <td>Senin, 18 Juli <br> (12.00 - 15.00)</td>
-                                        <td>Cinta Lingkungan</td>
-                                        <td>Bomb Nuclear</td>
-                                        <td>Arip kon</td>
-                                        <td class="text-danger fw-bold">Bentrok</td>
-                                        <td>
-                                            <a href="" class="btn btn-success">Ubah</a>
-                                            <a href="" class="btn btn-danger">Hapus</a>
-                                        </td>
-                                    </tr> --}}
+
                                 </tbody>
                             </table>
                         </div>
+
+                        @endif
+
                     </div>
                 </div>
             </div>
