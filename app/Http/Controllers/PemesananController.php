@@ -75,8 +75,8 @@ class PemesananController extends Controller
 
     public function cancel($id)
     {
+        Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 3]);
-
-        return redirect('/dashboard')->with('succes', 'Data pemesanan dibatalkan!');
+        return redirect('/dashboard')->with('success', 'Data pemesanan dibatalkan!');   
     }
 }

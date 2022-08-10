@@ -61,12 +61,18 @@
                                     placeholder="Mata Kuliah" required>
                                 <label for="matakuliah">Mata Kuliah</label>
                             </div>
-                            {{-- Only for admin --}}
+
+                            @if (auth()->user()->level == 'admin')
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" class="form-control" name="dosen" id="dosen" placeholder="Dosen"
                                     required>
                                 <label for="matakuliah">Nama Dosen</label>
                             </div>
+                                
+                            @else
+                                
+                            @endif
+                            {{-- Only for admin --}}
 
                             <input type="hidden" name="id_dosen" id="id_dosen" value="{{ auth()->user()->id }}">
                             <input type="hidden" name="id_status" id="id_status" value="1">
@@ -148,6 +154,9 @@
                                         <th scope="col">Mata Kuliah</th>
                                         <th scope="col">Dosen</th>
                                         <th scope="col">Status</th>
+                                        @if (auth()->user()->level == 'admin')
+                                        <th scope="col">Waktu Pemesanan</th>
+                                        @endif
                                         <th scope="col">Opsi</th>
                                     </tr>
                                 </thead>
@@ -178,6 +187,10 @@
                                             @else
                                                 <td class="fw-bold text-danger text-nowrap">
                                                     {{ $pesanan->Status->keterangan }}</td>
+                                            @endif
+
+                                            @if (auth()->user()->level == 'admin')
+                                                <td class="text-nowrap">{{ date('d/m/y h:i:s', strtotime($pesanan->created_at)) }}</td>
                                             @endif
 
                                             @if (auth()->user()->level == 'dosen')
