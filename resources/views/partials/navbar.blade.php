@@ -51,7 +51,7 @@
 
                     <ul class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2"
                         style="">
-                        <li><a class="dropdown-item d-block" href="#"><i
+                        <li><a class="dropdown-item d-block" href="/dashboard"><i
                                     class="fa-solid fa-building-circle-exclamation logowsidebarnv me-2"></i>Status
                                 Pemesanan</a>
                         </li>

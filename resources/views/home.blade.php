@@ -106,26 +106,26 @@ function bulanIndo($hariInggris)
                                     <th scope="col">No</th>
                                     <th scope="col">Jam Pakai</th>
                                     <th scope="col">Jurusan</th>
-                                    <th scope="col">Mata Kuliah</th>
+                                    <th scope="col" class="text-nowrap">Mata Kuliah</th>
                                     <th scope="col">Dosen</th>
                                     {{-- <th scope="col">Status</th> --}}
                                 </tr>
                             </thead>
-                            <tbody class="text-center">
+                            <tbody class="text-center align-middle">
                                 @foreach ($jdwlrgn1 as $rg1)
-                                <tr>
-                                    <th scope="row">{{ $num1++ }}</th>
-                                    <td class="text-nowrap">
-                                        {{ hariIndo(date('l', strtotime($rg1->jadwal_masuk))) }},
-                                        {{ date('d', strtotime($rg1->jadwal_masuk)) }}
-                                        {{ bulanIndo(date('M', strtotime($rg1->jadwal_masuk))) }} <br>
-                                        ({{ date('h:i', strtotime($rg1->jadwal_masuk)) }} -
-                                        {{ date('h:i', strtotime($rg1->jadwal_keluar)) }})
-                                    </td>
-                                    <td class="text-nowrap">{{ $rg1->jurusan }}</td>
-                                    <td class="text-nowrap">{{ $rg1->matakuliah }}</td>
-                                    <td class="text-nowrap">{{ $rg1->User->name }}</td>
-                                </tr>
+                                    <tr>
+                                        <th scope="row">{{ $num1++ }}</th>
+                                        <td class="text-nowrap">
+                                            {{ hariIndo(date('l', strtotime($rg1->jadwal_masuk))) }},
+                                            {{ date('d', strtotime($rg1->jadwal_masuk)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg1->jadwal_masuk))) }} <br>
+                                            ({{ date('h:i', strtotime($rg1->jadwal_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg1->jadwal_keluar)) }})
+                                        </td>
+                                        <td class="text-wrap">{{ $rg1->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg1->matakuliah }}</td>
+                                        <td class="text-wrap">{{ $rg1->User->name }}</td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -146,26 +146,25 @@ function bulanIndo($hariInggris)
                                     <th scope="col">No</th>
                                     <th scope="col">Jam Pakai</th>
                                     <th scope="col">Jurusan</th>
-                                    <th scope="col">Mata Kuliah</th>
+                                    <th scope="col" class="text-nowrap">Mata Kuliah</th>
                                     <th scope="col">Dosen</th>
-                                    {{-- <th scope="col">Status</th> --}}
                                 </tr>
                             </thead>
-                            <tbody class="text-center">
+                            <tbody class="text-center align-middle">
                                 @foreach ($jdwlrgn2 as $rg2)
-                                <tr>
-                                    <th scope="row">{{ $num2++ }}</th>
-                                    <td class="text-nowrap">
-                                        {{ hariIndo(date('l', strtotime($rg2->jadwal_masuk))) }},
-                                        {{ date('d', strtotime($rg2->jadwal_masuk)) }}
-                                        {{ bulanIndo(date('M', strtotime($rg2->jadwal_masuk))) }} <br>
-                                        ({{ date('h:i', strtotime($rg2->jadwal_masuk)) }} -
-                                        {{ date('h:i', strtotime($rg2->jadwal_keluar)) }})
-                                    </td>
-                                    <td class="text-nowrap">{{ $rg2->jurusan }}</td>
-                                    <td class="text-nowrap">{{ $rg2->matakuliah }}</td>
-                                    <td class="text-nowrap">{{ $rg2->User->name }}</td>
-                                </tr>
+                                    <tr>
+                                        <th scope="row">{{ $num2++ }}</th>
+                                        <td class="text-nowrap">
+                                            {{ hariIndo(date('l', strtotime($rg2->jadwal_masuk))) }},
+                                            {{ date('d', strtotime($rg2->jadwal_masuk)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg2->jadwal_masuk))) }} <br>
+                                            ({{ date('h:i', strtotime($rg2->jadwal_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg2->jadwal_keluar)) }})
+                                        </td>
+                                        <td class="text-wrap">{{ $rg2->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg2->matakuliah }}</td>
+                                        <td class="text-wrap">{{ $rg2->User->name }}</td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -173,8 +172,6 @@ function bulanIndo($hariInggris)
                 </div>
 
                 <div class="container r-wrapper">
-                    {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable2()">Ruangan 2</button> --}}
-                    {{-- <p class="fw-bold btn-shtable" onclick="showTable3()">Ruangan 3</p> --}}
                     <i class="fa-solid fa-list" id="icon-btn-shtable3"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable3()">
                         Ruangan 3
@@ -186,25 +183,136 @@ function bulanIndo($hariInggris)
                                     <th scope="col">No</th>
                                     <th scope="col">Jam Pakai</th>
                                     <th scope="col">Jurusan</th>
-                                    <th scope="col">Mata Kuliah</th>
+                                    <th scope="col" class="text-nowrap">Mata Kuliah</th>
                                     <th scope="col">Dosen</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center">
+                            <tbody class="text-center align-middle">
                                 @foreach ($jdwlrgn3 as $rg3)
+                                    <tr>
+                                        <th scope="row">{{ $num3++ }}</th>
+                                        <td class="text-nowrap">
+                                            {{ hariIndo(date('l', strtotime($rg3->jadwal_masuk))) }},
+                                            {{ date('d', strtotime($rg3->jadwal_masuk)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg3->jadwal_masuk))) }} <br>
+                                            ({{ date('h:i', strtotime($rg3->jadwal_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg3->jadwal_keluar)) }})
+                                        </td>
+                                        <td class="text-wrap">{{ $rg3->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg3->matakuliah }}</td>
+                                        <td class="text-wrap">{{ $rg3->User->name }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="container r-wrapper">
+                    <i class="fa-solid fa-list" id="icon-btn-shtable4"></i> <span class="fw-bold btn-shtable"
+                        onclick="showTable4()">
+                        Ruangan 4
+                    </span>
+                    <div class="table-responsive">
+                        <table class="table sh-table" id="table4">
+                            <thead class="bg-light text-center">
                                 <tr>
-                                    <th scope="row">{{ $num3++ }}</th>
-                                    <td class="text-nowrap">
-                                        {{ hariIndo(date('l', strtotime($rg3->jadwal_masuk))) }},
-                                        {{ date('d', strtotime($rg3->jadwal_masuk)) }}
-                                        {{ bulanIndo(date('M', strtotime($rg3->jadwal_masuk))) }} <br>
-                                        ({{ date('h:i', strtotime($rg3->jadwal_masuk)) }} -
-                                        {{ date('h:i', strtotime($rg3->jadwal_keluar)) }})
-                                    </td>
-                                    <td class="text-nowrap">{{ $rg3->jurusan }}</td>
-                                    <td class="text-nowrap">{{ $rg3->matakuliah }}</td>
-                                    <td class="text-nowrap">{{ $rg3->User->name }}</td>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Jam Pakai</th>
+                                    <th scope="col">Jurusan</th>
+                                    <th scope="col" class="text-nowrap">Mata Kuliah</th>
+                                    <th scope="col">Dosen</th>
                                 </tr>
+                            </thead>
+                            <tbody class="text-center align-middle">
+                                @foreach ($jdwlrgn4 as $rg4)
+                                    <tr>
+                                        <th scope="row">{{ $num4++ }}</th>
+                                        <td class="text-nowrap">
+                                            {{ hariIndo(date('l', strtotime($rg4->jadwal_masuk))) }},
+                                            {{ date('d', strtotime($rg4->jadwal_masuk)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg4->jadwal_masuk))) }} <br>
+                                            ({{ date('h:i', strtotime($rg4->jadwal_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg4->jadwal_keluar)) }})
+                                        </td>
+                                        <td class="text-wrap">{{ $rg4->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg4->matakuliah }}</td>
+                                        <td class="text-wrap">{{ $rg4->User->name }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="container r-wrapper">
+                    <i class="fa-solid fa-list" id="icon-btn-shtable5"></i> <span class="fw-bold btn-shtable"
+                        onclick="showTable5()">
+                        Ruangan 5
+                    </span>
+                    <div class="table-responsive">
+                        <table class="table sh-table" id="table5">
+                            <thead class="bg-light text-center">
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Jam Pakai</th>
+                                    <th scope="col">Jurusan</th>
+                                    <th scope="col" class="text-nowrap">Mata Kuliah</th>
+                                    <th scope="col">Dosen</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center align-middle">
+                                @foreach ($jdwlrgn5 as $rg5)
+                                    <tr>
+                                        <th scope="row">{{ $num5++ }}</th>
+                                        <td class="text-nowrap">
+                                            {{ hariIndo(date('l', strtotime($rg5->jadwal_masuk))) }},
+                                            {{ date('d', strtotime($rg5->jadwal_masuk)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg5->jadwal_masuk))) }} <br>
+                                            ({{ date('h:i', strtotime($rg5->jadwal_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg5->jadwal_keluar)) }})
+                                        </td>
+                                        <td class="text-wrap">{{ $rg5->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg5->matakuliah }}</td>
+                                        <td class="text-wrap">{{ $rg5->User->name }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="container r-wrapper">
+                    <i class="fa-solid fa-list" id="icon-btn-shtable6"></i> <span class="fw-bold btn-shtable"
+                        onclick="showTable6()">
+                        Ruangan 6
+                    </span>
+                    <div class="table-responsive">
+                        <table class="table sh-table" id="table6">
+                            <thead class="bg-light text-center">
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Jam Pakai</th>
+                                    <th scope="col">Jurusan</th>
+                                    <th scope="col" class="text-nowrap">Mata Kuliah</th>
+                                    <th scope="col">Dosen</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center align-middle">
+                                @foreach ($jdwlrgn6 as $rg6)
+                                    <tr>
+                                        <th scope="row">{{ $num6++ }}</th>
+                                        <td class="text-nowrap">
+                                            {{ hariIndo(date('l', strtotime($rg6->jadwal_masuk))) }},
+                                            {{ date('d', strtotime($rg6->jadwal_masuk)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg6->jadwal_masuk))) }} <br>
+                                            ({{ date('h:i', strtotime($rg6->jadwal_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg6->jadwal_keluar)) }})
+                                        </td>
+                                        <td class="text-wrap">{{ $rg6->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg6->matakuliah }}</td>
+                                        <td class="text-wrap">{{ $rg6->User->name }}</td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -212,7 +320,6 @@ function bulanIndo($hariInggris)
                 </div>
 
                 <div class="container-fluid text-center mt-3 pb-4">
-                    {{-- <button class="btn btn-dark text-center" >+ Booking Ruangan</button> --}}
                     <a href="/dashboard" class="btn btn-book">+ Booking Ruangan</a>
                 </div>
             </div>
