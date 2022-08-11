@@ -27,15 +27,31 @@
                         <form action="/dashboard" method="post" class="reg-room-form">
                             @csrf
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="datetime-local" name="jadwal_masuk" class="form-control" id="jadwal_masuk"
-                                    required>
-                                <label for="jadwal_masuk">Jadwal Masuk</label>
+                                {{-- <input type="datetime-local" name="jadwal_masuk" class="form-control" id="jadwal_masuk"
+                                    required> --}}
+                                <input type="date" name="jadwal_masuk" class="form-control" id="jadwal_masuk" required>
+                                <label for="jadwal_masuk">Tanggal Peminjaman</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
+                                {{-- <input type="datetime-local" name="jadwal_masuk" class="form-control" id="jadwal_masuk"
+                                    required> --}}
+                                <input type="time" step="3600" name="jam_masuk" class="form-control" id="jam_masuk"
+                                    required>
+                                <label for="jam_masuk">Jam Masuk</label>
+                            </div>
+                            <div class="col-sm-9 form-floating mb-3">
+                                {{-- <input type="datetime-local" name="jadwal_masuk" class="form-control" id="jadwal_masuk"
+                                    required> --}}
+                                <input type="time" step="3600" name="jam_masuk" class="form-control" id="jam_masuk"
+                                    required>
+                                <label for="jam_masuk">Jam Keluar</label>
+                            </div>
+
+                            {{-- <div class="col-sm-9 form-floating mb-3">
                                 <input type="datetime-local" name="jadwal_keluar" class="form-control" id="jadwal_keluar"
                                     required>
                                 <label for="jadwal_keluar">Jadwal Keluar</label>
-                            </div>
+                            </div> --}}
                             <div class="col-sm-9 form-floating mb-3">
                                 <select class="form-select" name="id_ruangan" id="id_ruangan" required>
                                     @foreach ($ruangan as $rn)
@@ -133,7 +149,7 @@
                             {{-- <table class="table sh-table" id="table1"> --}}
                             <table class="table table-striped table-list-pesan" id="table1">
                                 <thead class="bg-light text-center">
-                                    <tr>
+                                    <tr class="text-nowrap">
                                         <th scope="col">No</th>
                                         <th scope="col">Ruangan</th>
                                         <th scope="col">Waktu Pakai</th>
@@ -142,7 +158,7 @@
                                         <th scope="col">Dosen</th>
                                         <th scope="col">Status</th>
                                         @if (auth()->user()->level == 'admin')
-                                        <th scope="col">Waktu Pemesanan</th>
+                                            <th scope="col">Waktu Pemesanan</th>
                                         @endif
                                         <th scope="col">Opsi</th>
                                     </tr>
@@ -160,8 +176,8 @@
                                                 {{ date('h:i', strtotime($pesanan->jadwal_keluar)) }})
                                             </td>
                                             <td class="text-nowrap">{{ $pesanan->jurusan }}</td>
-                                            <td class="text-nowrap">{{ $pesanan->matakuliah }}</td>
-                                            <td class="text-nowrap">{{ $pesanan->User->name }}</td>                                           
+                                            <td class="text-wrap">{{ $pesanan->matakuliah }}</td>
+                                            <td class="text-nowrap">{{ $pesanan->User->name }}</td>
                                             @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi')
                                                 <td class="fw-bold text-warning text-nowrap">
                                                     {{ $pesanan->Status->keterangan }}</td>
@@ -172,12 +188,13 @@
                                                 <td class="fw-bold text-primary text-nowrap">
                                                     {{ $pesanan->Status->keterangan }}</td>
                                             @else
-                                            <td class="fw-bold text-danger text-nowrap">
-                                                {{ $pesanan->Status->keterangan }}</td>
+                                                <td class="fw-bold text-danger text-nowrap">
+                                                    {{ $pesanan->Status->keterangan }}</td>
                                             @endif
-                                                
+
                                             @if (auth()->user()->level == 'admin')
-                                                <td class="text-nowrap">{{ date('d/m/y h:i:s', strtotime($pesanan->created_at)) }}</td>
+                                                <td class="text-nowrap">
+                                                    {{ date('d/m/y h:i:s', strtotime($pesanan->created_at)) }}</td>
                                             @endif
 
                                             @if (auth()->user()->level == 'dosen')
@@ -190,37 +207,37 @@
                                                 </td>
                                             @else
                                                 <td>
-                                                    @if (($pesanan->Status->keterangan == 'Dihapus') Or ($pesanan->Status->keterangan == 'Ditolak (Dihapus)'))
+                                                    @if ($pesanan->Status->keterangan == 'Dihapus' or $pesanan->Status->keterangan == 'Ditolak (Dihapus)')
                                                     @else
-                                                    <form action="/dashboard/terima/{{ $pesanan->id }}" method="post"
-                                                        class="d-block">
-                                                        @csrf
-                                                        <button class="badge bg-success border-0"
-                                                            onclick="return confirm('Apakah anda yakin untuk menerima jadwal?')">Terima</button>
-                                                    </form>
+                                                        <form action="/dashboard/terima/{{ $pesanan->id }}"
+                                                            method="post" class="d-block">
+                                                            @csrf
+                                                            <button class="badge bg-success border-0"
+                                                                onclick="return confirm('Apakah anda yakin untuk menerima jadwal?')">Terima</button>
+                                                        </form>
                                                     @endif
-                                                    @if (($pesanan->Status->keterangan == 'Dihapus') Or ($pesanan->Status->keterangan == 'Ditolak (Dihapus)'))
-                                                    <form action="/dashboard/batalhapus/{{ $pesanan->id }}" method="post"
-                                                        class="d-block">
-                                                        @csrf
-                                                        <button class="badge bg-danger border-0"
-                                                            onclick="return confirm('Apakah anda yakin untuk menolak jadwal?')">Batalkan</button>
-                                                    </form>
+                                                    @if ($pesanan->Status->keterangan == 'Dihapus' or $pesanan->Status->keterangan == 'Ditolak (Dihapus)')
+                                                        <form action="/dashboard/batalhapus/{{ $pesanan->id }}"
+                                                            method="post" class="d-block">
+                                                            @csrf
+                                                            <button class="badge bg-danger border-0"
+                                                                onclick="return confirm('Apakah anda yakin untuk menolak jadwal?')">Batalkan</button>
+                                                        </form>
                                                     @else
-                                                    <form action="/dashboard/batal/{{ $pesanan->id }}" method="post"
-                                                        class="d-block">
-                                                        @csrf
-                                                        <button class="badge bg-danger border-0"
-                                                            onclick="return confirm('Apakah anda yakin untuk membatalkan jadwal?')">Batalkan</button>
-                                                    </form>
+                                                        <form action="/dashboard/batal/{{ $pesanan->id }}"
+                                                            method="post" class="d-block">
+                                                            @csrf
+                                                            <button class="badge bg-danger border-0"
+                                                                onclick="return confirm('Apakah anda yakin untuk membatalkan jadwal?')">Batalkan</button>
+                                                        </form>
                                                     @endif
-                                                    @if (($pesanan->Status->keterangan == 'Dihapus') Or ($pesanan->Status->keterangan == 'Ditolak (Dihapus)'))
-                                                    <form action="/dashboard/{{ $pesanan->id }}" method="post">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button class="badge bg-danger border-0"
-                                                            onclick="return confirm('Apakah anda yakin untuk menghapus jadwal?')">Hapus</button>
-                                                    </form>
+                                                    @if ($pesanan->Status->keterangan == 'Dihapus' or $pesanan->Status->keterangan == 'Ditolak (Dihapus)')
+                                                        <form action="/dashboard/{{ $pesanan->id }}" method="post">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="badge bg-danger border-0"
+                                                                onclick="return confirm('Apakah anda yakin untuk menghapus jadwal?')">Hapus</button>
+                                                        </form>
                                                     @endif
                                                 </td>
                                             @endif
@@ -232,7 +249,8 @@
 
                         @if (auth()->user()->level == 'admin')
                             <div class="table-responsive">
-                                <h2 class="fw-bold border-bottom border-2 border-dark mb-3">Jadwal Ruangan Yang Disetujui</h2>
+                                <h2 class="fw-bold border-bottom border-2 border-dark mb-3">Jadwal Ruangan Yang Disetujui
+                                </h2>
                                 {{-- <table class="table sh-table" id="table1"> --}}
                                 <table class="table table-striped table-list-pesan" id="table1">
                                     <thead class="bg-light text-center">
@@ -260,7 +278,7 @@
                                                     {{ date('h:i', strtotime($jadwal->jadwal_keluar)) }})
                                                 </td>
                                                 <td class="text-nowrap">{{ $jadwal->jurusan }}</td>
-                                                <td class="text-nowrap">{{ $jadwal->matakuliah }}</td>
+                                                <td class="text-wrap">{{ $jadwal->matakuliah }}</td>
                                                 <td class="text-nowrap">{{ $jadwal->User->name }}</td>
                                                 @if ($jadwal->Status->keterangan == 'Menunggu Konfirmasi')
                                                     <td class="fw-bold text-warning text-nowrap">
@@ -281,7 +299,8 @@
                                                         <form action="/dashboard/{{ $jadwal->id }}" method="post">
                                                             @method('delete')
                                                             @csrf
-                                                            <button class="btn btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</button>
+                                                            <button class="btn btn-danger"
+                                                                onclick="return confirm('Apakah anda yakin?')">Hapus</button>
                                                         </form>
                                                     </td>
                                                 @else
