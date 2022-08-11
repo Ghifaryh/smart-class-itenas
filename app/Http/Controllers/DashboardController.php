@@ -15,7 +15,7 @@ class DashboardController extends Controller
     {
         $date = new DateTime("NOW");
         if (auth()->user()->level == 'dosen') {
-            $pesanan = Pemesanan::where('id_dosen', auth()->user()->id)->whereNot('id_status', 4)->get();
+            $pesanan = Pemesanan::where('id_dosen', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
         } else {
             $pesanan = Pemesanan::all();
         }

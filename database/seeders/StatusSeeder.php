@@ -30,5 +30,9 @@ class StatusSeeder extends Seeder
         Status::create([
             'keterangan' => 'Dihapus',
         ]);
+
+        Status::create([
+            'keterangan' => 'Ditolak (Dihapus)',
+        ]);
     }
 }

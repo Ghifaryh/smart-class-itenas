@@ -69,8 +69,6 @@ class PemesananController extends Controller
             Pemesanan::where('id', $id)->update(['id_status' => 2]);
             return redirect('/dashboard')->with('success', 'Data pemesanan diterima!');
         }
-
-
     }
 
     public function cancel($id)
@@ -78,5 +76,12 @@ class PemesananController extends Controller
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 3]);
         return redirect('/dashboard')->with('success', 'Data pemesanan dibatalkan!');   
+    }
+
+    public function cancelhapus($id)
+    {
+        Jadwal::where('id_pemesanan', '=', $id)->delete();
+        Pemesanan::where('id', $id)->update(['id_status' => 5]);
+        return redirect('/dashboard')->with('success', 'Data pemesanan dibatalkan karna dihapus!');   
     }
 }
