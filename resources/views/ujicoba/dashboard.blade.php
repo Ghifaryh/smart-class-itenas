@@ -214,7 +214,7 @@
                                                             onclick="return confirm('Apakah anda yakin untuk membatalkan jadwal?')">Batalkan</button>
                                                     </form>
                                                     @endif
-                                                    @if (($pesanan->Status->keterangan == 'Dihapus') Or ($pesanan->Status->keterangan == 'Ditolak (Dihapus)'))
+                                                    @if (($pesanan->Status->keterangan == 'Dihapus') Or ($pesanan->Status->keterangan == 'Ditolak (Dihapus)') Or (auth()->user()->level == 'admin'))
                                                     <form action="/dashboard/{{ $pesanan->id }}" method="post">
                                                         @method('delete')
                                                         @csrf

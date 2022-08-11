@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_ruangan');
             $table->foreignId('id_dosen');
+            $table->date('tanggal_masuk');
             $table->dateTime('jadwal_masuk');
             $table->dateTime('jadwal_keluar');
             $table->string('jurusan');
