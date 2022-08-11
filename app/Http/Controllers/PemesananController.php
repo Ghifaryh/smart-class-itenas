@@ -15,13 +15,14 @@ class PemesananController extends Controller
         $validatedData = $request->validate([
             'id_ruangan' => ['required'],
             'id_dosen' => ['required'],
-            'jadwal_masuk' => ['required'],
-            'jadwal_keluar' => ['required'],
-            'jurusan' => ['required'],
+            'tanggal_pinjam' => ['required'],
+            'jam_masuk' => ['required'],
+            'jam_keluar' => ['required','after:jam_masuk'],
+            'prodi' => ['required'],
             'matakuliah' => ['required'],
             'id_status' => ['required']
         ]);
-
+        
         // dd($request);
         Pemesanan::create($validatedData);
 
@@ -53,9 +54,10 @@ class PemesananController extends Controller
             'id_pemesanan' => $pesanan->id,
             'id_ruangan' => $pesanan->id_ruangan,
             'id_dosen' => $pesanan->id_dosen,
-            'jadwal_masuk' => $pesanan->jadwal_masuk,
-            'jadwal_keluar' => $pesanan->jadwal_keluar,
-            'jurusan' => $pesanan->jurusan,
+            'tanggal_pinjam' => $pesanan->tanggal_pinjam,
+            'jam_masuk' => $pesanan->jam_masuk,
+            'jam_keluar' => $pesanan->jam_keluar,
+            'prodi' => $pesanan->prodi,
             'matakuliah' => $pesanan->matakuliah,
             'id_status' => 2
 

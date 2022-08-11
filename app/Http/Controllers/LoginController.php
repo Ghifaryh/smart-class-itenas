@@ -22,14 +22,16 @@ class LoginController extends Controller
         ]);
 
         if(Auth::attemptWhen($credentials)){
-            if(Auth::user()->level == "dosen"){
-                $request->session()->regenerate();
-                return redirect()->intended('/dashboard');
-            }else{
-                $request->session()->regenerate();
-                return redirect()->intended('/dashboard');
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard');
+            // if(Auth::user()->level == "dosen"){
+            //     $request->session()->regenerate();
+            //     return redirect()->intended('/dashboard');
+            // }else{
+            //     $request->session()->regenerate();
+            //     return redirect()->intended('/dashboard');
 
-            }
+            // }
         }
 
         return back()->with('loginError', 'Login Failed!');

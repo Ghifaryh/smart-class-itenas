@@ -18,9 +18,10 @@ return new class extends Migration
             $table->foreignId('id_pemesanan');
             $table->foreignId('id_ruangan');
             $table->foreignId('id_dosen');
-            $table->dateTime('jadwal_masuk');
-            $table->dateTime('jadwal_keluar');
-            $table->string('jurusan');
+            $table->date('tanggal_pinjam');
+            $table->time('jam_masuk');
+            $table->time('jam_keluar');
+            $table->string('prodi');
             $table->string('matakuliah');
             $table->foreignId('id_status');
             $table->timestamps();

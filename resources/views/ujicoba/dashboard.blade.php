@@ -27,55 +27,88 @@
                         <form action="/dashboard" method="post" class="reg-room-form">
                             @csrf
                             <div class="col-sm-9 form-floating mb-3">
-                                {{-- <input type="datetime-local" name="jadwal_masuk" class="form-control" id="jadwal_masuk"
-                                    required> --}}
-                                <input type="date" name="jadwal_masuk" class="form-control" id="jadwal_masuk" required>
-                                <label for="jadwal_masuk">Tanggal Peminjaman</label>
+                                <input type="date" name="tanggal_pinjam" class="form-control @error('tanggal_pinjam') is-invalid @enderror" id="tanggal_pinjam" required>
+                                <label for="tanggal_pinjam">Tanggal Peminjaman</label>
+                                @error('tanggal_pinjam')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
-                            <div class="col-sm-9 form-floating mb-3">
-                                {{-- <input type="datetime-local" name="jadwal_masuk" class="form-control" id="jadwal_masuk"
-                                    required> --}}
-                                <input type="time" step="3600" name="jam_masuk" class="form-control" id="jam_masuk"
+                            {{-- <div class="col-sm-9 form-floating mb-3">
+                                <input type="time" name="jam_masuk" class="form-control" id="jam_masuk"
                                     required>
                                 <label for="jam_masuk">Jam Masuk</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                {{-- <input type="datetime-local" name="jadwal_masuk" class="form-control" id="jadwal_masuk"
-                                    required> --}}
-                                <input type="time" step="3600" name="jam_masuk" class="form-control" id="jam_masuk"
+                                <input type="time" name="jam_keluar" class="form-control" id="jam_keluar"
                                     required>
-                                <label for="jam_masuk">Jam Keluar</label>
-                            </div>
-
-                            {{-- <div class="col-sm-9 form-floating mb-3">
-                                <input type="datetime-local" name="jadwal_keluar" class="form-control" id="jadwal_keluar"
-                                    required>
-                                <label for="jadwal_keluar">Jadwal Keluar</label>
+                                <label for="jam_keluar">Jam Keluar</label>
                             </div> --}}
                             <div class="col-sm-9 form-floating mb-3">
-                                <select class="form-select" name="id_ruangan" id="id_ruangan" required>
+                                <select class="form-select @error('jam_masuk') is-invalid @enderror" name="jam_masuk" id="jam_masuk" required>
+                                    @foreach ($jam as $jam_masuk)
+                                        <tr>
+                                            <option value="{{ $jam_masuk->jam_pakai }}">{{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
+                                        </tr>
+                                    @endforeach
+                                </select>
+                                <label for="jam_masuk">Jam Masuk</label>
+                                @error('jam_masuk')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-9 form-floating mb-3">
+                                <select class="form-select @error('jam_keluar') is-invalid @enderror" name="jam_keluar" id="jam_keluar" required>
+                                    @foreach ($jam as $jam_keluar)
+                                        <tr>
+                                            <option value="{{ $jam_keluar->jam_pakai }}">{{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
+                                        </tr>
+                                    @endforeach
+                                </select>
+                                <label for="jam_keluar">Jam Keluar</label>
+                                @error('jam-Keluar')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-9 form-floating mb-3">
+                                <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan" id="id_ruangan" required>
                                     @foreach ($ruangan as $rn)
                                         <tr>
                                             <option value="{{ $rn->id }}">{{ $rn->keterangan }}</option>
                                         </tr>
                                     @endforeach
-                                    {{-- <option value="2">Ruang 2</option>
-                                    <option value="3">Ruang Guru</option>
-                                    <option value="3">Ruang 4</option>
-                                    <option value="3">Ruang 5</option>
-                                    <option value="3">Ruang 6</option> --}}
                                 </select>
                                 <label for="id_ruangan">Ruangan yang dipilih</label>
+                                @error('id_ruangan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="text" class="form-control" name="prodi" id="prodi" placeholder="Prodi"
+                                <input type="text" class="form-control @error('prodi') is-invalid @enderror" name="prodi" id="prodi" placeholder="Prodi"
                                     required>
                                 <label for="prodi">Prodi</label>
+                                @error('prodi')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="text" class="form-control" name="matakuliah" id="matakuliah"
+                                <input type="text" class="form-control @error('matakuliah') is-invalid @enderror" name="matakuliah" id="matakuliah"
                                     placeholder="Mata Kuliah" required>
                                 <label for="matakuliah">Mata Kuliah</label>
+                                @error('matakuliah')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <input type="hidden" name="id_dosen" id="id_dosen" value="{{ auth()->user()->id }}">
                             <input type="hidden" name="id_status" id="id_status" value="1">
@@ -169,13 +202,13 @@
                                             <th scope="row">{{ $num1++ }}</th>
                                             <td>{{ $pesanan->id_ruangan }}</td>
                                             <td class="text-nowrap">
-                                                {{ hariIndo(date('l', strtotime($pesanan->jadwal_masuk))) }},
-                                                {{ date('d', strtotime($pesanan->jadwal_masuk)) }}
-                                                {{ bulanIndo(date('M', strtotime($pesanan->jadwal_masuk))) }} <br>
-                                                ({{ date('h:i', strtotime($pesanan->jadwal_masuk)) }} -
-                                                {{ date('h:i', strtotime($pesanan->jadwal_keluar)) }})
+                                                {{ hariIndo(date('l', strtotime($pesanan->tanggal_pinjam))) }},
+                                                {{ date('d', strtotime($pesanan->tanggal_pinjam)) }}
+                                                {{ bulanIndo(date('M', strtotime($pesanan->tanggal_pinjam))) }} <br>
+                                                ({{ date('h:i', strtotime($pesanan->jam_masuk)) }} -
+                                                {{ date('h:i', strtotime($pesanan->jam_keluar)) }})
                                             </td>
-                                            <td class="text-nowrap">{{ $pesanan->jurusan }}</td>
+                                            <td class="text-nowrap">{{ $pesanan->prodi }}</td>
                                             <td class="text-wrap">{{ $pesanan->matakuliah }}</td>
                                             <td class="text-nowrap">{{ $pesanan->User->name }}</td>
                                             @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi')
@@ -271,13 +304,13 @@
                                                 <th scope="row">{{ $num2++ }}</th>
                                                 <td>{{ $jadwal->id_ruangan }}</td>
                                                 <td class="text-nowrap">
-                                                    {{ hariIndo(date('l', strtotime($jadwal->jadwal_masuk))) }},
-                                                    {{ date('d', strtotime($jadwal->jadwal_masuk)) }}
-                                                    {{ bulanIndo(date('M', strtotime($jadwal->jadwal_masuk))) }} <br>
-                                                    ({{ date('h:i', strtotime($jadwal->jadwal_masuk)) }} -
-                                                    {{ date('h:i', strtotime($jadwal->jadwal_keluar)) }})
+                                                    {{ hariIndo(date('l', strtotime($pesanan->tanggal_pinjam))) }},
+                                                    {{ date('d', strtotime($pesanan->tanggal_pinjam)) }}
+                                                    {{ bulanIndo(date('M', strtotime($pesanan->tanggal_pinjam))) }} <br>
+                                                    ({{ date('h:i', strtotime($pesanan->jam_masuk)) }} -
+                                                    {{ date('h:i', strtotime($pesanan->jam_keluar)) }})
                                                 </td>
-                                                <td class="text-nowrap">{{ $jadwal->jurusan }}</td>
+                                                <td class="text-nowrap">{{ $jadwal->prodi }}</td>
                                                 <td class="text-wrap">{{ $jadwal->matakuliah }}</td>
                                                 <td class="text-nowrap">{{ $jadwal->User->name }}</td>
                                                 @if ($jadwal->Status->keterangan == 'Menunggu Konfirmasi')

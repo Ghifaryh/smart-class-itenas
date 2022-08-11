@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DateTime;
+use App\Models\Jam;
 use App\Models\User;
 use App\Models\Jadwal;
 use App\Models\Ruangan;
@@ -24,9 +25,10 @@ class DashboardController extends Controller
         
         return view('ujicoba.dashboard', [
             'title' => 'Dashboard',
-            "ruangan" => Ruangan::all(),
-            "pesanans" => $pesanan,
-            "jadwals" => Jadwal::all()
+            'ruangan' => Ruangan::all(),
+            'jam' => Jam::all(),
+            'pesanans' => $pesanan,
+            'jadwals' => Jadwal::all()
         ]);
     }
 
