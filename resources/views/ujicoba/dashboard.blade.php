@@ -68,9 +68,9 @@
                                 <label for="id_ruangan">Ruangan yang dipilih</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
-                                <input type="text" class="form-control" name="jurusan" id="jurusan"
-                                    placeholder="Jurusan" required>
-                                <label for="jurusan">Jurusan</label>
+                                <input type="text" class="form-control" name="prodi" id="prodi" placeholder="Prodi"
+                                    required>
+                                <label for="prodi">Prodi</label>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" class="form-control" name="matakuliah" id="matakuliah"
@@ -153,7 +153,7 @@
                                         <th scope="col">No</th>
                                         <th scope="col">Ruangan</th>
                                         <th scope="col">Waktu Pakai</th>
-                                        <th scope="col">Jurusan</th>
+                                        <th scope="col">Prodi</th>
                                         <th scope="col">Mata Kuliah</th>
                                         <th scope="col">Dosen</th>
                                         <th scope="col">Status</th>
@@ -258,7 +258,7 @@
                                             <th scope="col">No</th>
                                             <th scope="col">Ruangan</th>
                                             <th scope="col">Waktu Pakai</th>
-                                            <th scope="col">Jurusan</th>
+                                            <th scope="col">Prodi</th>
                                             <th scope="col">Mata Kuliah</th>
                                             <th scope="col">Dosen</th>
                                             <th scope="col">Status</th>
