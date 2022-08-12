@@ -19,7 +19,7 @@
     <link rel="stylesheet" href={{ asset('style/style.css') }}>
     <link rel="stylesheet" href={{ asset('style/stylesidebar.css') }}>
     <link rel="stylesheet" href={{ asset('style/styleujicoba.css') }}>
-    @if ($title === 'Dashboard')
+    @if ($title === 'Dashboard' or $title == 'Tambah Ruangan')
         <link rel="stylesheet" href={{ asset('style/styledashboard.css') }}>
     @endif
 
