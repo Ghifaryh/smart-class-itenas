@@ -21,7 +21,8 @@ class RuanganController extends Controller
     public function tambah(Request $request)
     {
         $validatedData = $request->validate([
-            'keterangan' => ['required'],
+            'nama' => ['required'],
+            'fasilitas' => ['required'],
         ]);
 
         // dd($request);
@@ -47,11 +48,13 @@ class RuanganController extends Controller
         $ruangan = Ruangan::findorfail($id);
 
         $this->validate($request, [
-            'keterangan' => ['required'],
+            'nama' => ['required'],
+            'fasilitas' => ['required'],
         ]);
 
         $ruangan->update([
-            'keterangan' => $request->keterangan,
+            'nama' => $request->nama,
+            'fasilitas' => $request->fasilitas,
         ]);
 
         // $ruangan->update($request->all());

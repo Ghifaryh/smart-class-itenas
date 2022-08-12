@@ -57,7 +57,7 @@
         @endif
     </header>
 
-    @if ($title === 'Home' or $title === 'Login')
+    @if ($title === 'Home' Or $title === 'Login' Or $title === 'Register')
         <div class="container-fluid my-3 contents-all px-5">
             @yield('container')
         </div>

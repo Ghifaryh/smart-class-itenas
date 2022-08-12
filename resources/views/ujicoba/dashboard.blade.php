@@ -86,7 +86,7 @@
                                     id="id_ruangan" required>
                                     @foreach ($ruangan as $rn)
                                         <tr>
-                                            <option value="{{ $rn->id }}">{{ $rn->keterangan }}</option>
+                                            <option value="{{ $rn->id }}">{{ $rn->nama}}</option>
                                         </tr>
                                     @endforeach
                                 </select>

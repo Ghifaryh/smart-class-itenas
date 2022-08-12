@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('ruangans', function (Blueprint $table) {
             $table->id();
-            $table->string('keterangan');
+            $table->string('nama');
+            $table->string('fasilitas')->nullable();
             $table->timestamps();
         });
     }
