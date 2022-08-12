@@ -48,7 +48,7 @@
     <header>
         {{-- navbar --}}
         @include('partials.navbar')
-        @if ($title === 'Dashboard' or $title === 'Home')
+        @if ($title === 'Dashboard' Or $title === 'Home' Or $title === 'Tambah Ruangan')
             @auth
                 @include('partials.sidebardosen')
             @else

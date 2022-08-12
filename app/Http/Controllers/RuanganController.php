@@ -13,6 +13,7 @@ class RuanganController extends Controller
     {
         return view('truangan', [
             'title' => 'Tambah Ruangan',
+            'param' => 'add',
             'ruangan' => Ruangan::all(),
         ]);
 
@@ -28,7 +29,42 @@ class RuanganController extends Controller
         // dd($request);
         Ruangan::create($validatedData);
 
-        return redirect('/truangan')->with('success', 'Data pemesanan berhasil diinput!');
+        return redirect('/truangan')->with('success', 'Data ruangan berhasil ditambahkan!');
+    }
+    
+    public function edit($id)
+    {
+        $ruangan = Ruangan::findorfail($id);
+        
+        return view('truangan', [
+            'title' => 'Tambah Ruangan',
+            'param' => 'edit',
+            'ruanganedt' => $ruangan,
+            'ruangan' => Ruangan::all(),
+        ]);
+    }
+    
+    public function update(Request $request, $id)
+    {
+        $ruangan = Ruangan::findorfail($id);
+
+        $this->validate($request, [
+            'keterangan' => ['required'],
+        ]);
+
+        $ruangan->update([
+            'keterangan' => $request->keterangan,
+        ]);
+
+        // $ruangan->update($request->all());
+    
+        return redirect('/truangan')->with('success', 'Data ruangan berhasil diupdate!');
     }
 
+    public function destroy($id)
+    {
+        Ruangan::destroy($id);
+
+        return redirect('/truangan')->with('success', 'Data ruangan berhasil dihapus!');
+    }
 }

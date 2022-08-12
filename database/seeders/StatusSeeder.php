@@ -24,7 +24,7 @@ class StatusSeeder extends Seeder
         ]);
 
         Status::create([
-            'keterangan' => 'Ditolak',
+            'keterangan' => 'Dibatalkan',
         ]);
 
         Status::create([
@@ -32,7 +32,7 @@ class StatusSeeder extends Seeder
         ]);
 
         Status::create([
-            'keterangan' => 'Ditolak (Dihapus)',
+            'keterangan' => 'Dibatalkan (Dihapus)',
         ]);
     }
 }

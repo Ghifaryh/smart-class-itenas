@@ -16,27 +16,33 @@ class RuanganSeeder extends Seeder
     public function run()
     {
         Ruangan::create([
-            'keterangan' => 'Ruangan 1'
+            'nama' => 'Ruangan 1',
+            'fasilitas' => 'AC, Proyektor, kursi, meja',
         ]);
 
         Ruangan::create([
-            'keterangan' => 'Ruangan 2'
+            'nama' => 'Ruangan 2',
+            'fasilitas' => 'AC, Proyektor, kursi, meja',
         ]);
 
         Ruangan::create([
-            'keterangan' => 'Ruangan 3'
+            'nama' => 'Ruangan 3',
+            'fasilitas' => 'AC, Proyektor, kursi, meja',
         ]);
 
         Ruangan::create([
-            'keterangan' => 'Ruangan 4'
+            'nama' => 'Ruangan 4',
+            'fasilitas' => 'AC, Proyektor, kursi, meja',
         ]);
 
         Ruangan::create([
-            'keterangan' => 'Ruangan 5'
+            'nama' => 'Ruangan 5',
+            'fasilitas' => 'AC, Proyektor, kursi, meja',
         ]);
 
         Ruangan::create([
-            'keterangan' => 'Ruangan 6'
+            'nama' => 'Ruangan 6',
+            'fasilitas' => 'AC, Proyektor, kursi, meja',
         ]);
     }
 }
