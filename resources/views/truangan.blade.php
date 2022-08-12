@@ -24,6 +24,28 @@
                                 Ruangan</button>
                         </div>
                     </form>
+                    <div class="table-responsive">
+                        <h2 class="fw-bold border-bottom border-2 border-dark mb-3">List Ruangan </h2>
+                        <table class="table table-striped table-list-pesen">
+                            <thead class="bg-light text-center">
+                                <tr class="text-nowrap">
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama Ruangan</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center align-middle">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <th scope="row">Ruangan 1</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <th scope="row">Ruangan 1</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>
