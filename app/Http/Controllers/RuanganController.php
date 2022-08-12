@@ -16,8 +16,6 @@ class RuanganController extends Controller
             'param' => 'add',
             'ruangan' => Ruangan::all(),
         ]);
-
-
     }
 
     public function tambah(Request $request)
@@ -25,7 +23,7 @@ class RuanganController extends Controller
         $validatedData = $request->validate([
             'keterangan' => ['required'],
         ]);
-        
+
         // dd($request);
         Ruangan::create($validatedData);
 
