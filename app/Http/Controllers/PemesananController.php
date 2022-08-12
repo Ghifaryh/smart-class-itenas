@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jadwal;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Requests\StorePemesananRequest;
 use App\Http\Requests\UpdatePemesananRequest;
 
@@ -15,7 +16,7 @@ class PemesananController extends Controller
         $validatedData = $request->validate([
             'id_ruangan' => ['required'],
             'id_dosen' => ['required'],
-            'tanggal_pinjam' => ['required'],
+            'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y H:i')],
             'jam_masuk' => ['required'],
             'jam_keluar' => ['required','after:jam_masuk'],
             'prodi' => ['required'],
