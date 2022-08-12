@@ -11,7 +11,7 @@ class RuanganController extends Controller
 {
     public function index()
     {
-        return view('ruangan', [
+        return view('truangan', [
             'title' => 'Tambah Ruangan',
             'ruangan' => Ruangan::all(),
         ]);
@@ -28,7 +28,7 @@ class RuanganController extends Controller
         // dd($request);
         Ruangan::create($validatedData);
 
-        return redirect('/ruangan')->with('success', 'Data pemesanan berhasil diinput!');
+        return redirect('/truangan')->with('success', 'Data pemesanan berhasil diinput!');
     }
 
 }

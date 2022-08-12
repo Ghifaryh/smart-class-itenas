@@ -8,7 +8,7 @@
         Status Pemesanan
     </a> --}}
     @if (auth()->user()->level == 'admin')
-        <a href="/" id="side3" class="asettext"><i class="fa-solid fa-plus logowsidebaro"></i>Tambah
+        <a href="/truangan" id="side3" class="asettext"><i class="fa-solid fa-plus logowsidebaro"></i>Tambah
             Ruangan</a>
     @endif
 </div>
