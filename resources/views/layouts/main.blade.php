@@ -48,7 +48,7 @@
     <header>
         {{-- navbar --}}
         @include('partials.navbar')
-        @if ($title === 'Dashboard' or $title === 'Home')
+        @if ($title === 'Dashboard' or $title === 'Home' or $title === 'Tambah Ruangan')
             @auth
                 @include('partials.sidebardosen')
             @else
@@ -57,13 +57,18 @@
         @endif
     </header>
 
-    @if ($title !== 'Dashboard')
+    @if ($title === 'Home' or $title === 'Login')
         <div class="container-fluid my-3 contents-all px-5">
             @yield('container')
         </div>
-    @else
+    @elseif ($title === 'Dashboard')
+        {{-- @elseif ($title === 'Dashboard' or $title == 'Tambah Ruangan') --}}
         <div class="dashboard-wrapper-main">
             @yield('dashboard-main')
+        </div>
+    @elseif ($title === 'Tambah Ruangan')
+        <div class="truangan-wrapper-main">'
+            @yield('tambah-ruangan')
         </div>
     @endif
 

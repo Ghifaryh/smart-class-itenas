@@ -15,8 +15,6 @@ class RuanganController extends Controller
             'title' => 'Tambah Ruangan',
             'ruangan' => Ruangan::all(),
         ]);
-
-
     }
 
     public function tambah(Request $request)
@@ -24,11 +22,10 @@ class RuanganController extends Controller
         $validatedData = $request->validate([
             'keterangan' => ['required'],
         ]);
-        
+
         // dd($request);
         Ruangan::create($validatedData);
 
         return redirect('/truangan')->with('success', 'Data pemesanan berhasil diinput!');
     }
-
 }
