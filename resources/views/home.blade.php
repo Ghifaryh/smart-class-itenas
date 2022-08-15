@@ -359,6 +359,10 @@ function bulanIndo($hariInggris)
                 $("#table6").show();
                 $("#icon-btn-shtable6").removeClass("fa-list");
                 $("#icon-btn-shtable6").addClass("fa-minus");
+
+                $(".btn-shtable").prop("onclick", null);
+                // $element.prop( "onclick", null );
+
             });
 
         });
