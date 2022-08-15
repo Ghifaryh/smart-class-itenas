@@ -330,7 +330,21 @@ function bulanIndo($hariInggris)
         <div class="col">
             <h2 class="content-title text-center"> Lokasi Gedung</h2>
             {{-- <img src="https://map.itenas.ac.id/map-itenas.jpg" width="100%" alt=""> --}}
-            <img src={{ asset('img/map-itenas.jpg') }} width="100%" alt="" class="rounded-3 shadow-lg">
+            <div class="interactive-map">
+                <img src={{ asset('img/map-smartclassroom.jpg') }} width="100%" alt=""
+                    class="rounded-3 shadow-lg">
+
+                <div class="map-marker">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h4 class="title-map">
+                        Gedung 9
+                    </h4>
+                    <span class="info-marker">
+                        <p>Pokonya Gedung Smart Classroom disini</p>
+                    </span>
+                </div>
+            </div>
+
         </div>
     </div>
     <script>

@@ -131,6 +131,25 @@ footer {
     color: black !important;
 }
 
+/* Map Marker */
+.interactive-map {
+    position: relative;
+}
+
+.interactive-map > img {
+    position: relative;
+}
+
+.interactive-map > .map-marker {
+    position: absolute;
+    top: 41%;
+    right: 14.5%;
+    text-align: center;
+}
+
+.map-marker i {
+    font-size: 3.2rem;
+}
 @media (max-width: 450px) {
     .h-custom {
         height: 100%;
