@@ -14,7 +14,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $date = new DateTime("NOW");
         if (auth()->user()->level == 'dosen') {
             $pesanan = Pemesanan::where('id_dosen', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
         } else {

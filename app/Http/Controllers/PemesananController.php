@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jam;
 use App\Models\Jadwal;
+use App\Models\Ruangan;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -88,5 +90,33 @@ class PemesananController extends Controller
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 5]);
         return redirect('/dashboard')->with('success', 'Data pemesanan dibatalkan karna dihapus!');   
+    }
+
+    public function edit($id)
+    {
+
+        $ruangan = Pemesanan::findorfail($id);
+        if (auth()->user()->level == 'dosen') {
+            $pesanan = Pemesanan::where('id_dosen', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
+        } else {
+            $pesanan = Pemesanan::all();
+        }
+
+        // ->where('jadwal_masuk', date())->
+        
+        return view('ujicoba.dashboard', [
+            'title' => 'Dashboard',
+            'param' => 'edit',
+            'ruangan' => Ruangan::all(),
+            'jam' => Jam::all(),
+            'pesanans' => $pesanan,
+            'jadwals' => Jadwal::all()
+        ]);
+        return view('truangan', [
+            'title' => 'Tambah Ruangan',
+            'param' => 'edit',
+            'ruanganedt' => $ruangan,
+            'ruangan' => Ruangan::all(),
+        ]);
     }
 }

@@ -257,12 +257,12 @@
                                                         </form>
                                                     @endif
 
-                                                    <form action="/truangan/{{ $pesanan->id }}"method="post" class="d-block">
+                                                    <form action="/dashboard/edit/{{ $pesanan->id }}"method="post" class="d-block">
                                                         @csrf
                                                         <button class="badge bg-primary border-0"
                                                             onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
                                                     </form>
-                                                    
+
                                                     @if ($pesanan->Status->keterangan == 'Dihapus' or $pesanan->Status->keterangan == 'Ditolak (Dihapus)')
                                                         <form action="/dashboard/batalhapus/{{ $pesanan->id }}"
                                                             method="post" class="d-block">
