@@ -67,3 +67,4 @@ function showTable6() {
     ticon6.classList.toggle("fa-list");
     ticon6.classList.toggle("fa-minus");
 }
+//testing
