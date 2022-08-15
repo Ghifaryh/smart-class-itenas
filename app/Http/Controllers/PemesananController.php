@@ -13,10 +13,12 @@ class PemesananController extends Controller
 {
     public function daftar(Request $request)
     {
+        config(['app.locale' => 'id']);
+        Carbon::setLocale('id');
         $validatedData = $request->validate([
             'id_ruangan' => ['required'],
             'id_dosen' => ['required'],
-            'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y H:i')],
+            'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
             'jam_masuk' => ['required'],
             'jam_keluar' => ['required','after:jam_masuk'],
             'prodi' => ['required'],

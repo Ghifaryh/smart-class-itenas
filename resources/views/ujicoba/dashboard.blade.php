@@ -29,7 +29,7 @@
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="date" name="tanggal_pinjam"
                                     class="form-control @error('tanggal_pinjam') is-invalid @enderror" id="tanggal_pinjam"
-                                    required>
+                                    required value="{{ old('tanggal_pinjam') }}">
                                 <label for="tanggal_pinjam">Tanggal Peminjaman</label>
                                 @error('tanggal_pinjam')
                                     <div class="invalid-feedback">
@@ -49,7 +49,7 @@
                             </div> --}}
                             <div class="col-sm-9 form-floating mb-3">
                                 <select class="form-select @error('jam_masuk') is-invalid @enderror" name="jam_masuk"
-                                    id="jam_masuk" required>
+                                    id="jam_masuk" required value="{{ old('jam_masuk') }}">
                                     @foreach ($jam as $jam_masuk)
                                         <tr>
                                             <option value="{{ $jam_masuk->jam_pakai }}">
@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
                                 <select class="form-select @error('jam_keluar') is-invalid @enderror" name="jam_keluar"
-                                    id="jam_keluar" required>
+                                    id="jam_keluar" required value="{{ old('jam_keluar') }}">
                                     @foreach ($jam as $jam_keluar)
                                         <tr>
                                             <option value="{{ $jam_keluar->jam_pakai }}">
@@ -83,7 +83,7 @@
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
                                 <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan"
-                                    id="id_ruangan" required>
+                                    id="id_ruangan" required value="{{ old('id_ruangan') }}">
                                     @foreach ($ruangan as $rn)
                                         <tr>
                                             <option value="{{ $rn->id }}">{{ $rn->nama}}</option>
@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" class="form-control @error('prodi') is-invalid @enderror"
-                                    name="prodi" id="prodi" placeholder="Prodi" required>
+                                    name="prodi" id="prodi" placeholder="Prodi" required value="{{ old('prodi') }}">
                                 <label for="prodi">Prodi</label>
                                 @error('prodi')
                                     <div class="invalid-feedback">
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" class="form-control @error('matakuliah') is-invalid @enderror"
-                                    name="matakuliah" id="matakuliah" placeholder="Mata Kuliah" required>
+                                    name="matakuliah" id="matakuliah" placeholder="Mata Kuliah" required value="{{ old('matakuliah') }}">
                                 <label for="matakuliah">Mata Kuliah</label>
                                 @error('matakuliah')
                                     <div class="invalid-feedback">
@@ -256,6 +256,13 @@
                                                                 onclick="return confirm('Apakah anda yakin untuk menerima jadwal?')">Terima</button>
                                                         </form>
                                                     @endif
+
+                                                    <form action="/truangan/{{ $pesanan->id }}"method="post" class="d-block">
+                                                        @csrf
+                                                        <button class="badge bg-primary border-0"
+                                                            onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
+                                                    </form>
+                                                    
                                                     @if ($pesanan->Status->keterangan == 'Dihapus' or $pesanan->Status->keterangan == 'Ditolak (Dihapus)')
                                                         <form action="/dashboard/batalhapus/{{ $pesanan->id }}"
                                                             method="post" class="d-block">

@@ -17,7 +17,7 @@ return [
     'accepted_if' => 'The :attribute must be accepted when :other is :value.',
     'active_url' => 'The :attribute is not a valid URL.',
     'after' => 'The :attribute must be a date after :date.',
-    'after_or_equal' => ':attribute harus di hari sekarang atau setelah tanggal/jam :date',
+    'after_or_equal' => ':attribute harus di hari sekarang atau setelah tanggal :date',
     // 'after_or_equal' => 'The :attribute must be a date after or equal to :date',
     'alpha' => 'The :attribute must only contain letters.',
     'alpha_dash' => 'The :attribute must only contain letters, numbers, dashes and underscores.',
