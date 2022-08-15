@@ -105,7 +105,7 @@ function bulanIndo($hariInggris)
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Jam Pakai</th>
-                                    <th scope="col">Jurusan</th>
+                                    <th scope="col">Prodi</th>
                                     <th scope="col" class="text-nowrap">Mata Kuliah</th>
                                     <th scope="col">Dosen</th>
                                     {{-- <th scope="col">Status</th> --}}
@@ -122,7 +122,7 @@ function bulanIndo($hariInggris)
                                             ({{ date('h:i', strtotime($rg1->jadwal_masuk)) }} -
                                             {{ date('h:i', strtotime($rg1->jadwal_keluar)) }})
                                         </td>
-                                        <td class="text-wrap">{{ $rg1->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg1->prodi }}</td>
                                         <td class="text-wrap">{{ $rg1->matakuliah }}</td>
                                         <td class="text-wrap">{{ $rg1->User->name }}</td>
                                     </tr>
