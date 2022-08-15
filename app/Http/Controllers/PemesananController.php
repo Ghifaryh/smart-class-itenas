@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Requests\StorePemesananRequest;
 use App\Http\Requests\UpdatePemesananRequest;
+use Illuminate\Validation\ValidationException;
 
 class PemesananController extends Controller
 {
@@ -95,7 +96,7 @@ class PemesananController extends Controller
     public function edit($id)
     {
 
-        $ruangan = Pemesanan::findorfail($id);
+        $pesananedt = Pemesanan::findorfail($id);
         if (auth()->user()->level == 'dosen') {
             $pesanan = Pemesanan::where('id_dosen', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
         } else {
@@ -107,16 +108,44 @@ class PemesananController extends Controller
         return view('ujicoba.dashboard', [
             'title' => 'Dashboard',
             'param' => 'edit',
+            'pesananedt' => $pesananedt,
             'ruangan' => Ruangan::all(),
             'jam' => Jam::all(),
             'pesanans' => $pesanan,
             'jadwals' => Jadwal::all()
         ]);
-        return view('truangan', [
-            'title' => 'Tambah Ruangan',
-            'param' => 'edit',
-            'ruanganedt' => $ruangan,
-            'ruangan' => Ruangan::all(),
+    }
+
+    public function update(Request $request, $id)
+    {
+        $pesanan = Pemesanan::findorfail($id);
+
+        config(['app.locale' => 'id']);
+        Carbon::setLocale('id');
+        $this->validate($request, [
+            'id_ruangan' => ['required'],
+            'id_dosen' => ['required'],
+            'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
+            'jam_masuk' => ['required'],
+            'jam_keluar' => ['required','after:jam_masuk'],
+            'prodi' => ['required'],
+            'matakuliah' => ['required'],
+            'id_status' => ['required']
         ]);
+
+        $pesanan->update([
+            'id_ruangan' => $request->id_ruangan,
+            'id_dosen' => $request->id_dosen,
+            'tanggal_pinjam' => $request->tanggal_pinjam,
+            'jam_masuk' => $request->jam_masuk,
+            'jam_keluar' => $request->jam_keluar,
+            'prodi' => $request->prodi,
+            'matakuliah' => $request->matakuliah,
+            'id_status' => $request->id_status,
+        ]);
+
+        // $pesanan->update($request->all());
+        
+        return redirect('/dashboard')->with('success', 'Data pemesanan ruangan berhasil diupdate!');
     }
 }

@@ -24,6 +24,7 @@ class DashboardController extends Controller
         
         return view('ujicoba.dashboard', [
             'title' => 'Dashboard',
+            'param' => 'add',
             'ruangan' => Ruangan::all(),
             'jam' => Jam::all(),
             'pesanans' => $pesanan,

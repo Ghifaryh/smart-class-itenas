@@ -11,6 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $date = new DateTime("NOW");
+        $date = $date->format('d-m-Y');
         // $ruangan1 = Jadwal::where('id_ruangan', '=', 1)->where('jadwal_masuk', '>=', $date)->whereNot('id_status', 4)->get();
         // isset($output);
         // $ruangan1 = isset($output) ? ($output) : 0;

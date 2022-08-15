@@ -1,4 +1,61 @@
 @extends('layouts.main')
+
+@php
+$num1 = 1;
+$num2 = 1;
+function hariIndo($hariInggris)
+{
+    switch ($hariInggris) {
+        case 'Sunday':
+            return 'Minggu';
+        case 'Monday':
+            return 'Senin';
+        case 'Tuesday':
+            return 'Selasa';
+        case 'Wednesday':
+            return 'Rabu';
+        case 'Thursday':
+            return 'Kamis';
+        case 'Friday':
+            return 'Jumat';
+        case 'Saturday':
+            return 'Sabtu';
+        default:
+            return 'hari tidak valid';
+    }
+}
+function bulanIndo($hariInggris)
+{
+    switch ($hariInggris) {
+        case 'Jan':
+            return 'Januari';
+        case 'Feb':
+            return 'Februari';
+        case 'Mar':
+            return 'Maret';
+        case 'Apr':
+            return 'April';
+        case 'May':
+            return 'Mei';
+        case 'Jun':
+            return 'Juni';
+        case 'Jul':
+            return 'Juli';
+        case 'Aug':
+            return 'Agustus';
+        case 'Sep':
+            return 'September';
+        case 'Oct':
+            return 'Oktober';
+        case 'Nov':
+            return 'November';
+        case 'Dec':
+            return 'Desember';
+        default:
+            return 'bulan tidak valid';
+    }
+}
+@endphp
 {{-- @section('container') --}}
 @section('dashboard-main')
     <div class="container-fluid dashboard-dosen">
@@ -6,184 +63,226 @@
             <div class="col"></div>
             <div class="col">
                 <div class="reg-room-wrapper px-5 py-2">
-                    <h1 class="fw-bold pt-4">Pemesanan Ruangan</h1>
                     <div class="reg-room">
-                        <h5 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h5>
-                        @if (session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
 
-                        @if (session()->has('failed'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ session('failed') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-                        <form action="/dashboard" method="post" class="reg-room-form">
-                            @csrf
-                            <div class="col-sm-9 form-floating mb-3">
-                                <input type="date" name="tanggal_pinjam"
-                                    class="form-control @error('tanggal_pinjam') is-invalid @enderror" id="tanggal_pinjam"
-                                    required value="{{ old('tanggal_pinjam') }}">
-                                <label for="tanggal_pinjam">Tanggal Peminjaman</label>
-                                @error('tanggal_pinjam')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            {{-- <div class="col-sm-9 form-floating mb-3">
-                                <input type="time" name="jam_masuk" class="form-control" id="jam_masuk"
-                                    required>
-                                <label for="jam_masuk">Jam Masuk</label>
-                            </div>
-                            <div class="col-sm-9 form-floating mb-3">
-                                <input type="time" name="jam_keluar" class="form-control" id="jam_keluar"
-                                    required>
-                                <label for="jam_keluar">Jam Keluar</label>
-                            </div> --}}
-                            <div class="col-sm-9 form-floating mb-3">
-                                <select class="form-select @error('jam_masuk') is-invalid @enderror" name="jam_masuk"
-                                    id="jam_masuk" required value="{{ old('jam_masuk') }}">
-                                    @foreach ($jam as $jam_masuk)
-                                        <tr>
-                                            <option value="{{ $jam_masuk->jam_pakai }}">
-                                                {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
-                                        </tr>
-                                    @endforeach
-                                </select>
-                                <label for="jam_masuk">Jam Masuk</label>
-                                @error('jam_masuk')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="col-sm-9 form-floating mb-3">
-                                <select class="form-select @error('jam_keluar') is-invalid @enderror" name="jam_keluar"
-                                    id="jam_keluar" required value="{{ old('jam_keluar') }}">
-                                    @foreach ($jam as $jam_keluar)
-                                        <tr>
-                                            <option value="{{ $jam_keluar->jam_pakai }}">
-                                                {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
-                                        </tr>
-                                    @endforeach
-                                </select>
-                                <label for="jam_keluar">Jam Keluar</label>
-                                @error('jam-Keluar')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="col-sm-9 form-floating mb-3">
-                                <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan"
-                                    id="id_ruangan" required value="{{ old('id_ruangan') }}">
-                                    @foreach ($ruangan as $rn)
-                                        <tr>
-                                            <option value="{{ $rn->id }}">{{ $rn->nama }}</option>
-                                        </tr>
-                                    @endforeach
-                                </select>
-                                <label for="id_ruangan">Ruangan yang dipilih</label>
-                                @error('id_ruangan')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="col-sm-9 form-floating mb-3">
-                                <input type="text" class="form-control @error('prodi') is-invalid @enderror"
-                                    name="prodi" id="prodi" placeholder="Prodi" required value="{{ old('prodi') }}">
-                                <label for="prodi">Prodi</label>
-                                @error('prodi')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="col-sm-9 form-floating mb-3">
-                                <input type="text" class="form-control @error('matakuliah') is-invalid @enderror"
-                                    name="matakuliah" id="matakuliah" placeholder="Mata Kuliah" required
-                                    value="{{ old('matakuliah') }}">
-                                <label for="matakuliah">Mata Kuliah</label>
-                                @error('matakuliah')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <input type="hidden" name="id_dosen" id="id_dosen" value="{{ auth()->user()->id }}">
-                            <input type="hidden" name="id_status" id="id_status" value="1">
-                            <div class="col-sm-9">
-                                <p class="reg-room-info">*Pembookingan ruangan akan diproses paling lama 1*24 Jam</p>
-                            </div>
-                            <div class="mb-3 me-3 px-5 text-end">
-                                <button type="submit" class="btn text-white me-5  reg-room-button fw-bold">Daftar</button>
-                            </div>
-                        </form>
+                    @if ($param == "add")
+                        
+                    <h1 class="fw-bold pt-4">Pemesanan Ruangan</h1>
+                    <h5 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h5>
+                    @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
 
-                        @php
-                            $num1 = 1;
-                            $num2 = 1;
-                            function hariIndo($hariInggris)
-                            {
-                                switch ($hariInggris) {
-                                    case 'Sunday':
-                                        return 'Minggu';
-                                    case 'Monday':
-                                        return 'Senin';
-                                    case 'Tuesday':
-                                        return 'Selasa';
-                                    case 'Wednesday':
-                                        return 'Rabu';
-                                    case 'Thursday':
-                                        return 'Kamis';
-                                    case 'Friday':
-                                        return 'Jumat';
-                                    case 'Saturday':
-                                        return 'Sabtu';
-                                    default:
-                                        return 'hari tidak valid';
-                                }
-                            }
-                            function bulanIndo($hariInggris)
-                            {
-                                switch ($hariInggris) {
-                                    case 'Jan':
-                                        return 'Januari';
-                                    case 'Feb':
-                                        return 'Februari';
-                                    case 'Mar':
-                                        return 'Maret';
-                                    case 'Apr':
-                                        return 'April';
-                                    case 'May':
-                                        return 'Mei';
-                                    case 'Jun':
-                                        return 'Juni';
-                                    case 'Jul':
-                                        return 'Juli';
-                                    case 'Aug':
-                                        return 'Agustus';
-                                    case 'Sep':
-                                        return 'September';
-                                    case 'Oct':
-                                        return 'Oktober';
-                                    case 'Nov':
-                                        return 'November';
-                                    case 'Dec':
-                                        return 'Desember';
-                                    default:
-                                        return 'bulan tidak valid';
-                                }
-                            }
-                        @endphp
+                    @if (session()->has('failed'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('failed') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
+                    <form action="/dashboard" method="post" class="reg-room-form">
+                        @csrf
+                        <div class="col-sm-9 form-floating mb-3">
+                            <input type="date" name="tanggal_pinjam"
+                                class="form-control @error('tanggal_pinjam') is-invalid @enderror" id="tanggal_pinjam"
+                                required value="{{ old('tanggal_pinjam') }}">
+                            <label for="tanggal_pinjam">Tanggal Peminjaman</label>
+                            @error('tanggal_pinjam')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        {{-- <div class="col-sm-9 form-floating mb-3">
+                            <input type="time" name="jam_masuk" class="form-control" id="jam_masuk"
+                                required>
+                            <label for="jam_masuk">Jam Masuk</label>
+                        </div>
+                        <div class="col-sm-9 form-floating mb-3">
+                            <input type="time" name="jam_keluar" class="form-control" id="jam_keluar"
+                                required>
+                            <label for="jam_keluar">Jam Keluar</label>
+                        </div> --}}
+                        <div class="col-sm-9 form-floating mb-3">
+                            <select class="form-select @error('jam_masuk') is-invalid @enderror" name="jam_masuk"
+                                id="jam_masuk" required>
+                                @foreach ($jam as $jam_masuk)
+                                    <tr>
+                                        <option value="{{ $jam_masuk->jam_pakai }}" {{ old('jam_masuk') ==  $jam_masuk->jam_pakai ? 'selected' : '' }}>{{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
+                                    </tr>
+                                @endforeach
+                            </select>
+                            <label for="jam_masuk">Jam Masuk</label>
+                            @error('jam_masuk')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-9 form-floating mb-3">
+                            <select class="form-select @error('jam_keluar') is-invalid @enderror" name="jam_keluar"
+                                id="jam_keluar" required>
+                                @foreach ($jam as $jam_keluar)
+                                    <tr>
+                                        <option value="{{ $jam_keluar->jam_pakai }}" {{ old('jam_keluar') ==  $jam_keluar->jam_pakai ? 'selected' : '' }}>{{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
+                                    </tr>
+                                @endforeach
+                            </select>
+                            <label for="jam_keluar">Jam Keluar</label>
+                            @error('jam_keluar')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-9 form-floating mb-3">
+                            <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan"
+                                id="id_ruangan" required>
+                                @foreach ($ruangan as $rn)
+                                    <tr>
+                                        <option value="{{ $rn->id }}" {{ old('id_ruangan') ==  $rn->id ? 'selected' : '' }}>{{ $rn->nama }}</option>
+                                    </tr>
+                                @endforeach
+                            </select>
+                            <label for="id_ruangan">Ruangan yang dipilih</label>
+                            @error('id_ruangan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-9 form-floating mb-3">
+                            <input type="text" class="form-control @error('prodi') is-invalid @enderror"
+                                name="prodi" id="prodi" placeholder="Prodi" required value="{{ old('prodi') }}">
+                            <label for="prodi">Prodi</label>
+                            @error('prodi')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-9 form-floating mb-3">
+                            <input type="text" class="form-control @error('matakuliah') is-invalid @enderror"
+                                name="matakuliah" id="matakuliah" placeholder="Mata Kuliah" required
+                                value="{{ old('matakuliah') }}">
+                            <label for="matakuliah">Mata Kuliah</label>
+                            @error('matakuliah')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <input type="hidden" name="id_dosen" id="id_dosen" value="{{ auth()->user()->id }}">
+                        <input type="hidden" name="id_status" id="id_status" value="1">
+                        <div class="col-sm-9">
+                            <p class="reg-room-info">*Pembookingan ruangan akan diproses paling lama 1*24 Jam</p>
+                        </div>
+                        <div class="mb-3 me-3 px-5 text-end">
+                            <button type="submit" class="btn text-white me-5  reg-room-button fw-bold">Daftar</button>
+                        </div>
+                    </form>
+
+                    @else
+
+                    <h1 class="fw-bold pt-4">Edit Data Pemesanan Ruangan</h1>
+                    <h5 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h5>
+                    <form action="/dashboard/update/{{ $pesananedt->id }}" method="post" class="reg-room-form">
+                        @csrf
+                        <div class="col-sm-9 form-floating mb-3">
+                            <input type="date" name="tanggal_pinjam"
+                                class="form-control @error('tanggal_pinjam') is-invalid @enderror" id="tanggal_pinjam"
+                                required value="{{ $pesananedt->tanggal_pinjam }}">
+                            <label for="tanggal_pinjam">Tanggal Peminjaman</label>
+                            @error('tanggal_pinjam')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-9 form-floating mb-3">
+                            <select class="form-select @error('jam_masuk') is-invalid @enderror" name="jam_masuk"
+                                id="jam_masuk" required>
+                                @foreach ($jam as $jam_masuk)
+                                    <tr>
+                                        <option value="{{ $jam_masuk->jam_pakai }}" {{ $pesananedt->jam_masuk ==  $jam_masuk->jam_pakai ? 'selected' : '' }}>{{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
+                                    </tr>
+                                @endforeach
+                            </select>
+                            <label for="jam_masuk">Jam Masuk</label>
+                            @error('jam_masuk')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-9 form-floating mb-3">
+                            <select class="form-select @error('jam_keluar') is-invalid @enderror" name="jam_keluar"
+                                id="jam_keluar" required>
+                                @foreach ($jam as $jam_keluar)
+                                    <tr>
+                                        <option value="{{ $jam_keluar->jam_pakai }}" {{ $pesananedt->jam_keluar ==  $jam_keluar->jam_pakai ? 'selected' : '' }}>{{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
+                                    </tr>
+                                @endforeach
+                            </select>
+                            <label for="jam_keluar">Jam Keluar</label>
+                            @error('jam_keluar')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-9 form-floating mb-3">
+                            <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan"
+                                id="id_ruangan" required>
+                                @foreach ($ruangan as $rn)
+                                    <tr>
+                                        <option value="{{ $rn->id }}" {{ $pesananedt->id_ruangan ==  $rn->id ? 'selected' : '' }}>{{ $rn->nama }}</option>
+                                    </tr>
+                                @endforeach
+                            </select>
+                            <label for="id_ruangan">Ruangan yang dipilih</label>
+                            @error('id_ruangan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-9 form-floating mb-3">
+                            <input type="text" class="form-control @error('prodi') is-invalid @enderror"
+                                name="prodi" id="prodi" placeholder="Prodi" required value="{{ $pesananedt->prodi }}">
+                            <label for="prodi">Prodi</label>
+                            @error('prodi')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-9 form-floating mb-3">
+                            <input type="text" class="form-control @error('matakuliah') is-invalid @enderror"
+                                name="matakuliah" id="matakuliah" placeholder="Mata Kuliah" required
+                                value="{{ $pesananedt->matakuliah }}">
+                            <label for="matakuliah">Mata Kuliah</label>
+                            @error('matakuliah')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <input type="hidden" name="id_dosen" id="id_dosen" value="{{ $pesananedt->id_dosen }}">
+                        <input type="hidden" name="id_status" id="id_status" value="1">
+                        <div class="col-sm-9">
+                            <p class="reg-room-info">*Pembookingan ruangan akan diproses paling lama 1*24 Jam</p>
+                        </div>
+                        <div class="mb-3 me-3 px-5 text-end">
+                            <button type="submit" class="btn text-white me-5  reg-room-button fw-bold">Update Data</button>
+                        </div>
+                    </form>
+                        
+                    @endif
 
                         <div class="table-responsive">
                             <h2 class="fw-bold border-bottom border-2 border-dark mb-3">List Proses Pemesanan Ruangan</h2>
@@ -240,6 +339,13 @@
 
                                             @if (auth()->user()->level == 'dosen')
                                                 <td class="text-nowrap">
+                                                    @if (($pesanan->Status->keterangan == 'Menunggu Konfirmasi') Or ($pesanan->Status->keterangan == 'dibatalkan'))
+                                                    <form action="/dashboard/edit/{{ $pesanan->id }}"method="post" class="d-block">
+                                                        @csrf
+                                                        <button class="badge bg-primary border-0"
+                                                            onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
+                                                    </form>                                                       
+                                                    @endif
                                                     <form action="/dashboard/hapus/{{ $pesanan->id }}" method="post">
                                                         @csrf
                                                         <button class="badge bg-danger border-0"
@@ -257,12 +363,14 @@
                                                                 onclick="return confirm('Apakah anda yakin untuk menerima jadwal?')">Terima</button>
                                                         </form>
                                                     @endif
-
+                                                    
+                                                    @if (($pesanan->Status->keterangan == 'Menunggu Konfirmasi') Or ($pesanan->Status->keterangan == 'dibatalkan'))
                                                     <form action="/dashboard/edit/{{ $pesanan->id }}"method="post" class="d-block">
                                                         @csrf
                                                         <button class="badge bg-primary border-0"
                                                             onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
-                                                    </form>
+                                                    </form>                                                       
+                                                    @endif
 
                                                     @if ($pesanan->Status->keterangan == 'Dihapus' or $pesanan->Status->keterangan == 'Ditolak (Dihapus)')
                                                         <form action="/dashboard/batalhapus/{{ $pesanan->id }}"
