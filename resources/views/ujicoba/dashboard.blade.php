@@ -86,7 +86,7 @@
                                     id="id_ruangan" required value="{{ old('id_ruangan') }}">
                                     @foreach ($ruangan as $rn)
                                         <tr>
-                                            <option value="{{ $rn->id }}">{{ $rn->nama}}</option>
+                                            <option value="{{ $rn->id }}">{{ $rn->nama }}</option>
                                         </tr>
                                     @endforeach
                                 </select>
@@ -109,7 +109,8 @@
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" class="form-control @error('matakuliah') is-invalid @enderror"
-                                    name="matakuliah" id="matakuliah" placeholder="Mata Kuliah" required value="{{ old('matakuliah') }}">
+                                    name="matakuliah" id="matakuliah" placeholder="Mata Kuliah" required
+                                    value="{{ old('matakuliah') }}">
                                 <label for="matakuliah">Mata Kuliah</label>
                                 @error('matakuliah')
                                     <div class="invalid-feedback">
@@ -187,7 +188,7 @@
                         <div class="table-responsive">
                             <h2 class="fw-bold border-bottom border-2 border-dark mb-3">List Proses Pemesanan Ruangan</h2>
                             {{-- <table class="table sh-table" id="table1"> --}}
-                            <table class="table table-striped table-list-pesan" id="table1">
+                            <table class="table table-striped table-list-pesan" id="table2">
                                 <thead class="bg-light text-center">
                                     <tr class="text-nowrap">
                                         <th scope="col">No</th>
@@ -257,12 +258,13 @@
                                                         </form>
                                                     @endif
 
-                                                    <form action="/truangan/{{ $pesanan->id }}"method="post" class="d-block">
+                                                    <form action="/truangan/{{ $pesanan->id }}"method="post"
+                                                        class="d-block">
                                                         @csrf
                                                         <button class="badge bg-primary border-0"
                                                             onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
                                                     </form>
-                                                    
+
                                                     @if ($pesanan->Status->keterangan == 'Dihapus' or $pesanan->Status->keterangan == 'Ditolak (Dihapus)')
                                                         <form action="/dashboard/batalhapus/{{ $pesanan->id }}"
                                                             method="post" class="d-block">
@@ -375,4 +377,10 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#table1').DataTable();
+            $('#table2').DataTable();
+        });
+    </script>
 @endsection
