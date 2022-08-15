@@ -42,13 +42,17 @@
     {{-- Jquery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    {{-- Datatables --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
 </head>
 
 <body>
     <header>
         {{-- navbar --}}
         @include('partials.navbar')
-        @if ($title === 'Dashboard' Or $title === 'Home' Or $title === 'Tambah Ruangan')
+        @if ($title === 'Dashboard' or $title === 'Home' or $title === 'Tambah Ruangan')
             @auth
                 @include('partials.sidebardosen')
             @else
@@ -57,7 +61,7 @@
         @endif
     </header>
 
-    @if ($title === 'Home' Or $title === 'Login' Or $title === 'Register')
+    @if ($title === 'Home' or $title === 'Login' or $title === 'Register')
         <div class="container-fluid my-3 contents-all px-5">
             @yield('container')
         </div>
