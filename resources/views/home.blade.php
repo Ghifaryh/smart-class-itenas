@@ -337,8 +337,6 @@ function bulanIndo($hariInggris)
         $(document).ready(function() {
             $("#searchHome").on("keyup", function() {
                 $("#table1").show();
-                // $("#icon-btn-shtable1").toggleClass("fa-list");
-                // $("#icon-btn-shtable1").toggleClass("fa-minus");
 
                 $("#table2").show();
                 $("#icon-btn-shtable2").removeClass("fa-list");
@@ -361,8 +359,6 @@ function bulanIndo($hariInggris)
                 $("#icon-btn-shtable6").addClass("fa-minus");
 
                 $(".btn-shtable").prop("onclick", null);
-                // $element.prop( "onclick", null );
-
             });
 
         });
