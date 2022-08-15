@@ -91,6 +91,7 @@ function bulanIndo($hariInggris)
             </div>
             <div class="row">
                 <h2 class="content-title text-center mt-3"> List Ruangan</h2>
+                <input type="text" id="searchHome" placeholder="Cari Matakuliah/Dosen/prodi" class="my-3 py-2">
                 <div class="container r-wrapper">
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable1()">Ruangan 1</button> --}}
                     <i class="fa-solid fa-minus" id="icon-btn-shtable1"></i> <span class="fw-bold btn-shtable"
@@ -111,7 +112,7 @@ function bulanIndo($hariInggris)
                                     {{-- <th scope="col">Status</th> --}}
                                 </tr>
                             </thead>
-                            <tbody class="text-center align-middle">
+                            <tbody class="text-center align-middle" id="myTable1">
                                 @foreach ($jdwlrgn1 as $rg1)
                                     <tr>
                                         <th scope="row">{{ $num1++ }}</th>
@@ -145,12 +146,12 @@ function bulanIndo($hariInggris)
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Jam Pakai</th>
-                                    <th scope="col">Jurusan</th>
+                                    <th scope="col">Prodi</th>
                                     <th scope="col" class="text-nowrap">Mata Kuliah</th>
                                     <th scope="col">Dosen</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center align-middle">
+                            <tbody class="text-center align-middle" id="myTable2">
                                 @foreach ($jdwlrgn2 as $rg2)
                                     <tr>
                                         <th scope="row">{{ $num2++ }}</th>
@@ -161,7 +162,7 @@ function bulanIndo($hariInggris)
                                             ({{ date('h:i', strtotime($rg2->jadwal_masuk)) }} -
                                             {{ date('h:i', strtotime($rg2->jadwal_keluar)) }})
                                         </td>
-                                        <td class="text-wrap">{{ $rg2->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg2->prodi }}</td>
                                         <td class="text-wrap">{{ $rg2->matakuliah }}</td>
                                         <td class="text-wrap">{{ $rg2->User->name }}</td>
                                     </tr>
@@ -182,12 +183,12 @@ function bulanIndo($hariInggris)
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Jam Pakai</th>
-                                    <th scope="col">Jurusan</th>
+                                    <th scope="col">Prodi</th>
                                     <th scope="col" class="text-nowrap">Mata Kuliah</th>
                                     <th scope="col">Dosen</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center align-middle">
+                            <tbody class="text-center align-middle" id="myTable3">
                                 @foreach ($jdwlrgn3 as $rg3)
                                     <tr>
                                         <th scope="row">{{ $num3++ }}</th>
@@ -198,7 +199,7 @@ function bulanIndo($hariInggris)
                                             ({{ date('h:i', strtotime($rg3->jadwal_masuk)) }} -
                                             {{ date('h:i', strtotime($rg3->jadwal_keluar)) }})
                                         </td>
-                                        <td class="text-wrap">{{ $rg3->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg3->prodi }}</td>
                                         <td class="text-wrap">{{ $rg3->matakuliah }}</td>
                                         <td class="text-wrap">{{ $rg3->User->name }}</td>
                                     </tr>
@@ -219,12 +220,12 @@ function bulanIndo($hariInggris)
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Jam Pakai</th>
-                                    <th scope="col">Jurusan</th>
+                                    <th scope="col">Prodi</th>
                                     <th scope="col" class="text-nowrap">Mata Kuliah</th>
                                     <th scope="col">Dosen</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center align-middle">
+                            <tbody class="text-center align-middle" id="myTable4">
                                 @foreach ($jdwlrgn4 as $rg4)
                                     <tr>
                                         <th scope="row">{{ $num4++ }}</th>
@@ -235,7 +236,7 @@ function bulanIndo($hariInggris)
                                             ({{ date('h:i', strtotime($rg4->jadwal_masuk)) }} -
                                             {{ date('h:i', strtotime($rg4->jadwal_keluar)) }})
                                         </td>
-                                        <td class="text-wrap">{{ $rg4->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg4->prodi }}</td>
                                         <td class="text-wrap">{{ $rg4->matakuliah }}</td>
                                         <td class="text-wrap">{{ $rg4->User->name }}</td>
                                     </tr>
@@ -256,12 +257,12 @@ function bulanIndo($hariInggris)
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Jam Pakai</th>
-                                    <th scope="col">Jurusan</th>
+                                    <th scope="col">Prodi</th>
                                     <th scope="col" class="text-nowrap">Mata Kuliah</th>
                                     <th scope="col">Dosen</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center align-middle">
+                            <tbody class="text-center align-middle" id="myTable5">
                                 @foreach ($jdwlrgn5 as $rg5)
                                     <tr>
                                         <th scope="row">{{ $num5++ }}</th>
@@ -272,7 +273,7 @@ function bulanIndo($hariInggris)
                                             ({{ date('h:i', strtotime($rg5->jadwal_masuk)) }} -
                                             {{ date('h:i', strtotime($rg5->jadwal_keluar)) }})
                                         </td>
-                                        <td class="text-wrap">{{ $rg5->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg5->prodi }}</td>
                                         <td class="text-wrap">{{ $rg5->matakuliah }}</td>
                                         <td class="text-wrap">{{ $rg5->User->name }}</td>
                                     </tr>
@@ -293,12 +294,12 @@ function bulanIndo($hariInggris)
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Jam Pakai</th>
-                                    <th scope="col">Jurusan</th>
+                                    <th scope="col">Prodi</th>
                                     <th scope="col" class="text-nowrap">Mata Kuliah</th>
                                     <th scope="col">Dosen</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center align-middle">
+                            <tbody class="text-center align-middle" id="myTable6">
                                 @foreach ($jdwlrgn6 as $rg6)
                                     <tr>
                                         <th scope="row">{{ $num6++ }}</th>
@@ -309,7 +310,7 @@ function bulanIndo($hariInggris)
                                             ({{ date('h:i', strtotime($rg6->jadwal_masuk)) }} -
                                             {{ date('h:i', strtotime($rg6->jadwal_keluar)) }})
                                         </td>
-                                        <td class="text-wrap">{{ $rg6->jurusan }}</td>
+                                        <td class="text-wrap">{{ $rg6->prodi }}</td>
                                         <td class="text-wrap">{{ $rg6->matakuliah }}</td>
                                         <td class="text-wrap">{{ $rg6->User->name }}</td>
                                     </tr>
@@ -332,4 +333,83 @@ function bulanIndo($hariInggris)
             <img src={{ asset('img/map-itenas.jpg') }} width="100%" alt="" class="rounded-3 shadow-lg">
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $("#searchHome").on("keyup", function() {
+                $("#table1").show();
+                // $("#icon-btn-shtable1").toggleClass("fa-list");
+                // $("#icon-btn-shtable1").toggleClass("fa-minus");
+
+                $("#table2").show();
+                $("#icon-btn-shtable2").removeClass("fa-list");
+                $("#icon-btn-shtable2").addClass("fa-minus");
+
+                $("#table3").show();
+                $("#icon-btn-shtable3").removeClass("fa-list");
+                $("#icon-btn-shtable3").addClass("fa-minus");
+
+                $("#table4").show();
+                $("#icon-btn-shtable4").removeClass("fa-list");
+                $("#icon-btn-shtable4").addClass("fa-minus");
+
+                $("#table5").show();
+                $("#icon-btn-shtable5").removeClass("fa-list");
+                $("#icon-btn-shtable5").addClass("fa-minus");
+
+                $("#table6").show();
+                $("#icon-btn-shtable6").removeClass("fa-list");
+                $("#icon-btn-shtable6").addClass("fa-minus");
+            });
+
+        });
+
+        $(document).ready(function() {
+            $("#searchHome").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable1 tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#searchHome").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable2 tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#searchHome").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable3 tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#searchHome").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable4 tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#searchHome").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable5 tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#searchHome").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable6 tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
 @endsection
