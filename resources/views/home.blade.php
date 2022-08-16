@@ -350,8 +350,6 @@ function bulanIndo($hariInggris)
     <script>
         $(document).ready(function() {
             if (window.matchMedia("(max-width: 767px)").matches) {
-                // The viewport is less than 768 pixels wide
-                // alert("This is a mobile device.");
                 $("#icon-btn-shtable2").removeClass("fa-list");
                 $("#icon-btn-shtable2").addClass("fa-minus");
 
