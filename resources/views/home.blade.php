@@ -349,6 +349,29 @@ function bulanIndo($hariInggris)
     </div>
     <script>
         $(document).ready(function() {
+            if (window.matchMedia("(max-width: 767px)").matches) {
+                // The viewport is less than 768 pixels wide
+                // alert("This is a mobile device.");
+                $("#icon-btn-shtable2").removeClass("fa-list");
+                $("#icon-btn-shtable2").addClass("fa-minus");
+
+                $("#icon-btn-shtable3").removeClass("fa-list");
+                $("#icon-btn-shtable3").addClass("fa-minus");
+
+                $("#icon-btn-shtable4").removeClass("fa-list");
+                $("#icon-btn-shtable4").addClass("fa-minus");
+
+                $("#icon-btn-shtable5").removeClass("fa-list");
+                $("#icon-btn-shtable5").addClass("fa-minus");
+
+                $("#icon-btn-shtable6").removeClass("fa-list");
+                $("#icon-btn-shtable6").addClass("fa-minus");
+
+                $(".btn-shtable").prop("onclick", null);
+            }
+        });
+
+        $(document).ready(function() {
             $("#searchHome").on("keyup", function() {
                 $("#table1").show();
 
