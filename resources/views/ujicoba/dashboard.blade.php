@@ -86,9 +86,7 @@ function bulanIndo($hariInggris)
                             <form action="/dashboard" method="post" class="reg-room-form">
                                 @csrf
                                 <div class="col-sm-9 form-floating mb-3">
-                                    <input type="date" name="tanggal_pinjam"
-                                        class="form-control @error('tanggal_pinjam') is-invalid @enderror"
-                                        id="tanggal_pinjam" required value="{{ old('tanggal_pinjam') }}">
+                                    <input type="date" name="tanggal_pinjam" class="form-control @error('tanggal_pinjam') is-invalid @enderror" id="tanggal_pinjam" required value="{{ old('tanggal_pinjam') }}">
                                     <label for="tanggal_pinjam">Tanggal Peminjaman</label>
                                     @error('tanggal_pinjam')
                                         <div class="invalid-feedback">
@@ -96,41 +94,17 @@ function bulanIndo($hariInggris)
                                         </div>
                                     @enderror
                                 </div>
-                                {{-- <div class="col-sm-9 form-floating mb-3">
-                            <input type="time" name="jam_masuk" class="form-control" id="jam_masuk"
-                                required>
-                            <label for="jam_masuk">Jam Masuk</label>
-                        </div>
-                        <div class="col-sm-9 form-floating mb-3">
-                            <input type="time" name="jam_keluar" class="form-control" id="jam_keluar"
-                                required>
-                            <label for="jam_keluar">Jam Keluar</label>
-                        </div> --}}
-                                {{-- <div class="col-sm-9 form-floating mb-3"> --}}
                                 <div class="col-sm-9 mb-3 ">
                                     <label for="jam_masuk">Jam Masuk
                                         <select class="form-select @error('jam_masuk') is-invalid @enderror"
                                             name="jam_masuk" id="jam_masuk" data-width=100% required>
-                                            {{-- <input type="text" name="" id="" list="jamMasuk"
-                                        class="form-control @error('jam_masuk') in-invalid @enderror"
-                                        placeholder="Masukan Jam Mulai" required> --}}
                                             <option value="" selected disabled hidden>Pilih Jam</option>
                                             @foreach ($jam as $jam_masuk)
-                                                {{-- <tr> --}}
                                                 <option value="{{ $jam_masuk->jam_pakai }}"
                                                     {{ old('jam_masuk') == $jam_masuk->jam_pakai ? 'selected' : '' }}>
                                                     {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}
                                                 </option>
-                                                {{-- </tr> --}}
-                                                {{-- <datalist id="jamMasuk"> --}}
-                                                {{-- @foreach ($jam as $jam_masuk) --}}
-                                                {{-- <option value="{{ $jam_masuk->jam_pakai }}"
-                                                    {{ old('jam_masuk') == $jam_masuk->jam_pakai ? 'selected' : '' }}
-                                                    {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}> --}}
-                                                {{-- </option> --}}
                                             @endforeach
-                                            {{-- </datalist> --}}
-
                                         </select>
                                     </label>
                                     @error('jam_masuk')
@@ -138,25 +112,18 @@ function bulanIndo($hariInggris)
                                             {{ $message }}
                                         </div>
                                     @enderror
-
-
                                 </div>
-                                {{-- <div class="col-sm-9 form-floating mb-3"> --}}
                                 <div class="col-sm-9 mb-3">
                                     <label for="jam_keluar">Jam Keluar
                                         <select class="form-select @error('jam_keluar') is-invalid @enderror"
                                             name="jam_keluar" id="jam_keluar" data-width=100% required>
                                             <option value="" selected disabled hidden>Pilih Jam Keluar</option>
                                             @foreach ($jam as $jam_keluar)
-                                                {{-- <tr> --}}
                                                 <option value="{{ $jam_keluar->jam_pakai }}"
                                                     {{ old('jam_keluar') == $jam_keluar->jam_pakai ? 'selected' : '' }}>
                                                     {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
-                                                {{-- </tr> --}}
                                             @endforeach
                                         </select>
-                                        {{-- <label for="jam_keluar">Jam Keluar</label> --}}
-
                                     </label>
                                     @error('jam_keluar')
                                         <div class="invalid-feedback">
@@ -164,12 +131,9 @@ function bulanIndo($hariInggris)
                                         </div>
                                     @enderror
                                 </div>
-
-                                {{-- <div class="col-sm-9 form-floating mb-3"> --}}
                                 <div class="col-sm-9 mb-3">
                                     <label for="id_ruangan">Ruangan yang dipilih
-                                        <select class="form-select @error('id_ruangan') is-invalid @enderror"
-                                            name="id_ruangan" id="id_ruangan" required>
+                                        <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan" id="id_ruangan" required>
                                             <option value="" selected disabled hidden>Pilih Ruangan</option>
                                             @foreach ($ruangan as $rn)
                                                 <option value="{{ $rn->id }}"
@@ -177,8 +141,6 @@ function bulanIndo($hariInggris)
                                                     {{ $rn->nama }}</option>
                                             @endforeach
                                         </select>
-                                        {{-- <label for="id_ruangan">Ruangan yang dipilih</label> --}}
-
                                     </label>
                                     @error('id_ruangan')
                                         <div class="invalid-feedback">
@@ -187,20 +149,28 @@ function bulanIndo($hariInggris)
                                     @enderror
                                 </div>
                                 <div class="col-sm-9 mb-3">
+                                    <label for="semester">Semester
+                                        <select name="semester" id="semester"
+                                            class="form-select @error('semester') is-invalid @enderror" data-width="300%" required>
+                                            <option value="" selected disabled hidden>Pilih Semester</option>
+                                            <option value="20221">Ganjil</option>
+                                            <option value="20212">Genap</option>
+                                        </select>
+                                    </label>
+                                    @error('semester')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-3">
                                     <label for="prodi">Prodi
-                                        {{-- <input type="text" class="form-control @error('prodi') is-invalid @enderror"
-                                            name="prodi" id="prodi" placeholder="Prodi" required
-                                            value="{{ old('prodi') }}"> --}}
                                         <select name="prodi" id="prodi"
                                             class="form-select @error('prodi') is-invalid @enderror" required>
                                             <option value="" selected disabled hidden>Pilih Prodi</option>
-
                                             <option value="">
-
                                             </option>
-
                                         </select>
-
                                     </label>
                                     @error('prodi')
                                         <div class="invalid-feedback">
@@ -209,17 +179,12 @@ function bulanIndo($hariInggris)
                                     @enderror
                                 </div>
                                 <div class="col-sm-9 mb-3">
-                                    {{-- <input type="text" class="form-control @error('matakuliah') is-invalid @enderror"
-                                        name="matakuliah" id="matakuliah" placeholder="Mata Kuliah" required
-                                        value="{{ old('matakuliah') }}"> --}}
                                     <label for="matakuliah">Mata Kuliah
                                         <select name="matakuliah" id="matakuliah"
                                             class="form-select @error('matakuliah') is-invalid @enderror" required>
                                             <option value="" selected disabled hidden>Pilih Matakuliah</option>
-
                                             <option value=""></option>
                                         </select>
-
                                     </label>
                                     @error('matakuliah')
                                         <div class="invalid-feedback">
@@ -340,7 +305,6 @@ function bulanIndo($hariInggris)
 
                         <div class="table-responsive">
                             <h2 class="fw-bold border-bottom border-2 border-dark mb-3">List Proses Pemesanan Ruangan</h2>
-                            {{-- <table class="table sh-table" id="table1"> --}}
                             <table class="table table-striped table-list-pesan" id="table2">
                                 <thead class="bg-light text-center">
                                     <tr class="text-nowrap">
@@ -546,22 +510,32 @@ function bulanIndo($hariInggris)
             $('#table2').DataTable();
             $('#jam_masuk').select2({
                 placeholder: "Pilih Jam Masuk",
-                allowClear: true
+                theme : "bootstrap-5",
+                allowClear: true,
             });
             $('#jam_keluar').select2({
                 placeholder: "Pilih Jam Keluar",
+                theme : "bootstrap-5",
                 allowClear: true
             });
             $('#id_ruangan').select2({
                 placeholder: "Pilih Ruangan",
+                theme : "bootstrap-5",
+                allowClear: true
+            });
+            $('#semester').select2({
+                placeholder: "Pilih Semester",
+                theme : "bootstrap-5",
                 allowClear: true
             });
             $('#prodi').select2({
                 placeholder: "Pilih Prodi",
+                theme : "bootstrap-5",
                 allowClear: true
             });
             $('#matakuliah').select2({
                 placeholder: "Pilih Matakuliah",
+                theme : "bootstrap-5",
                 allowClear: true
             });
         });
