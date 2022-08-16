@@ -110,11 +110,9 @@ function bulanIndo($hariInggris)
                                     <select class="form-select @error('jam_masuk') is-invalid @enderror" name="jam_masuk"
                                         id="jam_masuk" required>
                                         @foreach ($jam as $jam_masuk)
-                                            <tr>
-                                                <option value="{{ $jam_masuk->jam_pakai }}"
-                                                    {{ old('jam_masuk') == $jam_masuk->jam_pakai ? 'selected' : '' }}>
-                                                    {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
-                                            </tr>
+                                        <option value="{{ $jam_masuk->jam_pakai }}"
+                                            {{ old('jam_masuk') == $jam_masuk->jam_pakai ? 'selected' : '' }}>
+                                            {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
                                         @endforeach
                                     </select>
                                     <label for="jam_masuk">Jam Masuk</label>
@@ -128,11 +126,9 @@ function bulanIndo($hariInggris)
                                     <select class="form-select @error('jam_keluar') is-invalid @enderror" name="jam_keluar"
                                         id="jam_keluar" required>
                                         @foreach ($jam as $jam_keluar)
-                                            <tr>
-                                                <option value="{{ $jam_keluar->jam_pakai }}"
-                                                    {{ old('jam_keluar') == $jam_keluar->jam_pakai ? 'selected' : '' }}>
-                                                    {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
-                                            </tr>
+                                        <option value="{{ $jam_keluar->jam_pakai }}"
+                                            {{ old('jam_keluar') == $jam_keluar->jam_pakai ? 'selected' : '' }}>
+                                            {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
                                         @endforeach
                                     </select>
                                     <label for="jam_keluar">Jam Keluar</label>
@@ -146,11 +142,9 @@ function bulanIndo($hariInggris)
                                     <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan"
                                         id="id_ruangan" required>
                                         @foreach ($ruangan as $rn)
-                                            <tr>
-                                                <option value="{{ $rn->id }}"
-                                                    {{ old('id_ruangan') == $rn->id ? 'selected' : '' }}>
-                                                    {{ $rn->nama }}</option>
-                                            </tr>
+                                        <option value="{{ $rn->id }}"
+                                            {{ old('id_ruangan') == $rn->id ? 'selected' : '' }}>
+                                            {{ $rn->nama }}</option>
                                         @endforeach
                                     </select>
                                     <label for="id_ruangan">Ruangan yang dipilih</label>
@@ -212,11 +206,9 @@ function bulanIndo($hariInggris)
                                     <select class="form-select @error('jam_masuk') is-invalid @enderror" name="jam_masuk"
                                         id="jam_masuk" required>
                                         @foreach ($jam as $jam_masuk)
-                                            <tr>
-                                                <option value="{{ $jam_masuk->jam_pakai }}"
-                                                    {{ $pesananedt->jam_masuk == $jam_masuk->jam_pakai ? 'selected' : '' }}>
-                                                    {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
-                                            </tr>
+                                        <option value="{{ $jam_masuk->jam_pakai }}"
+                                            {{ $pesananedt->jam_masuk == $jam_masuk->jam_pakai ? 'selected' : '' }}>
+                                            {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
                                         @endforeach
                                     </select>
                                     <label for="jam_masuk">Jam Masuk</label>
@@ -230,11 +222,9 @@ function bulanIndo($hariInggris)
                                     <select class="form-select @error('jam_keluar') is-invalid @enderror"
                                         name="jam_keluar" id="jam_keluar" required>
                                         @foreach ($jam as $jam_keluar)
-                                            <tr>
-                                                <option value="{{ $jam_keluar->jam_pakai }}"
-                                                    {{ $pesananedt->jam_keluar == $jam_keluar->jam_pakai ? 'selected' : '' }}>
-                                                    {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
-                                            </tr>
+                                        <option value="{{ $jam_keluar->jam_pakai }}"
+                                            {{ $pesananedt->jam_keluar == $jam_keluar->jam_pakai ? 'selected' : '' }}>
+                                            {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
                                         @endforeach
                                     </select>
                                     <label for="jam_keluar">Jam Keluar</label>
@@ -248,11 +238,9 @@ function bulanIndo($hariInggris)
                                     <select class="form-select @error('id_ruangan') is-invalid @enderror"
                                         name="id_ruangan" id="id_ruangan" required>
                                         @foreach ($ruangan as $rn)
-                                            <tr>
-                                                <option value="{{ $rn->id }}"
-                                                    {{ $pesananedt->id_ruangan == $rn->id ? 'selected' : '' }}>
-                                                    {{ $rn->nama }}</option>
-                                            </tr>
+                                        <option value="{{ $rn->id }}"
+                                            {{ $pesananedt->id_ruangan == $rn->id ? 'selected' : '' }}>
+                                            {{ $rn->nama }}</option>
                                         @endforeach
                                     </select>
                                     <label for="id_ruangan">Ruangan yang dipilih</label>
