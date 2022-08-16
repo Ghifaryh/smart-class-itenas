@@ -444,11 +444,11 @@ function bulanIndo($hariInggris)
                                                 <th scope="row">{{ $num2++ }}</th>
                                                 <td>{{ $jadwal->id_ruangan }}</td>
                                                 <td class="text-nowrap">
-                                                    {{ hariIndo(date('l', strtotime($pesanan->tanggal_pinjam))) }},
-                                                    {{ date('d', strtotime($pesanan->tanggal_pinjam)) }}
-                                                    {{ bulanIndo(date('M', strtotime($pesanan->tanggal_pinjam))) }} <br>
-                                                    ({{ date('h:i', strtotime($pesanan->jam_masuk)) }} -
-                                                    {{ date('h:i', strtotime($pesanan->jam_keluar)) }})
+                                                    {{ hariIndo(date('l', strtotime($jadwal->tanggal_pinjam))) }},
+                                                    {{ date('d', strtotime($jadwal->tanggal_pinjam)) }}
+                                                    {{ bulanIndo(date('M', strtotime($jadwal->tanggal_pinjam))) }} <br>
+                                                    ({{ date('h:i', strtotime($jadwal->jam_masuk)) }} -
+                                                    {{ date('h:i', strtotime($jadwal->jam_keluar)) }})
                                                 </td>
                                                 <td class="text-nowrap">{{ $jadwal->prodi }}</td>
                                                 <td class="text-wrap">{{ $jadwal->matakuliah }}</td>

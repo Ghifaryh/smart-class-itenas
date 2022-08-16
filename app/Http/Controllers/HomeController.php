@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use DateTime;
+use DateTimeZone;
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $date = new DateTime("NOW");
-        $date = $date->format('d-m-Y');
+        // $datenext = Carbon::now()->addMonth()->format('Y-m-d');
+        $date = Carbon::now()->format('Y-m-d');
+        // dd($date);
+
         // $ruangan1 = Jadwal::where('id_ruangan', '=', 1)->where('jadwal_masuk', '>=', $date)->whereNot('id_status', 4)->get();
         // isset($output);
         // $ruangan1 = isset($output) ? ($output) : 0;

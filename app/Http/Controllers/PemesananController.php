@@ -16,8 +16,6 @@ class PemesananController extends Controller
 {
     public function daftar(Request $request)
     {
-        config(['app.locale' => 'id']);
-        Carbon::setLocale('id');
         $validatedData = $request->validate([
             'id_ruangan' => ['required'],
             'id_dosen' => ['required'],
@@ -120,8 +118,6 @@ class PemesananController extends Controller
     {
         $pesanan = Pemesanan::findorfail($id);
 
-        config(['app.locale' => 'id']);
-        Carbon::setLocale('id');
         $this->validate($request, [
             'id_ruangan' => ['required'],
             'id_dosen' => ['required'],
