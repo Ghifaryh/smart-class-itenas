@@ -347,6 +347,8 @@ function bulanIndo($hariInggris)
 
         </div>
     </div>
+@endsection
+@push('scripts')
     <script>
         $(document).ready(function() {
             if (window.matchMedia("(max-width: 767px)").matches) {
@@ -447,4 +449,4 @@ function bulanIndo($hariInggris)
             });
         });
     </script>
-@endsection
+@endpush
