@@ -117,11 +117,11 @@ function bulanIndo($hariInggris)
                                     <tr>
                                         <th scope="row">{{ $num1++ }}</th>
                                         <td class="text-nowrap">
-                                            {{ hariIndo(date('l', strtotime($rg1->jadwal_masuk))) }},
-                                            {{ date('d', strtotime($rg1->jadwal_masuk)) }}
-                                            {{ bulanIndo(date('M', strtotime($rg1->jadwal_masuk))) }} <br>
-                                            ({{ date('h:i', strtotime($rg1->jadwal_masuk)) }} -
-                                            {{ date('h:i', strtotime($rg1->jadwal_keluar)) }})
+                                            {{ hariIndo(date('l', strtotime($rg1->tanggal_pinjam))) }},
+                                            {{ date('d', strtotime($rg1->tanggal_pinjam)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg1->tanggal_pinjam))) }} <br>
+                                            ({{ date('h:i', strtotime($rg1->jam_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg1->jam_keluar)) }})
                                         </td>
                                         <td class="text-wrap">{{ $rg1->prodi }}</td>
                                         <td class="text-wrap">{{ $rg1->matakuliah }}</td>
@@ -156,11 +156,11 @@ function bulanIndo($hariInggris)
                                     <tr>
                                         <th scope="row">{{ $num2++ }}</th>
                                         <td class="text-nowrap">
-                                            {{ hariIndo(date('l', strtotime($rg2->jadwal_masuk))) }},
-                                            {{ date('d', strtotime($rg2->jadwal_masuk)) }}
-                                            {{ bulanIndo(date('M', strtotime($rg2->jadwal_masuk))) }} <br>
-                                            ({{ date('h:i', strtotime($rg2->jadwal_masuk)) }} -
-                                            {{ date('h:i', strtotime($rg2->jadwal_keluar)) }})
+                                            {{ hariIndo(date('l', strtotime($rg2->tanggal_pinjam))) }},
+                                            {{ date('d', strtotime($rg2->tanggal_pinjam)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg2->tanggal_pinjam))) }} <br>
+                                            ({{ date('h:i', strtotime($rg2->jam_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg2->jam_keluar)) }})
                                         </td>
                                         <td class="text-wrap">{{ $rg2->prodi }}</td>
                                         <td class="text-wrap">{{ $rg2->matakuliah }}</td>
@@ -193,11 +193,11 @@ function bulanIndo($hariInggris)
                                     <tr>
                                         <th scope="row">{{ $num3++ }}</th>
                                         <td class="text-nowrap">
-                                            {{ hariIndo(date('l', strtotime($rg3->jadwal_masuk))) }},
-                                            {{ date('d', strtotime($rg3->jadwal_masuk)) }}
-                                            {{ bulanIndo(date('M', strtotime($rg3->jadwal_masuk))) }} <br>
-                                            ({{ date('h:i', strtotime($rg3->jadwal_masuk)) }} -
-                                            {{ date('h:i', strtotime($rg3->jadwal_keluar)) }})
+                                            {{ hariIndo(date('l', strtotime($rg3->tanggal_pinjam))) }},
+                                            {{ date('d', strtotime($rg3->tanggal_pinjam)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg3->tanggal_pinjam))) }} <br>
+                                            ({{ date('h:i', strtotime($rg3->jam_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg3->jam_keluar)) }})
                                         </td>
                                         <td class="text-wrap">{{ $rg3->prodi }}</td>
                                         <td class="text-wrap">{{ $rg3->matakuliah }}</td>
@@ -230,11 +230,11 @@ function bulanIndo($hariInggris)
                                     <tr>
                                         <th scope="row">{{ $num4++ }}</th>
                                         <td class="text-nowrap">
-                                            {{ hariIndo(date('l', strtotime($rg4->jadwal_masuk))) }},
-                                            {{ date('d', strtotime($rg4->jadwal_masuk)) }}
-                                            {{ bulanIndo(date('M', strtotime($rg4->jadwal_masuk))) }} <br>
-                                            ({{ date('h:i', strtotime($rg4->jadwal_masuk)) }} -
-                                            {{ date('h:i', strtotime($rg4->jadwal_keluar)) }})
+                                            {{ hariIndo(date('l', strtotime($rg4->tanggal_pinjam))) }},
+                                            {{ date('d', strtotime($rg4->tanggal_pinjam)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg4->tanggal_pinjam))) }} <br>
+                                            ({{ date('h:i', strtotime($rg4->jam_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg4->jam_keluar)) }})
                                         </td>
                                         <td class="text-wrap">{{ $rg4->prodi }}</td>
                                         <td class="text-wrap">{{ $rg4->matakuliah }}</td>
@@ -267,11 +267,11 @@ function bulanIndo($hariInggris)
                                     <tr>
                                         <th scope="row">{{ $num5++ }}</th>
                                         <td class="text-nowrap">
-                                            {{ hariIndo(date('l', strtotime($rg5->jadwal_masuk))) }},
-                                            {{ date('d', strtotime($rg5->jadwal_masuk)) }}
-                                            {{ bulanIndo(date('M', strtotime($rg5->jadwal_masuk))) }} <br>
-                                            ({{ date('h:i', strtotime($rg5->jadwal_masuk)) }} -
-                                            {{ date('h:i', strtotime($rg5->jadwal_keluar)) }})
+                                            {{ hariIndo(date('l', strtotime($rg5->tanggal_pinjam))) }},
+                                            {{ date('d', strtotime($rg5->tanggal_pinjam)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg5->tanggal_pinjam))) }} <br>
+                                            ({{ date('h:i', strtotime($rg5->jam_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg5->jam_keluar)) }})
                                         </td>
                                         <td class="text-wrap">{{ $rg5->prodi }}</td>
                                         <td class="text-wrap">{{ $rg5->matakuliah }}</td>
@@ -304,11 +304,11 @@ function bulanIndo($hariInggris)
                                     <tr>
                                         <th scope="row">{{ $num6++ }}</th>
                                         <td class="text-nowrap">
-                                            {{ hariIndo(date('l', strtotime($rg6->jadwal_masuk))) }},
-                                            {{ date('d', strtotime($rg6->jadwal_masuk)) }}
-                                            {{ bulanIndo(date('M', strtotime($rg6->jadwal_masuk))) }} <br>
-                                            ({{ date('h:i', strtotime($rg6->jadwal_masuk)) }} -
-                                            {{ date('h:i', strtotime($rg6->jadwal_keluar)) }})
+                                            {{ hariIndo(date('l', strtotime($rg6->tanggal_pinjam))) }},
+                                            {{ date('d', strtotime($rg6->tanggal_pinjam)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg6->tanggal_pinjam))) }} <br>
+                                            ({{ date('h:i', strtotime($rg6->jam_masuk)) }} -
+                                            {{ date('h:i', strtotime($rg6->jam_keluar)) }})
                                         </td>
                                         <td class="text-wrap">{{ $rg6->prodi }}</td>
                                         <td class="text-wrap">{{ $rg6->matakuliah }}</td>
