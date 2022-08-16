@@ -106,70 +106,121 @@ function bulanIndo($hariInggris)
                                 required>
                             <label for="jam_keluar">Jam Keluar</label>
                         </div> --}}
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <select class="form-select @error('jam_masuk') is-invalid @enderror" name="jam_masuk"
-                                        id="jam_masuk" required>
-                                        @foreach ($jam as $jam_masuk)
-                                        <option value="{{ $jam_masuk->jam_pakai }}"
-                                            {{ old('jam_masuk') == $jam_masuk->jam_pakai ? 'selected' : '' }}>
-                                            {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="jam_masuk">Jam Masuk</label>
+                                {{-- <div class="col-sm-9 form-floating mb-3"> --}}
+                                <div class="col-sm-9 mb-3 ">
+                                    <label for="jam_masuk">Jam Masuk
+                                        <select class="form-select @error('jam_masuk') is-invalid @enderror"
+                                            name="jam_masuk" id="jam_masuk" data-width=100% required>
+                                            {{-- <input type="text" name="" id="" list="jamMasuk"
+                                        class="form-control @error('jam_masuk') in-invalid @enderror"
+                                        placeholder="Masukan Jam Mulai" required> --}}
+                                            <option value="" selected disabled hidden>Pilih Jam</option>
+                                            @foreach ($jam as $jam_masuk)
+                                                {{-- <tr> --}}
+                                                <option value="{{ $jam_masuk->jam_pakai }}"
+                                                    {{ old('jam_masuk') == $jam_masuk->jam_pakai ? 'selected' : '' }}>
+                                                    {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}
+                                                </option>
+                                                {{-- </tr> --}}
+                                                {{-- <datalist id="jamMasuk"> --}}
+                                                {{-- @foreach ($jam as $jam_masuk) --}}
+                                                {{-- <option value="{{ $jam_masuk->jam_pakai }}"
+                                                    {{ old('jam_masuk') == $jam_masuk->jam_pakai ? 'selected' : '' }}
+                                                    {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}> --}}
+                                                {{-- </option> --}}
+                                            @endforeach
+                                            {{-- </datalist> --}}
+
+                                        </select>
+                                    </label>
                                     @error('jam_masuk')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
+
+
                                 </div>
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <select class="form-select @error('jam_keluar') is-invalid @enderror" name="jam_keluar"
-                                        id="jam_keluar" required>
-                                        @foreach ($jam as $jam_keluar)
-                                        <option value="{{ $jam_keluar->jam_pakai }}"
-                                            {{ old('jam_keluar') == $jam_keluar->jam_pakai ? 'selected' : '' }}>
-                                            {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="jam_keluar">Jam Keluar</label>
+                                {{-- <div class="col-sm-9 form-floating mb-3"> --}}
+                                <div class="col-sm-9 mb-3">
+                                    <label for="jam_keluar">Jam Keluar
+                                        <select class="form-select @error('jam_keluar') is-invalid @enderror"
+                                            name="jam_keluar" id="jam_keluar" data-width=100% required>
+                                            <option value="" selected disabled hidden>Pilih Jam Keluar</option>
+                                            @foreach ($jam as $jam_keluar)
+                                                {{-- <tr> --}}
+                                                <option value="{{ $jam_keluar->jam_pakai }}"
+                                                    {{ old('jam_keluar') == $jam_keluar->jam_pakai ? 'selected' : '' }}>
+                                                    {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
+                                                {{-- </tr> --}}
+                                            @endforeach
+                                        </select>
+                                        {{-- <label for="jam_keluar">Jam Keluar</label> --}}
+
+                                    </label>
                                     @error('jam_keluar')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan"
-                                        id="id_ruangan" required>
-                                        @foreach ($ruangan as $rn)
-                                        <option value="{{ $rn->id }}"
-                                            {{ old('id_ruangan') == $rn->id ? 'selected' : '' }}>
-                                            {{ $rn->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="id_ruangan">Ruangan yang dipilih</label>
+
+                                {{-- <div class="col-sm-9 form-floating mb-3"> --}}
+                                <div class="col-sm-9 mb-3">
+                                    <label for="id_ruangan">Ruangan yang dipilih
+                                        <select class="form-select @error('id_ruangan') is-invalid @enderror"
+                                            name="id_ruangan" id="id_ruangan" required>
+                                            <option value="" selected disabled hidden>Pilih Ruangan</option>
+                                            @foreach ($ruangan as $rn)
+                                                <option value="{{ $rn->id }}"
+                                                    {{ old('id_ruangan') == $rn->id ? 'selected' : '' }}>
+                                                    {{ $rn->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                        {{-- <label for="id_ruangan">Ruangan yang dipilih</label> --}}
+
+                                    </label>
                                     @error('id_ruangan')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <input type="text" class="form-control @error('prodi') is-invalid @enderror"
-                                        name="prodi" id="prodi" placeholder="Prodi" required
-                                        value="{{ old('prodi') }}">
-                                    <label for="prodi">Prodi</label>
+                                <div class="col-sm-9 mb-3">
+                                    <label for="prodi">Prodi
+                                        {{-- <input type="text" class="form-control @error('prodi') is-invalid @enderror"
+                                            name="prodi" id="prodi" placeholder="Prodi" required
+                                            value="{{ old('prodi') }}"> --}}
+                                        <select name="prodi" id="prodi"
+                                            class="form-select @error('prodi') is-invalid @enderror" required>
+                                            <option value="" selected disabled hidden>Pilih Prodi</option>
+
+                                            <option value="">
+
+                                            </option>
+
+                                        </select>
+
+                                    </label>
                                     @error('prodi')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <input type="text" class="form-control @error('matakuliah') is-invalid @enderror"
+                                <div class="col-sm-9 mb-3">
+                                    {{-- <input type="text" class="form-control @error('matakuliah') is-invalid @enderror"
                                         name="matakuliah" id="matakuliah" placeholder="Mata Kuliah" required
-                                        value="{{ old('matakuliah') }}">
-                                    <label for="matakuliah">Mata Kuliah</label>
+                                        value="{{ old('matakuliah') }}"> --}}
+                                    <label for="matakuliah">Mata Kuliah
+                                        <select name="matakuliah" id="matakuliah"
+                                            class="form-select @error('matakuliah') is-invalid @enderror" required>
+                                            <option value="" selected disabled hidden>Pilih Matakuliah</option>
+
+                                            <option value=""></option>
+                                        </select>
+
+                                    </label>
                                     @error('matakuliah')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -238,9 +289,9 @@ function bulanIndo($hariInggris)
                                     <select class="form-select @error('id_ruangan') is-invalid @enderror"
                                         name="id_ruangan" id="id_ruangan" required>
                                         @foreach ($ruangan as $rn)
-                                        <option value="{{ $rn->id }}"
-                                            {{ $pesananedt->id_ruangan == $rn->id ? 'selected' : '' }}>
-                                            {{ $rn->nama }}</option>
+                                            <option value="{{ $rn->id }}"
+                                                {{ $pesananedt->id_ruangan == $rn->id ? 'selected' : '' }}>
+                                                {{ $rn->nama }}</option>
                                         @endforeach
                                     </select>
                                     <label for="id_ruangan">Ruangan yang dipilih</label>
@@ -255,6 +306,8 @@ function bulanIndo($hariInggris)
                                         name="prodi" id="prodi" placeholder="Prodi" required
                                         value="{{ $pesananedt->prodi }}">
                                     <label for="prodi">Prodi</label>
+
+                                    <option value="" selected disabled hidden>Pilih Jam</option>
                                     @error('prodi')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -491,6 +544,26 @@ function bulanIndo($hariInggris)
         $(document).ready(function() {
             $('#table1').DataTable();
             $('#table2').DataTable();
+            $('#jam_masuk').select2({
+                placeholder: "Pilih Jam Masuk",
+                allowClear: true
+            });
+            $('#jam_keluar').select2({
+                placeholder: "Pilih Jam Keluar",
+                allowClear: true
+            });
+            $('#id_ruangan').select2({
+                placeholder: "Pilih Ruangan",
+                allowClear: true
+            });
+            $('#prodi').select2({
+                placeholder: "Pilih Prodi",
+                allowClear: true
+            });
+            $('#matakuliah').select2({
+                placeholder: "Pilih Matakuliah",
+                allowClear: true
+            });
         });
     </script>
 @endsection
