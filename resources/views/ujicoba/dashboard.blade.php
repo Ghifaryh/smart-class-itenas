@@ -61,6 +61,7 @@ function bulanIndo($hariInggris)
     <div class="container-fluid dashboard-dosen">
         <div class="row">
             <div class="col"></div>
+            {{-- Mungkin bakalan bikin side by side tabel dan form --}}
             <div class="col">
                 <div class="reg-room-wrapper px-5 py-2">
                     <div class="reg-room">
@@ -85,8 +86,11 @@ function bulanIndo($hariInggris)
                             @endif
                             <form action="/dashboard" method="post" class="reg-room-form">
                                 @csrf
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <input type="date" name="tanggal_pinjam" class="form-control @error('tanggal_pinjam') is-invalid @enderror" id="tanggal_pinjam" required value="{{ old('tanggal_pinjam') }}">
+                                {{-- <div class="col-sm-9 form-floating mb-3"> --}}
+                                <div class="col-sm-3 form-floating mb-3">
+                                    <input type="date" name="tanggal_pinjam"
+                                        class="form-control @error('tanggal_pinjam') is-invalid @enderror"
+                                        id="tanggal_pinjam" required value="{{ old('tanggal_pinjam') }}">
                                     <label for="tanggal_pinjam">Tanggal Peminjaman</label>
                                     @error('tanggal_pinjam')
                                         <div class="invalid-feedback">
@@ -133,7 +137,8 @@ function bulanIndo($hariInggris)
                                 </div>
                                 <div class="col-sm-9 mb-3">
                                     <label for="id_ruangan">Ruangan yang dipilih
-                                        <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan" id="id_ruangan" required>
+                                        <select class="form-select @error('id_ruangan') is-invalid @enderror"
+                                            name="id_ruangan" id="id_ruangan" data-width=100% required>
                                             <option value="" selected disabled hidden>Pilih Ruangan</option>
                                             @foreach ($ruangan as $rn)
                                                 <option value="{{ $rn->id }}"
@@ -151,7 +156,8 @@ function bulanIndo($hariInggris)
                                 <div class="col-sm-9 mb-3">
                                     <label for="semester">Semester
                                         <select name="semester" id="semester"
-                                            class="form-select @error('semester') is-invalid @enderror" data-width="300%" required>
+                                            class="form-select @error('semester') is-invalid @enderror" data-width="100%"
+                                            required>
                                             <option value="" selected disabled hidden>Pilih Semester</option>
                                             <option value="20221">Ganjil</option>
                                             <option value="20212">Genap</option>
@@ -166,7 +172,8 @@ function bulanIndo($hariInggris)
                                 <div class="col-sm-9 mb-3">
                                     <label for="prodi">Prodi
                                         <select name="prodi" id="prodi"
-                                            class="form-select @error('prodi') is-invalid @enderror" required>
+                                            class="form-select @error('prodi') is-invalid @enderror" data-width=100%
+                                            required>
                                             <option value="" selected disabled hidden>Pilih Prodi</option>
                                             <option value="">
                                             </option>
@@ -181,7 +188,8 @@ function bulanIndo($hariInggris)
                                 <div class="col-sm-9 mb-3">
                                     <label for="matakuliah">Mata Kuliah
                                         <select name="matakuliah" id="matakuliah"
-                                            class="form-select @error('matakuliah') is-invalid @enderror" required>
+                                            class="form-select @error('matakuliah') is-invalid @enderror" data-width=100%
+                                            required>
                                             <option value="" selected disabled hidden>Pilih Matakuliah</option>
                                             <option value=""></option>
                                         </select>
@@ -222,9 +230,9 @@ function bulanIndo($hariInggris)
                                     <select class="form-select @error('jam_masuk') is-invalid @enderror" name="jam_masuk"
                                         id="jam_masuk" required>
                                         @foreach ($jam as $jam_masuk)
-                                        <option value="{{ $jam_masuk->jam_pakai }}"
-                                            {{ $pesananedt->jam_masuk == $jam_masuk->jam_pakai ? 'selected' : '' }}>
-                                            {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
+                                            <option value="{{ $jam_masuk->jam_pakai }}"
+                                                {{ $pesananedt->jam_masuk == $jam_masuk->jam_pakai ? 'selected' : '' }}>
+                                                {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
                                         @endforeach
                                     </select>
                                     <label for="jam_masuk">Jam Masuk</label>
@@ -238,9 +246,9 @@ function bulanIndo($hariInggris)
                                     <select class="form-select @error('jam_keluar') is-invalid @enderror"
                                         name="jam_keluar" id="jam_keluar" required>
                                         @foreach ($jam as $jam_keluar)
-                                        <option value="{{ $jam_keluar->jam_pakai }}"
-                                            {{ $pesananedt->jam_keluar == $jam_keluar->jam_pakai ? 'selected' : '' }}>
-                                            {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
+                                            <option value="{{ $jam_keluar->jam_pakai }}"
+                                                {{ $pesananedt->jam_keluar == $jam_keluar->jam_pakai ? 'selected' : '' }}>
+                                                {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
                                         @endforeach
                                     </select>
                                     <label for="jam_keluar">Jam Keluar</label>
@@ -251,15 +259,17 @@ function bulanIndo($hariInggris)
                                     @enderror
                                 </div>
                                 <div class="col-sm-9 form-floating mb-3">
-                                    <select class="form-select @error('id_ruangan') is-invalid @enderror"
-                                        name="id_ruangan" id="id_ruangan" required>
-                                        @foreach ($ruangan as $rn)
-                                            <option value="{{ $rn->id }}"
-                                                {{ $pesananedt->id_ruangan == $rn->id ? 'selected' : '' }}>
-                                                {{ $rn->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="id_ruangan">Ruangan yang dipilih</label>
+                                    <label for="id_ruangan">Ruangan yang dipilih
+                                        <select class="form-select @error('id_ruangan') is-invalid @enderror"
+                                            name="id_ruangan" id="id_ruangan" required>
+                                            @foreach ($ruangan as $rn)
+                                                <option value="{{ $rn->id }}"
+                                                    {{ $pesananedt->id_ruangan == $rn->id ? 'selected' : '' }}>
+                                                    {{ $rn->nama }}</option>
+                                            @endforeach
+                                        </select>
+
+                                    </label>
                                     @error('id_ruangan')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -510,33 +520,39 @@ function bulanIndo($hariInggris)
             $('#table2').DataTable();
             $('#jam_masuk').select2({
                 placeholder: "Pilih Jam Masuk",
-                theme : "bootstrap-5",
+                theme: "bootstrap-5",
                 allowClear: true,
+                width: 'resolve'
             });
             $('#jam_keluar').select2({
                 placeholder: "Pilih Jam Keluar",
-                theme : "bootstrap-5",
-                allowClear: true
+                theme: "bootstrap-5",
+                allowClear: true,
+                width: 'resolve'
             });
             $('#id_ruangan').select2({
                 placeholder: "Pilih Ruangan",
-                theme : "bootstrap-5",
-                allowClear: true
+                theme: "bootstrap-5",
+                allowClear: true,
+                width: 'resolve'
             });
             $('#semester').select2({
                 placeholder: "Pilih Semester",
-                theme : "bootstrap-5",
-                allowClear: true
+                theme: "bootstrap-5",
+                allowClear: true,
+                width: 'resolve'
             });
             $('#prodi').select2({
                 placeholder: "Pilih Prodi",
-                theme : "bootstrap-5",
-                allowClear: true
+                theme: "bootstrap-5",
+                allowClear: true,
+                width: 'resolve'
             });
             $('#matakuliah').select2({
                 placeholder: "Pilih Matakuliah",
-                theme : "bootstrap-5",
-                allowClear: true
+                theme: "bootstrap-5",
+                allowClear: true,
+                width: 'resolve'
             });
         });
     </script>
