@@ -17,14 +17,15 @@ class PemesananController extends Controller
     public function daftar(Request $request)
     {
         $validatedData = $request->validate([
-            'id_ruangan' => ['required'],
-            'id_pemesan' => ['required'],
-            'dosen_matkul' => ['required'],
             'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
             'jam_masuk' => ['required'],
             'jam_keluar' => ['required','after:jam_masuk'],
+            'id_ruangan' => ['required'],
             'prodi' => ['required'],
             'matakuliah' => ['required'],
+            'dosen_matkul' => ['required'],
+            'kelas' => ['required'],
+            'id_pemesan' => ['required'],
             'id_status' => ['required']
         ]);
         
@@ -57,13 +58,15 @@ class PemesananController extends Controller
 
         $data = [
             'id_pemesanan' => $pesanan->id,
-            'id_ruangan' => $pesanan->id_ruangan,
-            'id_dosen' => $pesanan->id_dosen,
             'tanggal_pinjam' => $pesanan->tanggal_pinjam,
             'jam_masuk' => $pesanan->jam_masuk,
             'jam_keluar' => $pesanan->jam_keluar,
+            'id_ruangan' => $pesanan->id_ruangan,
             'prodi' => $pesanan->prodi,
             'matakuliah' => $pesanan->matakuliah,
+            'dosen_matkul' => $pesanan->dosen_matkul,
+            'kelas' => $pesanan->kelas,
+            'id_pemesan' => $pesanan->id_pemesan,
             'id_status' => 2
 
         ];

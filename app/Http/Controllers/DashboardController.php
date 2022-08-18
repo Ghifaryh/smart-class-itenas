@@ -56,33 +56,36 @@ class DashboardController extends Controller
 
         // error_log($output);
         echo json_encode($output);
-
-        // $data =[];
-        // foreach ($output as $value) {
-        //     $data[] = [
-        //         'kode' => $value['Disp_Kode'],
-        //         'nama' => $value['Disp_Matakuliah'],
-        //     ];
-        // }
-
-        // $response['data'] = $data;
-        // return $this->response->setJSON($response);
-
-        
-        // $res = Http::get(config('app.URL_API').'aset-by-kodegedung',[
-        //     'APIKEY'=>config('app.API_KEY'), 
-        //     'kodegedung'=>$gedung, 
-        // ]); 
-        // $json=$res->json();
-        
-
-        // return view('part/astable', [
-        //     "title" => "Detail Aset Gedung",
-        //     "namaged"   => $nama,
-        //     "noged"   => $gedung,
-        //     "detailAset" => $output,
     
-        // ]);
+    }
+
+    public function getDosenMatkul($semester, $prodi, $kode_matkul, $kelas)
+    {
+        // $semester = $this->request->getvar('semester');
+        // $prodi = $this->request->getvar('prodi');
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, "https://api-sikad.itenas.ac.id/public/4p151k4dn0w/mahasiswa/matakuliah-by-prodi?APIKEY=284a13407bb5660a4b725312af37b814186056c2&semester={$semester}&jurusan={$prodi}");
+        // curl_setopt($curl, CURLOPT_URL, "https://api-sikad.itenas.ac.id/public/4p151k4dn0w/mahasiswa/matakuliah-by-prodi?APIKEY=284a13407bb5660a4b725312af37b814186056c2&semester=20221&jurusan=15");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($curl);
+        curl_close($curl);
+        $output = json_decode($output, true);
+
+        isset($output["data"]);
+        
+        $output = isset($output["data"]) ? ($output["data"]) : null;
+        
+        foreach ($output as $key => $value) {
+            if (($value['Disp_Kode'] == $kode_matkul) && ($value['Disp_Kelas'] == $kelas) && ($value['Disp_Semester'] == $semester)) {
+                //if magicRankis not 8, ignore and move on to the next entry
+                $data = array("data1"=>$value['Disp_NamaDosen'], "data2"=>$value['Disp_Kelas']);
+            }
+            continue;
+            //magicRank is 8, do something
+            }
+
+        // error_log($output);
+        echo json_encode($data);
     
     }
 

@@ -144,7 +144,6 @@ function bulanIndo($hariInggris)
                                                 {{ $rn->nama }}</option>
                                         @endforeach
                                     </select>
-
                                     @error('id_ruangan')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -175,16 +174,16 @@ function bulanIndo($hariInggris)
                                     <select name="matakuliah" id="matakuliah"
                                         class="form-select @error('matakuliah') is-invalid @enderror" data-width=100%
                                         required>
-                                        <option value="" selected disabled hidden>Pilih Matakuliah</option>
-                                    </select>
-
+                                        {{-- <option value="" selected disabled hidden>Pilih Matakuliah</option> --}}
+                                    </select>                  
                                     @error('matakuliah')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
                                 <input type="hidden" name="dosen_matkul" id="dosen_matkul">
+                                <input type="hidden" name="kelas" id="kelas">
                                 <input type="hidden" name="id_pemesan" id="id_pemesan" value="{{ auth()->user()->id }}">
                                 <input type="hidden" name="id_status" id="id_status" value="1">
                                 <div class="col">
@@ -588,73 +587,103 @@ function bulanIndo($hariInggris)
         });
 
         $(document).ready(function() {
-            $("#matakuliah").prop('disabled', true);
+            $("#matakuliah").prop('disabled', true);    
             // $("#prodi").prop('disabled', true);
 
-            $('#prodi').change(function() {
-                // $("#prodi").prop('disabled', false);
-                // if (!$('#semester').val()) {
-                //     // $("#prodi").prop('selectedIndex', 0);
-                //     $("#matakuliah").prop('selectedIndex', 0);
-                //     // $("#prodi").prop('disabled', true);
-                //     $("#matakuliah").prop('disabled', true);
-                // }
+            $('#prodi').on('change', function() {
+                // alert( this.value );
+                $('#matakuliah').empty();
+                $('#matakuliah').append(`<option value="" selected disabled hidden>Pilih Matakuliah</option>`);
                 $("#matakuliah").prop('disabled', false);
-                    if (!$('#prodi').val()) {
-                        $("#matakuliah").prop('disabled', true);
-                    }else{
-                        let tanggal = $('#tanggal_pinjam').val().split("-");
-                        var tahun = parseInt(tanggal[0]);
-                        var month = parseInt(tanggal[1]);
-                        // let semester = $('#semester').val();
-                        let ngurangTahun;
-
-                        var semesterNow;
-                        if ( month >= 9){
-                            let tahunSemester = tahun.toString();
-                            semesterNow = tahunSemester + "1";
-                        }else if (month < 2){
-                            ngurangTahun = tahun - 1;
-                            
-                            let tahunSemester = ngurangTahun.toString();
-                            semesterNow = tahunSemester + "1";
-                            
-                        }else if(month >= 2 && month <= 6){
-                            ngurangTahun = tahun - 1;
-                            let tahunSemester = ngurangTahun.toString();
-                            semesterNow = tahunSemester + "2";
-                            // tai = ""tahun+"1";
-                        }
-                        else if(month >= 7 && month < 9) {
-                            ngurangTahun = tahun - 1;
-                            semesterNow = tahunSemester + "3";
-                            // tai = ""tahun+"1";
-                        }else{
-                            console.log("KONTOL SEMESTER BERAPA SIA");
-                        }
-                        // console.log(semester);
-                        var semester = parseInt(semesterNow);
-                        console.log(semester);
-                        let prodi = $('#prodi').val();
-                        // if (tanggal)
-                        // $('#semester').val(``);
-                    // $('#sub_category').empty();
-                    // $('#sub_category').append(`<option value="0" disabled selected>Processing...</option>`);
-                    $.ajax({
-                        type: 'GET',
-                        url: '/get-matkul/' +semesterNow + '/' +prodi,
-                        success: function (response) {
-                            var response = JSON.parse(response);
-                            // console.log(response);   
-                            // $('#sub_category').empty();
-                            // $('#sub_category').append(`<option value="0" disabled selected>Select Sub Category*</option>`);
-                            response.forEach(element => {
-                                $('#matakuliah').append(`<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']}</option>`);
-                                $('#dosen_matkul').val(`${element['Disp_NamaDosen']}`);
-                                });
-                        }
-                    });
+                if (!$('#prodi').val()) {
+                    $("#matakuliah").prop('disabled', true);
                 }
+                let tanggal = $('#tanggal_pinjam').val().split("-");
+                var tahun = parseInt(tanggal[0]);
+                var month = parseInt(tanggal[1]);
+                let ngurangTahun;
+
+                var semesterNow;
+                if ( month >= 9){
+                    let tahunSemester = tahun.toString();
+                    semesterNow = tahunSemester + "1";
+                }else if (month < 2){
+                    ngurangTahun = tahun - 1;
+                    
+                    let tahunSemester = ngurangTahun.toString();
+                    semesterNow = tahunSemester + "1";
+                    
+                }else if(month >= 2 && month < 7){
+                    ngurangTahun = tahun - 1;
+                    let tahunSemester = ngurangTahun.toString();
+                    semesterNow = tahunSemester + "2";
+                }
+                else if(month >= 7 && month < 9) {
+                    ngurangTahun = tahun - 1;
+                    semesterNow = tahunSemester + "3";
+                }else{
+                    console.log("UwoW");
+                }
+                var semester = parseInt(semesterNow);
+                // console.log(semester);
+                let prodi = $('#prodi').val();
+                $.ajax({
+                    type: 'GET',
+                    url: '/get-matkul/' +semesterNow + '/' +prodi,
+                    success: function (response) {
+                        var response = JSON.parse(response);
+                        // console.log(response);   
+                        response.forEach(element => {
+                            $('#matakuliah').append(`<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']} ${element['Disp_Kelas']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']} ${element['Disp_Kelas']}</option>`);
+                            });
+                    }
+                });
+            });
+
+            $('#matakuliah').on("change",function(){
+                let tanggal = $('#tanggal_pinjam').val().split("-");
+                var tahun = parseInt(tanggal[0]);
+                var month = parseInt(tanggal[1]);
+                let ngurangTahun;
+
+                var semesterNow;
+                if ( month >= 9){
+                    let tahunSemester = tahun.toString();
+                    semesterNow = tahunSemester + "1";
+                }else if (month < 2){
+                    ngurangTahun = tahun - 1;
+                    
+                    let tahunSemester = ngurangTahun.toString();
+                    semesterNow = tahunSemester + "1";
+                    
+                }else if(month >= 2 && month < 7){
+                    ngurangTahun = tahun - 1;
+                    let tahunSemester = ngurangTahun.toString();
+                    semesterNow = tahunSemester + "2";
+                }
+                else if(month >= 7 && month < 9) {
+                    ngurangTahun = tahun - 1;
+                    semesterNow = tahunSemester + "3";
+                }else{
+                    console.log("UwoW");
+                }
+                let prodi = $('#prodi').val();
+                let matkul = $('#matakuliah').val();
+                var kalimat = matkul.split(" ");
+                var kalimatkebalik = matkul.split(" ").reverse();
+                var kelas = kalimatkebalik[0];
+                var kode_matkul = kalimat[0];
+                console.log(kelas);
+                $.ajax({
+                    type: 'GET',
+                    url: '/dosen-matkul/' + semesterNow + '/' +prodi + '/' + kode_matkul + '/' + kelas,
+                    success: function (response) {
+                        var response = JSON.parse(response);
+                        console.log(response);   
+                        $('#dosen_matkul').val(`${response["data1"]}`);
+                        $('#kelas').val(`${response["data2"]}`);
+                    }
+                });
             });
         });
     </script>
