@@ -529,19 +529,7 @@ function bulanIndo($hariInggris)
     <script type="text/javascript">
         $(document).ready(function() {
             $('#table1').DataTable();
-            $('#table2').DataTable(
-                //     {
-                //     scrollY: "300px",
-                //     scrollX: true,
-                //     scrollCollapse: true,
-                //     paging: false,
-                //     columnDefs: [{
-                //         width: '100%',
-                //         targets: 0
-                //     }],
-                //     fixedColumns: true
-                // }
-            );
+            $('#table2').DataTable();
             $('#jam_masuk').select2({
                 placeholder: "Pilih Jam Masuk",
                 theme: "bootstrap-5",
@@ -588,74 +576,141 @@ function bulanIndo($hariInggris)
         });
 
         $(document).ready(function() {
+            $("#prodi").prop('disabled', true);
             $("#matakuliah").prop('disabled', true);
-            // $("#prodi").prop('disabled', true);
-
+            $('#tanggal_pinjam').change(function() {
+                $("#prodi").prop('disabled', false);
+            });
             $('#prodi').change(function() {
-                // $("#prodi").prop('disabled', false);
-                // if (!$('#semester').val()) {
-                //     // $("#prodi").prop('selectedIndex', 0);
-                //     $("#matakuliah").prop('selectedIndex', 0);
-                //     // $("#prodi").prop('disabled', true);
-                //     $("#matakuliah").prop('disabled', true);
-                // }
-                $("#matakuliah").prop('disabled', false);
-                    if (!$('#prodi').val()) {
-                        $("#matakuliah").prop('disabled', true);
-                    }else{
-                        let tanggal = $('#tanggal_pinjam').val().split("-");
-                        var tahun = parseInt(tanggal[0]);
-                        var month = parseInt(tanggal[1]);
-                        // let semester = $('#semester').val();
-                        let ngurangTahun;
+                if (!$('#prodi').val()) {
+                    $("#matakuliah").prop('disabled', true);
+                } else {
+                    $("#matakuliah").prop('disabled', false);
+                    let tanggalPesan = $('#tanggal_pinjam').val().split("-");
+                    var tahunPesan = parseInt(tanggalPesan[0]);
+                    var bulanPesan = parseInt(tanggalPesan[1]);
 
-                        var semesterNow;
-                        if ( month >= 9){
-                            let tahunSemester = tahun.toString();
-                            semesterNow = tahunSemester + "1";
-                        }else if (month < 2){
-                            ngurangTahun = tahun - 1;
-                            
-                            let tahunSemester = ngurangTahun.toString();
-                            semesterNow = tahunSemester + "1";
-                            
-                        }else if(month >= 2 && month <= 6){
-                            ngurangTahun = tahun - 1;
-                            let tahunSemester = ngurangTahun.toString();
-                            semesterNow = tahunSemester + "2";
-                            // tai = ""tahun+"1";
-                        }
-                        else if(month >= 7 && month < 9) {
-                            ngurangTahun = tahun - 1;
-                            semesterNow = tahunSemester + "3";
-                            // tai = ""tahun+"1";
-                        }else{
-                            console.log("KONTOL SEMESTER BERAPA SIA");
-                        }
-                        // console.log(semester);
-                        var semester = parseInt(semesterNow);
-                        console.log(semester);
-                        let prodi = $('#prodi').val();
-                        // if (tanggal)
-                        // $('#semester').val(``);
-                    // $('#sub_category').empty();
-                    // $('#sub_category').append(`<option value="0" disabled selected>Processing...</option>`);
+                    var fixSemester;
+                    let rumusSemester;
+                    let nowSemester;
+
+                    if (bulanPesan >= 9) {
+                        //semester ganjil
+                        nowSemester = tahunPesan.toString();
+                        fixSemester = nowSemester + "1";
+                    } else if (bulanPesan < 2) {
+                        //semester ganjil
+                        rumusSemester = tahunPesan - 1;
+                        nowSemester = rumusSemester.toString();
+                        fixSemester = nowSemester + "1";
+                    } else if (bulanPesan >= 2 && bulanPesan <= 6) {
+                        //semester genap
+                        rumusSemester = tahunPesan - 1;
+                        nowSemester = rumusSemester.toString();
+                        fixSemester = nowSemester + "2";
+
+                    } else if (bulanPesan >= 7 && bulanPesan < 9) {
+                        // semester pendek
+                        rumusSemester = tahunPesan - 1;
+                        nowSemester = rumusSemester.toString();
+                        fixSemester = nowSemester + "3";
+                    } else {
+                        alert("Semester tidak diketahui, silahkan perbaiki isinya");
+                    }
+                    var semester = parseInt(fixSemester);
+                    alert(semester);
+
+                    let prodi = $('#prodi').val();
                     $.ajax({
                         type: 'GET',
-                        url: '/get-matkul/' +semesterNow + '/' +prodi,
-                        success: function (response) {
+                        url: '/get-matkul/' + fixSemester + '/' + prodi,
+                        success: function(response) {
                             var response = JSON.parse(response);
-                            // console.log(response);   
-                            // $('#sub_category').empty();
-                            // $('#sub_category').append(`<option value="0" disabled selected>Select Sub Category*</option>`);
                             response.forEach(element => {
-                                $('#matakuliah').append(`<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']}</option>`);
+                                $('#matakuliah').append(
+                                    `<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']}</option>`
+                                );
                                 $('#dosen_matkul').val(`${element['Disp_NamaDosen']}`);
-                                });
+                            });
                         }
                     });
                 }
+
             });
         });
+
+        // $(document).ready(function() {
+        //     $("#matakuliah").prop('disabled', true);
+        //     // $("#prodi").prop('disabled', true);
+
+        //     $('#prodi').change(function() {
+        //         // $("#prodi").prop('disabled', false);
+        //         // if (!$('#semester').val()) {
+        //         //     // $("#prodi").prop('selectedIndex', 0);
+        //         //     $("#matakuliah").prop('selectedIndex', 0);
+        //         //     // $("#prodi").prop('disabled', true);
+        //         //     $("#matakuliah").prop('disabled', true);
+        //         // }
+        //         $("#matakuliah").prop('disabled', false);
+        //         if (!$('#prodi').val()) {
+        //             $("#matakuliah").prop('disabled', true);
+        //         } else {
+        //             let tanggal = $('#tanggal_pinjam').val().split("-");
+        //             // alert(tanggal[0]);
+        //             var tahun = parseInt(tanggal[0]);
+        //             var month = parseInt(tanggal[1]);
+        //             // let semester = $('#semester').val();
+        //             let ngurangTahun;
+
+        //             var semesterNow;
+        //             if (month >= 9) {
+        //                 let tahunSemester = tahun.toString();
+        //                 semesterNow = tahunSemester + "1";
+        //             } else if (month < 2) {
+        //                 ngurangTahun = tahun - 1;
+
+        //                 let tahunSemester = ngurangTahun.toString();
+        //                 semesterNow = tahunSemester + "1";
+
+        //             } else if (month >= 2 && month <= 6) {
+        //                 ngurangTahun = tahun - 1;
+        //                 let tahunSemester = ngurangTahun.toString();
+        //                 semesterNow = tahunSemester + "2";
+        //                 // tai = ""tahun+"1";
+        //             } else if (month >= 7 && month < 9) {
+        //                 ngurangTahun = tahun - 1;
+        //                 semesterNow = tahunSemester + "3";
+        //                 // tai = ""tahun+"1";
+        //             } else {
+        //                 // console.log("KONTOL SEMESTER BERAPA SIA");
+        //                 alert("Semester tidak terdaftar");
+        //             }
+        //             // console.log(semester);
+        //             var semester = parseInt(semesterNow);
+        //             console.log(semester);
+        //             let prodi = $('#prodi').val();
+        //             // if (tanggal)
+        //             // $('#semester').val(``);
+        //             // $('#sub_category').empty();
+        //             // $('#sub_category').append(`<option value="0" disabled selected>Processing...</option>`);
+        //             $.ajax({
+        //                 type: 'GET',
+        //                 url: '/get-matkul/' + semesterNow + '/' + prodi,
+        //                 success: function(response) {
+        //                     var response = JSON.parse(response);
+        //                     // console.log(response);
+        //                     // $('#sub_category').empty();
+        //                     // $('#sub_category').append(`<option value="0" disabled selected>Select Sub Category*</option>`);
+        //                     response.forEach(element => {
+        //                         $('#matakuliah').append(
+        //                             `<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']}</option>`
+        //                         );
+        //                         $('#dosen_matkul').val(`${element['Disp_NamaDosen']}`);
+        //                     });
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
     </script>
 @endpush
