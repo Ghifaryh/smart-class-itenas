@@ -79,6 +79,12 @@ body:not(header) {
 /* rkgk responsive table */
 .table-list-pesan {
     overflow-x: auto;
+    /* color: blue; */
+    /* background-color: red;   */
+    /* width: 50% !important; */
+}
+.table-list-pesan thead {
+    text-align: center;
 }
 
 /* Footer stuff */
