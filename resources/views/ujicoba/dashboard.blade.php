@@ -152,22 +152,6 @@ function bulanIndo($hariInggris)
                                     @enderror
                                 </div>
                                 <div class="col mb-3">
-                                    <label for="semester">Semester</label>
-                                    <select name="semester" id="semester"
-                                        class="form-select @error('semester') is-invalid @enderror" data-width=100%
-                                        required>
-                                        <option value="" selected disabled hidden>Pilih Semester</option>
-                                        <option value="20221">Ganjil</option>
-                                        <option value="20212">Genap</option>
-                                    </select>
-
-                                    @error('semester')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col mb-3">
                                     <label for="prodi">Prodi</label>
                                     <select name="prodi" id="prodi"
                                         class="form-select @error('prodi') is-invalid @enderror" data-width=100% required>
@@ -192,7 +176,6 @@ function bulanIndo($hariInggris)
                                         class="form-select @error('matakuliah') is-invalid @enderror" data-width=100%
                                         required>
                                         <option value="" selected disabled hidden>Pilih Matakuliah</option>
-                                        <option value=""></option>
                                     </select>
 
                                     @error('matakuliah')
@@ -201,7 +184,8 @@ function bulanIndo($hariInggris)
                                         </div>
                                     @enderror
                                 </div>
-                                <input type="hidden" name="id_dosen" id="id_dosen" value="{{ auth()->user()->id }}">
+                                <input type="hidden" name="dosen_matkul" id="dosen_matkul">
+                                <input type="hidden" name="id_pemesan" id="id_pemesan" value="{{ auth()->user()->id }}">
                                 <input type="hidden" name="id_status" id="id_status" value="1">
                                 <div class="col">
                                     <p class="reg-room-info">*Pemesanan ruangan akan diproses paling lama 1x24 Jam</p>
@@ -593,26 +577,6 @@ function bulanIndo($hariInggris)
                 theme: "bootstrap-5",
                 allowClear: true,
                 width: 'resolve',
-                ajax: {
-                    // url: "{{ url('DashboardController.getdatamatkul') }}",
-                    url: "/matakuliah",
-                    type: "post",
-                    dataType: 'json',
-                    delay: 250,
-                    data: function(data) {
-                        return {
-                            semester: $('#semester').val(),
-                            prodi: $('#prodi').val(),
-                            searchTerm: data.term
-                        };
-                    },
-                    processResults: function(data) {
-                        return {
-                            results: data.data,
-                        };
-                    },
-                    cache: true
-                }
             });
         });
 
@@ -625,22 +589,72 @@ function bulanIndo($hariInggris)
 
         $(document).ready(function() {
             $("#matakuliah").prop('disabled', true);
-            $("#prodi").prop('disabled', true);
+            // $("#prodi").prop('disabled', true);
 
-            $('#semester').change(function() {
-                $("#prodi").prop('disabled', false);
-                if (!$('#semester').val()) {
-                    $("#prodi").prop('selectedIndex', 0);
-                    $("#matakuliah").prop('selectedIndex', 0);
-                    $("#prodi").prop('disabled', true);
-                    $("#matakuliah").prop('disabled', true);
-                }
-                $('#prodi').change(function() {
-                    $("#matakuliah").prop('disabled', false);
+            $('#prodi').change(function() {
+                // $("#prodi").prop('disabled', false);
+                // if (!$('#semester').val()) {
+                //     // $("#prodi").prop('selectedIndex', 0);
+                //     $("#matakuliah").prop('selectedIndex', 0);
+                //     // $("#prodi").prop('disabled', true);
+                //     $("#matakuliah").prop('disabled', true);
+                // }
+                $("#matakuliah").prop('disabled', false);
                     if (!$('#prodi').val()) {
                         $("#matakuliah").prop('disabled', true);
-                    }
-                });
+                    }else{
+                        let tanggal = $('#tanggal_pinjam').val().split("-");
+                        var tahun = parseInt(tanggal[0]);
+                        var month = parseInt(tanggal[1]);
+                        // let semester = $('#semester').val();
+                        let ngurangTahun;
+
+                        var semesterNow;
+                        if ( month >= 9){
+                            let tahunSemester = tahun.toString();
+                            semesterNow = tahunSemester + "1";
+                        }else if (month < 2){
+                            ngurangTahun = tahun - 1;
+                            
+                            let tahunSemester = ngurangTahun.toString();
+                            semesterNow = tahunSemester + "1";
+                            
+                        }else if(month >= 2 && month <= 6){
+                            ngurangTahun = tahun - 1;
+                            let tahunSemester = ngurangTahun.toString();
+                            semesterNow = tahunSemester + "2";
+                            // tai = ""tahun+"1";
+                        }
+                        else if(month >= 7 && month < 9) {
+                            ngurangTahun = tahun - 1;
+                            semesterNow = tahunSemester + "3";
+                            // tai = ""tahun+"1";
+                        }else{
+                            console.log("KONTOL SEMESTER BERAPA SIA");
+                        }
+                        // console.log(semester);
+                        var semester = parseInt(semesterNow);
+                        console.log(semester);
+                        let prodi = $('#prodi').val();
+                        // if (tanggal)
+                        // $('#semester').val(``);
+                    // $('#sub_category').empty();
+                    // $('#sub_category').append(`<option value="0" disabled selected>Processing...</option>`);
+                    $.ajax({
+                        type: 'GET',
+                        url: '/get-matkul/' +semesterNow + '/' +prodi,
+                        success: function (response) {
+                            var response = JSON.parse(response);
+                            // console.log(response);   
+                            // $('#sub_category').empty();
+                            // $('#sub_category').append(`<option value="0" disabled selected>Select Sub Category*</option>`);
+                            response.forEach(element => {
+                                $('#matakuliah').append(`<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']}</option>`);
+                                $('#dosen_matkul').val(`${element['Disp_NamaDosen']}`);
+                                });
+                        }
+                    });
+                }
             });
         });
     </script>

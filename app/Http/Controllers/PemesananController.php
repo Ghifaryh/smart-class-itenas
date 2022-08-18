@@ -18,7 +18,8 @@ class PemesananController extends Controller
     {
         $validatedData = $request->validate([
             'id_ruangan' => ['required'],
-            'id_dosen' => ['required'],
+            'id_pemesan' => ['required'],
+            'dosen_matkul' => ['required'],
             'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
             'jam_masuk' => ['required'],
             'jam_keluar' => ['required','after:jam_masuk'],
@@ -27,10 +28,10 @@ class PemesananController extends Controller
             'id_status' => ['required']
         ]);
         
-        // dd($request);
-        Pemesanan::create($validatedData);
+        dd($request);
+        // Pemesanan::create($validatedData);
 
-        return redirect('/dashboard')->with('success', 'Data pemesanan berhasil diinput!');
+        // return redirect('/dashboard')->with('success', 'Data pemesanan berhasil diinput!');
     }
 
     public function hapusket($id)
