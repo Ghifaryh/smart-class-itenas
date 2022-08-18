@@ -168,7 +168,11 @@ function bulanIndo($hariInggris)
                                         <select name="prodi" id="prodi"
                                             class="form-select @error('prodi') is-invalid @enderror" required>
                                             <option value="" selected disabled hidden>Pilih Prodi</option>
-                                            <option value="">
+                                            @foreach ($prodis as $prodi)
+                                                <option value="{{ $prodi->kode }}"
+                                                    {{ old('prodi') == $prodi->kode ? 'selected' : '' }}>
+                                                    {{ $prodi->nama }}</option>
+                                            @endforeach
                                             </option>
                                         </select>
                                     </label>
@@ -271,7 +275,6 @@ function bulanIndo($hariInggris)
                                         name="prodi" id="prodi" placeholder="Prodi" required
                                         value="{{ $pesananedt->prodi }}">
                                     <label for="prodi">Prodi</label>
-
                                     <option value="" selected disabled hidden>Pilih Jam</option>
                                     @error('prodi')
                                         <div class="invalid-feedback">
@@ -504,7 +507,7 @@ function bulanIndo($hariInggris)
             </div>
         </div>
     </div>
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
             $('#table1').DataTable();
             $('#table2').DataTable();
@@ -536,7 +539,27 @@ function bulanIndo($hariInggris)
             $('#matakuliah').select2({
                 placeholder: "Pilih Matakuliah",
                 theme : "bootstrap-5",
-                allowClear: true
+                allowClear: true,
+                ajax: {
+                    // url: "{{ url('DashboardController.getdatamatkul') }}",
+                    url: "/matakuliah",
+                    type: "post",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (data) {
+                        return {
+                            semester: $('#semester').val(),
+                            prodi: $('#prodi').val(),
+                            searchTerm: data.term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data.data,
+                        };
+                    },
+                    cache: true
+                }
             });
         });
     </script>

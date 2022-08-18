@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             RuanganSeeder::class,
             StatusSeeder::class,
             JamSeeder::class,
+            ProdiSeeder::class,
         ]);
     }
 }
