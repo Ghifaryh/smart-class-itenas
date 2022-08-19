@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::post('/dashboard/terima/{id}', [PemesananController::class, 'accept']);
     Route::post('/dashboard/batal/{id}', [PemesananController::class, 'cancel']);
     Route::post('/dashboard/batalhapus/{id}', [PemesananController::class, 'cancelhapus']);
+    Route::post('/dashboard/hapus/{id}', [JadwalController::class, 'destroy']);
     Route::delete('/dashboard/{id}', [PemesananController::class, 'destroy']);
     Route::get('/truangan', [RuanganController::class, 'index']);
     Route::post('/truangan', [RuanganController::class, 'tambah']);

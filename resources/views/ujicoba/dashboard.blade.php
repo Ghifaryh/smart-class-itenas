@@ -63,7 +63,7 @@ function bulanIndo($hariInggris)
             <div class="col-sm-3">
                 <div class="reg-room-wrapper ms-5 px-4 py-2 mb-3" id="regWrapper">
                     <div class="reg-room">
-                        @if ($param == 'add')
+                        {{-- @if ($param == 'add') --}}
                             <h3 class="fw-bold pt-2 text-nowrap">Pemesanan Ruangan</h3>
                             <h6 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h6>
                             @if (session()->has('success'))
@@ -191,8 +191,8 @@ function bulanIndo($hariInggris)
                                         id="submitPesan">Daftar</button>
                                 </div>
                             </form>
-                        @else
-                            <h3 class="fw-bold pt-2 text-wrap">Edit Data Pemesanan Ruangan</h3>
+                        {{-- @else --}}
+                            {{-- <h3 class="fw-bold pt-2 text-wrap">Edit Data Pemesanan Ruangan</h3>
                             <h6 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h6>
                             <form action="/dashboard/update/{{ $pesananedt->id }}" method="post" class="reg-room-form">
                                 @csrf
@@ -263,7 +263,6 @@ function bulanIndo($hariInggris)
                                     <label for="prodi">Prodi</label>
                                     <select name="prodi" id="prodi"
                                         class="form-select @error('prodi') is-invalid @enderror" data-width=100% required>
-                                        {{-- <option value="" selected disabled hidden>Pilih Prodi</option> --}}
                                         @foreach ($prodis as $prodi)
                                             <option value="{{ $prodi->kode }}"
                                                 {{ $pesananedt->prodi == $prodi->kode ? 'selected' : '' }}>
@@ -282,7 +281,6 @@ function bulanIndo($hariInggris)
                                     <select name="matakuliah" id="matakuliah"
                                         class="form-select @error('matakuliah') is-invalid @enderror" data-width=100%
                                         required>
-                                        {{-- <option value="" selected disabled hidden>Pilih Matakuliah</option> --}}
 
                                         <option value="{{ $pesananedt->matakuliah }}" selected>{{ $pesananedt->matakuliah }}</option>
                                     </select>                  
@@ -302,17 +300,15 @@ function bulanIndo($hariInggris)
                                 <div class="col-sm-9">
                                     <p class="reg-room-info">*Pembookingan ruangan akan diproses paling lama 1*24 Jam</p>
                                 </div>
-                                {{-- <div class="mb-3 me-3 px-5 text-end"> --}}
                                 <div class="text-center mb-3">
                                     <a href="/dashboard" class="btn text-white reg-room-button fw-bold me-3">Batal</a>
                                     <button type="submit"
                                         class="btn text-white reg-room-button-update fw-bold text-nowrap">Update</button>
                                 </div>
                             </form>
-                        @endif
+                        @endif --}}
 
                     </div>
-
                 </div>
             </div>
             <div class="col-sm-9">
@@ -378,7 +374,7 @@ function bulanIndo($hariInggris)
 
                                                 @if (auth()->user()->level == 'dosen')
                                                     <td class="text-nowrap">
-                                                        @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi' or $pesanan->Status->keterangan == 'dibatalkan')
+                                                        {{-- @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi' or $pesanan->Status->keterangan == 'dibatalkan')
                                                             <form
                                                                 action="/dashboard/edit/{{ $pesanan->id }}"method="post"
                                                                 class="d-block">
@@ -386,7 +382,7 @@ function bulanIndo($hariInggris)
                                                                 <button class="badge bg-primary border-0"
                                                                     onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
                                                             </form>
-                                                        @endif
+                                                        @endif --}}
                                                         <form action="/dashboard/hapus/{{ $pesanan->id }}"
                                                             method="post">
                                                             @csrf
@@ -406,7 +402,7 @@ function bulanIndo($hariInggris)
                                                             </form>
                                                         @endif
 
-                                                        @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi' or $pesanan->Status->keterangan == 'dibatalkan')
+                                                        {{-- @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi' or $pesanan->Status->keterangan == 'dibatalkan')
                                                             <form
                                                                 action="/dashboard/edit/{{ $pesanan->id }}"method="post"
                                                                 class="d-block">
@@ -414,7 +410,7 @@ function bulanIndo($hariInggris)
                                                                 <button class="badge bg-primary border-0"
                                                                     onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
                                                             </form>
-                                                        @endif
+                                                        @endif --}}
 
                                                         @if ($pesanan->Status->keterangan == 'Dihapus' or $pesanan->Status->keterangan == 'Ditolak (Dihapus)')
                                                             <form action="/dashboard/batalhapus/{{ $pesanan->id }}"
