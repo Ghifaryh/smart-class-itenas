@@ -9,7 +9,8 @@ body {
 }
 
 .reg-room-button,
-.add-room-button {
+.add-room-button,
+.reg-room-button-update {
     background-color: orange !important;
 }
 
@@ -19,6 +20,12 @@ body {
 }
 
 .reg-room-button {
+    width: 40%;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px !important;
+}
+
+.reg-room-button-update {
     width: 40%;
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
     border-radius: 20px !important;

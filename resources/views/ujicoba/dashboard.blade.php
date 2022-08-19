@@ -192,7 +192,7 @@ function bulanIndo($hariInggris)
                                 </div>
                             </form>
                         @else
-                            <h3 class="fw-bold pt-2 text-nowrap">Edit Data Pemesanan Ruangan</h3>
+                            <h3 class="fw-bold pt-2 text-wrap">Edit Data Pemesanan Ruangan</h3>
                             <h6 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h6>
                             <form action="/dashboard/update/{{ $pesananedt->id }}" method="post" class="reg-room-form">
                                 @csrf
@@ -244,8 +244,8 @@ function bulanIndo($hariInggris)
                                 </div>
                                 <div class="col mb-3">
                                     <label for="id_ruangan">Ruangan yang dipilih</label>
-                                    <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan"
-                                        id="id_ruangan" data-width=100% required>
+                                    <select class="form-select @error('id_ruangan') is-invalid @enderror"
+                                        name="id_ruangan" id="id_ruangan" data-width=100% required>
                                         <option value="" selected disabled hidden>Pilih Ruangan</option>
                                         @foreach ($ruangan as $rn)
                                             <option value="{{ $rn->id }}"
@@ -265,9 +265,9 @@ function bulanIndo($hariInggris)
                                         class="form-select @error('prodi') is-invalid @enderror" data-width=100% required>
                                         <option value="" selected disabled hidden>Pilih Prodi</option>
                                         @foreach ($prodis as $prodi)
-                                        <option value="{{ $prodi->kode }}"
-                                            {{ $pesananedt->prodi == $prodi->kode ? 'selected' : '' }}>
-                                            {{ $prodi->nama }}</option>
+                                            <option value="{{ $prodi->kode }}"
+                                                {{ $pesananedt->prodi == $prodi->kode ? 'selected' : '' }}>
+                                                {{ $prodi->nama }}</option>
                                         @endforeach
                                         </option>
                                     </select>
@@ -283,25 +283,29 @@ function bulanIndo($hariInggris)
                                         class="form-select @error('matakuliah') is-invalid @enderror" data-width=100%
                                         required>
                                         {{-- <option value="" selected disabled hidden>Pilih Matakuliah</option> --}}
+
                                         <option value="{{  }}" selected>Pilih Matakuliah</option>
                                     </select>                  
                                     @error('matakuliah')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
-                                <input type="hidden" name="dosen_matkul" id="dosen_matkul" value="{{ $pesananedt->dosen_matkul }}">
+                                <input type="hidden" name="dosen_matkul" id="dosen_matkul"
+                                    value="{{ $pesananedt->dosen_matkul }}">
                                 <input type="hidden" name="kelas" id="kelas" value="{{ $pesananedt->kelas }}">
-                                <input type="hidden" name="id_pemesan" id="id_pemesan" value="{{ $pesananedt->id_pemesan }}">
+                                <input type="hidden" name="id_pemesan" id="id_pemesan"
+                                    value="{{ $pesananedt->id_pemesan }}">
                                 <input type="hidden" name="id_status" id="id_status" value="1">
                                 <div class="col-sm-9">
                                     <p class="reg-room-info">*Pembookingan ruangan akan diproses paling lama 1*24 Jam</p>
                                 </div>
-                                <div class="mb-3 me-3 px-5 text-end">
-                                    <a href="" class="btn text-white me-5  reg-room-button fw-bold">Batal</a>
-                                    <button type="submit" class="btn text-white me-5  reg-room-button fw-bold">Update
-                                        Data</button>
+                                {{-- <div class="mb-3 me-3 px-5 text-end"> --}}
+                                <div class="text-center mb-3">
+                                    <a href="/dashboard" class="btn text-white reg-room-button fw-bold me-3">Batal</a>
+                                    <button type="submit"
+                                        class="btn text-white reg-room-button-update fw-bold text-nowrap">Update</button>
                                 </div>
                             </form>
                         @endif
@@ -801,6 +805,5 @@ function bulanIndo($hariInggris)
                 $("#regWrapper").removeClass("ms-5");
             }
         });
-
     </script>
 @endpush
