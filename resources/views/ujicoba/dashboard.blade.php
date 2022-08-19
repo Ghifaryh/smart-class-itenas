@@ -85,11 +85,17 @@ function bulanIndo($hariInggris)
                                 @csrf
                                 {{-- <div class="col-sm-9 form-floating mb-3"> --}}
                                 {{-- <div class="col-sm-9 form-floating mb-3"> --}}
-                                <div class="col form-floating mb-3">
-                                    <input type="date" name="tanggal_pinjam"
+                                {{-- <div class="col form-floating mb-3"> --}}
+                                <div class="col mb-3">
+                                    {{-- <input type="date" name="tanggal_pinjam"
                                         class="form-control @error('tanggal_pinjam') is-invalid @enderror"
-                                        id="tanggal_pinjam" required value="{{ old('tanggal_pinjam') }}">
+                                        id="tanggal_pinjam" required value="{{ old('tanggal_pinjam') }}"> --}}
                                     <label for="tanggal_pinjam">Tanggal Peminjaman</label>
+
+                                    <input type="text" name="tanggal_pinjam" id="tanggal_pinjam"
+                                        class="form-control @error('tanggal_pinjam') is-invalid @enderror" required
+                                        value="{{ old('tanggal_pinjam') }}" readonly>
+
                                     @error('tanggal_pinjam')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -173,11 +179,11 @@ function bulanIndo($hariInggris)
                                         class="form-select @error('matakuliah') is-invalid @enderror" data-width=100%
                                         required>
                                         {{-- <option value="" selected disabled hidden>Pilih Matakuliah</option> --}}
-                                    </select>                  
+                                    </select>
                                     @error('matakuliah')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
                                 <input type="hidden" name="dosen_matkul" id="dosen_matkul">
@@ -188,8 +194,8 @@ function bulanIndo($hariInggris)
                                     <p class="reg-room-info">*Pemesanan ruangan akan diproses paling lama 1x24 Jam</p>
                                 </div>
                                 <div class="mb-3 me-3 text-center">
-                                    <button type="submit"
-                                        class="btn text-white reg-room-button fw-bold text-uppercase">Daftar</button>
+                                    <button type="submit" class="btn text-white reg-room-button fw-bold text-uppercase"
+                                        id="submitPesan">Daftar</button>
                                 </div>
                             </form>
                         @else
@@ -517,13 +523,169 @@ function bulanIndo($hariInggris)
         </div>
 
     </div>
-    </div>
-    </div>
-    </div>
 @endsection
 
 @push('scriptsDashboard')
     <script type="text/javascript">
+        // DatePicker
+        $(document).ready(function() {
+            $("#matakuliah").prop('disabled', true);
+
+            $('#tanggal_pinjam').datepicker({
+                dateFormat: 'dd/mm/yy'
+            });
+            $('#tanggal_pinjam').datepicker('setDate', 'today');
+            var tanggalSekarangFull = $('#tanggal_pinjam').val();
+            var splitTanggalSekarang = $('#tanggal_pinjam').val().split("/");
+            let tanggalSekarang = parseInt(splitTanggalSekarang[0]);
+            let bulanSekarang = parseInt(splitTanggalSekarang[1]);
+            let tahunSekarang = parseInt(splitTanggalSekarang[2]);
+
+            $('#tanggal_pinjam').on('change', function() {
+                $('#prodi').append(
+                    `<option value="" selected disabled hidden>Pilih Prodi</option>`
+                );
+
+                $("#matakuliah").prop('disabled', true);
+                $('#matakuliah').empty();
+                $('#matakuliah').append(
+                    `<option value="" selected disabled hidden>Pilih Matakuliah</option>`
+                );
+
+                let tanggalPinjam = $('#tanggal_pinjam').val();
+                let splitTanggal = $('#tanggal_pinjam').val().split("/");
+                let tanggal = parseInt(splitTanggal[0]);
+                let bulan = parseInt(splitTanggal[1]);
+                let tahun = parseInt(splitTanggal[2]);
+                if (tahun < tahunSekarang) {
+                    swal({
+                        title: "Error",
+                        text: "Tidak bisa memesan tahun kurang dari tahun ini!",
+                        icon: "error",
+                        button: "Tutup",
+                        timer: 2000,
+                    });
+                    $('#tanggal_pinjam').val(tanggalSekarangFull);
+                } else if (tahun == tahunSekarang) {
+                    if (bulan < bulanSekarang) {
+                        swal({
+                            title: "Error",
+                            text: "Tidak bisa memesan bulan kurang dari bulan ini!",
+                            icon: "error",
+                            button: "Tutup",
+                            timer: 2000,
+                        });
+                        $('#tanggal_pinjam').val(tanggalSekarangFull);
+                    } else if (bulan == bulanSekarang) {
+                        if (tanggal < tanggalSekarang) {
+                            swal({
+                                title: "Error",
+                                text: "Tidak bisa memesan tanggal kurang dari hari ini!",
+                                icon: "error",
+                                button: "Tutup",
+                                timer: 2000,
+                            });
+                            $('#tanggal_pinjam').val(tanggalSekarangFull);
+                        }
+                    } else {
+                        $('#tanggal_pinjam').val(tanggalPinjam);
+                    }
+                }
+            });
+
+            $('#prodi').on('change', function() {
+                // alert( this.value );
+                $('#matakuliah').empty();
+                $('#matakuliah').append(
+                    `<option value="" selected disabled hidden>Pilih Matakuliah</option>`
+                );
+                if (!$('#prodi').val()) {
+                    $("#matakuliah").prop('disabled', true);
+                } else {
+                    $("#matakuliah").prop('disabled', false);
+                    let tanggalPesan = $('#tanggal_pinjam').val().split("/");
+                    var tahunPesan = parseInt(tanggalPesan[2]);
+                    var bulanPesan = parseInt(tanggalPesan[1]);
+
+                    var fixSemester;
+                    let rumusSemester;
+                    let nowSemester;
+
+                    if (bulanPesan >= 9) {
+                        //semester ganjil
+                        nowSemester = tahunPesan.toString();
+                        fixSemester = nowSemester + "1";
+                    } else if (bulanPesan < 2) {
+                        //semester ganjil
+                        rumusSemester = tahunPesan - 1;
+                        nowSemester = rumusSemester.toString();
+                        fixSemester = nowSemester + "1";
+                    } else if (bulanPesan >= 2 && bulanPesan <= 6) {
+                        //semester genap
+                        rumusSemester = tahunPesan - 1;
+                        nowSemester = rumusSemester.toString();
+                        fixSemester = nowSemester + "2";
+
+                    } else if (bulanPesan >= 7 && bulanPesan < 9) {
+                        // semester pendek
+                        rumusSemester = tahunPesan - 1;
+                        nowSemester = rumusSemester.toString();
+                        fixSemester = nowSemester + "3";
+                    } else {
+                        alert("Semester tidak diketahui, silahkan perbaiki isinya");
+                    }
+
+                    let prodi = $('#prodi').val();
+                    $.ajax({
+                        type: 'GET',
+                        url: '/get-matkul/' + fixSemester + '/' + prodi,
+                        success: function(response) {
+                            var response = JSON.parse(response);
+                            response.forEach(element => {
+                                $('#matakuliah').append(
+                                    `<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']} ${element['Disp_Kelas']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']} ${element['Disp_Kelas']}</option>`
+                                );
+                            });
+                        }
+                    });
+                }
+            })
+
+        });
+
+        $(document).ready(function() {
+            $("#jam_keluar").prop('disabled', true);
+            $('#jam_masuk').on("change", function() {
+                $("#jam_keluar").prop('disabled', false);
+                if (!$('#jam_masuk').val()) {
+                    $("#jam_keluar").prop('disabled', true);
+                    $('#jam_keluar').append(
+                        `<option value="" selected disabled hidden>Pilih Jam Keluar</option>`
+                    );
+
+                }
+            });
+            $('#jam_keluar').on("change", function() {
+                let jamMasuk = $('#jam_masuk').val();
+                let jamKeluar = $('#jam_keluar').val();
+
+                if (jamKeluar <= jamMasuk) {
+                    // alert('Jam Keluar harus lebih dari Jam Masuk!');
+                    // swal("Hello world!");
+                    swal({
+                        title: "Error",
+                        text: "Jam Keluar harus lebih dari Jam Masuk!",
+                        icon: "error",
+                        button: "Tutup",
+                        timer: 2000,
+                    });
+                    $('#jam_keluar').append(
+                        `<option value="" selected disabled hidden>Pilih Jam Keluar</option>`
+                    );
+                }
+            });
+        });
+
         $(document).ready(function() {
             $('#table1').DataTable();
             $('#table2').DataTable();
@@ -572,201 +734,130 @@ function bulanIndo($hariInggris)
             }
         });
 
-        $(document).ready(function() {
-            $("#prodi").prop('disabled', true);
-            $("#matakuliah").prop('disabled', true);
-            $('#tanggal_pinjam').change(function() {
-                $("#prodi").prop('disabled', false);
-                
-            });  
-            // $("#prodi").prop('disabled', true);
-
-            $('#prodi').on('change', function() {
-                // alert( this.value );
-                $('#matakuliah').empty();
-                $('#matakuliah').append(`<option value="" selected disabled hidden>Pilih Matakuliah</option>`);
-                if (!$('#prodi').val()) {
-                    $("#matakuliah").prop('disabled', true);
-                } else {
-                    $("#matakuliah").prop('disabled', false);
-                    let tanggalPesan = $('#tanggal_pinjam').val().split("-");
-                    var tahunPesan = parseInt(tanggalPesan[0]);
-                    var bulanPesan = parseInt(tanggalPesan[1]);
-
-                    var fixSemester;
-                    let rumusSemester;
-                    let nowSemester;
-
-                    if (bulanPesan >= 9) {
-                        //semester ganjil
-                        nowSemester = tahunPesan.toString();
-                        fixSemester = nowSemester + "1";
-                    } else if (bulanPesan < 2) {
-                        //semester ganjil
-                        rumusSemester = tahunPesan - 1;
-                        nowSemester = rumusSemester.toString();
-                        fixSemester = nowSemester + "1";
-                    } else if (bulanPesan >= 2 && bulanPesan <= 6) {
-                        //semester genap
-                        rumusSemester = tahunPesan - 1;
-                        nowSemester = rumusSemester.toString();
-                        fixSemester = nowSemester + "2";
-
-                    } else if (bulanPesan >= 7 && bulanPesan < 9) {
-                        // semester pendek
-                        rumusSemester = tahunPesan - 1;
-                        nowSemester = rumusSemester.toString();
-                        fixSemester = nowSemester + "3";
-                    } else {
-                        alert("Semester tidak diketahui, silahkan perbaiki isinya");
-                    }
-                    var semester = parseInt(fixSemester);
-                    alert(semester);
-
-                    let prodi = $('#prodi').val();
-                    $.ajax({
-                        type: 'GET',
-                        url: '/get-matkul/' + fixSemester + '/' + prodi,
-                        success: function(response) {
-                            var response = JSON.parse(response);
-                            response.forEach(element => {
-                                $('#matakuliah').append(
-                                    `<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']} ${element['Disp_Kelas']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']} ${element['Disp_Kelas']}</option>`
-                                );
-                            });
-                        }
-                    });
-                }
-                
-            });
-
-            $('#matakuliah').on("change",function(){
-                let tanggalPesan = $('#tanggal_pinjam').val().split("-");
-                var tahunPesan = parseInt(tanggalPesan[0]);
-                var bulanPesan = parseInt(tanggalPesan[1]);
-
-                var fixSemester;
-                let rumusSemester;
-                let nowSemester;
-
-                if (bulanPesan >= 9) {
-                    //semester ganjil
-                    nowSemester = tahunPesan.toString();
-                    fixSemester = nowSemester + "1";
-                } else if (bulanPesan < 2) {
-                    //semester ganjil
-                    rumusSemester = tahunPesan - 1;
-                    nowSemester = rumusSemester.toString();
-                    fixSemester = nowSemester + "1";
-                } else if (bulanPesan >= 2 && bulanPesan <= 6) {
-                    //semester genap
-                    rumusSemester = tahunPesan - 1;
-                    nowSemester = rumusSemester.toString();
-                    fixSemester = nowSemester + "2";
-
-                } else if (bulanPesan >= 7 && bulanPesan < 9) {
-                    // semester pendek
-                    rumusSemester = tahunPesan - 1;
-                    nowSemester = rumusSemester.toString();
-                    fixSemester = nowSemester + "3";
-                } else {
-                    alert("Semester tidak diketahui, silahkan perbaiki isinya");
-                }
-                var semester = parseInt(fixSemester);
-                alert(semester);
-
-                let prodi = $('#prodi').val();
-
-                let matkul = $('#matakuliah').val();
-                var kalimat = matkul.split(" ");
-                var kalimatkebalik = matkul.split(" ").reverse();
-                var kelas = kalimatkebalik[0];
-                var kode_matkul = kalimat[0];
-                console.log(kelas);
-                $.ajax({
-                    type: 'GET',
-                    url: '/dosen-matkul/' + fixSemester + '/' +prodi + '/' + kode_matkul + '/' + kelas,
-                    success: function (response) {
-                        var response = JSON.parse(response);
-                        console.log(response);   
-                        $('#dosen_matkul').val(`${response["data1"]}`);
-                        $('#kelas').val(`${response["data2"]}`);
-                    }
-                });
-            });
-        });
-
         // $(document).ready(function() {
+        //     $("#prodi").prop('disabled', true);
         //     $("#matakuliah").prop('disabled', true);
+        //     $('#tanggal_pinjam').change(function() {
+        //         $("#prodi").prop('disabled', false);
+
+        //     });
         //     // $("#prodi").prop('disabled', true);
 
-        //     $('#prodi').change(function() {
-        //         // $("#prodi").prop('disabled', false);
-        //         // if (!$('#semester').val()) {
-        //         //     // $("#prodi").prop('selectedIndex', 0);
-        //         //     $("#matakuliah").prop('selectedIndex', 0);
-        //         //     // $("#prodi").prop('disabled', true);
-        //         //     $("#matakuliah").prop('disabled', true);
-        //         // }
-        //         $("#matakuliah").prop('disabled', false);
+        //     $('#prodi').on('change', function() {
+        //         // alert( this.value );
+        //         $('#matakuliah').empty();
+        //         $('#matakuliah').append(
+        //             `<option value="" selected disabled hidden>Pilih Matakuliah</option>`
+        //         );
         //         if (!$('#prodi').val()) {
         //             $("#matakuliah").prop('disabled', true);
         //         } else {
-        //             let tanggal = $('#tanggal_pinjam').val().split("-");
-        //             // alert(tanggal[0]);
-        //             var tahun = parseInt(tanggal[0]);
-        //             var month = parseInt(tanggal[1]);
-        //             // let semester = $('#semester').val();
-        //             let ngurangTahun;
+        //             $("#matakuliah").prop('disabled', false);
+        //             let tanggalPesan = $('#tanggal_pinjam').val().split("-");
+        //             // var tahunPesan = parseInt(tanggalPesan[0]);
+        //             var tahunPesan = parseInt(tanggalPesan[-1]);
+        //             var bulanPesan = parseInt(tanggalPesan[1]);
 
-        //             var semesterNow;
-        //             if (month >= 9) {
-        //                 let tahunSemester = tahun.toString();
-        //                 semesterNow = tahunSemester + "1";
-        //             } else if (month < 2) {
-        //                 ngurangTahun = tahun - 1;
+        //             // alert(tahunPesan);
+        //             var fixSemester;
+        //             let rumusSemester;
+        //             let nowSemester;
 
-        //                 let tahunSemester = ngurangTahun.toString();
-        //                 semesterNow = tahunSemester + "1";
+        //             if (bulanPesan >= 9) {
+        //                 //semester ganjil
+        //                 nowSemester = tahunPesan.toString();
+        //                 fixSemester = nowSemester + "1";
+        //             } else if (bulanPesan < 2) {
+        //                 //semester ganjil
+        //                 rumusSemester = tahunPesan - 1;
+        //                 nowSemester = rumusSemester.toString();
+        //                 fixSemester = nowSemester + "1";
+        //             } else if (bulanPesan >= 2 && bulanPesan <= 6) {
+        //                 //semester genap
+        //                 rumusSemester = tahunPesan - 1;
+        //                 nowSemester = rumusSemester.toString();
+        //                 fixSemester = nowSemester + "2";
 
-        //             } else if (month >= 2 && month <= 6) {
-        //                 ngurangTahun = tahun - 1;
-        //                 let tahunSemester = ngurangTahun.toString();
-        //                 semesterNow = tahunSemester + "2";
-        //                 // tai = ""tahun+"1";
-        //             } else if (month >= 7 && month < 9) {
-        //                 ngurangTahun = tahun - 1;
-        //                 semesterNow = tahunSemester + "3";
-        //                 // tai = ""tahun+"1";
+        //             } else if (bulanPesan >= 7 && bulanPesan < 9) {
+        //                 // semester pendek
+        //                 rumusSemester = tahunPesan - 1;
+        //                 nowSemester = rumusSemester.toString();
+        //                 fixSemester = nowSemester + "3";
         //             } else {
-        //                 // console.log("KONTOL SEMESTER BERAPA SIA");
-        //                 alert("Semester tidak terdaftar");
+        //                 alert("Semester tidak diketahui, silahkan perbaiki isinya");
         //             }
-        //             // console.log(semester);
-        //             var semester = parseInt(semesterNow);
-        //             console.log(semester);
+        //             var semester = parseInt(fixSemester);
+        //             alert(semester);
+
         //             let prodi = $('#prodi').val();
-        //             // if (tanggal)
-        //             // $('#semester').val(``);
-        //             // $('#sub_category').empty();
-        //             // $('#sub_category').append(`<option value="0" disabled selected>Processing...</option>`);
         //             $.ajax({
         //                 type: 'GET',
-        //                 url: '/get-matkul/' + semesterNow + '/' + prodi,
+        //                 url: '/get-matkul/' + fixSemester + '/' + prodi,
         //                 success: function(response) {
         //                     var response = JSON.parse(response);
-        //                     // console.log(response);
-        //                     // $('#sub_category').empty();
-        //                     // $('#sub_category').append(`<option value="0" disabled selected>Select Sub Category*</option>`);
         //                     response.forEach(element => {
         //                         $('#matakuliah').append(
-        //                             `<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']}</option>`
+        //                             `<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']} ${element['Disp_Kelas']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']} ${element['Disp_Kelas']}</option>`
         //                         );
-        //                         $('#dosen_matkul').val(`${element['Disp_NamaDosen']}`);
         //                     });
         //                 }
         //             });
         //         }
+
+        //     });
+
+        //     $('#matakuliah').on("change", function() {
+        //         let tanggalPesan = $('#tanggal_pinjam').val().split("-");
+        //         var tahunPesan = parseInt(tanggalPesan[0]);
+        //         var bulanPesan = parseInt(tanggalPesan[1]);
+
+        //         var fixSemester;
+        //         let rumusSemester;
+        //         let nowSemester;
+
+        //         if (bulanPesan >= 9) {
+        //             //semester ganjil
+        //             nowSemester = tahunPesan.toString();
+        //             fixSemester = nowSemester + "1";
+        //         } else if (bulanPesan < 2) {
+        //             //semester ganjil
+        //             rumusSemester = tahunPesan - 1;
+        //             nowSemester = rumusSemester.toString();
+        //             fixSemester = nowSemester + "1";
+        //         } else if (bulanPesan >= 2 && bulanPesan <= 6) {
+        //             //semester genap
+        //             rumusSemester = tahunPesan - 1;
+        //             nowSemester = rumusSemester.toString();
+        //             fixSemester = nowSemester + "2";
+
+        //         } else if (bulanPesan >= 7 && bulanPesan < 9) {
+        //             // semester pendek
+        //             rumusSemester = tahunPesan - 1;
+        //             nowSemester = rumusSemester.toString();
+        //             fixSemester = nowSemester + "3";
+        //         } else {
+        //             alert("Semester tidak diketahui, silahkan perbaiki isinya");
+        //         }
+        //         var semester = parseInt(fixSemester);
+        //         let prodi = $('#prodi').val();
+
+        //         let matkul = $('#matakuliah').val();
+        //         var kalimat = matkul.split(" ");
+        //         var kalimatkebalik = matkul.split(" ").reverse();
+        //         var kelas = kalimatkebalik[0];
+        //         var kode_matkul = kalimat[0];
+        //         console.log(kelas);
+        //         $.ajax({
+        //             type: 'GET',
+        //             url: '/dosen-matkul/' + fixSemester + '/' + prodi + '/' + kode_matkul + '/' +
+        //                 kelas,
+        //             success: function(response) {
+        //                 var response = JSON.parse(response);
+        //                 console.log(response);
+        //                 $('#dosen_matkul').val(`${response["data1"]}`);
+        //                 $('#kelas').val(`${response["data2"]}`);
+        //             }
+        //         });
         //     });
         // });
     </script>
