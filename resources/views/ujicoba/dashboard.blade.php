@@ -283,6 +283,7 @@ function bulanIndo($hariInggris)
                                         class="form-select @error('matakuliah') is-invalid @enderror" data-width=100%
                                         required>
                                         {{-- <option value="" selected disabled hidden>Pilih Matakuliah</option> --}}
+                                        <option value="{{  }}" selected>Pilih Matakuliah</option>
                                     </select>                  
                                     @error('matakuliah')
                                     <div class="invalid-feedback">
