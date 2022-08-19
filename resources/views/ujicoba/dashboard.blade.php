@@ -156,9 +156,7 @@ function bulanIndo($hariInggris)
                                         class="form-select @error('prodi') is-invalid @enderror" data-width=100% required>
                                         <option value="" selected disabled hidden>Pilih Prodi</option>
                                         @foreach ($prodis as $prodi)
-                                            <option value="{{ $prodi->kode }}"
-                                                {{ old('prodi') == $prodi->kode ? 'selected' : '' }}>
-                                                {{ $prodi->nama }}</option>
+                                            <option value="{{ $prodi->kode }}">{{ $prodi->nama }}</option>
                                         @endforeach
                                         </option>
                                     </select>
@@ -579,6 +577,7 @@ function bulanIndo($hariInggris)
             $("#matakuliah").prop('disabled', true);
             $('#tanggal_pinjam').change(function() {
                 $("#prodi").prop('disabled', false);
+                
             });  
             // $("#prodi").prop('disabled', true);
 
@@ -632,7 +631,7 @@ function bulanIndo($hariInggris)
                             var response = JSON.parse(response);
                             response.forEach(element => {
                                 $('#matakuliah').append(
-                                    `<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']}</option>`
+                                    `<option value="${element['Disp_Kode']} ${element['Disp_Matakuliah']} ${element['Disp_Kelas']}">${element['Disp_Kode']} ${element['Disp_Matakuliah']} ${element['Disp_Kelas']}</option>`
                                 );
                             });
                         }
