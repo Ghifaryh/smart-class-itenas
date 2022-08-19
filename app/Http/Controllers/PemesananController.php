@@ -137,20 +137,20 @@ class PemesananController extends Controller
             'id_status' => ['required']
         ]);
 
-        $pesanan->update([
-            'id_ruangan' => $pesanan->id_ruangan,
-            'id_pemesan' => $pesanan->id_pemesan,
-            'tanggal_pinjam' => $pesanan->tanggal_pinjam,
-            'jam_masuk' => $pesanan->jam_masuk,
-            'jam_keluar' => $pesanan->jam_keluar,
-            'prodi' => $pesanan->prodi,
-            'matakuliah' => $pesanan->matakuliah,
-            'kelas' => $pesanan->kelas,
-            'dosen_matkul' => $pesanan->dosen_matkul,
-            'id_status' => $request->id_status,
-        ]);
+        // $pesanan->update([
+        //     'id_ruangan' => $pesanan->id_ruangan,
+        //     'id_pemesan' => $pesanan->id_pemesan,
+        //     'tanggal_pinjam' => $pesanan->tanggal_pinjam,
+        //     'jam_masuk' => $pesanan->jam_masuk,
+        //     'jam_keluar' => $pesanan->jam_keluar,
+        //     'prodi' => $pesanan->prodi,
+        //     'matakuliah' => $pesanan->matakuliah,
+        //     'kelas' => $pesanan->kelas,
+        //     'dosen_matkul' => $pesanan->dosen_matkul,
+        //     'id_status' => $request->id_status,
+        // ]);
 
-        // $pesanan->update($request->all());
+        $pesanan->update($request->all());
         
         return redirect('/dashboard')->with('success', 'Data pemesanan ruangan berhasil diupdate!');
     }

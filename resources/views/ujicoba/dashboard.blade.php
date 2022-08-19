@@ -197,9 +197,9 @@ function bulanIndo($hariInggris)
                             <form action="/dashboard/update/{{ $pesananedt->id }}" method="post" class="reg-room-form">
                                 @csrf
                                 <div class="col form-floating mb-3">
-                                    <input type="date" name="tanggal_input"
+                                    <input type="text" name="tanggal_input"
                                         class="form-control @error('tanggal_input') is-invalid @enderror"
-                                        id="tanggal_input" required value="{{ $pesananedt->tanggal_input }}">
+                                        id="tanggal_input" required value="{{ date('d/m/Y', strtotime($pesananedt->tanggal_pinjam)) }}" readonly>
                                     <label for="tanggal_input">Tanggal Peminjaman</label>
                                     @error('tanggal_input')
                                         <div class="invalid-feedback">
@@ -263,7 +263,7 @@ function bulanIndo($hariInggris)
                                     <label for="prodi">Prodi</label>
                                     <select name="prodi" id="prodi"
                                         class="form-select @error('prodi') is-invalid @enderror" data-width=100% required>
-                                        <option value="" selected disabled hidden>Pilih Prodi</option>
+                                        {{-- <option value="" selected disabled hidden>Pilih Prodi</option> --}}
                                         @foreach ($prodis as $prodi)
                                             <option value="{{ $prodi->kode }}"
                                                 {{ $pesananedt->prodi == $prodi->kode ? 'selected' : '' }}>
@@ -284,7 +284,7 @@ function bulanIndo($hariInggris)
                                         required>
                                         {{-- <option value="" selected disabled hidden>Pilih Matakuliah</option> --}}
 
-                                        <option value="{{  }}" selected>Pilih Matakuliah</option>
+                                        <option value="{{ $pesananedt->matakuliah }}" selected>{{ $pesananedt->matakuliah }}</option>
                                     </select>                  
                                     @error('matakuliah')
                                         <div class="invalid-feedback">
@@ -292,6 +292,7 @@ function bulanIndo($hariInggris)
                                         </div>
                                     @enderror
                                 </div>
+                                <input type="hidden" name="tanggal_pinjam" id="tanggal_pinjam" value="{{ $pesananedt->tanggal_pinjam }}">
                                 <input type="hidden" name="dosen_matkul" id="dosen_matkul"
                                     value="{{ $pesananedt->dosen_matkul }}">
                                 <input type="hidden" name="kelas" id="kelas" value="{{ $pesananedt->kelas }}">
@@ -547,7 +548,7 @@ function bulanIndo($hariInggris)
             $('#tanggal_input').datepicker({
                 dateFormat: 'dd/mm/yy'
             });
-            $('#tanggal_input').datepicker('setDate', 'today');
+            // $('#tanggal_input').datepicker('setDate', 'today');
             var tanggalSekarangFull = $('#tanggal_input').val();
             var splitTanggalSekarang = $('#tanggal_input').val().split("/");
             let tanggalSekarang = parseInt(splitTanggalSekarang[0]);
