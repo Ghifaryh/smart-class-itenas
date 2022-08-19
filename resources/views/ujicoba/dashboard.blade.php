@@ -81,14 +81,13 @@ function bulanIndo($hariInggris)
                                         aria-label="Close"></button>
                                 </div>
                             @endif
+
                             <form action="/dashboard" method="post" class="reg-room-form">
                                 @csrf
-                                {{-- <div class="col-sm-9 form-floating mb-3"> --}}
-                                {{-- <div class="col-sm-9 form-floating mb-3"> --}}
                                 <div class="col form-floating mb-3">
                                     <input type="date" name="tanggal_pinjam"
                                         class="form-control @error('tanggal_pinjam') is-invalid @enderror"
-                                        id="tanggal_pinjam" required value="{{ old('tanggal_pinjam') }}">
+                                        id="tanggal_pinjam" required>
                                     <label for="tanggal_pinjam">Tanggal Peminjaman</label>
                                     @error('tanggal_pinjam')
                                         <div class="invalid-feedback">
@@ -96,7 +95,6 @@ function bulanIndo($hariInggris)
                                         </div>
                                     @enderror
                                 </div>
-                                {{-- <div class="col-sm-9 mb-3 "> --}}
                                 <div class="col mb-3 ">
                                     <label for="jam_masuk">Jam Masuk</label>
                                     <select class="form-select @error('jam_masuk') is-invalid @enderror w-auto"
@@ -115,7 +113,6 @@ function bulanIndo($hariInggris)
                                         </div>
                                     @enderror
                                 </div>
-                                {{-- <div class="col-sm-9 mb-3"> --}}
                                 <div class="col mb-3">
                                     <label for="jam_keluar">Jam Keluar</label>
                                     <select class="form-select @error('jam_keluar') is-invalid @enderror w-auto"
@@ -172,7 +169,6 @@ function bulanIndo($hariInggris)
                                     <select name="matakuliah" id="matakuliah"
                                         class="form-select @error('matakuliah') is-invalid @enderror" data-width=100%
                                         required>
-                                        {{-- <option value="" selected disabled hidden>Pilih Matakuliah</option> --}}
                                     </select>                  
                                     @error('matakuliah')
                                     <div class="invalid-feedback">
@@ -193,11 +189,11 @@ function bulanIndo($hariInggris)
                                 </div>
                             </form>
                         @else
-                            <h1 class="fw-bold pt-4">Edit Data Pemesanan Ruangan</h1>
-                            <h5 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h5>
+                            <h3 class="fw-bold pt-2 text-nowrap">Edit Data Pemesanan Ruangan</h3>
+                            <h6 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h6>
                             <form action="/dashboard/update/{{ $pesananedt->id }}" method="post" class="reg-room-form">
                                 @csrf
-                                <div class="col-sm-9 form-floating mb-3">
+                                <div class="col form-floating mb-3">
                                     <input type="date" name="tanggal_pinjam"
                                         class="form-control @error('tanggal_pinjam') is-invalid @enderror"
                                         id="tanggal_pinjam" required value="{{ $pesananedt->tanggal_pinjam }}">
@@ -208,86 +204,98 @@ function bulanIndo($hariInggris)
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <select class="form-select @error('jam_masuk') is-invalid @enderror" name="jam_masuk"
-                                        id="jam_masuk" required>
+                                <div class="col mb-3 ">
+                                    <label for="jam_masuk">Jam Masuk</label>
+                                    <select class="form-select @error('jam_masuk') is-invalid @enderror w-auto"
+                                        name="jam_masuk" id="jam_masuk" data-width=100% required>
+                                        <option value="" selected disabled hidden>Pilih Jam Masuk</option>
                                         @foreach ($jam as $jam_masuk)
                                             <option value="{{ $jam_masuk->jam_pakai }}"
                                                 {{ $pesananedt->jam_masuk == $jam_masuk->jam_pakai ? 'selected' : '' }}>
-                                                {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}</option>
+                                                {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}
+                                            </option>
                                         @endforeach
                                     </select>
-                                    <label for="jam_masuk">Jam Masuk</label>
                                     @error('jam_masuk')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <select class="form-select @error('jam_keluar') is-invalid @enderror"
-                                        name="jam_keluar" id="jam_keluar" required>
+                                <div class="col mb-3">
+                                    <label for="jam_keluar">Jam Keluar</label>
+                                    <select class="form-select @error('jam_keluar') is-invalid @enderror w-auto"
+                                        name="jam_keluar" id="jam_keluar" data-width=100% required>
+                                        <option value="" selected disabled hidden>Pilih Jam Keluar</option>
                                         @foreach ($jam as $jam_keluar)
                                             <option value="{{ $jam_keluar->jam_pakai }}"
                                                 {{ $pesananedt->jam_keluar == $jam_keluar->jam_pakai ? 'selected' : '' }}>
                                                 {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
                                         @endforeach
                                     </select>
-                                    <label for="jam_keluar">Jam Keluar</label>
                                     @error('jam_keluar')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <label for="id_ruangan">Ruangan yang dipilih
-                                        <select class="form-select @error('id_ruangan') is-invalid @enderror"
-                                            name="id_ruangan" id="id_ruangan" required>
-                                            @foreach ($ruangan as $rn)
-                                                <option value="{{ $rn->id }}"
-                                                    {{ $pesananedt->id_ruangan == $rn->id ? 'selected' : '' }}>
-                                                    {{ $rn->nama }}</option>
-                                            @endforeach
-                                        </select>
-
-                                    </label>
+                                <div class="col mb-3">
+                                    <label for="id_ruangan">Ruangan yang dipilih</label>
+                                    <select class="form-select @error('id_ruangan') is-invalid @enderror" name="id_ruangan"
+                                        id="id_ruangan" data-width=100% required>
+                                        <option value="" selected disabled hidden>Pilih Ruangan</option>
+                                        @foreach ($ruangan as $rn)
+                                            <option value="{{ $rn->id }}"
+                                                {{ $pesananedt->id_ruangan == $rn->id ? 'selected' : '' }}>
+                                                {{ $rn->nama }}</option>
+                                        @endforeach
+                                    </select>
                                     @error('id_ruangan')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <input type="text" class="form-control @error('prodi') is-invalid @enderror"
-                                        name="prodi" id="prodi" placeholder="Prodi" required
-                                        value="{{ $pesananedt->prodi }}">
+                                <div class="col mb-3">
                                     <label for="prodi">Prodi</label>
-                                    <option value="" selected disabled hidden>Pilih Jam</option>
+                                    <select name="prodi" id="prodi"
+                                        class="form-select @error('prodi') is-invalid @enderror" data-width=100% required>
+                                        <option value="" selected disabled hidden>Pilih Prodi</option>
+                                        @foreach ($prodis as $prodi)
+                                        <option value="{{ $prodi->kode }}"
+                                            {{ $pesananedt->prodi == $prodi->kode ? 'selected' : '' }}>
+                                            {{ $prodi->nama }}</option>
+                                        @endforeach
+                                        </option>
+                                    </select>
                                     @error('prodi')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="col-sm-9 form-floating mb-3">
-                                    <input type="text" class="form-control @error('matakuliah') is-invalid @enderror"
-                                        name="matakuliah" id="matakuliah" placeholder="Mata Kuliah" required
-                                        value="{{ $pesananedt->matakuliah }}">
+                                <div class="col mb-3">
                                     <label for="matakuliah">Mata Kuliah</label>
+                                    <select name="matakuliah" id="matakuliah"
+                                        class="form-select @error('matakuliah') is-invalid @enderror" data-width=100%
+                                        required>
+                                        {{-- <option value="" selected disabled hidden>Pilih Matakuliah</option> --}}
+                                    </select>                  
                                     @error('matakuliah')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
-                                <input type="hidden" name="id_dosen" id="id_dosen"
-                                    value="{{ $pesananedt->id_dosen }}">
+                                <input type="hidden" name="dosen_matkul" id="dosen_matkul" value="{{ $pesananedt->dosen_matkul }}">
+                                <input type="hidden" name="kelas" id="kelas" value="{{ $pesananedt->kelas }}">
+                                <input type="hidden" name="id_pemesan" id="id_pemesan" value="{{ $pesananedt->id_pemesan }}">
                                 <input type="hidden" name="id_status" id="id_status" value="1">
                                 <div class="col-sm-9">
                                     <p class="reg-room-info">*Pembookingan ruangan akan diproses paling lama 1*24 Jam</p>
                                 </div>
                                 <div class="mb-3 me-3 px-5 text-end">
+                                    <a href="" class="btn text-white me-5  reg-room-button fw-bold">Batal</a>
                                     <button type="submit" class="btn text-white me-5  reg-room-button fw-bold">Update
                                         Data</button>
                                 </div>
@@ -315,6 +323,7 @@ function bulanIndo($hariInggris)
                                             <th scope="col">Waktu Pakai</th>
                                             <th scope="col">Prodi</th>
                                             <th scope="col">Mata Kuliah</th>
+                                            <th scope="col">Kelas</th>
                                             <th scope="col">Dosen</th>
                                             <th scope="col">Status</th>
                                             @if (auth()->user()->level == 'admin')
@@ -335,9 +344,10 @@ function bulanIndo($hariInggris)
                                                     ({{ date('h:i', strtotime($pesanan->jam_masuk)) }} -
                                                     {{ date('h:i', strtotime($pesanan->jam_keluar)) }})
                                                 </td>
-                                                <td class="text-nowrap">{{ $pesanan->prodi }}</td>
+                                                <td class="text-nowrap">{{ $pesanan->Prodi->nama }}</td>
                                                 <td class="text-wrap">{{ $pesanan->matakuliah }}</td>
-                                                <td class="text-wrap">{{ $pesanan->User->name }}</td>
+                                                <td class="text-wrap">{{ $pesanan->kelas }}</td>
+                                                <td class="text-wrap">{{ $pesanan->dosen_matkul }}</td>
                                                 @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi')
                                                     <td class="fw-bold text-warning text-nowrap">
                                                         {{ $pesanan->Status->keterangan }}</td>
@@ -354,7 +364,7 @@ function bulanIndo($hariInggris)
 
                                                 @if (auth()->user()->level == 'admin')
                                                     <td class="text-nowrap">
-                                                        {{ date('d/m/y h:i:s', strtotime($pesanan->created_at)) }}</td>
+                                                        {{ date('d/m/y h:i:s', strtotime($pesanan->updated_at)) }}</td>
                                                 @endif
 
                                                 @if (auth()->user()->level == 'dosen')
@@ -453,6 +463,7 @@ function bulanIndo($hariInggris)
                                                 <th scope="col">Waktu Pakai</th>
                                                 <th scope="col">Prodi</th>
                                                 <th scope="col">Mata Kuliah</th>
+                                                <th scope="col">kelas</th>
                                                 <th scope="col">Dosen</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Opsi</th>
@@ -470,9 +481,10 @@ function bulanIndo($hariInggris)
                                                         ({{ date('h:i', strtotime($jadwal->jam_masuk)) }} -
                                                         {{ date('h:i', strtotime($jadwal->jam_keluar)) }})
                                                     </td>
-                                                    <td class="text-nowrap">{{ $jadwal->prodi }}</td>
+                                                    <td class="text-nowrap">{{ $jadwal->Prodi->nama }}</td>
                                                     <td class="text-wrap">{{ $jadwal->matakuliah }}</td>
-                                                    <td class="text-wrap">{{ $jadwal->User->name }}</td>
+                                                    <td class="text-wrap">{{ $jadwal->kelas }}</td>
+                                                    <td class="text-wrap">{{ $jadwal->dosen_matkul }}</td>
                                                     @if ($jadwal->Status->keterangan == 'Menunggu Konfirmasi')
                                                         <td class="fw-bold text-warning text-nowrap">
                                                             {{ $jadwal->Status->keterangan }}</td>
@@ -515,10 +527,6 @@ function bulanIndo($hariInggris)
                 @endif
             </div>
         </div>
-
-    </div>
-    </div>
-    </div>
     </div>
 @endsection
 

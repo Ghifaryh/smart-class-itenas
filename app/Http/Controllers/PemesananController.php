@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jam;
+use App\Models\Prodi;
 use App\Models\Jadwal;
 use App\Models\Ruangan;
 use App\Models\Pemesanan;
@@ -29,10 +30,10 @@ class PemesananController extends Controller
             'id_status' => ['required']
         ]);
         
-        dd($request);
-        // Pemesanan::create($validatedData);
+        // dd($request);
+        Pemesanan::create($validatedData);
 
-        // return redirect('/dashboard')->with('success', 'Data pemesanan berhasil diinput!');
+        return redirect('/dashboard')->with('success', 'Data pemesanan berhasil diinput!');
     }
 
     public function hapusket($id)
@@ -58,15 +59,15 @@ class PemesananController extends Controller
 
         $data = [
             'id_pemesanan' => $pesanan->id,
+            'id_ruangan' => $pesanan->id_ruangan,
+            'id_pemesan' => $pesanan->id_pemesan,
             'tanggal_pinjam' => $pesanan->tanggal_pinjam,
             'jam_masuk' => $pesanan->jam_masuk,
             'jam_keluar' => $pesanan->jam_keluar,
-            'id_ruangan' => $pesanan->id_ruangan,
             'prodi' => $pesanan->prodi,
             'matakuliah' => $pesanan->matakuliah,
-            'dosen_matkul' => $pesanan->dosen_matkul,
             'kelas' => $pesanan->kelas,
-            'id_pemesan' => $pesanan->id_pemesan,
+            'dosen_matkul' => $pesanan->dosen_matkul,
             'id_status' => 2
 
         ];
@@ -100,7 +101,7 @@ class PemesananController extends Controller
 
         $pesananedt = Pemesanan::findorfail($id);
         if (auth()->user()->level == 'dosen') {
-            $pesanan = Pemesanan::where('id_dosen', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
+            $pesanan = Pemesanan::where('id_pemesan', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
         } else {
             $pesanan = Pemesanan::all();
         }
@@ -114,7 +115,8 @@ class PemesananController extends Controller
             'ruangan' => Ruangan::all(),
             'jam' => Jam::all(),
             'pesanans' => $pesanan,
-            'jadwals' => Jadwal::all()
+            'jadwals' => Jadwal::all(),
+            'prodis' => Prodi::all(),
         ]);
     }
 
@@ -123,24 +125,28 @@ class PemesananController extends Controller
         $pesanan = Pemesanan::findorfail($id);
 
         $this->validate($request, [
-            'id_ruangan' => ['required'],
-            'id_dosen' => ['required'],
             'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
             'jam_masuk' => ['required'],
             'jam_keluar' => ['required','after:jam_masuk'],
+            'id_ruangan' => ['required'],
             'prodi' => ['required'],
             'matakuliah' => ['required'],
+            'dosen_matkul' => ['required'],
+            'kelas' => ['required'],
+            'id_pemesan' => ['required'],
             'id_status' => ['required']
         ]);
 
         $pesanan->update([
-            'id_ruangan' => $request->id_ruangan,
-            'id_dosen' => $request->id_dosen,
-            'tanggal_pinjam' => $request->tanggal_pinjam,
-            'jam_masuk' => $request->jam_masuk,
-            'jam_keluar' => $request->jam_keluar,
-            'prodi' => $request->prodi,
-            'matakuliah' => $request->matakuliah,
+            'id_ruangan' => $pesanan->id_ruangan,
+            'id_pemesan' => $pesanan->id_pemesan,
+            'tanggal_pinjam' => $pesanan->tanggal_pinjam,
+            'jam_masuk' => $pesanan->jam_masuk,
+            'jam_keluar' => $pesanan->jam_keluar,
+            'prodi' => $pesanan->prodi,
+            'matakuliah' => $pesanan->matakuliah,
+            'kelas' => $pesanan->kelas,
+            'dosen_matkul' => $pesanan->dosen_matkul,
             'id_status' => $request->id_status,
         ]);
 

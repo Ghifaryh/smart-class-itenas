@@ -16,11 +16,11 @@ class DashboardController extends Controller
 {
     public function index()
     {   
-        $date = Carbon::now()->format('Y-m-d');
-        $date = Carbon::now()->format('Y-m-d');
+        $datenow = Carbon::now()->format('Y-m-d');
+        // $date = Carbon::now()->format('Y-m-d');
         
         if (auth()->user()->level == 'dosen') {
-            $pesanan = Pemesanan::where('id_dosen', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
+            $pesanan = Pemesanan::where('id_pemesan', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
         } else {
             $pesanan = Pemesanan::all();
         }
@@ -35,6 +35,7 @@ class DashboardController extends Controller
             'pesanans' => $pesanan,
             'jadwals' => Jadwal::all(),
             'prodis' => Prodi::all(),
+
         ]);
     }
 

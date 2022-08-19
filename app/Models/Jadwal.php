@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Prodi;
 use App\Models\Status;
 use App\Models\Ruangan;
 use App\Models\Pemesanan;
@@ -33,5 +34,10 @@ class Jadwal extends Model
     public function pemesanan()
     {
         return $this->belongsTo(Pemesanan::class, 'id_pemesanan');
+    }
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class, 'prodi');
     }
 }
