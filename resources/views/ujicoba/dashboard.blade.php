@@ -718,6 +718,26 @@ function bulanIndo($hariInggris)
                 });
             });
 
+            // Submit Swall
+            // $('#submitPesan').click(function() {
+            $('#submitPesan').on("click", function() {
+                swal({
+                        title: "Apakah form pemesanan sudah sesuai?",
+                        text: "Jika sudah sesuai maka akan segera diproses oleh admin.",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Pemesanan berhasil!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("Ok.");
+                        }
+                    });
+            });
 
         });
 
