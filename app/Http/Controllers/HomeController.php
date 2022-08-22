@@ -29,7 +29,7 @@ class HomeController extends Controller
             "jdwlrgn4" => Jadwal::where('id_ruangan', '=', 4)->where('tanggal_pinjam', '>=', $date)->get(),
             "jdwlrgn5" => Jadwal::where('id_ruangan', '=', 5)->where('tanggal_pinjam', '>=', $date)->get(),
             "jdwlrgn6" => Jadwal::where('id_ruangan', '=', 6)->where('tanggal_pinjam', '>=', $date)->get(),
-            "ruangans" => Ruangan::all(),
+            "ruangan" => Ruangan::count(),
         ]);
     }
 }
