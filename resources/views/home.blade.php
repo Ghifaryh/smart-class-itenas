@@ -95,16 +95,18 @@ function bulanIndo($hariInggris)
                 <input type="text" id="searchHome" placeholder="Cari Matakuliah/Dosen/prodi" class="my-3 py-2">
 
                 @foreach ($ruangans as $ruangan)
-                <div class="container r-wrapper">
+                    <input type="hidden" name="banyakRuangan" id="banyakRuangan" value="{{ $num++ }}">
+                @endforeach
+                <div class="container r-wrapper" id="tables">
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable1()">Ruangan 1</button> --}}
-                    <i class="fa-solid fa-minus" id="icon-btn-shtable{{ $num++ }}"></i> <span class="fw-bold btn-shtable"
-                        onclick="showTable{{ $num++ }}()">
-                        Ruangan {{ $num++ }}
+                    <i class="fa-solid fa-minus" id="icon-btn-shtable1"></i> <span class="fw-bold btn-shtable"
+                        onclick="showTable1()" id="ruangan1">
+                        Ruangan 1
                     </span>
                     {{-- <p class="fw-bold btn-shtable" onclick="showTable1()">Ruangan 1</p> --}}
                     <div class="table-responsive">
                         {{-- <table class="table sh-table" id="table1"> --}}
-                        <table class="table" id="table{{ $num++ }}">
+                        <table class="table" id="table1">
                             <thead class="bg-light text-center">
                                 <tr>
                                     <th scope="col">No</th>
@@ -115,27 +117,26 @@ function bulanIndo($hariInggris)
                                     {{-- <th scope="col">Status</th> --}}
                                 </tr>
                             </thead>
-                            <tbody class="text-center align-middle" id="myTable{{ $num++ }}">
-                                @foreach ($jdwlrgn{ $num++ } as $rg{ $num++ })
+                            <tbody class="text-center align-middle" id="myTable1">
+                                @foreach ($jdwlrgn1 as $rg1)
                                     <tr>
-                                        <th scope="row">{{ $num{ $num++ }++ }}</th>
+                                        <th scope="row">{{ $num1++ }}</th>
                                         <td class="text-nowrap">
-                                            {{ hariIndo(date('l', strtotime($rg{ $num++ }->tanggal_pinjam))) }},
-                                            {{ date('d', strtotime($rg{ $num++ }->tanggal_pinjam)) }}
-                                            {{ bulanIndo(date('M', strtotime($rg{ $num++ }->tanggal_pinjam))) }} <br>
-                                            ({{ date('H:i', strtotime($rg{ $num++ }->jam_masuk)) }} -
-                                            {{ date('H:i', strtotime($rg{ $num++ }->jam_keluar)) }})
+                                            {{ hariIndo(date('l', strtotime($rg1->tanggal_pinjam))) }},
+                                            {{ date('d', strtotime($rg1->tanggal_pinjam)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg1->tanggal_pinjam))) }} <br>
+                                            ({{ date('H:i', strtotime($rg1->jam_masuk)) }} -
+                                            {{ date('H:i', strtotime($rg1->jam_keluar)) }})
                                         </td>
-                                        <td class="text-wrap">{{ $rg{ $num++ }->Prodi->nama }}</td>
-                                        <td class="text-wrap">{{ $rg{ $num++ }->matakuliah }}</td>
-                                        <td class="text-wrap">{{ $rg{ $num++ }->dosen_matkul }}</td>
+                                        <td class="text-wrap">{{ $rg1->Prodi->nama }}</td>
+                                        <td class="text-wrap">{{ $rg1->matakuliah }}</td>
+                                        <td class="text-wrap">{{ $rg1->dosen_matkul }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                </div>    
-                @endforeach
+                </div>
                 {{-- <div class="container r-wrapper">
                     <i class="fa-solid fa-minus" id="icon-btn-shtable1"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable1()">
@@ -408,6 +409,16 @@ function bulanIndo($hariInggris)
 
                 $(".btn-shtable").prop("onclick", null);
             }
+        });
+
+        $(document).ready(function() {
+            $("#ruangan1").click(function({
+                var banyakRuangan = $("#banyakRuangan").val();
+                console.log(banyakRuangan);
+                // for (var i = 0; i < banyakRuangan; i++) {
+                //     console.log(i);
+                // }
+            }))
         });
 
         $(document).ready(function() {
