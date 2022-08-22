@@ -177,6 +177,12 @@ function bulanIndo($hariInggris)
                                     </div>
                                 @enderror
                             </div>
+                            <div class="col mb-3">
+                                <label for="fileRPS" class="form-label">Input RPS</label>
+                                <input class="form-control" type="file" id="fileRPS">
+                            </div>
+
+
                             <input type="hidden" name="tanggal_pinjam" id="tanggal_pinjam">
                             <input type="hidden" name="dosen_matkul" id="dosen_matkul">
                             <input type="hidden" name="kelas" id="kelas">
