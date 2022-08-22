@@ -134,7 +134,7 @@
                 e.preventDefault();
                 var url = '{{ url('truangan') }}';
                 var nama = $("#nama").val();
-                var fasilitas = $("#jam_masuk").val();
+                var fasilitas = $("#fasilitas").val();
                 swal({
                         title: "Peringatan!",
                         text: "Apakah form tambah ruangan sudah sesuai?",

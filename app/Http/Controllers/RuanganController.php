@@ -73,6 +73,7 @@ class RuanganController extends Controller
             'nama' => $request->nama,
             'fasilitas' => $request->fasilitas,
         ]);
+        
         Alert::success('Success','Data ruangan berhasil diupdate');
         return redirect('/truangan');
     }
