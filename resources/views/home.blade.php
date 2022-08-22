@@ -90,12 +90,14 @@ function bulanIndo($hariInggris)
                     </span> --}}
                 </p>
             </div>
-            <div class="row">
+            <div class="row ruangan">
                 <h2 class="content-title text-center mt-3"> List Ruangan</h2>
                 <input type="text" id="searchHome" placeholder="Cari Matakuliah/Dosen/prodi" class="my-3 py-2">
 
                 <input type="hidden" name="banyakRuangan" id="banyakRuangan" value="{{ $ruangan }}">
+
                 <div class="container r-wrapper" id="tables">
+
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable1()">Ruangan 1</button> --}}
                     <i class="fa-solid fa-minus" id="icon-btn-shtable1"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable1()" id="ruangan1">
@@ -409,9 +411,51 @@ function bulanIndo($hariInggris)
             }
         });
 
+        // TableLoop
         $(document).ready(function() {
+
             var banyakRuangan = $("#banyakRuangan").val();
-            console.log(banyakRuangan);
+            for (var i = 1; i <= banyakRuangan; i++) {
+                // console.log(i);
+                // var autoRuangan = '<div class="container r-wrapper" id="tables"> <
+                // i class = "fa-solid fa-minus"
+                // id = "icon-btn-shtable' + i + ' " > < /i><span class="fw-bold btn-shtable"
+                // onclick = "showTable'+i+'()"
+                // id = "ruangan'+i+'" >
+                //     Ruangan '+i+' <
+                //     /span>';
+                var autoRuangan;
+                autoRuangan = `<div class="container r-wrapper" id="tables">` +
+                    `<i class="fa-solid fa-minus" id="icon-btn-shtable` + i + `"></i>` +
+                    `<span class="fw-bold btn-shtable"onclick="showTable` + i + `()" id="ruangan ` + i +
+                    `"> Ruangan ` + i + ` </span>` +
+                    `<div class="table-responsive">` +
+                    `<table class="table" id="table` + i + `">` +
+                    `<thead class="bg-light text-center">` +
+                    ` <tr>` +
+                    `<th scope="col">No</th>` +
+                    `<th scope="col">Jam Pakai</th>` +
+                    `<th scope="col">Prodi</th>` +
+                    `<th scope="col" class="text-nowrap">Mata Kuliah</th>` +
+                    `<th scope="col">Dosen</th>` +
+                    `</tr>` +
+                    `</thead>` +
+                    `<tbody class="text-center align-middle" id="myTable` + i + `"> `;
+
+
+                // var html = '<div class="freeze"></div>' +
+                //     '<div class="parent">' +
+                //     '<div class="loadimg"></div>' +
+                //     '<div class="header"></div>' +
+                //     '<div class="msg"></div>' +
+                //     '</div>';
+
+
+                // $("#tables").clone().appendTo(".ruangan");
+                $("#tables").append(autoRuangan);
+
+
+            }
         });
 
         $(document).ready(function() {
