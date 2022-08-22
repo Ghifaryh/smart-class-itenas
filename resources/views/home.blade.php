@@ -94,9 +94,7 @@ function bulanIndo($hariInggris)
                 <h2 class="content-title text-center mt-3"> List Ruangan</h2>
                 <input type="text" id="searchHome" placeholder="Cari Matakuliah/Dosen/prodi" class="my-3 py-2">
 
-                @foreach ($ruangans as $ruangan)
-                    <input type="hidden" name="banyakRuangan" id="banyakRuangan" value="{{ $num++ }}">
-                @endforeach
+                <input type="hidden" name="banyakRuangan" id="banyakRuangan" value="{{ $ruangan }}">
                 <div class="container r-wrapper" id="tables">
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable1()">Ruangan 1</button> --}}
                     <i class="fa-solid fa-minus" id="icon-btn-shtable1"></i> <span class="fw-bold btn-shtable"
@@ -412,13 +410,8 @@ function bulanIndo($hariInggris)
         });
 
         $(document).ready(function() {
-            $("#ruangan1").click(function({
-                var banyakRuangan = $("#banyakRuangan").val();
-                console.log(banyakRuangan);
-                // for (var i = 0; i < banyakRuangan; i++) {
-                //     console.log(i);
-                // }
-            }))
+            var banyakRuangan = $("#banyakRuangan").val();
+            console.log(banyakRuangan);
         });
 
         $(document).ready(function() {
