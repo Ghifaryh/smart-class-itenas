@@ -40,9 +40,9 @@ class RuanganSeeder extends Seeder
             'fasilitas' => 'AC, Proyektor, kursi, meja',
         ]);
 
-        Ruangan::create([
-            'nama' => 'Ruangan 6',
-            'fasilitas' => 'AC, Proyektor, kursi, meja',
-        ]);
+        // Ruangan::create([
+        //     'nama' => 'Ruangan 6',
+        //     'fasilitas' => 'AC, Proyektor, kursi, meja',
+        // ]);
     }
 }

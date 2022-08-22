@@ -133,11 +133,11 @@
             $("#submitRuangan").submit(function(e){
                 e.preventDefault();
                 var url = '{{ url('truangan') }}';
-                var tanggal_pinjam = $("#nama").val();
-                var jam_masuk = $("#jam_masuk").val();
+                var nama = $("#nama").val();
+                var fasilitas = $("#jam_masuk").val();
                 swal({
-                        title: "Apakah form tambah ruangan sudah sesuai?",
-                        text: "Jika sudah sesuai maka akan segera diproses oleh admin.",
+                        title: "Peringatan!",
+                        text: "Apakah form tambah ruangan sudah sesuai?",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,
@@ -148,16 +148,8 @@
                             method:'POST',
                             url:url,
                             data:{
-                                    tanggal_pinjam:tanggal_pinjam, 
-                                    jam_masuk:jam_masuk,
-                                    jam_keluar:jam_keluar,
-                                    prodi:prodi,
-                                    kelas:kelas,
-                                    matakuliah:matakuliah,
-                                    dosen_matkul:dosen_matkul,
-                                    id_ruangan:id_ruangan,
-                                    id_pemesan:id_pemesan,
-                                    id_status:id_status,
+                                    nama:nama, 
+                                    fasilitas:fasilitas,
                                     },
                             success:function(response){
                                 if(response.success){

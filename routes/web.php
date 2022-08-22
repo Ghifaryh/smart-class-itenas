@@ -50,8 +50,8 @@ Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     // Route::post('/dashboard', [PemesananController::class, 'daftar']);   
     Route::post('/dashboard', [PemesananController::class, 'ajaxRequestPost']);   
     Route::post('/dashboard/hapusketpemesanan/{id}', [PemesananController::class, 'hapusket']);
-    Route::post('/dashboard/edit/{id}', [PemesananController::class, 'edit']);
-    Route::post('/dashboard/update/{id}', [PemesananController::class, 'update']);
+    // Route::post('/dashboard/edit/{id}', [PemesananController::class, 'edit']);
+    // Route::post('/dashboard/update/{id}', [PemesananController::class, 'update']);
     
 });
 
@@ -62,7 +62,8 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::delete('/dashboard/hapusjadwal/{id}', [JadwalController::class, 'destroy']);
     Route::delete('/dashboard/hapuspemesanan/{id}', [PemesananController::class, 'destroy']);
     Route::get('/truangan', [RuanganController::class, 'index']);
-    Route::post('/truangan', [RuanganController::class, 'tambah']);
+    // Route::post('/truangan', [RuanganController::class, 'tambah']);
+    Route::post('/truangan', [RuanganController::class, 'ajaxRequestRuangan']);
     Route::post('/truangan/{id}', [RuanganController::class, 'edit']);
     Route::post('/truangan/update/{id}', [RuanganController::class, 'update']);
     Route::delete('/truangan/{id}', [RuanganController::class, 'destroy']);

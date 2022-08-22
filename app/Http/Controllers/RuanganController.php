@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreRuanganRequest;
 use App\Http\Requests\UpdateRuanganRequest;
 
@@ -31,7 +32,7 @@ class RuanganController extends Controller
         return redirect('/truangan')->with('success', 'Data ruangan berhasil ditambahkan!');
     }
 
-    public function ajaxRequestPost(Request $request)
+    public function ajaxRequestRuangan(Request $request)
     {
         $validatedData = $request->validate([
             'nama' => ['required'],
@@ -72,16 +73,14 @@ class RuanganController extends Controller
             'nama' => $request->nama,
             'fasilitas' => $request->fasilitas,
         ]);
-
-        // $ruangan->update($request->all());
-    
-        return redirect('/truangan')->with('success', 'Data ruangan berhasil diupdate!');
+        Alert::success('Success','Data ruangan berhasil diupdate');
+        return redirect('/truangan');
     }
 
     public function destroy($id)
     {
         Ruangan::destroy($id);
-
-        return redirect('/truangan')->with('success', 'Data ruangan berhasil dihapus!');
+        Alert::success('Success','Data ruangan berhasil dihapus');
+        return redirect('/truangan');
     }
 }

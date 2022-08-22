@@ -65,7 +65,9 @@ class PemesananController extends Controller
     {
         Pemesanan::where('id', $id)->update(['id_status' => 4]);
 
-        return redirect('/dashboard')->with('succes', 'Data pemesanan berhasil dihapus!');
+        Alert::success('Success','Data pemesanan berhasil dihapus');
+
+        return redirect('/dashboard');
     }
 
     public function destroy($id)
@@ -73,7 +75,7 @@ class PemesananController extends Controller
         Pemesanan::destroy($id);
         Jadwal::where('id_pemesanan', $id)->delete();
 
-        Alert::toast('Data pemesanan berhasil dihapus', 'success');
+        Alert::success('Success','Data pemesanan berhasil dihapus');
 
         return redirect('/dashboard')->with('success', 'Data pemesanan berhasil dihapus!');
     }
@@ -103,10 +105,12 @@ class PemesananController extends Controller
         if ($check === null) {
             Jadwal::create($data);
             Pemesanan::where('id', $id)->update(['id_status' => 2]);
-            return redirect('/dashboard')->with('success', 'Data pemesanan diterima!');
+            Alert::success('Success','Jadwal diterima');
+            return redirect('/dashboard');
         } else {
             Pemesanan::where('id', $id)->update(['id_status' => 2]);
-            return redirect('/dashboard')->with('success', 'Data pemesanan diterima!');
+            Alert::success('Success','Jadwal diterima');
+            return redirect('/dashboard');
         }
     }
 
@@ -114,14 +118,16 @@ class PemesananController extends Controller
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 3]);
-        return redirect('/dashboard')->with('success', 'Data pemesanan dibatalkan!');   
+        Alert::success('Success','Jadwal dibatalkan');
+        return redirect('/dashboard');   
     }
 
     public function cancelhapus($id)
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 5]);
-        return redirect('/dashboard')->with('success', 'Data pemesanan dibatalkan karna dihapus!');   
+        Alert::success('Success','Jadwal dibatalkan karena dihapus');
+        return redirect('/dashboard');   
     }
 
     public function edit($id)
