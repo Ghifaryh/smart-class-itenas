@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DateTime;
 use DateTimeZone;
 use App\Models\Jadwal;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -28,7 +29,7 @@ class HomeController extends Controller
             "jdwlrgn4" => Jadwal::where('id_ruangan', '=', 4)->where('tanggal_pinjam', '>=', $date)->get(),
             "jdwlrgn5" => Jadwal::where('id_ruangan', '=', 5)->where('tanggal_pinjam', '>=', $date)->get(),
             "jdwlrgn6" => Jadwal::where('id_ruangan', '=', 6)->where('tanggal_pinjam', '>=', $date)->get(),
-            
+            "ruangans" => Ruangan::all(),
         ]);
     }
 }

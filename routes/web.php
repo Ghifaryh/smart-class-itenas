@@ -47,8 +47,8 @@ Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/get-matkul/{semester}/{prodi}', [DashboardController::class, 'getMatkul']);
     Route::get('/dosen-matkul/{semester}/{prodi}/{kode_matkul}/{kelas}', [DashboardController::class, 'getDosenMatkul']);
-    // Route::post('/dashboard', [PemesananController::class, 'daftar']);   
-    Route::post('/dashboard', [PemesananController::class, 'ajaxRequestPost']);   
+    Route::post('/dashboard', [PemesananController::class, 'daftar']);   
+    // Route::post('/dashboard', [PemesananController::class, 'ajaxRequestPost']);   
     Route::post('/dashboard/hapusketpemesanan/{id}', [PemesananController::class, 'hapusket']);
     // Route::post('/dashboard/edit/{id}', [PemesananController::class, 'edit']);
     // Route::post('/dashboard/update/{id}', [PemesananController::class, 'update']);

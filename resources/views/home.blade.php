@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @php
+$num = 1;
 $num1 = 1;
 $num2 = 1;
 $num3 = 1;
@@ -92,16 +93,18 @@ function bulanIndo($hariInggris)
             <div class="row">
                 <h2 class="content-title text-center mt-3"> List Ruangan</h2>
                 <input type="text" id="searchHome" placeholder="Cari Matakuliah/Dosen/prodi" class="my-3 py-2">
+
+                @foreach ($ruangans as $ruangan)
                 <div class="container r-wrapper">
                     {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable1()">Ruangan 1</button> --}}
-                    <i class="fa-solid fa-minus" id="icon-btn-shtable1"></i> <span class="fw-bold btn-shtable"
-                        onclick="showTable1()">
-                        Ruangan 1
+                    <i class="fa-solid fa-minus" id="icon-btn-shtable{{ $num++ }}"></i> <span class="fw-bold btn-shtable"
+                        onclick="showTable{{ $num++ }}()">
+                        Ruangan {{ $num++ }}
                     </span>
                     {{-- <p class="fw-bold btn-shtable" onclick="showTable1()">Ruangan 1</p> --}}
                     <div class="table-responsive">
                         {{-- <table class="table sh-table" id="table1"> --}}
-                        <table class="table" id="table1">
+                        <table class="table" id="table{{ $num++ }}">
                             <thead class="bg-light text-center">
                                 <tr>
                                     <th scope="col">No</th>
@@ -110,6 +113,43 @@ function bulanIndo($hariInggris)
                                     <th scope="col" class="text-nowrap">Mata Kuliah</th>
                                     <th scope="col">Dosen</th>
                                     {{-- <th scope="col">Status</th> --}}
+                                </tr>
+                            </thead>
+                            <tbody class="text-center align-middle" id="myTable{{ $num++ }}">
+                                @foreach ($jdwlrgn{ $num++ } as $rg{ $num++ })
+                                    <tr>
+                                        <th scope="row">{{ $num{ $num++ }++ }}</th>
+                                        <td class="text-nowrap">
+                                            {{ hariIndo(date('l', strtotime($rg{ $num++ }->tanggal_pinjam))) }},
+                                            {{ date('d', strtotime($rg{ $num++ }->tanggal_pinjam)) }}
+                                            {{ bulanIndo(date('M', strtotime($rg{ $num++ }->tanggal_pinjam))) }} <br>
+                                            ({{ date('H:i', strtotime($rg{ $num++ }->jam_masuk)) }} -
+                                            {{ date('H:i', strtotime($rg{ $num++ }->jam_keluar)) }})
+                                        </td>
+                                        <td class="text-wrap">{{ $rg{ $num++ }->Prodi->nama }}</td>
+                                        <td class="text-wrap">{{ $rg{ $num++ }->matakuliah }}</td>
+                                        <td class="text-wrap">{{ $rg{ $num++ }->dosen_matkul }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>    
+                @endforeach
+                {{-- <div class="container r-wrapper">
+                    <i class="fa-solid fa-minus" id="icon-btn-shtable1"></i> <span class="fw-bold btn-shtable"
+                        onclick="showTable1()">
+                        Ruangan 1
+                    </span>
+                    <div class="table-responsive">
+                        <table class="table" id="table1">
+                            <thead class="bg-light text-center">
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Jam Pakai</th>
+                                    <th scope="col">Prodi</th>
+                                    <th scope="col" class="text-nowrap">Mata Kuliah</th>
+                                    <th scope="col">Dosen</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center align-middle" id="myTable1">
@@ -131,15 +171,13 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="container r-wrapper">
-                    {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable2()">Ruangan 2</button> --}}
+                {{-- <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable2"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable2()">
                         Ruangan 2
                     </span>
-                    {{-- <p class="fw-bold btn-shtable" onclick="showTable2()">Ruangan 2</p> --}}
                     <div class="table-responsive">
                         <table class="table sh-table" id="table2">
                             <thead class="bg-light text-center">
@@ -170,9 +208,9 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="container r-wrapper">
+                {{-- <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable3"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable3()">
                         Ruangan 3
@@ -207,9 +245,9 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="container r-wrapper">
+                {{-- <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable4"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable4()">
                         Ruangan 4
@@ -244,9 +282,9 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="container r-wrapper">
+                {{-- <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable5"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable5()">
                         Ruangan 5
@@ -281,7 +319,7 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable6"></i> <span class="fw-bold btn-shtable"

@@ -18,6 +18,8 @@ class PemesananController extends Controller
 {
     public function daftar(Request $request)
     {
+        return ([$request->file('fileRPS')->store('File-RPS'),$request->file('sertifikat')->store('File-Sertif')]);
+
         $validatedData = $request->validate([
             'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
             'jam_masuk' => ['required'],
@@ -31,34 +33,35 @@ class PemesananController extends Controller
             'id_status' => ['required']
         ]);
         
-        // dd($request);
+        // ddd($request);
         Pemesanan::create($validatedData);
-
+        
         return redirect('/dashboard')->with('success', 'Data pemesanan berhasil diinput!');
     }
 
     public function ajaxRequestPost(Request $request)
     {
-        $validatedData = $request->validate([
-            'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
-            'jam_masuk' => ['required'],
-            'jam_keluar' => ['required','after:jam_masuk'],
-            'id_ruangan' => ['required'],
-            'prodi' => ['required'],
-            'matakuliah' => ['required'],
-            'dosen_matkul' => ['required'],
-            'kelas' => ['required'],
-            'id_pemesan' => ['required'],
-            'id_status' => ['required']
-        ]);
+        dd($request);
+
+        // $validatedData = $request->validate([
+        //     'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
+        //     'jam_masuk' => ['required'],
+        //     'jam_keluar' => ['required','after:jam_masuk'],
+        //     'id_ruangan' => ['required'],
+        //     'prodi' => ['required'],
+        //     'matakuliah' => ['required'],
+        //     'dosen_matkul' => ['required'],
+        //     'kelas' => ['required'],
+        //     'id_pemesan' => ['required'],
+        //     'id_status' => ['required']
+        // ]);
         
-        // dd($request);
-        Pemesanan::create($validatedData);
-        return response()->json(
-            [
-                'success' => true,
-            ]
-        );
+        // Pemesanan::create($validatedData);
+        // return response()->json(
+        //     [
+        //         'success' => true,
+        //     ]
+        // );
     }
 
     public function hapusKet($id)
