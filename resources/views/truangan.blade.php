@@ -27,7 +27,7 @@
                                 aria-label="Close"></button>
                         </div>
                     @endif
-                    <form action="/truangan" method="post" class="formAddRuangan">
+                    <form action="" method="" class="formAddRuangan" id="submitRuangan">
                         @csrf
                         <div class="col-sm-9 form-floating mb-3">
                             <input type="text" name="nama" id="nama" placeholder="Nama Ruangan"
@@ -121,3 +121,66 @@
         </div>
     </div>
 @endsection
+
+@push('scriptsTruangan')
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            $("#submitRuangan").submit(function(e){
+                e.preventDefault();
+                var url = '{{ url('truangan') }}';
+                var tanggal_pinjam = $("#nama").val();
+                var jam_masuk = $("#jam_masuk").val();
+                swal({
+                        title: "Apakah form tambah ruangan sudah sesuai?",
+                        text: "Jika sudah sesuai maka akan segera diproses oleh admin.",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                            method:'POST',
+                            url:url,
+                            data:{
+                                    tanggal_pinjam:tanggal_pinjam, 
+                                    jam_masuk:jam_masuk,
+                                    jam_keluar:jam_keluar,
+                                    prodi:prodi,
+                                    kelas:kelas,
+                                    matakuliah:matakuliah,
+                                    dosen_matkul:dosen_matkul,
+                                    id_ruangan:id_ruangan,
+                                    id_pemesan:id_pemesan,
+                                    id_status:id_status,
+                                    },
+                            success:function(response){
+                                if(response.success){
+                                    swal("Pemesanan berhasil!", {
+                                    icon: "success",
+                                    }).then(function(){
+                                        location.reload();
+                                        // window.location = window.location.href;
+                                    })
+                                    ;
+                                }else{
+                                    swal("Pemesanan gagal!", {
+                                    icon: "error",
+                                    });
+                                }
+                            },
+                            error:function(error){
+                                console.log(error)
+                            }
+                            });
+                        }
+                    });
+            });
+        });
+    </script>
+@endpush

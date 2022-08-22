@@ -82,7 +82,8 @@ function bulanIndo($hariInggris)
                             </div>
                         @endif
 
-                        <form action="/dashboard" method="post" class="reg-room-form">
+                        {{-- <form action="/dashboard" method="post" class="reg-room-form"> --}}
+                        <form action="" class="reg-room-form" id="submitPesan">
                             @csrf
                             <div class="col mb-3">
                                 <label for="tanggal_input">Tanggal Peminjaman</label>
@@ -382,7 +383,7 @@ function bulanIndo($hariInggris)
                                                                     onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
                                                             </form>
                                                         @endif --}}
-                                                        <form action="/dashboard/hapus/{{ $pesanan->id }}"
+                                                        <form action="/dashboard/hapusketpemesanan/{{ $pesanan->id }}"
                                                             method="post">
                                                             @csrf
                                                             <button class="badge bg-danger border-0"
@@ -426,10 +427,8 @@ function bulanIndo($hariInggris)
                                                                     onclick="return confirm('Apakah anda yakin untuk membatalkan jadwal?')">Batalkan</button>
                                                             </form>
                                                         @endif
-                                                        @if ($pesanan->Status->keterangan == 'Dihapus' or
-                                                            $pesanan->Status->keterangan == 'Ditolak (Dihapus)' or
-                                                            auth()->user()->level == 'admin')
-                                                            <form action="/dashboard/{{ $pesanan->id }}" method="post">
+                                                        @if (auth()->user()->level == 'admin')
+                                                            <form action="/dashboard/hapuspemesanan/{{ $pesanan->id }}" method="post">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="badge bg-danger border-0"
@@ -503,25 +502,14 @@ function bulanIndo($hariInggris)
                                                             {{ $jadwal->Status->keterangan }}</td>
                                                     @endif
 
-                                                    @if (auth()->user()->level == 'dosen')
-                                                        <td class="text-nowrap">
-                                                            <form action="/dashboard/{{ $jadwal->id }}" method="post">
-                                                                @method('delete')
-                                                                @csrf
-                                                                <button class="btn btn-danger"
-                                                                    onclick="return confirm('Apakah anda yakin?')">Hapus</button>
-                                                            </form>
-                                                        </td>
-                                                    @else
-                                                        <td>
-                                                            <form action="/dashboard/hapus/{{ $jadwal->id }}"
-                                                                method="post" class="d-block">
-                                                                @csrf
-                                                                <button class="badge bg-danger border-0"
-                                                                    onclick="return confirm('Apakah anda yakin?')">Hapus</button>
-                                                            </form>
-                                                        </td>
-                                                    @endif
+                                                    <td class="text-nowrap">
+                                                        <form action="/dashboard/hapusjadwal/{{ $jadwal->id }}" method="post">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="btn btn-danger"
+                                                                onclick="return confirm('Apakah anda yakin?')">Hapus</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             @endforeach
 
@@ -536,6 +524,11 @@ function bulanIndo($hariInggris)
 
 @push('scriptsDashboard')
     <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         // DatePicker
         $(document).ready(function() {
             $("#matakuliah").prop('disabled', true);
@@ -720,7 +713,20 @@ function bulanIndo($hariInggris)
 
             // Submit Swall
             // $('#submitPesan').click(function() {
-            $('#submitPesan').on("click", function() {
+            // $('#submitPesan').on("click", function() {
+            $("#submitPesan").submit(function(e){
+                e.preventDefault();
+                var url = '{{ url('dashboard') }}';
+                var tanggal_pinjam = $("#tanggal_pinjam").val();
+                var jam_masuk = $("#jam_masuk").val();
+                var jam_keluar = $("#jam_keluar").val();
+                var prodi = $("#prodi").val();
+                var kelas = $("#kelas").val();
+                var matakuliah = $("#matakuliah").val();
+                var dosen_matkul = $("#dosen_matkul").val();
+                var id_ruangan = $("#id_ruangan").val();
+                var id_pemesan = $("#id_pemesan").val();
+                var id_status = $("#id_status").val();
                 swal({
                         title: "Apakah form pemesanan sudah sesuai?",
                         text: "Jika sudah sesuai maka akan segera diproses oleh admin.",
@@ -730,11 +736,40 @@ function bulanIndo($hariInggris)
                     })
                     .then((willDelete) => {
                         if (willDelete) {
-                            swal("Pemesanan berhasil!", {
-                                icon: "success",
+                            $.ajax({
+                            method:'POST',
+                            url:url,
+                            data:{
+                                    tanggal_pinjam:tanggal_pinjam, 
+                                    jam_masuk:jam_masuk,
+                                    jam_keluar:jam_keluar,
+                                    prodi:prodi,
+                                    kelas:kelas,
+                                    matakuliah:matakuliah,
+                                    dosen_matkul:dosen_matkul,
+                                    id_ruangan:id_ruangan,
+                                    id_pemesan:id_pemesan,
+                                    id_status:id_status,
+                                    },
+                            success:function(response){
+                                if(response.success){
+                                    swal("Pemesanan berhasil!", {
+                                    icon: "success",
+                                    }).then(function(){
+                                        location.reload();
+                                        // window.location = window.location.href;
+                                    })
+                                    ;
+                                }else{
+                                    swal("Pemesanan gagal!", {
+                                    icon: "error",
+                                    });
+                                }
+                            },
+                            error:function(error){
+                                console.log(error)
+                            }
                             });
-                        } else {
-                            swal("Ok.");
                         }
                     });
             });
@@ -744,6 +779,9 @@ function bulanIndo($hariInggris)
         $(document).ready(function() {
             $("#jam_keluar").prop('disabled', true);
             $('#jam_masuk').on("change", function() {
+                $('#jam_keluar').append(
+                        `<option value="" selected disabled hidden>Pilih Jam Masuk</option>`
+                    );
                 $("#jam_keluar").prop('disabled', false);
                 if (!$('#jam_masuk').val()) {
                     $("#jam_keluar").prop('disabled', true);

@@ -9,6 +9,7 @@ use App\Models\Ruangan;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StorePemesananRequest;
 use App\Http\Requests\UpdatePemesananRequest;
 use Illuminate\Validation\ValidationException;
@@ -36,7 +37,31 @@ class PemesananController extends Controller
         return redirect('/dashboard')->with('success', 'Data pemesanan berhasil diinput!');
     }
 
-    public function hapusket($id)
+    public function ajaxRequestPost(Request $request)
+    {
+        $validatedData = $request->validate([
+            'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
+            'jam_masuk' => ['required'],
+            'jam_keluar' => ['required','after:jam_masuk'],
+            'id_ruangan' => ['required'],
+            'prodi' => ['required'],
+            'matakuliah' => ['required'],
+            'dosen_matkul' => ['required'],
+            'kelas' => ['required'],
+            'id_pemesan' => ['required'],
+            'id_status' => ['required']
+        ]);
+        
+        // dd($request);
+        Pemesanan::create($validatedData);
+        return response()->json(
+            [
+                'success' => true,
+            ]
+        );
+    }
+
+    public function hapusKet($id)
     {
         Pemesanan::where('id', $id)->update(['id_status' => 4]);
 
@@ -46,6 +71,9 @@ class PemesananController extends Controller
     public function destroy($id)
     {
         Pemesanan::destroy($id);
+        Jadwal::where('id_pemesanan', $id)->delete();
+
+        Alert::toast('Data pemesanan berhasil dihapus', 'success');
 
         return redirect('/dashboard')->with('success', 'Data pemesanan berhasil dihapus!');
     }

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <title>Smart Classroom Itenas | {{ $title }}</title>
 
@@ -71,6 +72,8 @@
     {{-- Dashboard Aestehtic --}}
     @stack('scriptsDashboard')
 
+    @stack('scriptsTruangan')
+
 </head>
 
 <body>
@@ -89,15 +92,18 @@
     @if ($title === 'Home' or $title === 'Login' or $title === 'Register')
         <div class="container-fluid my-3 contents-all px-5">
             @yield('container')
+            @include('sweetalert::alert')
         </div>
     @elseif ($title === 'Dashboard')
         {{-- @elseif ($title === 'Dashboard' or $title == 'Tambah Ruangan') --}}
         <div class="dashboard-wrapper-main">
             @yield('dashboard-main')
+            @include('sweetalert::alert')
         </div>
     @elseif ($title === 'Tambah Ruangan')
         <div class="truangan-wrapper-main">'
             @yield('tambah-ruangan')
+            @include('sweetalert::alert')
         </div>
     @endif
 

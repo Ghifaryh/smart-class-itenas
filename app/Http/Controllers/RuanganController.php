@@ -30,6 +30,22 @@ class RuanganController extends Controller
 
         return redirect('/truangan')->with('success', 'Data ruangan berhasil ditambahkan!');
     }
+
+    public function ajaxRequestPost(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nama' => ['required'],
+            'fasilitas' => ['required'],
+        ]);
+        
+        // dd($request);
+        Ruangan::create($validatedData);
+        return response()->json(
+            [
+                'success' => true,
+            ]
+        );
+    }
     
     public function edit($id)
     {
