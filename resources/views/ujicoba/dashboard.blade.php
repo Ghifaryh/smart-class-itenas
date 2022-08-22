@@ -346,8 +346,8 @@ function bulanIndo($hariInggris)
                                                     {{ hariIndo(date('l', strtotime($pesanan->tanggal_pinjam))) }},
                                                     {{ date('d', strtotime($pesanan->tanggal_pinjam)) }}
                                                     {{ bulanIndo(date('M', strtotime($pesanan->tanggal_pinjam))) }} <br>
-                                                    ({{ date('h:i', strtotime($pesanan->jam_masuk)) }} -
-                                                    {{ date('h:i', strtotime($pesanan->jam_keluar)) }})
+                                                    ({{ date('H:i', strtotime($pesanan->jam_masuk)) }} -
+                                                    {{ date('H:i', strtotime($pesanan->jam_keluar)) }})
                                                 </td>
                                                 <td class="text-nowrap">{{ $pesanan->Prodi->nama }}</td>
                                                 <td class="text-wrap">{{ $pesanan->matakuliah }}</td>
@@ -483,8 +483,8 @@ function bulanIndo($hariInggris)
                                                         {{ hariIndo(date('l', strtotime($jadwal->tanggal_pinjam))) }},
                                                         {{ date('d', strtotime($jadwal->tanggal_pinjam)) }}
                                                         {{ bulanIndo(date('M', strtotime($jadwal->tanggal_pinjam))) }} <br>
-                                                        ({{ date('h:i', strtotime($jadwal->jam_masuk)) }} -
-                                                        {{ date('h:i', strtotime($jadwal->jam_keluar)) }})
+                                                        ({{ date('H:i', strtotime($jadwal->jam_masuk)) }} -
+                                                        {{ date('H:i', strtotime($jadwal->jam_keluar)) }})
                                                     </td>
                                                     <td class="text-nowrap">{{ $jadwal->Prodi->nama }}</td>
                                                     <td class="text-wrap">{{ $jadwal->matakuliah }}</td>
@@ -544,7 +544,7 @@ function bulanIndo($hariInggris)
             $('#tanggal_input').datepicker({
                 dateFormat: 'dd/mm/yy'
             });
-            // $('#tanggal_input').datepicker('setDate', 'today');
+            $('#tanggal_input').datepicker('setDate', 'today');
             var tanggalSekarangFull = $('#tanggal_input').val();
             var splitTanggalSekarang = $('#tanggal_input').val().split("/");
             let tanggalSekarang = parseInt(splitTanggalSekarang[0]);

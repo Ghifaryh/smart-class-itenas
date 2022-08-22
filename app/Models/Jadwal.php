@@ -38,6 +38,6 @@ class Jadwal extends Model
 
     public function prodi()
     {
-        return $this->belongsTo(Prodi::class, 'prodi');
+        return $this->belongsTo(Prodi::class, 'prodi', 'kode');
     }
 }
