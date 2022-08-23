@@ -83,7 +83,7 @@
     <header>
         {{-- navbar --}}
         @include('partials.navbar')
-        @if ($title === 'Dashboard' or $title === 'Home' or $title === 'Tambah Ruangan')
+        @if ($title === 'Dashboard' or $title === 'Home' or $title === 'Tambah Ruangan' or $title === 'Verifikasi Akun')
             @auth
                 @include('partials.sidebardosen')
             @else
@@ -97,7 +97,7 @@
             @yield('container')
             @include('sweetalert::alert')
         </div>
-    @elseif ($title === 'Dashboard')
+    @elseif ($title === 'Dashboard' or $title === 'Verifikasi Akun')
         {{-- @elseif ($title === 'Dashboard' or $title == 'Tambah Ruangan') --}}
         <div class="dashboard-wrapper-main">
             @yield('dashboard-main')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -23,6 +24,7 @@ class LoginController extends Controller
 
         if(Auth::attemptWhen($credentials)){
             $request->session()->regenerate();
+            Alert::success('Login Berhasil','Selamat datang');
             return redirect()->intended('/dashboard');
             // if(Auth::user()->level == "dosen"){
             //     $request->session()->regenerate();
@@ -34,7 +36,8 @@ class LoginController extends Controller
             // }
         }
 
-        return back()->with('loginError', 'Login Failed!');
+        Alert::error('Login Gagal','Pastikan kode dosen dan password sudah benar!');
+        return back();
 
         // dd('berhasil login!');
         

@@ -9,6 +9,7 @@ use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\VerifAkunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,7 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::post('/truangan/{id}', [RuanganController::class, 'edit']);
     Route::post('/truangan/update/{id}', [RuanganController::class, 'update']);
     Route::delete('/truangan/{id}', [RuanganController::class, 'destroy']);
+    Route::get('/verifakun', [VerifAkunController::class, 'index']);
 
 });
 // Route::get('/statuspesan', [DashboardController::class, 'status']);

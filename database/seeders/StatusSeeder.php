@@ -34,5 +34,17 @@ class StatusSeeder extends Seeder
         Status::create([
             'keterangan' => 'Dibatalkan (Dihapus)',
         ]);
+
+        Status::create([
+            'keterangan' => 'Menunggu Verifikasi',
+        ]);
+
+        Status::create([
+            'keterangan' => 'Terverifikasi',
+        ]);
+
+        Status::create([
+            'keterangan' => 'Ditolak',
+        ]);
     }
 }

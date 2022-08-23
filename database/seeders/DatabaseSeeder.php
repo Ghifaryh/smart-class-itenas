@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             StatusSeeder::class,
             JamSeeder::class,
             ProdiSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
