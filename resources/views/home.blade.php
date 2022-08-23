@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @php
-$num = 1;
+$numton = 1;
 $num1 = 1;
 $num2 = 1;
 $num3 = 1;
@@ -61,17 +61,51 @@ function bulanIndo($hariInggris)
     }
 }
 @endphp
+@php
+    $directory = 'img/ruangan/';
+    $filecount = count(glob($directory . '*'));
+    // glob($directory . "*.{jpg,png,gif}",GLOB_BRACE)
+    // echo "There were $filecount files";
+
+    $fileSystemIterator = new FilesystemIterator('img/ruangan/');
+    $entries = [];
+    foreach ($fileSystemIterator as $fileInfo) {
+        $entries[] = $fileInfo->getFilename();
+    }
+
+    // var_dump($entries);
+    // echo implode(', ', $entries);
+
+@endphp
 
 @section('container')
     <div class="container container-sm mb-4" id="">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ $numton }}"
+                    aria-current="true" aria-label="Slide {{ $numton }}"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ $numton }}" class="active"
+                    aria-current="true" aria-label="Slide {{ $numton }}"></button>
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
                     aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5"
+                    aria-label="Slide 6"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="6"
+                    aria-label="Slide 7"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="7"
+                    aria-label="Slide 8"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="8"
+                    aria-label="Slide 9"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="9"
+                    aria-label="Slide 10"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="10"
+                    aria-label="Slide 11"></button>
             </div>
             <div class="carousel-inner">
 
@@ -83,6 +117,27 @@ function bulanIndo($hariInggris)
                 </div>
                 <div class="carousel-item">
                     <img src="img/ruangan/3.jpeg" class="d-block h-50 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ruangan/4.jpeg" class="d-block h-50 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ruangan/5.jpeg" class="d-block h-50 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ruangan/6.jpeg" class="d-block h-50 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ruangan/7.jpeg" class="d-block h-50 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ruangan/8.jpeg" class="d-block h-50 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ruangan/9.jpeg" class="d-block h-50 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ruangan/10.jpeg" class="d-block h-50 mx-auto" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -376,22 +431,6 @@ function bulanIndo($hariInggris)
 
         </div>
     </div>
-    @php
-    $directory = 'img/ruangan/';
-    $filecount = count(glob($directory . '*'));
-    // glob($directory . "*.{jpg,png,gif}",GLOB_BRACE)
-    // echo "There were $filecount files";
-
-    $fileSystemIterator = new FilesystemIterator('img/ruangan/');
-    $entries = [];
-    foreach ($fileSystemIterator as $fileInfo) {
-        $entries[] = $fileInfo->getFilename();
-    }
-
-    // var_dump($entries);
-    // echo implode(', ', $entries);
-
-    @endphp
     <input type="hidden" name="fotos" value="{{ $filecount }}" id="fotos">
     {{-- <div class="ignoreThis" data-namaFile="{{ $entries }}"></div> --}}
     <input type="hidden" name="fotoName" id="fotoName" value="{{ implode(',', $entries) }}">
