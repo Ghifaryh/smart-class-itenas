@@ -345,9 +345,53 @@ function bulanIndo($hariInggris)
 
         </div>
     </div>
+    @php
+    $directory = 'img/ruangan/';
+    $filecount = count(glob($directory . '*'));
+    // glob($directory . "*.{jpg,png,gif}",GLOB_BRACE)
+    // echo "There were $filecount files";
+
+    $fileSystemIterator = new FilesystemIterator('img/ruangan/');
+    $entries = [];
+    foreach ($fileSystemIterator as $fileInfo) {
+        $entries[] = $fileInfo->getFilename();
+    }
+
+    // var_dump($entries);
+    echo implode(', ', $entries);
+
+    @endphp
+    <input type="hidden" name="fotos" value="{{ $filecount }}" id="fotos">
+    {{-- <div class="ignoreThis" data-namaFile="{{ $entries }}"></div> --}}
+    <input type="hidden" name="fotoName" id="fotoName" value="{{ implode(',', $entries) }}">
 @endsection
 @push('scripts')
     <script>
+        $(document).ready(function() {
+            var fotos = parseInt($('#fotos').val());
+
+            var fotoName = $('#fotoName').val().split(",");
+
+            console.log(fotoName);
+            var imgs = [];
+            // var imgs = ["img/ruangan/1.jpeg"];
+            for (var i = 0; i < fotoName.length; i++) {
+                imgs.push("img/ruangan/" + fotoName[i]);
+                // imgs.push("img/ruangan/" + i + ".jpeg");
+                // img.push("img/ruangan/")
+                // console.log("img/ruangan/" + fotoName[i]);
+            }
+
+
+
+
+            $.backstretch(imgs, {
+                duration: 3000,
+                fade: 750
+            });
+        });
+
+
         $(document).ready(function() {
             if (window.matchMedia("(max-width: 767px)").matches) {
 

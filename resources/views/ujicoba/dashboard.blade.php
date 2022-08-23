@@ -83,7 +83,7 @@ function bulanIndo($hariInggris)
                         @endif
 
                         <form action="/dashboard" method="post" class="reg-room-form" enctype="multipart/form-data">
-                        {{-- <form action="" class="reg-room-form" id="submitPesan" enctype="multipart/form-data"> --}}
+                            {{-- <form action="" class="reg-room-form" id="submitPesan" enctype="multipart/form-data"> --}}
                             @csrf
                             <div class="col mb-3">
                                 <label for="tanggal_input">Tanggal Peminjaman</label>
@@ -436,7 +436,8 @@ function bulanIndo($hariInggris)
                                                             </form>
                                                         @endif
                                                         @if (auth()->user()->level == 'admin')
-                                                            <form action="/dashboard/hapuspemesanan/{{ $pesanan->id }}" method="post">
+                                                            <form action="/dashboard/hapuspemesanan/{{ $pesanan->id }}"
+                                                                method="post">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="badge bg-danger border-0"
@@ -450,8 +451,6 @@ function bulanIndo($hariInggris)
                                     </tbody>
                                 </table>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -511,7 +510,8 @@ function bulanIndo($hariInggris)
                                                     @endif
 
                                                     <td class="text-nowrap">
-                                                        <form action="/dashboard/hapusjadwal/{{ $jadwal->id }}" method="post">
+                                                        <form action="/dashboard/hapusjadwal/{{ $jadwal->id }}"
+                                                            method="post">
                                                             @method('delete')
                                                             @csrf
                                                             <button class="btn btn-danger"
@@ -520,10 +520,12 @@ function bulanIndo($hariInggris)
                                                     </td>
                                                 </tr>
                                             @endforeach
-
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>
@@ -745,7 +747,7 @@ function bulanIndo($hariInggris)
             //                 method:'POST',
             //                 url:url,
             //                 data:{
-            //                         tanggal_pinjam:tanggal_pinjam, 
+            //                         tanggal_pinjam:tanggal_pinjam,
             //                         jam_masuk:jam_masuk,
             //                         jam_keluar:jam_keluar,
             //                         prodi:prodi,
@@ -785,8 +787,8 @@ function bulanIndo($hariInggris)
             $("#jam_keluar").prop('disabled', true);
             $('#jam_masuk').on("change", function() {
                 $('#jam_keluar').append(
-                        `<option value="" selected disabled hidden>Pilih Jam Masuk</option>`
-                    );
+                    `<option value="" selected disabled hidden>Pilih Jam Masuk</option>`
+                );
                 $("#jam_keluar").prop('disabled', false);
                 if (!$('#jam_masuk').val()) {
                     $("#jam_keluar").prop('disabled', true);
