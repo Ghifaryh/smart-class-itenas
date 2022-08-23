@@ -96,48 +96,7 @@ function bulanIndo($hariInggris)
 
                 <input type="hidden" name="banyakRuangan" id="banyakRuangan" value="{{ $ruangan }}">
 
-                <div class="container r-wrapper" id="tables">
-
-                    {{-- <button href="" class="btn btn-block" id="showr1" onclick="showTable1()">Ruangan 1</button> --}}
-                    <i class="fa-solid fa-minus" id="icon-btn-shtable1"></i> <span class="fw-bold btn-shtable"
-                        onclick="showTable1()" id="ruangan1">
-                        Ruangan 1
-                    </span>
-                    {{-- <p class="fw-bold btn-shtable" onclick="showTable1()">Ruangan 1</p> --}}
-                    <div class="table-responsive">
-                        {{-- <table class="table sh-table" id="table1"> --}}
-                        <table class="table" id="table1">
-                            <thead class="bg-light text-center">
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Jam Pakai</th>
-                                    <th scope="col">Prodi</th>
-                                    <th scope="col" class="text-nowrap">Mata Kuliah</th>
-                                    <th scope="col">Dosen</th>
-                                    {{-- <th scope="col">Status</th> --}}
-                                </tr>
-                            </thead>
-                            <tbody class="text-center align-middle" id="myTable1">
-                                @foreach ($jdwlrgn1 as $rg1)
-                                    <tr>
-                                        <th scope="row">{{ $num1++ }}</th>
-                                        <td class="text-nowrap">
-                                            {{ hariIndo(date('l', strtotime($rg1->tanggal_pinjam))) }},
-                                            {{ date('d', strtotime($rg1->tanggal_pinjam)) }}
-                                            {{ bulanIndo(date('M', strtotime($rg1->tanggal_pinjam))) }} <br>
-                                            ({{ date('H:i', strtotime($rg1->jam_masuk)) }} -
-                                            {{ date('H:i', strtotime($rg1->jam_keluar)) }})
-                                        </td>
-                                        <td class="text-wrap">{{ $rg1->Prodi->nama }}</td>
-                                        <td class="text-wrap">{{ $rg1->matakuliah }}</td>
-                                        <td class="text-wrap">{{ $rg1->dosen_matkul }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                {{-- <div class="container r-wrapper">
+                <div class="container r-wrapper">
                     <i class="fa-solid fa-minus" id="icon-btn-shtable1"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable1()">
                         Ruangan 1
@@ -172,9 +131,9 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div> --}}
+                </div>
 
-                {{-- <div class="container r-wrapper">
+                <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable2"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable2()">
                         Ruangan 2
@@ -209,9 +168,9 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div> --}}
+                </div>
 
-                {{-- <div class="container r-wrapper">
+                <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable3"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable3()">
                         Ruangan 3
@@ -246,9 +205,9 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div> --}}
+                </div>
 
-                {{-- <div class="container r-wrapper">
+                <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable4"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable4()">
                         Ruangan 4
@@ -283,9 +242,9 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div> --}}
+                </div>
 
-                {{-- <div class="container r-wrapper">
+                <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable5"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable5()">
                         Ruangan 5
@@ -320,9 +279,9 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div> --}}
+                </div>
 
-                {{-- <div class="container r-wrapper">
+                <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable6"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable6()">
                         Ruangan 6
@@ -357,7 +316,7 @@ function bulanIndo($hariInggris)
                             </tbody>
                         </table>
                     </div>
-                </div> --}}
+                </div>
 
                 <div class="container-fluid text-center mt-3 pb-4">
                     <a href="/dashboard" class="btn btn-book">+ Booking Ruangan</a>
@@ -411,56 +370,12 @@ function bulanIndo($hariInggris)
             }
         });
 
-        // TableLoop
-        $(document).ready(function() {
-
-            var banyakRuangan = $("#banyakRuangan").val();
-            for (var i = 1; i <= banyakRuangan; i++) {
-                // console.log(i);
-                // var autoRuangan = '<div class="container r-wrapper" id="tables"> <
-                // i class = "fa-solid fa-minus"
-                // id = "icon-btn-shtable' + i + ' " > < /i><span class="fw-bold btn-shtable"
-                // onclick = "showTable'+i+'()"
-                // id = "ruangan'+i+'" >
-                //     Ruangan '+i+' <
-                //     /span>';
-                var autoRuangan;
-                autoRuangan = `<div class="container r-wrapper" id="tables">` +
-                    `<i class="fa-solid fa-minus" id="icon-btn-shtable` + i + `"></i>` +
-                    `<span class="fw-bold btn-shtable"onclick="showTable` + i + `()" id="ruangan ` + i +
-                    `"> Ruangan ` + i + ` </span>` +
-                    `<div class="table-responsive">` +
-                    `<table class="table" id="table` + i + `">` +
-                    `<thead class="bg-light text-center">` +
-                    ` <tr>` +
-                    `<th scope="col">No</th>` +
-                    `<th scope="col">Jam Pakai</th>` +
-                    `<th scope="col">Prodi</th>` +
-                    `<th scope="col" class="text-nowrap">Mata Kuliah</th>` +
-                    `<th scope="col">Dosen</th>` +
-                    `</tr>` +
-                    `</thead>` +
-                    `<tbody class="text-center align-middle" id="myTable` + i + `"> `;
-
-
-                // var html = '<div class="freeze"></div>' +
-                //     '<div class="parent">' +
-                //     '<div class="loadimg"></div>' +
-                //     '<div class="header"></div>' +
-                //     '<div class="msg"></div>' +
-                //     '</div>';
-
-
-                // $("#tables").clone().appendTo(".ruangan");
-                $("#tables").append(autoRuangan);
-
-
-            }
-        });
 
         $(document).ready(function() {
             $("#searchHome").on("keyup", function() {
                 $("#table1").show();
+                $("#icon-btn-shtable1").removeClass("fa-list");
+                $("#icon-btn-shtable1").addClass("fa-minus");
 
                 $("#table2").show();
                 $("#icon-btn-shtable2").removeClass("fa-list");
