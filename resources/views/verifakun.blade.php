@@ -4,7 +4,7 @@
 $num1 = 1;
 @endphp
 {{-- @section('container') --}}
-@section('dashboard-main')
+@section('verif-akun')
     {{-- <div class="container-fluid dashboard-dosen ms-5"> --}}
     <div class="container dashboard-dosen ms-4">
         {{-- <div class="row"> --}}
@@ -65,7 +65,7 @@ $num1 = 1;
                                             @method('delete')
                                             @csrf
                                             <button class="badge bg-danger border-0 btn-verif"
-                                                onclick="return confirm('Apakah anda yakin untuk menghapus jadwal?')">Hapus</button>
+                                                onclick="return myFunction();">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -90,5 +90,9 @@ $num1 = 1;
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        function myFunction() {
+            if(!confirm("Are You Sure to delete this"))
+            event.preventDefault();
+        }
     </script>
 @endpush

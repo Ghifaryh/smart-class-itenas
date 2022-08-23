@@ -796,10 +796,16 @@ function bulanIndo($hariInggris)
                 var id_status = $("#id_status").val();
                 // var fileRPS = new FormData ($("#fileRPS"));
                 // var fileSertif = new FormData ($("#fileSertif"));
+                const fileuploadrps = $('#fileRPS').prop('files')[0];
+                const fileuploadsertif = $('#fileSertif').prop('files')[0];
                 var fileRPS = new FormData();
-                fileRPS.append('file', $('#fileRPS')[0].files[0]);
+                fileRPS.append('fileuploadrps',fileuploadrps);
+                // fileRPS.append('_token',CSRF_TOKEN);
+                // fileRPS.append('file', $('#fileRPS')[0].files[0]);
                 var fileSertif = new FormData();
-                fileSertif.append('file', $('#fileSertif')[0].files[0]);
+                fileSertif.append('fileuploadsertif',fileuploadsertif);
+                // fileSertif.append('_token',CSRF_TOKEN);
+                // fileSertif.append('file', $('#fileSertif')[0].files[0]);
                 swal({
                         title: "Apakah form pemesanan sudah sesuai?",
                         text: "Jika sudah sesuai maka akan segera diproses oleh admin.",

@@ -43,11 +43,13 @@ class PemesananController extends Controller
         if ($request->file('fileSertif')) {
             $validatedData['fileSertif'] = $request->file('fileSertif')->store('File-Sertif');
         };
+
+        Alert::success('Success','Data pemesanan berhasil diinput!');
         
         // ddd($request);
         Pemesanan::create($validatedData);
         
-        return redirect('/dashboard')->with('success', 'Data pemesanan berhasil diinput!');
+        return redirect('/dashboard');
     }
 
     public function ajaxRequestPost(Request $request)
