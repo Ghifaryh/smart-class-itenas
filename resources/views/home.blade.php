@@ -63,7 +63,7 @@ function bulanIndo($hariInggris)
 @endphp
 
 @section('container')
-    <div class="container container-sm mb-4" id="">
+    <div class="container-fluid mb-4" id="">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -76,13 +76,13 @@ function bulanIndo($hariInggris)
             <div class="carousel-inner">
 
                 <div class="carousel-item active ">
-                    <img src="img/ruangan/1.jpeg" class="d-block h-50 mx-auto" alt="...">
+                    <img src="img/ruangan/1.jpeg" class="d-block w-100 h-50 mx-auto" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="img/ruangan/2.jpeg" class="d-block h-50 mx-auto" alt="...">
+                    <img src="img/ruangan/2.jpeg" class="d-block w-100 h-50 mx-auto" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="img/ruangan/3.jpeg" class="d-block h-50 mx-auto" alt="...">
+                    <img src="img/ruangan/3.jpeg" class="d-block w-100 h-50 mx-auto" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -389,6 +389,7 @@ function bulanIndo($hariInggris)
     }
 
     // var_dump($entries);
+    // echo $entries;
     // echo implode(', ', $entries);
 
     @endphp
