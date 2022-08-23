@@ -63,8 +63,40 @@ function bulanIndo($hariInggris)
 @endphp
 
 @section('container')
+    <div class="container container-sm mb-4" id="">
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+
+                <div class="carousel-item active ">
+                    <img src="img/ruangan/1.jpeg" class="d-block h-50 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ruangan/2.jpeg" class="d-block h-50 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ruangan/3.jpeg" class="d-block h-50 mx-auto" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
     <div class="row contents-wrapper">
-        <div class="col">
+        <div class="col-sm-6">
             <div class="row">
                 <h2 class="content-title text-center"> About</h2>
                 <p class="text-about" style="text-align: justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -325,9 +357,8 @@ function bulanIndo($hariInggris)
         </div>
 
 
-        <div class="col">
+        <div class="col-sm-6">
             <h2 class="content-title text-center"> Lokasi Gedung</h2>
-            {{-- <img src="https://map.itenas.ac.id/map-itenas.jpg" width="100%" alt=""> --}}
             <div class="interactive-map">
                 <img src={{ asset('img/map-smartclassroom.jpg') }} width="100%" alt=""
                     class="rounded-3 shadow-lg">
@@ -358,7 +389,7 @@ function bulanIndo($hariInggris)
     }
 
     // var_dump($entries);
-    echo implode(', ', $entries);
+    // echo implode(', ', $entries);
 
     @endphp
     <input type="hidden" name="fotos" value="{{ $filecount }}" id="fotos">
@@ -382,13 +413,16 @@ function bulanIndo($hariInggris)
                 // console.log("img/ruangan/" + fotoName[i]);
             }
 
-
-
-
-            $.backstretch(imgs, {
-                duration: 3000,
-                fade: 750
-            });
+            $("#carouselStretch").backstretch(
+                imgs, {
+                    duration: 3000,
+                    fade: 750
+                }
+            );
+            // $.backstretch(imgs, {
+            //     duration: 3000,
+            //     fade: 750
+            // });
         });
 
 

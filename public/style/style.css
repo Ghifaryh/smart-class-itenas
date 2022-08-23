@@ -175,6 +175,10 @@ footer {
 
 /* Mobile */
 @media (max-width: 480px) {
+    /* .carousel-item img {
+        width: 50%;
+    } */
+
     .login-text {
         margin-right: 0rem;
         font-size: 0.8rem;
@@ -215,5 +219,28 @@ footer {
     .btn-shtable {
         pointer-events: none !important;
         padding-top: 200px !important;
+    }
+
+    /* footer stuff */
+
+    .title-foot {
+        padding-top: 5rem;
+        padding-bottom: 3rem;
+        font-size: 3rem;
+        font-weight: 400;
+    }
+
+    .list-item a {
+        font-weight: 490;
+        font-size: 2.3em;
+        margin-bottom: 0.4em;
+        transition: color 0.5s;
+    }
+
+    .list-item a i {
+        /* color: #bababa; */
+        font-size: 3rem;
+        margin-right: 1em;
+        transition: color 0.5s;
     }
 }
