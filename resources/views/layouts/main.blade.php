@@ -97,7 +97,7 @@
             @yield('container')
             @include('sweetalert::alert')
         </div>
-    @elseif ($title === 'Dashboard' or $title === 'Verifikasi Akun')
+    @elseif ($title === 'Dashboard')
         {{-- @elseif ($title === 'Dashboard' or $title == 'Tambah Ruangan') --}}
         <div class="dashboard-wrapper-main">
             @yield('dashboard-main')
@@ -106,6 +106,11 @@
     @elseif ($title === 'Tambah Ruangan')
         <div class="truangan-wrapper-main">'
             @yield('tambah-ruangan')
+            @include('sweetalert::alert')
+        </div>
+    @elseif ($title === 'Verifikasi Akun')
+        <div class="truangan-wrapper-main">'
+            @yield('verif-akun')
             @include('sweetalert::alert')
         </div>
     @endif

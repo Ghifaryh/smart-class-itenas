@@ -48,8 +48,8 @@ Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/get-matkul/{semester}/{prodi}', [DashboardController::class, 'getMatkul']);
     Route::get('/dosen-matkul/{semester}/{prodi}/{kode_matkul}/{kelas}', [DashboardController::class, 'getDosenMatkul']);
-    Route::post('/dashboard', [PemesananController::class, 'daftar']);   
-    // Route::post('/dashboard', [PemesananController::class, 'ajaxRequestPost']);   
+    // Route::post('/dashboard', [PemesananController::class, 'daftar']);   
+    Route::post('/dashboard', [PemesananController::class, 'ajaxRequestPost']);   
     Route::post('/dashboard/hapusketpemesanan/{id}', [PemesananController::class, 'hapusket']);
     // Route::post('/dashboard/edit/{id}', [PemesananController::class, 'edit']);
     // Route::post('/dashboard/update/{id}', [PemesananController::class, 'update']);
@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::post('/dashboard/batal/{id}', [PemesananController::class, 'cancel']);
     Route::post('/dashboard/batalhapus/{id}', [PemesananController::class, 'cancelhapus']);
     Route::delete('/dashboard/hapusjadwal/{id}', [JadwalController::class, 'destroy']);
-    Route::delete('/dashboard/hapuspemesanan/{id}', [PemesananController::class, 'destroy']);
+    Route::delete('/dashboard/hapuspemesanan/{id}/{filerps}/{filesertif}', [PemesananController::class, 'destroy']);
     Route::get('/truangan', [RuanganController::class, 'index']);
     // Route::post('/truangan', [RuanganController::class, 'tambah']);
     Route::post('/truangan', [RuanganController::class, 'ajaxRequestRuangan']);
@@ -69,6 +69,9 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::post('/truangan/update/{id}', [RuanganController::class, 'update']);
     Route::delete('/truangan/{id}', [RuanganController::class, 'destroy']);
     Route::get('/verifakun', [VerifAkunController::class, 'index']);
+    Route::post('/verifakun/verifikasi/{kode}', [VerifAkunController::class, 'verifikasi']);
+    Route::post('/verifakun/tolak/{kode}', [VerifAkunController::class, 'cancel']);
+    Route::delete('/verifakun/hapus/{kode}', [VerifAkunController::class, 'destroy']);
 
 });
 // Route::get('/statuspesan', [DashboardController::class, 'status']);

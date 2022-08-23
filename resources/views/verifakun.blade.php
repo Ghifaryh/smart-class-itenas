@@ -4,7 +4,7 @@
 $num1 = 1;
 @endphp
 {{-- @section('container') --}}
-@section('dashboard-main')
+@section('verif-akun')
     <div class="container-fluid dashboard-dosen">
         <div class="row">
             <div class="col-sm-9">

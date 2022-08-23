@@ -9,6 +9,7 @@ use App\Models\Ruangan;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StorePemesananRequest;
 use App\Http\Requests\UpdatePemesananRequest;
@@ -51,37 +52,37 @@ class PemesananController extends Controller
 
     public function ajaxRequestPost(Request $request)
     {
-        dd($request);
+        // dd($request);
 
-        // $validatedData = $request->validate([
-        //     'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
-        //     'jam_masuk' => ['required'],
-        //     'jam_keluar' => ['required','after:jam_masuk'],
-        //     'id_ruangan' => ['required'],
-        //     'prodi' => ['required'],
-        //     'matakuliah' => ['required'],
-        //     'dosen_matkul' => ['required'],
-        //     'fileRPS' => ['required','file','max:5120'],
-        //     'fileSertif' => ['required','file','max:5120'],
-        //     'kelas' => ['required'],
-        //     'id_pemesan' => ['required'],
-        //     'id_status' => ['required']
-        // ]);
+        $validatedData = $request->validate([
+            'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
+            'jam_masuk' => ['required'],
+            'jam_keluar' => ['required','after:jam_masuk'],
+            'id_ruangan' => ['required'],
+            'prodi' => ['required'],
+            'matakuliah' => ['required'],
+            'dosen_matkul' => ['required'],
+            'fileRPS' => ['required','file','max:5120','mimes:pdf'],
+            'fileSertif' => ['required','file','max:5120','mimes:pdf'],
+            'kelas' => ['required'],
+            'id_pemesan' => ['required'],
+            'id_status' => ['required']
+        ]);
 
-        // if ($request->file('fileRPS')) {
-        //     $validatedData['fileRPS'] = $request->file('fileRPS')->store('File-RPS');
-        // };
+        if ($request->file('fileRPS')) {
+            $validatedData['fileRPS'] = $request->file('fileRPS')->store('File-RPS');
+        };
         
-        // if ($request->file('fileSertif')) {
-        //     $validatedData['fileSertif'] = $request->file('fileSertif')->store('File-Sertif');
-        // };
+        if ($request->file('fileSertif')) {
+            $validatedData['fileSertif'] = $request->file('fileSertif')->store('File-Sertif');
+        };
         
-        // Pemesanan::create($validatedData);
-        // return response()->json(
-        //     [
-        //         'success' => true,
-        //     ]
-        // );
+        Pemesanan::create($validatedData);
+        return response()->json(
+            [
+                'success' => true,
+            ]
+        );
     }
 
     public function hapusKet($id)
@@ -93,10 +94,12 @@ class PemesananController extends Controller
         return redirect('/dashboard');
     }
 
-    public function destroy($id)
+    public function destroy($id,$filerps,$filesertif)
     {
         Pemesanan::destroy($id);
         Jadwal::where('id_pemesanan', $id)->delete();
+        Storage::delete($filerps);
+        Storage::delete($filesertif);
 
         Alert::success('Success','Data pemesanan berhasil dihapus');
 

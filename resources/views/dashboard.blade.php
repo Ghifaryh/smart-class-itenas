@@ -82,8 +82,8 @@ function bulanIndo($hariInggris)
                             </div>
                         @endif
 
-                        <form action="/dashboard" method="post" class="reg-room-form" enctype="multipart/form-data">
-                            {{-- <form action="" class="reg-room-form" id="submitPesan" enctype="multipart/form-data"> --}}
+                        {{-- <form action="/dashboard" method="post" class="reg-room-form" enctype="multipart/form-data"> --}}
+                        <form action="" class="reg-room-form" id="submitPesan" enctype="multipart/form-data">
                             @csrf
                             <div class="col mb-3">
                                 <label for="tanggal_input">Tanggal Peminjaman</label>
@@ -496,7 +496,7 @@ function bulanIndo($hariInggris)
                                                             </form>
                                                         @endif
                                                         @if (auth()->user()->level == 'admin')
-                                                            <form action="/dashboard/hapuspemesanan/{{ $pesanan->id }}"
+                                                            <form action="/dashboard/hapuspemesanan/{{ $pesanan->id }}/{{ $pesanan->fileRPS }}/{{ $pesanan->fileSertif }}"
                                                                 method="post">
                                                                 @method('delete')
                                                                 @csrf
@@ -781,65 +781,78 @@ function bulanIndo($hariInggris)
                 });
             });
 
-            // $("#submitPesan").submit(function(e){
-            //     e.preventDefault();
-            //     var url = '{{ url('dashboard') }}';
-            //     var tanggal_pinjam = $("#tanggal_pinjam").val();
-            //     var jam_masuk = $("#jam_masuk").val();
-            //     var jam_keluar = $("#jam_keluar").val();
-            //     var prodi = $("#prodi").val();
-            //     var kelas = $("#kelas").val();
-            //     var matakuliah = $("#matakuliah").val();
-            //     var dosen_matkul = $("#dosen_matkul").val();
-            //     var id_ruangan = $("#id_ruangan").val();
-            //     var id_pemesan = $("#id_pemesan").val();
-            //     var id_status = $("#id_status").val();
-            //     swal({
-            //             title: "Apakah form pemesanan sudah sesuai?",
-            //             text: "Jika sudah sesuai maka akan segera diproses oleh admin.",
-            //             icon: "warning",
-            //             buttons: true,
-            //             dangerMode: true,
-            //         })
-            //         .then((willDelete) => {
-            //             if (willDelete) {
-            //                 $.ajax({
-            //                 method:'POST',
-            //                 url:url,
-            //                 data:{
-            //                         tanggal_pinjam:tanggal_pinjam,
-            //                         jam_masuk:jam_masuk,
-            //                         jam_keluar:jam_keluar,
-            //                         prodi:prodi,
-            //                         kelas:kelas,
-            //                         matakuliah:matakuliah,
-            //                         dosen_matkul:dosen_matkul,
-            //                         id_ruangan:id_ruangan,
-            //                         id_pemesan:id_pemesan,
-            //                         id_status:id_status,
-            //                         },
-            //                 success:function(response){
-            //                     if(response.success){
-            //                         swal("Pemesanan berhasil!", {
-            //                         icon: "success",
-            //                         }).then(function(){
-            //                             location.reload();
-            //                             // window.location = window.location.href;
-            //                         })
-            //                         ;
-            //                     }else{
-            //                         swal("Pemesanan gagal!", {
-            //                         icon: "error",
-            //                         });
-            //                     }
-            //                 },
-            //                 error:function(error){
-            //                     console.log(error)
-            //                 }
-            //                 });
-            //             }
-            //         });
-            // });
+            $("#submitPesan").submit(function(e){
+                e.preventDefault();
+                var url = '{{ url('dashboard') }}';
+                var tanggal_pinjam = $("#tanggal_pinjam").val();
+                var jam_masuk = $("#jam_masuk").val();
+                var jam_keluar = $("#jam_keluar").val();
+                var prodi = $("#prodi").val();
+                var kelas = $("#kelas").val();
+                var matakuliah = $("#matakuliah").val();
+                var dosen_matkul = $("#dosen_matkul").val();
+                var id_ruangan = $("#id_ruangan").val();
+                var id_pemesan = $("#id_pemesan").val();
+                var id_status = $("#id_status").val();
+                // var fileRPS = new FormData ($("#fileRPS"));
+                // var fileSertif = new FormData ($("#fileSertif"));
+                var fileRPS = new FormData();
+                fileRPS.append('file', $('#fileRPS')[0].files[0]);
+                var fileSertif = new FormData();
+                fileSertif.append('file', $('#fileSertif')[0].files[0]);
+                swal({
+                        title: "Apakah form pemesanan sudah sesuai?",
+                        text: "Jika sudah sesuai maka akan segera diproses oleh admin.",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                            method:'POST',
+                            url:url,
+                            data:{
+                                    tanggal_pinjam:tanggal_pinjam,
+                                    jam_masuk:jam_masuk,
+                                    jam_keluar:jam_keluar,
+                                    prodi:prodi,
+                                    kelas:kelas,
+                                    matakuliah:matakuliah,
+                                    dosen_matkul:dosen_matkul,
+                                    id_ruangan:id_ruangan,
+                                    id_pemesan:id_pemesan,
+                                    id_status:id_status,
+                                    fileRPS:fileRPS,
+                                    fileSertif:fileSertif,
+                                    },
+                            async: false,
+                            cache: false,
+                            contentType: false,
+                            enctype: 'multipart/form-data',
+                            processData: false,
+                            success:function(response){
+                                if(response.success){
+                                    swal("Pemesanan berhasil!", {
+                                    icon: "success",
+                                    }).then(function(){
+                                        location.reload();
+                                        // window.location = window.location.href;
+                                    })
+                                    ;
+                                }else{
+                                    swal("Pemesanan gagal!", {
+                                    icon: "error",
+                                    });
+                                }
+                            },
+                            error:function(error){
+                                console.log(error)
+                            }
+                            });
+                        }
+                    });
+            });
 
         });
 
