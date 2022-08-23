@@ -18,7 +18,7 @@ class PemesananController extends Controller
 {
     public function daftar(Request $request)
     {
-        return ([$request->file('fileRPS')->store('File-RPS'),$request->file('sertifikat')->store('File-Sertif')]);
+        // return ([$request->file('fileRPS')->store('File-RPS'),$request->file('fileSertif')->store('File-Sertif')]);
 
         $validatedData = $request->validate([
             'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
@@ -28,10 +28,20 @@ class PemesananController extends Controller
             'prodi' => ['required'],
             'matakuliah' => ['required'],
             'dosen_matkul' => ['required'],
+            'fileRPS' => ['required','file','max:5120','mimes:pdf'],
+            'fileSertif' => ['required','file','max:5120','mimes:pdf'],
             'kelas' => ['required'],
             'id_pemesan' => ['required'],
             'id_status' => ['required']
         ]);
+        
+        if ($request->file('fileRPS')) {
+            $validatedData['fileRPS'] = $request->file('fileRPS')->store('File-RPS');
+        };
+        
+        if ($request->file('fileSertif')) {
+            $validatedData['fileSertif'] = $request->file('fileSertif')->store('File-Sertif');
+        };
         
         // ddd($request);
         Pemesanan::create($validatedData);
@@ -51,10 +61,20 @@ class PemesananController extends Controller
         //     'prodi' => ['required'],
         //     'matakuliah' => ['required'],
         //     'dosen_matkul' => ['required'],
+        //     'fileRPS' => ['required','file','max:5120'],
+        //     'fileSertif' => ['required','file','max:5120'],
         //     'kelas' => ['required'],
         //     'id_pemesan' => ['required'],
         //     'id_status' => ['required']
         // ]);
+
+        // if ($request->file('fileRPS')) {
+        //     $validatedData['fileRPS'] = $request->file('fileRPS')->store('File-RPS');
+        // };
+        
+        // if ($request->file('fileSertif')) {
+        //     $validatedData['fileSertif'] = $request->file('fileSertif')->store('File-Sertif');
+        // };
         
         // Pemesanan::create($validatedData);
         // return response()->json(
@@ -80,7 +100,7 @@ class PemesananController extends Controller
 
         Alert::success('Success','Data pemesanan berhasil dihapus');
 
-        return redirect('/dashboard')->with('success', 'Data pemesanan berhasil dihapus!');
+        return redirect('/dashboard');
     }
 
     public function accept($id)
@@ -133,62 +153,47 @@ class PemesananController extends Controller
         return redirect('/dashboard');   
     }
 
-    public function edit($id)
-    {
+    // public function edit($id)
+    // {
 
-        $pesananedt = Pemesanan::findorfail($id);
-        if (auth()->user()->level == 'dosen') {
-            $pesanan = Pemesanan::where('id_pemesan', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
-        } else {
-            $pesanan = Pemesanan::all();
-        }
-
-        // ->where('jadwal_masuk', date())->
+    //     $pesananedt = Pemesanan::findorfail($id);
+    //     if (auth()->user()->level == 'dosen') {
+    //         $pesanan = Pemesanan::where('id_pemesan', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
+    //     } else {
+    //         $pesanan = Pemesanan::all();
+    //     }
         
-        return view('ujicoba.dashboard', [
-            'title' => 'Dashboard',
-            'param' => 'edit',
-            'pesananedt' => $pesananedt,
-            'ruangan' => Ruangan::all(),
-            'jam' => Jam::all(),
-            'pesanans' => $pesanan,
-            'jadwals' => Jadwal::all(),
-            'prodis' => Prodi::all(),
-        ]);
-    }
+    //     return view('dashboard', [
+    //         'title' => 'Dashboard',
+    //         'param' => 'edit',
+    //         'pesananedt' => $pesananedt,
+    //         'ruangan' => Ruangan::all(),
+    //         'jam' => Jam::all(),
+    //         'pesanans' => $pesanan,
+    //         'jadwals' => Jadwal::all(),
+    //         'prodis' => Prodi::all(),
+    //     ]);
+    // }
 
-    public function update(Request $request, $id)
-    {
-        $pesanan = Pemesanan::findorfail($id);
+    // public function update(Request $request, $id)
+    // {
+    //     $pesanan = Pemesanan::findorfail($id);
 
-        $this->validate($request, [
-            'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
-            'jam_masuk' => ['required'],
-            'jam_keluar' => ['required','after:jam_masuk'],
-            'id_ruangan' => ['required'],
-            'prodi' => ['required'],
-            'matakuliah' => ['required'],
-            'dosen_matkul' => ['required'],
-            'kelas' => ['required'],
-            'id_pemesan' => ['required'],
-            'id_status' => ['required']
-        ]);
+    //     $this->validate($request, [
+    //         'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
+    //         'jam_masuk' => ['required'],
+    //         'jam_keluar' => ['required','after:jam_masuk'],
+    //         'id_ruangan' => ['required'],
+    //         'prodi' => ['required'],
+    //         'matakuliah' => ['required'],
+    //         'dosen_matkul' => ['required'],
+    //         'kelas' => ['required'],
+    //         'id_pemesan' => ['required'],
+    //         'id_status' => ['required']
+    //     ]);
 
-        // $pesanan->update([
-        //     'id_ruangan' => $pesanan->id_ruangan,
-        //     'id_pemesan' => $pesanan->id_pemesan,
-        //     'tanggal_pinjam' => $pesanan->tanggal_pinjam,
-        //     'jam_masuk' => $pesanan->jam_masuk,
-        //     'jam_keluar' => $pesanan->jam_keluar,
-        //     'prodi' => $pesanan->prodi,
-        //     'matakuliah' => $pesanan->matakuliah,
-        //     'kelas' => $pesanan->kelas,
-        //     'dosen_matkul' => $pesanan->dosen_matkul,
-        //     'id_status' => $request->id_status,
-        // ]);
-
-        $pesanan->update($request->all());
+    //     $pesanan->update($request->all());
         
-        return redirect('/dashboard')->with('success', 'Data pemesanan ruangan berhasil diupdate!');
-    }
+    //     return redirect('/dashboard')->with('success', 'Data pemesanan ruangan berhasil diupdate!');
+    // }
 }

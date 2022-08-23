@@ -27,9 +27,8 @@ class DashboardController extends Controller
 
         // ->where('jadwal_masuk', date())->
         
-        return view('ujicoba.dashboard', [
+        return view('dashboard', [
             'title' => 'Dashboard',
-            'param' => 'add',
             'ruangan' => Ruangan::all(),
             'jam' => Jam::all(),
             'pesanans' => $pesanan,

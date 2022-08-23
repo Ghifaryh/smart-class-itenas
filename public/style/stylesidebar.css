@@ -51,6 +51,13 @@
     background-color: #ffffff;
 }
 
+#side4 {
+    color: #ffffff;
+    outline: 2px solid #ffffff;
+    top: 215px;
+    background-color: #ff7b01;
+}
+
 .logowsidebaro {
     padding-right: 20px;
     color: orange;

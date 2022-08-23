@@ -16,7 +16,10 @@
                     </div>
                     @enderror
                 </div>
-                <div class="form-floating">
+
+                <input type="hidden" name="id_status" class="form-control" id="id_status" placeholder="Level" required value="6">
+                <input type="hidden" name="level" class="form-control" id="level" placeholder="Level" required value="dosen">
+                {{-- <div class="form-floating">
                     <input type="text" name="level" class="form-control @error('level') is-invalid @enderror" id="level" placeholder="Level" required value="{{ old('level') }}">
                     <label for="level">Level</label>
                     @error('level')
@@ -24,7 +27,7 @@
                         {{ $message }}
                     </div>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="form-floating">
                     <input type="text" name="kode_dosen" class="form-control @error('kode_dosen') is-invalid @enderror" id="kode_dosen" placeholder="Kode Dosen" required value="{{ old('kode_dosen') }}">
                     <label for="kode_dosen">Kode Dosen</label>

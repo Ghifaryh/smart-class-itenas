@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\VerifAkun;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
     public function index()
     {
-        return view('ujicoba.register', [
+        return view('register', [
             'title' => 'Register',
 
         ]);
@@ -22,7 +24,8 @@ class RegisterController extends Controller
             'name' => ['required','max:255'],
             'level' => ['required'],
             'kode_dosen' => ['required'],
-            'password' => ['required']
+            'id_status' => ['required'],
+            'password' => ['required'],
         ]);
 
         // $validatedData['password'] = bcrypt($validatedData['password']);
@@ -30,10 +33,10 @@ class RegisterController extends Controller
         // $validatedData['level'] = $validatedData['password'].toLowerCase();
 
         // dd('Registrasi Berhasil!!');
-        User::create($validatedData);
+        VerifAkun::create($validatedData);
 
         // $request->session()->flash('success', 'Registration successfull!vPlease Login');
-
-        return redirect('/login')->with('success', 'Registration successfull! Please Login');
+        Alert::success('Success','Registrasi Berhasil! Tunggu akun diverifikasi oleh admin');
+        return redirect('/login');
     }
 }
