@@ -55,7 +55,6 @@ $num1 = 1;
                                             <button class="badge bg-success border-0 btn-verif"
                                                 onclick="return confirm('Apakah anda yakin untuk memverifikasi akun ini?')">Verifikasi</button>
                                         </form>
-
                                         <form action="/verifakun/tolak/{{ $akun->kode_dosen }}" method="post"
                                             class="d-block">
                                             @csrf

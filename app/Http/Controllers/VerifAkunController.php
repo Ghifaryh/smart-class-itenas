@@ -22,7 +22,7 @@ class VerifAkunController extends Controller
 
     public function verifikasi($kode)
     {
-        $akun = VerifAkun::where('kode_dosen', '=', $kode )->get();
+        $akun = VerifAkun::where('kode_dosen', '=', $kode )->first();
         $check = User::where('kode_dosen', '=', $kode )->first();
 
         // $checked = $check->id_pemesanan;
@@ -36,12 +36,12 @@ class VerifAkunController extends Controller
 
         if ($check === null) {
             User::create($data);
-            VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 2]);
-            Alert::success('Success','Jadwal diterima');
+            VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 7]);
+            Alert::success('Success','Akun Terverifikasi');
             return redirect('/verifakun');
         } else {
-            VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 2]);
-            Alert::success('Success','Jadwal diterima');
+            VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 7]);
+            Alert::success('Success','Akun Terverifikasi');
             return redirect('/verifakun');
         }
     }
@@ -49,9 +49,9 @@ class VerifAkunController extends Controller
     public function cancel($kode)
     {
         User::where('kode_dosen', '=', $kode )->delete();
-        VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 3]);
-        Alert::success('Success','Jadwal dibatalkan');
-        return redirect('/dashboard');   
+        VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 8]);
+        Alert::success('Success','Akun Ditolak');
+        return redirect('/verifakun');   
     }
 
     public function destroy($kode)
