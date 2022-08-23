@@ -2,6 +2,9 @@ body {
     min-width: 960px;
 }
 
+/* .carousel-item img {
+        width: 50%;
+    } */
 .logo-header .titlewb,
 .titlewb a,
 .content-title {
@@ -181,7 +184,7 @@ footer {
 
     .login-text {
         margin-right: 0rem;
-        font-size: 0.8rem;
+        font-size: 1.5rem;
     }
 
     .logowsidebarnv {
@@ -193,9 +196,13 @@ footer {
     }
 
     .titlewb {
-        font-size: 0.8rem !important;
-        /* margin-left: 1vw; */
+        font-size: 2.2rem !important;
+        margin-left: 1rem;
         /* align-items: center; */
+    }
+
+    .logo-header img {
+        width: 50%;
     }
 
     .user-name {
@@ -203,7 +210,11 @@ footer {
     }
 
     .img-goodstart {
-        width: 15% !important;
+        width: 12% !important;
+    }
+
+    .fa-user {
+        font-size: 2rem !important;
     }
     /* table,
     thead,
