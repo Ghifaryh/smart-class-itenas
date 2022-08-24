@@ -513,7 +513,8 @@ function bulanIndo($hariInggris)
                                                             </form>
                                                         @endif
                                                         @if (auth()->user()->level == 'admin')
-                                                            <form action="/dashboard/hapuspemesanan\{{ $pesanan->id }}">
+                                                            <form action="/dashboard/hapuspemesanan/{{ $pesanan->id }}"
+                                                                method="post" class="d-block">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="badge bg-danger border-0"
