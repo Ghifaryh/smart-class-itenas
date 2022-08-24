@@ -513,16 +513,12 @@ function bulanIndo($hariInggris)
                                                             </form>
                                                         @endif
                                                         @if (auth()->user()->level == 'admin')
-                                                            <<<<<<< HEAD <form
-                                                                action="/dashboard/hapuspemesanan/{{ $pesanan->id }}/{{ $pesanan->fileRPS }}/{{ $pesanan->fileSertif }}"=======<form
-                                                                action="/dashboard/hapuspemesanan\{{ $pesanan->id }}">
-                                                                >>>>>> 004b5f7454d140a8870bca1902c67ed4678f08aa
-                                                                method="post">
+                                                            <form action="/dashboard/hapuspemesanan\{{ $pesanan->id }}">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="badge bg-danger border-0"
                                                                     onclick="return confirm('Apakah anda yakin untuk menghapus jadwal?')">Hapus</button>
-                                                                </form>
+                                                            </form>
                                                         @endif
                                                     </td>
                                                 @endif
@@ -840,7 +836,6 @@ function bulanIndo($hariInggris)
                         };
                     });
             });
-
         });
 
         $(document).ready(function() {
