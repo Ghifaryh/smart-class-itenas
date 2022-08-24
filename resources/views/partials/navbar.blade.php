@@ -51,10 +51,23 @@
 
                     <ul class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2"
                         style="">
+                        <li><a class="dropdown-item d-block" href="/"><i
+                                    class="fa-solid fa-house logowsidebarnv me-2"></i>Home</a>
+                        </li>
                         <li><a class="dropdown-item d-block" href="/dashboard"><i
                                     class="fa-solid fa-building-circle-exclamation logowsidebarnv me-2"></i>Status
                                 Pemesanan</a>
                         </li>
+                        @if (auth()->user()->level == 'admin')
+                        <li>
+                            <a class="dropdown-item d-block" href="/truangan"><i
+                            class="fa-solid fa-plus logowsidebarnv me-2"></i>Tambah Ruangan</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-block" href="/verifakun"><i
+                            class="fa-solid fa-user-shield logowsidebarnv me-2"></i>Verifikasi Akun</a>
+                        </li>
+                        @endif
                         <li>
                             <hr class="dropdown-divider">
                         </li>
