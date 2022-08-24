@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::post('/dashboard/batal/{id}', [PemesananController::class, 'cancel']);
     Route::post('/dashboard/batalhapus/{id}', [PemesananController::class, 'cancelhapus']);
     Route::delete('/dashboard/hapusjadwal/{id}', [JadwalController::class, 'destroy']);
-    Route::delete('/dashboard/hapuspemesanan/{id}/{filerps}/{filesertif}', [PemesananController::class, 'destroy']);
+    Route::delete('/dashboard/hapuspemesanan/{id}', [PemesananController::class, 'destroy']);
     Route::get('/truangan', [RuanganController::class, 'index']);
     // Route::post('/truangan', [RuanganController::class, 'tambah']);
     Route::post('/truangan', [RuanganController::class, 'ajaxRequestRuangan']);
