@@ -83,6 +83,9 @@ $dir = 'img/ruangan/';
 $images = glob($dir . '/*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}', GLOB_BRACE);
 $jumlah = count($images);
 // echo $jumlah;
+// for ($i = 1; $i <= $jumlah; $i++) {
+//     echo $i;
+// }
 @endphp
 
 @section('container')
@@ -99,11 +102,12 @@ $jumlah = count($images);
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="img/ruangan/trigger/1.jpeg" class="d-block w-100 h-50 mx-auto" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
+                    {{-- <div class="carousel-caption d-none d-md-block">
                         <h5>First slide label</h5>
                         <p>Some representative placeholder content for the first slide.</p>
-                    </div>
+                    </div> --}}
                 </div>
+                {{-- Harus nambah style widht and height --}}
                 @foreach ($images as $img)
                     <div class="carousel-item">
                         <img src="{{ $img }}" class="d-block w-100 h-50 mx-auto" alt="...">
