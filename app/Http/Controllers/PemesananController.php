@@ -43,11 +43,13 @@ class PemesananController extends Controller
         if ($request->file('fileSertif')) {
             $validatedData['fileSertif'] = $request->file('fileSertif')->store('File-Sertif');
         };
+
+        Alert::success('Success','Data pemesanan berhasil diinput!');
         
         // ddd($request);
         Pemesanan::create($validatedData);
         
-        return redirect('/dashboard')->with('success', 'Data pemesanan berhasil diinput!');
+        return redirect('/dashboard');
     }
 
     public function ajaxRequestPost(Request $request)
@@ -69,12 +71,16 @@ class PemesananController extends Controller
             'id_status' => ['required']
         ]);
 
+        
+
         if ($request->file('fileRPS')) {
-            $validatedData['fileRPS'] = $request->file('fileRPS')->store('File-RPS');
+            $fileNamerps = pathinfo($request->file('fileRPS')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileRPS')->getClientOriginalExtension();
+            $validatedData['fileRPS'] = $request->file('fileRPS')->storeAs('File-RPS',$fileNamerps);
         };
         
         if ($request->file('fileSertif')) {
-            $validatedData['fileSertif'] = $request->file('fileSertif')->store('File-Sertif');
+            $fileNamesertif = pathinfo($request->file('fileSertif')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileSertif')->getClientOriginalExtension();
+            $validatedData['fileSertif'] = $request->file('fileSertif')->storeAs('File-Sertif',$fileNamesertif);
         };
         
         Pemesanan::create($validatedData);
@@ -94,12 +100,12 @@ class PemesananController extends Controller
         return redirect('/dashboard');
     }
 
-    public function destroy($id,$filerps,$filesertif)
+    public function destroy($id)
     {
+        $check = Pemesanan::find($id);
+        Storage::delete($check->fileRPS);
+        Storage::delete($check->fileSertif);
         Pemesanan::destroy($id);
-        Jadwal::where('id_pemesanan', $id)->delete();
-        Storage::delete($filerps);
-        Storage::delete($filesertif);
 
         Alert::success('Success','Data pemesanan berhasil dihapus');
 

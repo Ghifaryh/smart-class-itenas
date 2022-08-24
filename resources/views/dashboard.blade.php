@@ -83,7 +83,8 @@ function bulanIndo($hariInggris)
                         @endif
 
                         {{-- <form action="/dashboard" method="post" class="reg-room-form" enctype="multipart/form-data"> --}}
-                        <form action="" class="reg-room-form" id="submitPesan" enctype="multipart/form-data">
+                        <form action="/dashboard" method="post" class="reg-room-form" id="postPemesanan"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="col mb-3">
                                 <label for="tanggal_input">Tanggal Peminjaman</label>
@@ -512,14 +513,16 @@ function bulanIndo($hariInggris)
                                                             </form>
                                                         @endif
                                                         @if (auth()->user()->level == 'admin')
-                                                            <form
-                                                                action="/dashboard/hapuspemesanan/{{ $pesanan->id }}/{{ $pesanan->fileRPS }}/{{ $pesanan->fileSertif }}"
+                                                            <<<<<<< HEAD <form
+                                                                action="/dashboard/hapuspemesanan/{{ $pesanan->id }}/{{ $pesanan->fileRPS }}/{{ $pesanan->fileSertif }}"=======<form
+                                                                action="/dashboard/hapuspemesanan\{{ $pesanan->id }}">
+                                                                >>>>>> 004b5f7454d140a8870bca1902c67ed4678f08aa
                                                                 method="post">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="badge bg-danger border-0"
                                                                     onclick="return confirm('Apakah anda yakin untuk menghapus jadwal?')">Hapus</button>
-                                                            </form>
+                                                                </form>
                                                         @endif
                                                     </td>
                                                 @endif
@@ -797,26 +800,9 @@ function bulanIndo($hariInggris)
                     }
                 });
             });
-
-            $("#submitPesan").submit(function(e) {
+            // $("#submitPesan").submit(function(e){
+            $("#postPemesanan").submit(function(e) {
                 e.preventDefault();
-                var url = '{{ url('dashboard') }}';
-                var tanggal_pinjam = $("#tanggal_pinjam").val();
-                var jam_masuk = $("#jam_masuk").val();
-                var jam_keluar = $("#jam_keluar").val();
-                var prodi = $("#prodi").val();
-                var kelas = $("#kelas").val();
-                var matakuliah = $("#matakuliah").val();
-                var dosen_matkul = $("#dosen_matkul").val();
-                var id_ruangan = $("#id_ruangan").val();
-                var id_pemesan = $("#id_pemesan").val();
-                var id_status = $("#id_status").val();
-                // var fileRPS = new FormData ($("#fileRPS"));
-                // var fileSertif = new FormData ($("#fileSertif"));
-                var fileRPS = new FormData();
-                fileRPS.append('file', $('#fileRPS')[0].files[0]);
-                var fileSertif = new FormData();
-                fileSertif.append('file', $('#fileSertif')[0].files[0]);
                 swal({
                         title: "Apakah form pemesanan sudah sesuai?",
                         text: "Jika sudah sesuai maka akan segera diproses oleh admin.",
@@ -827,27 +813,15 @@ function bulanIndo($hariInggris)
                     .then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                                method: 'POST',
-                                url: url,
-                                data: {
-                                    tanggal_pinjam: tanggal_pinjam,
-                                    jam_masuk: jam_masuk,
-                                    jam_keluar: jam_keluar,
-                                    prodi: prodi,
-                                    kelas: kelas,
-                                    matakuliah: matakuliah,
-                                    dosen_matkul: dosen_matkul,
-                                    id_ruangan: id_ruangan,
-                                    id_pemesan: id_pemesan,
-                                    id_status: id_status,
-                                    fileRPS: fileRPS,
-                                    fileSertif: fileSertif,
-                                },
-                                async: false,
-                                cache: false,
-                                contentType: false,
-                                enctype: 'multipart/form-data',
+                                url: $(this).attr('action'),
+                                method: $(this).attr('method'),
+                                data: new FormData(this),
                                 processData: false,
+                                dataType: 'json',
+                                // async: false,
+                                // cache: false,
+                                contentType: false,
+                                enctype: $(this).attr('enctype'),
                                 success: function(response) {
                                     if (response.success) {
                                         swal("Pemesanan berhasil!", {
@@ -861,12 +835,9 @@ function bulanIndo($hariInggris)
                                             icon: "error",
                                         });
                                     }
-                                },
-                                error: function(error) {
-                                    console.log(error)
                                 }
                             });
-                        }
+                        };
                     });
             });
 
