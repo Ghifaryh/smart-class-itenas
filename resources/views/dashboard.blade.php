@@ -58,6 +58,20 @@ function bulanIndo($hariInggris)
 @endphp
 {{-- @section('container') --}}
 @section('dashboard-main')
+    <!-- Modal -->
+    {{-- <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="iframeModal" src="" frameborder="0" width="100%" height="800px"></iframe>
+            </div>
+        </div>
+        </div>
+    </div> --}}
     <div class="container-fluid dashboard-dosen">
         <div class="row">
             <div class="col-sm-3" id="formPemesanan">
@@ -66,23 +80,14 @@ function bulanIndo($hariInggris)
                         {{-- @if ($param == 'add') --}}
                         <h3 class="fw-bold pt-2 text-nowrap">Pemesanan Ruangan</h3>
                         <h6 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h6>
-                        @if (session()->has('success'))
+                        {{-- @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                        @endif
+                        @endif --}}
 
-                        @if (session()->has('failed'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ session('failed') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-
-                        {{-- <form action="/dashboard" method="post" class="reg-room-form" enctype="multipart/form-data"> --}}
                         <form action="/dashboard" method="post" class="reg-room-form" id="postPemesanan"
                             enctype="multipart/form-data">
                             @csrf
@@ -91,12 +96,12 @@ function bulanIndo($hariInggris)
                                 <input type="text" name="tanggal_input" id="tanggal_input"
                                     class="form-control @error('tanggal_input') is-invalid @enderror" required
                                     value="{{ old('tanggal_input') }}" readonly>
-
-                                @error('tanggal_input')
+                                <span class="text-danger error-text tanggal_input_error"></span>
+                                {{-- @error('tanggal_input')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
-                                @enderror
+                                @enderror --}}
                             </div>
                             <div class="col mb-3 ">
                                 <label for="jam_masuk">Jam Masuk</label>
@@ -110,11 +115,7 @@ function bulanIndo($hariInggris)
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('jam_masuk')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <span class="text-danger error-text jam_masuk_error"></span>
                             </div>
                             <div class="col mb-3">
                                 <label for="jam_keluar">Jam Keluar</label>
@@ -127,11 +128,7 @@ function bulanIndo($hariInggris)
                                             {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
                                     @endforeach
                                 </select>
-                                @error('jam_keluar')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <span class="text-danger error-text jam_keluar_error"></span>
                             </div>
                             <div class="col mb-3">
                                 <label for="id_ruangan">Ruangan yang dipilih</label>
@@ -144,11 +141,7 @@ function bulanIndo($hariInggris)
                                             {{ $rn->nama }}</option>
                                     @endforeach
                                 </select>
-                                @error('id_ruangan')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <span class="text-danger error-text id_ruangan_error"></span>
                             </div>
                             <div class="col mb-3">
                                 <label for="prodi">Prodi</label>
@@ -160,12 +153,7 @@ function bulanIndo($hariInggris)
                                     @endforeach
                                     </option>
                                 </select>
-
-                                @error('prodi')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <span class="text-danger error-text prodi_error"></span>
                             </div>
                             <div class="col mb-3">
                                 <label for="matakuliah">Mata Kuliah</label>
@@ -173,31 +161,19 @@ function bulanIndo($hariInggris)
                                     class="form-select @error('matakuliah') is-invalid @enderror" data-width=100% required>
                                     {{-- <option value="" selected disabled hidden>Pilih Matakuliah</option> --}}
                                 </select>
-                                @error('matakuliah')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <span class="text-danger error-text matakuliah_error"></span>
                             </div>
                             <div class="col mb-3">
                                 <label for="fileRPS" class="form-label @error('fileRPS') is-invalid @enderror">Input
                                     RPS</label>
                                 <input class="form-control" type="file" id="fileRPS" name="fileRPS">
-                                @error('fileRPS')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <span class="text-danger error-text fileRPS_error"></span>
                             </div>
                             <div class="col mb-3">
                                 <label for="fileSertif" class="form-label @error('fileSertif') is-invalid @enderror">Input
                                     Sertifikat</label>
                                 <input class="form-control" type="file" id="fileSertif" name="fileSertif">
-                                @error('fileSertif')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <span class="text-danger error-text fileSertif_error"></span>
                             </div>
                             <input type="hidden" name="tanggal_pinjam" id="tanggal_pinjam">
                             <input type="hidden" name="dosen_matkul" id="dosen_matkul">
@@ -212,123 +188,6 @@ function bulanIndo($hariInggris)
                                     id="submitPesan">Daftar</button>
                             </div>
                         </form>
-                        {{-- @else --}}
-                        {{-- <h3 class="fw-bold pt-2 text-wrap">Edit Data Pemesanan Ruangan</h3>
-                            <h6 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h6>
-                            <form action="/dashboard/update/{{ $pesananedt->id }}" method="post" class="reg-room-form">
-                                @csrf
-                                <div class="col form-floating mb-3">
-                                    <input type="text" name="tanggal_input"
-                                        class="form-control @error('tanggal_input') is-invalid @enderror"
-                                        id="tanggal_input" required value="{{ date('d/m/Y', strtotime($pesananedt->tanggal_pinjam)) }}" readonly>
-                                    <label for="tanggal_input">Tanggal Peminjaman</label>
-                                    @error('tanggal_input')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col mb-3 ">
-                                    <label for="jam_masuk">Jam Masuk</label>
-                                    <select class="form-select @error('jam_masuk') is-invalid @enderror w-auto"
-                                        name="jam_masuk" id="jam_masuk" data-width=100% required>
-                                        <option value="" selected disabled hidden>Pilih Jam Masuk</option>
-                                        @foreach ($jam as $jam_masuk)
-                                            <option value="{{ $jam_masuk->jam_pakai }}"
-                                                {{ $pesananedt->jam_masuk == $jam_masuk->jam_pakai ? 'selected' : '' }}>
-                                                {{ date('H:i', strtotime($jam_masuk->jam_pakai)) }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('jam_masuk')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col mb-3">
-                                    <label for="jam_keluar">Jam Keluar</label>
-                                    <select class="form-select @error('jam_keluar') is-invalid @enderror w-auto"
-                                        name="jam_keluar" id="jam_keluar" data-width=100% required>
-                                        <option value="" selected disabled hidden>Pilih Jam Keluar</option>
-                                        @foreach ($jam as $jam_keluar)
-                                            <option value="{{ $jam_keluar->jam_pakai }}"
-                                                {{ $pesananedt->jam_keluar == $jam_keluar->jam_pakai ? 'selected' : '' }}>
-                                                {{ date('H:i', strtotime($jam_keluar->jam_pakai)) }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('jam_keluar')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col mb-3">
-                                    <label for="id_ruangan">Ruangan yang dipilih</label>
-                                    <select class="form-select @error('id_ruangan') is-invalid @enderror"
-                                        name="id_ruangan" id="id_ruangan" data-width=100% required>
-                                        <option value="" selected disabled hidden>Pilih Ruangan</option>
-                                        @foreach ($ruangan as $rn)
-                                            <option value="{{ $rn->id }}"
-                                                {{ $pesananedt->id_ruangan == $rn->id ? 'selected' : '' }}>
-                                                {{ $rn->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('id_ruangan')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col mb-3">
-                                    <label for="prodi">Prodi</label>
-                                    <select name="prodi" id="prodi"
-                                        class="form-select @error('prodi') is-invalid @enderror" data-width=100% required>
-                                        @foreach ($prodis as $prodi)
-                                            <option value="{{ $prodi->kode }}"
-                                                {{ $pesananedt->prodi == $prodi->kode ? 'selected' : '' }}>
-                                                {{ $prodi->nama }}</option>
-                                        @endforeach
-                                        </option>
-                                    </select>
-                                    @error('prodi')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col mb-3">
-                                    <label for="matakuliah">Mata Kuliah</label>
-                                    <select name="matakuliah" id="matakuliah"
-                                        class="form-select @error('matakuliah') is-invalid @enderror" data-width=100%
-                                        required>
-
-                                        <option value="{{ $pesananedt->matakuliah }}" selected>{{ $pesananedt->matakuliah }}</option>
-                                    </select>
-                                    @error('matakuliah')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <input type="hidden" name="tanggal_pinjam" id="tanggal_pinjam" value="{{ $pesananedt->tanggal_pinjam }}">
-                                <input type="hidden" name="dosen_matkul" id="dosen_matkul"
-                                    value="{{ $pesananedt->dosen_matkul }}">
-                                <input type="hidden" name="kelas" id="kelas" value="{{ $pesananedt->kelas }}">
-                                <input type="hidden" name="id_pemesan" id="id_pemesan"
-                                    value="{{ $pesananedt->id_pemesan }}">
-                                <input type="hidden" name="id_status" id="id_status" value="1">
-                                <div class="col-sm-9">
-                                    <p class="reg-room-info">*Pembookingan ruangan akan diproses paling lama 1*24 Jam</p>
-                                </div>
-                                <div class="text-center mb-3">
-                                    <a href="/dashboard" class="btn text-white reg-room-button fw-bold me-3">Batal</a>
-                                    <button type="submit"
-                                        class="btn text-white reg-room-button-update fw-bold text-nowrap">Update</button>
-                                </div>
-                            </form>
-                        @endif --}}
-
                     </div>
                 </div>
             </div>
@@ -378,62 +237,21 @@ function bulanIndo($hariInggris)
                                                 <td class="text-wrap">{{ $pesanan->dosen_matkul }}</td>
                                                 <td class="text-wrap">
                                                     <!-- Button trigger modal -->
-                                                    <button type="button" class="badge bg-info border-0"
-                                                        data-bs-toggle="modal" data-bs-target="#rpsModal">
+                                                    {{-- <button value="{{ asset('storage/' . $pesanan->fileRPS) }}" type="button" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#myModal" id="btnFileRPS">
                                                         View
-                                                    </button>
-
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="rpsModal">
-                                                        <div class="modal-dialog modal-dialog-centered modal-xl">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">File RPS</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <embed
-                                                                        src="{{ asset('storage/' . $pesanan->fileRPS) }}"
-                                                                        frameborder="0" width="100%" height="800px">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <form method="get"
-                                                        action="{{ asset('storage/' . $pesanan->fileRPS) }}">
+                                                    </button> --}}
+                                                
+                                                    <form action="{{ asset('storage/' . $pesanan->fileRPS) }}">
                                                         <button class="badge bg-primary border-0"
                                                             type="submit">Download</button>
                                                     </form>
                                                 </td>
                                                 <td class="text-wrap">
-                                                    <button type="button" class="badge bg-info border-0"
-                                                        data-bs-toggle="modal" data-bs-target="#sertifModal">
+                                                    <!-- Button trigger modal -->
+                                                    {{-- <button value="{{ asset('storage/' . $pesanan->fileSertif) }}" type="button" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#myModal" id="btnFileSertif">
                                                         View
-                                                    </button>
-
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="sertifModal">
-                                                        <div class="modal-dialog modal-dialog-centered modal-xl">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">File Sertifikat</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <embed
-                                                                        src="{{ asset('storage/' . $pesanan->fileSertif) }}"
-                                                                        frameborder="0" width="100%" height="800px">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{-- <button class="badge bg-primary border-0" type="submit" onclick="window.location.href='{{ asset('storage/' . $pesanan->fileSertif) }}'">Download!</button> --}}
-                                                    <form method="get"
-                                                        action="{{ asset('storage/' . $pesanan->fileSertif) }}">
+                                                    </button> --}}
+                                                    <form action="{{ asset('storage/' . $pesanan->fileSertif) }}">
                                                         <button class="badge bg-primary border-0"
                                                             type="submit">Download</button>
                                                     </form>
@@ -513,7 +331,7 @@ function bulanIndo($hariInggris)
                                                             </form>
                                                         @endif
                                                         @if (auth()->user()->level == 'admin')
-                                                            <form action="/dashboard/hapuspemesanan\{{ $pesanan->id }}">
+                                                            <form action="/dashboard/hapuspemesanan/{{ $pesanan->id }}" method="post" class="d-block">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="badge bg-danger border-0"
@@ -615,10 +433,22 @@ function bulanIndo($hariInggris)
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        // DatePicker
+        
         $(document).ready(function() {
             $("#matakuliah").prop('disabled', true);
+            
+            // $('#btnFileRPS').click(function () {            
+            //     $('#iframeModal').attr('src', null);
+            //     var fileRPS = $(this).val();
+            //     var $iframe = $('#iframeModal').attr('src', fileRPS);
+            // })
 
+            // $('#btnFileSertif').click(function () {      
+            //     $('#iframeModal').attr('src', null);
+            //     var fileSertif = $(this).val();
+            //     var $iframe = $('#iframeModal').attr('src', fileSertif);
+            // })
+            
             $('#tanggal_input').datepicker({
                 dateFormat: 'dd/mm/yy'
             });
@@ -818,6 +648,9 @@ function bulanIndo($hariInggris)
                                 // cache: false,
                                 contentType: false,
                                 enctype: $(this).attr('enctype'),
+                                beforeSend:function(){
+                                    $(document).find('span.error-text').text('');
+                                },
                                 success: function(response) {
                                     if (response.success) {
                                         swal("Pemesanan berhasil!", {
@@ -826,9 +659,12 @@ function bulanIndo($hariInggris)
                                             location.reload();
                                             // window.location = window.location.href;
                                         });
-                                    } else {
+                                    }else{
                                         swal("Pemesanan gagal!", {
                                             icon: "error",
+                                        });
+                                        $.each(response.error, function(prefix, val){
+                                            $('span.'+prefix+'_error').text(val[0]);
                                         });
                                     }
                                 }

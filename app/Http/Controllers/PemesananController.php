@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StorePemesananRequest;
 use App\Http\Requests\UpdatePemesananRequest;
 use Illuminate\Validation\ValidationException;
@@ -56,7 +57,7 @@ class PemesananController extends Controller
     {
         // dd($request);
 
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
             'jam_masuk' => ['required'],
             'jam_keluar' => ['required','after:jam_masuk'],
@@ -71,24 +72,29 @@ class PemesananController extends Controller
             'id_status' => ['required']
         ]);
 
-        
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error' => $validator->errors()->toArray()]);
+        }else{
+            $validatedData = $validator->validate();
+    
+            if ($request->file('fileRPS')) {
+                $fileNamerps = pathinfo($request->file('fileRPS')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileRPS')->getClientOriginalExtension();
+                $validatedData['fileRPS'] = $request->file('fileRPS')->storeAs('File-RPS',$fileNamerps);
+            };
+            
+            if ($request->file('fileSertif')) {
+                $fileNamesertif = pathinfo($request->file('fileSertif')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileSertif')->getClientOriginalExtension();
+                $validatedData['fileSertif'] = $request->file('fileSertif')->storeAs('File-Sertif',$fileNamesertif);
+            };
+            
+            Pemesanan::create($validatedData);
+            return response()->json(
+                [
+                    'success' => true,
+                ]
+            );
+        }
 
-        if ($request->file('fileRPS')) {
-            $fileNamerps = pathinfo($request->file('fileRPS')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileRPS')->getClientOriginalExtension();
-            $validatedData['fileRPS'] = $request->file('fileRPS')->storeAs('File-RPS',$fileNamerps);
-        };
-        
-        if ($request->file('fileSertif')) {
-            $fileNamesertif = pathinfo($request->file('fileSertif')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileSertif')->getClientOriginalExtension();
-            $validatedData['fileSertif'] = $request->file('fileSertif')->storeAs('File-Sertif',$fileNamesertif);
-        };
-        
-        Pemesanan::create($validatedData);
-        return response()->json(
-            [
-                'success' => true,
-            ]
-        );
     }
 
     public function hapusKet($id)
