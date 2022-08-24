@@ -110,7 +110,8 @@ $jumlah = count($images);
                 {{-- Harus nambah style widht and height --}}
                 @foreach ($images as $img)
                     <div class="carousel-item">
-                        <img src="{{ $img }}" class="d-block w-100 h-50 mx-auto" alt="...">
+                        <img src="{{ $img }}" class="d-block w-100 h-50 mx-auto"
+                            alt="Foto-foto fasilitas dan ruangan Smart Classsroom">
                     </div>
                 @endforeach
             </div>
@@ -393,7 +394,7 @@ $jumlah = count($images);
                 <img src={{ asset('img/map-smartclassroom.jpg') }} width="100%" alt=""
                     class="rounded-3 shadow-lg">
 
-                <div class="map-marker">
+                {{-- <div class="map-marker">
                     <i class="fa-solid fa-location-dot"></i>
                     <h4 class="title-map">
                         Gedung 9
@@ -401,7 +402,15 @@ $jumlah = count($images);
                     <span class="info-marker">
                         <p>Pokonya Gedung Smart Classroom disini</p>
                     </span>
-                </div>
+                </div> --}}
+                <a href="" class="map-marker text-center" id="markLokasi">
+                    <span aria-hidden="true">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </span>
+                    <P>
+                        Gedung 9
+                    </P>
+                </a>
             </div>
 
         </div>

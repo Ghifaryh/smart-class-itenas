@@ -27,7 +27,7 @@
         <link rel="stylesheet" href={{ asset('style/styledashboard.css') }}>
     @endif
 
-    @if ($title === 'Login')
+    @if ($title === 'Login' or $title === 'Register')
         <link rel="stylesheet" href={{ asset('style/stylelogin.css') }}>
     @endif
 
