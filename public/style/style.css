@@ -147,22 +147,57 @@ footer {
 /* Map Marker */
 .interactive-map {
     position: relative;
+    display: inline-block;
 }
 
-.interactive-map > img {
-    position: relative;
+.interactive-map img {
+    /* position: relative; */
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
-.interactive-map > .map-marker {
+/* .interactive-map .map-marker {
     position: absolute;
     top: 41%;
     right: 14.5%;
     text-align: center;
+} */
+
+.map-marker {
+    position: absolute;
+    text-decoration: none;
 }
 
 .map-marker i {
-    font-size: 3.2rem;
+    /* font-size: 3.2rem; */
+    font-size: 40px;
+    position: relative;
+    color: black;
 }
+
+.map-marker p {
+    color: orange;
+    background: white;
+    border-radius: 10%;
+    padding: 5px 10px;
+}
+.map-marker span,
+.map-marker p {
+    position: relative;
+}
+
+.map-marker:before {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#markLokasi {
+    top: 42%;
+    left: 64.2%;
+}
+
 @media (max-width: 450px) {
     .h-custom {
         height: 100%;

@@ -2,15 +2,17 @@
 
 @section('container')
     <section class="wrapper">
-        <div class="container-fluid vh-100 d-inline-block">
+        <div class="container-fluid vh-100 d-inline-block" id="containerLogin">
             {{-- <div class="row d-flex justify-content-center align-items-center h-100"> --}}
             <div class="row">
                 {{-- <div class="col-md-9 col-lg-6 col-xl-5">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                         class="img-fluid" alt="Sample image">
                     </div> --}}
-                <div class="col"></div>
-                <div class="col-md-9 col-lg-6 col-xl-4 offset-xl-1">
+                {{-- <div class="col"></div> --}}
+                {{-- <div class="col-md-9 col-lg-6 col-xl-4 offset-xl-1" id="colLoginWrapper"> --}}
+                {{-- <div class="col-md-9 col-xl-4 offset-xl-8" id="colLoginWrapper"> --}}
+                <div class="col offset-xl-8" id="colLoginWrapper">
                     {{-- <div class="col h-100 px-6"> --}}
                     <div class="login-wrapper">
                         @if (session()->has('success'))
@@ -72,11 +74,11 @@
                             {{-- <div class="form-check mb-0">
                             <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
                             <label class="form-check-label" for="form2Example3">
-                Remember me
-            </label>
-        </div>
-            <a href="#!" class="text-body">Forgot password?</a>
-        </div> --}}
+                            Remember me
+                                </label>
+                            </div>
+                                <a href="#!" class="text-body">Forgot password?</a>
+                            </div> --}}
                             <div class="text-end mt-4 pt-2 ">
                                 {{-- <div class="text-center text-lg-start mt-4 pt-2 "> --}}
                                 <button type="submit" class="btn btn-md btn-login fw-bold text-white text-center me-auto"
@@ -90,4 +92,19 @@
         </div>
     </section>
 @endsection
-<script></script>
+
+@push('loginJs')
+    <script>
+        $(document).ready(function() {
+            if (window.matchMedia("(max-width: 767px)").matches) {
+                $("#containerLogin").removeClass("vh-100");
+                $("#containerLogin").addClass("mb-4");
+                // $("#colLoginWrapper").removeClass("col-md-9 col-lg-6 col-xl-4 offset-xl-1");
+                $("#colLoginWrapper").removeClass("col-md-9 col-xl-4 offset-xl-8");
+                $("#colLoginWrapper").addClass("col");
+                // $("#colLoginWrapper").addClass("mx-auto");
+
+            }
+        });
+    </script>
+@endpush

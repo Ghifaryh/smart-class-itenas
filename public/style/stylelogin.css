@@ -5,8 +5,13 @@ body {
     /* overflow-y: hidden; */
 }
 
-.login-wrapper {
+.login-wrapper,
+.form-registration {
     background: rgba(255, 255, 255, 0.9);
+}
+
+.form-registration {
+    border-radius: 10px;
 }
 
 .btn-login {

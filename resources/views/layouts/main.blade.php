@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"> --}}
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -26,7 +27,7 @@
         <link rel="stylesheet" href={{ asset('style/styledashboard.css') }}>
     @endif
 
-    @if ($title === 'Login')
+    @if ($title === 'Login' or $title === 'Register')
         <link rel="stylesheet" href={{ asset('style/stylelogin.css') }}>
     @endif
 
@@ -74,8 +75,12 @@
     @stack('scripts')
     {{-- Dashboard Aestehtic --}}
     @stack('scriptsDashboard')
+    @stack('scriptsVerification')
 
     @stack('scriptsTruangan')
+
+    {{-- Login Aestehtic --}}
+    @stack('loginJs')
 
 </head>
 
@@ -104,12 +109,12 @@
             @include('sweetalert::alert')
         </div>
     @elseif ($title === 'Tambah Ruangan')
-        <div class="truangan-wrapper-main">'
+        <div class="truangan-wrapper-main">
             @yield('tambah-ruangan')
             @include('sweetalert::alert')
         </div>
     @elseif ($title === 'Verifikasi Akun')
-        <div class="truangan-wrapper-main">'
+        <div class="truangan-wrapper-main">
             @yield('verif-akun')
             @include('sweetalert::alert')
         </div>

@@ -331,7 +331,8 @@ function bulanIndo($hariInggris)
                                                             </form>
                                                         @endif
                                                         @if (auth()->user()->level == 'admin')
-                                                            <form action="/dashboard/hapuspemesanan/{{ $pesanan->id }}" method="post" class="d-block">
+                                                            <form action="/dashboard/hapuspemesanan/{{ $pesanan->id }}"
+                                                                method="post" class="d-block">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="badge bg-danger border-0"
@@ -433,7 +434,7 @@ function bulanIndo($hariInggris)
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         $(document).ready(function() {
             $("#matakuliah").prop('disabled', true);
             
