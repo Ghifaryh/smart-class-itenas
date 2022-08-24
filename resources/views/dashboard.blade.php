@@ -60,7 +60,7 @@ function bulanIndo($hariInggris)
 @section('dashboard-main')
     <div class="container-fluid dashboard-dosen">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-3" id="formPemesanan">
                 <div class="reg-room-wrapper ms-5 px-4 py-2 mb-3" id="regWrapper">
                     <div class="reg-room">
                         {{-- @if ($param == 'add') --}}
@@ -83,7 +83,8 @@ function bulanIndo($hariInggris)
                         @endif
 
                         {{-- <form action="/dashboard" method="post" class="reg-room-form" enctype="multipart/form-data"> --}}
-                        <form action="/dashboard" method="post" class="reg-room-form" id="postPemesanan" enctype="multipart/form-data">
+                        <form action="/dashboard" method="post" class="reg-room-form" id="postPemesanan"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="col mb-3">
                                 <label for="tanggal_input">Tanggal Peminjaman</label>
@@ -179,7 +180,8 @@ function bulanIndo($hariInggris)
                                 @enderror
                             </div>
                             <div class="col mb-3">
-                                <label for="fileRPS" class="form-label @error('fileRPS') is-invalid @enderror">Input RPS</label>
+                                <label for="fileRPS" class="form-label @error('fileRPS') is-invalid @enderror">Input
+                                    RPS</label>
                                 <input class="form-control" type="file" id="fileRPS" name="fileRPS">
                                 @error('fileRPS')
                                     <div class="invalid-feedback">
@@ -188,7 +190,8 @@ function bulanIndo($hariInggris)
                                 @enderror
                             </div>
                             <div class="col mb-3">
-                                <label for="fileSertif" class="form-label @error('fileSertif') is-invalid @enderror">Input Sertifikat</label>
+                                <label for="fileSertif" class="form-label @error('fileSertif') is-invalid @enderror">Input
+                                    Sertifikat</label>
                                 <input class="form-control" type="file" id="fileSertif" name="fileSertif">
                                 @error('fileSertif')
                                     <div class="invalid-feedback">
@@ -375,51 +378,65 @@ function bulanIndo($hariInggris)
                                                 <td class="text-wrap">{{ $pesanan->dosen_matkul }}</td>
                                                 <td class="text-wrap">
                                                     <!-- Button trigger modal -->
-                                                    <button type="button" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#rpsModal">
+                                                    <button type="button" class="badge bg-info border-0"
+                                                        data-bs-toggle="modal" data-bs-target="#rpsModal">
                                                         View
                                                     </button>
-                                                    
+
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="rpsModal">
                                                         <div class="modal-dialog modal-dialog-centered modal-xl">
                                                             <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">File RPS</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <embed src="{{ asset('storage/' . $pesanan->fileRPS) }}" frameborder="0" width="100%" height="800px">
-                                                            </div>
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">File RPS</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <embed
+                                                                        src="{{ asset('storage/' . $pesanan->fileRPS) }}"
+                                                                        frameborder="0" width="100%" height="800px">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <form method="get" action="{{ asset('storage/' . $pesanan->fileRPS) }}">
-                                                        <button class="badge bg-primary border-0" type="submit">Download</button>
-                                                     </form>
+                                                    <form method="get"
+                                                        action="{{ asset('storage/' . $pesanan->fileRPS) }}">
+                                                        <button class="badge bg-primary border-0"
+                                                            type="submit">Download</button>
+                                                    </form>
                                                 </td>
                                                 <td class="text-wrap">
-                                                    <button type="button" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#sertifModal">
+                                                    <button type="button" class="badge bg-info border-0"
+                                                        data-bs-toggle="modal" data-bs-target="#sertifModal">
                                                         View
                                                     </button>
-                                                    
+
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="sertifModal">
                                                         <div class="modal-dialog modal-dialog-centered modal-xl">
                                                             <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">File Sertifikat</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <embed src="{{ asset('storage/' . $pesanan->fileSertif) }}" frameborder="0" width="100%" height="800px">
-                                                            </div>
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">File Sertifikat</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <embed
+                                                                        src="{{ asset('storage/' . $pesanan->fileSertif) }}"
+                                                                        frameborder="0" width="100%" height="800px">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     {{-- <button class="badge bg-primary border-0" type="submit" onclick="window.location.href='{{ asset('storage/' . $pesanan->fileSertif) }}'">Download!</button> --}}
-                                                    <form method="get" action="{{ asset('storage/' . $pesanan->fileSertif) }}">
-                                                        <button class="badge bg-primary border-0" type="submit">Download</button>
-                                                     </form>
+                                                    <form method="get"
+                                                        action="{{ asset('storage/' . $pesanan->fileSertif) }}">
+                                                        <button class="badge bg-primary border-0"
+                                                            type="submit">Download</button>
+                                                    </form>
                                                 </td>
                                                 @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi')
                                                     <td class="fw-bold text-warning text-nowrap">
@@ -496,8 +513,7 @@ function bulanIndo($hariInggris)
                                                             </form>
                                                         @endif
                                                         @if (auth()->user()->level == 'admin')
-                                                            <form action="/dashboard/hapuspemesanan\{{ $pesanan->id }}"
-                                                                method="post">
+                                                            <form action="/dashboard/hapuspemesanan\{{ $pesanan->id }}">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="badge bg-danger border-0"
@@ -780,9 +796,8 @@ function bulanIndo($hariInggris)
                     }
                 });
             });
-
             // $("#submitPesan").submit(function(e){
-            $("#postPemesanan").submit(function(e){
+            $("#postPemesanan").submit(function(e) {
                 e.preventDefault();
                 swal({
                         title: "Apakah form pemesanan sudah sesuai?",
@@ -794,38 +809,33 @@ function bulanIndo($hariInggris)
                     .then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                            url:$(this).attr('action'),
-                            method:$(this).attr('method'),
-                            data:new FormData(this),
-                            processData: false,
-                            dataType:'json',
-                            // async: false,
-                            // cache: false,
-                            contentType: false,
-                            enctype:$(this).attr('enctype'),
-                            success:function(response){
-                                if(response.success){
-                                    swal("Pemesanan berhasil!", {
-                                    icon: "success",
-                                    }).then(function(){
-                                        location.reload();
-                                        // window.location = window.location.href;
-                                    })
-                                    ;
-                                }else{
-                                    swal("Pemesanan gagal!", {
-                                    icon: "error",
-                                    });
+                                url: $(this).attr('action'),
+                                method: $(this).attr('method'),
+                                data: new FormData(this),
+                                processData: false,
+                                dataType: 'json',
+                                // async: false,
+                                // cache: false,
+                                contentType: false,
+                                enctype: $(this).attr('enctype'),
+                                success: function(response) {
+                                    if (response.success) {
+                                        swal("Pemesanan berhasil!", {
+                                            icon: "success",
+                                        }).then(function() {
+                                            location.reload();
+                                            // window.location = window.location.href;
+                                        });
+                                    } else {
+                                        swal("Pemesanan gagal!", {
+                                            icon: "error",
+                                        });
+                                    }
                                 }
-                            },
-                            error:function(error){
-                                console.log(error)
-                            }
                             });
-                        }
+                        };
                     });
             });
-
         });
 
         $(document).ready(function() {
@@ -909,6 +919,7 @@ function bulanIndo($hariInggris)
         $(document).ready(function() {
             if (window.matchMedia("(max-width: 767px)").matches) {
                 $("#regWrapper").removeClass("ms-5");
+                $("#formPemesanan").addClass("mx-auto");
             }
         });
     </script>
