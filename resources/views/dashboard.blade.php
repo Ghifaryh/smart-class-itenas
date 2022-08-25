@@ -58,24 +58,24 @@ function bulanIndo($hariInggris)
 @endphp
 {{-- @section('container') --}}
 @section('dashboard-main')
-@if (session()->has('Login Berhasil'))
-    <script>
-        $(document).ready(function() {
-            swal({
-                title: 'Login Berhasil',
-                text: `{{ session('Login Berhasil') }}`,
-                icon: "success",
-                button: "Tutup",
-                timer: 3000,
+    @if (session()->has('Login Berhasil'))
+        <script>
+            $(document).ready(function() {
+                swal({
+                    title: 'Login Berhasil',
+                    text: `{{ session('Login Berhasil') }}`,
+                    icon: "success",
+                    button: "Tutup",
+                    timer: 3000,
+                });
             });
-        });
-    </script>
-    {{-- <div class="alert alert-success alert-dismissible fade show" role="alert">
+        </script>
+        {{-- <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert"
             aria-label="Close"></button>
     </div> --}}
-@endif
+    @endif
     <div class="container-fluid dashboard-dosen">
         <div class="row">
             <div class="col-sm-3" id="formPemesanan">
@@ -718,10 +718,29 @@ function bulanIndo($hariInggris)
         });
 
         $(document).ready(function() {
-            $('#table1').DataTable();
+            $('#table1').DataTable({
+                dom: 'Bfrtip',
+                // button: [{
+                //         extend: 'pdf',
+                //         oriented: 'potrait',
+                //         // title: 'Data Pasien',
+                //         download: 'open'
+                //     },
+                //     'excel', 'print'
+                // ]
+                buttons: [
+                    'pdf', 'copy'
+                ]
+            });
             // $('#table1').css("text-align", "center");
             // $('#table1').css("color", "orange");
-            $('#table2').DataTable();
+            $('#table2').DataTable({
+                dom: 'Brftip',
+                buttons: [
+                    'pdf', 'copy'
+                ]
+            });
+
             $('#jam_masuk').select2({
                 placeholder: "Pilih Jam Masuk",
                 theme: "bootstrap-5",
