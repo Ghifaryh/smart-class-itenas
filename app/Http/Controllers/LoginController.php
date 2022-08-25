@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\VerifAkun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -26,29 +25,27 @@ class LoginController extends Controller
 
         if(Auth::attemptWhen($credentials)){
             $request->session()->regenerate();
-            // Alert::success('Login Berhasil','Selamat datang');
-            // return redirect()->intended('/dashboard');
             if(Auth::user()->level == "dosen"){
                 $request->session()->regenerate();
-                Alert::success('Login Berhasil','Selamat datang');
-                return redirect()->intended('/dashboard');
+                // Alert::success('Login Berhasil','Selamat datang');
+                return redirect()->intended('/dashboard')->with('success','Selamat datang');
             }else{
                 $request->session()->regenerate();
-                Alert::success('Login Berhasil','Selamat datang admin');
-                return redirect()->intended('/dashboard');
+                // Alert::success('Login Berhasil','Selamat datang admin');
+                return redirect()->intended('/dashboard')->with('success','Selamat datang');
 
             }
         }
 
         if ($check === null) {
-            Alert::error('Login Gagal','Pastikan kode dosen dan password sudah benar!');
+            // Alert::error('Login Gagal','Pastikan kode dosen dan password sudah benar!');
             return back();
         } else {
-            Alert::warning('Peringatan','Akun dengan kode dosen '. $request['kode_dosen'] .' telah didaftarkan, mohon tunggu verifikasi admin');
+            // Alert::warning('Peringatan','Akun dengan kode dosen '. $request['kode_dosen'] .' telah didaftarkan, mohon tunggu verifikasi admin');
             return back();
         }
 
-        Alert::error('Login Gagal','Pastikan kode dosen dan password sudah benar!');
+        // Alert::error('Login Gagal','Pastikan kode dosen dan password sudah benar!');
         return back();
 
         // dd('berhasil login!');

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreRuanganRequest;
 use App\Http\Requests\UpdateRuanganRequest;
@@ -58,7 +57,7 @@ class RuanganController extends Controller
     public function edit($id)
     {
         $ruangan = Ruangan::findorfail($id);
-        Alert::success('Success','Data ruangan siap untuk diedit');
+        // Alert::success('Success','Data ruangan siap untuk diedit');
         return view('truangan', [
             'title' => 'Tambah Ruangan',
             'param' => 'edit',
@@ -81,14 +80,14 @@ class RuanganController extends Controller
             'fasilitas' => $request->fasilitas,
         ]);
         
-        Alert::success('Success','Data ruangan berhasil diupdate');
+        // Alert::success('Success','Data ruangan berhasil diupdate');
         return redirect('/truangan');
     }
 
     public function destroy($id)
     {
         Ruangan::destroy($id);
-        Alert::success('Success','Data ruangan berhasil dihapus');
+        // Alert::success('Success','Data ruangan berhasil dihapus');
         return redirect('/truangan');
     }
 }

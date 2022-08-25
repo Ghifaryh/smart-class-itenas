@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('verif_akuns', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email');
             $table->string('level');
             $table->string('kode_dosen')->unique();
             $table->timestamp('email_verified_at')->nullable();

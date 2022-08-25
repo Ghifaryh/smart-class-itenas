@@ -23,6 +23,7 @@
     <link rel="stylesheet" href={{ asset('style/style.css') }}>
     <link rel="stylesheet" href={{ asset('style/stylesidebar.css') }}>
     <link rel="stylesheet" href={{ asset('style/styleujicoba.css') }}>
+    <link rel="stylesheet" href={{ asset('style/stylenotif.css') }}>
     @if ($title === 'Dashboard' or $title == 'Tambah Ruangan' or $title == 'Verifikasi Akun')
         <link rel="stylesheet" href={{ asset('style/styledashboard.css') }}>
     @endif
@@ -100,23 +101,19 @@
     @if ($title === 'Home' or $title === 'Login' or $title === 'Register')
         <div class="container-fluid my-3 contents-all px-5">
             @yield('container')
-            @include('sweetalert::alert')
         </div>
     @elseif ($title === 'Dashboard')
         {{-- @elseif ($title === 'Dashboard' or $title == 'Tambah Ruangan') --}}
         <div class="dashboard-wrapper-main">
             @yield('dashboard-main')
-            @include('sweetalert::alert')
         </div>
     @elseif ($title === 'Tambah Ruangan')
         <div class="truangan-wrapper-main">
             @yield('tambah-ruangan')
-            @include('sweetalert::alert')
         </div>
     @elseif ($title === 'Verifikasi Akun')
         <div class="truangan-wrapper-main">
             @yield('verif-akun')
-            @include('sweetalert::alert')
         </div>
     @endif
 

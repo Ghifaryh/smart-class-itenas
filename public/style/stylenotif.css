@@ -1,0 +1,50 @@
+/* .modal-body {
+    background-color: #5165ff;
+    border-color: #5165ff;
+}
+
+.intro-1 {
+    font-size: 20px
+}
+
+.close {
+    color: #fff
+}
+
+.close:hover {
+    color: #fff
+}
+
+.intro-2 {
+    font-size: 13px
+} */
+
+.modal-content{
+    border-radius: 1rem;
+}
+
+
+.modal-content:hover{
+    box-shadow: 2px 2px 2px black;
+}
+
+.fa{
+    color: #2b84be;
+    font-size:90px;
+    padding: 30px 0px;
+}
+
+.b1{
+    background-color:#2b84be;
+    box-shadow: 0px 4px #337095;
+    font-size: 17px;
+}
+
+.r3{
+    color: #c1c1c1;
+    font-weight: 500;
+}
+
+a, a:hover{
+    text-decoration: none;
+}

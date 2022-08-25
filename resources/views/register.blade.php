@@ -19,6 +19,17 @@
                             </div>
                         @enderror
                     </div>
+                    <div class="form-floating">
+                        <input type="email" name="email"
+                            class="form-control rounded-top @error('email') is-invalid @enderror" id="email"
+                            placeholder="name@example.com" required value="{{ old('email') }}">
+                        <label for="email">Nama</label>
+                        @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
 
                     <input type="hidden" name="id_status" class="form-control" id="id_status" placeholder="Level" required
                         value="6">
