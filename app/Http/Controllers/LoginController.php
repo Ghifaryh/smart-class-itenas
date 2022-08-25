@@ -27,26 +27,22 @@ class LoginController extends Controller
             $request->session()->regenerate();
             if(Auth::user()->level == "dosen"){
                 $request->session()->regenerate();
-                // Alert::success('Login Berhasil','Selamat datang');
-                return redirect()->intended('/dashboard')->with('success','Selamat datang');
+                return redirect()->intended('/dashboard')->with('Login Berhasil', 'Selamat Datang');
             }else{
                 $request->session()->regenerate();
-                // Alert::success('Login Berhasil','Selamat datang admin');
-                return redirect()->intended('/dashboard')->with('success','Selamat datang');
+                return redirect()->intended('/dashboard')->with('Login Berhasil', 'Selamat Datang Admin');
 
             }
         }
 
         if ($check === null) {
-            // Alert::error('Login Gagal','Pastikan kode dosen dan password sudah benar!');
-            return back();
+            return back()->with('Login Gagal', 'Pastikan kode dosen dan password sudah benar!');
         } else {
-            // Alert::warning('Peringatan','Akun dengan kode dosen '. $request['kode_dosen'] .' telah didaftarkan, mohon tunggu verifikasi admin');
-            return back();
+            return back()->with('Login Warning', 'Akun dengan kode dosen '. $request['kode_dosen'] .' telah didaftarkan, mohon tunggu verifikasi admin');
         }
 
         // Alert::error('Login Gagal','Pastikan kode dosen dan password sudah benar!');
-        return back();
+        // return back();
 
         // dd('berhasil login!');
         

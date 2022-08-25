@@ -37,12 +37,10 @@ class VerifAkunController extends Controller
         if ($check === null) {
             User::create($data);
             VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 7]);
-            // Alert::success('Success','Akun Terverifikasi');
-            return redirect('/verifakun');
+            return redirect('/verifakun')->with('Verif', 'Akun Terverifikasi');
         } else {
             VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 7]);
-            // Alert::success('Success','Akun Terverifikasi');
-            return redirect('/verifakun');
+            return redirect('/verifakun')->with('Verif', 'Akun Terverifikasi');
         }
     }
 
@@ -51,7 +49,7 @@ class VerifAkunController extends Controller
         User::where('kode_dosen', '=', $kode )->delete();
         VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 8]);
         // Alert::success('Success','Akun Ditolak');
-        return redirect('/verifakun');   
+        return redirect('/verifakun')->with('Verif', 'Akun Ditolak');   
     }
 
     public function destroy($kode)
@@ -61,7 +59,7 @@ class VerifAkunController extends Controller
 
         // Alert::success('Success','Akun berhasil dihapus');
 
-        return redirect('/verifakun');
+        return redirect('/verifakun')->with('Verif', 'Akun berhasil dihapus');
     }
 
     

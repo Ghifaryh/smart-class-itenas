@@ -3,8 +3,21 @@
 @php
 $num1 = 1;
 @endphp
-{{-- @section('container') --}}
+
 @section('verif-akun')
+@if (session()->has('Verif'))
+    <script>
+        $(document).ready(function() {
+            swal({
+                title: 'Berhasil',
+                text: `{{ session('Verif') }}`,
+                icon: "success",
+                button: "Tutup",
+                timer: 3000,
+            });
+        });
+    </script>
+@endif
     {{-- <div class="container-fluid dashboard-dosen ms-5"> --}}
     <div class="container-fluid dashboard-verif mb-5">
         <div class="row">

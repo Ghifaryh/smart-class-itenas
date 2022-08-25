@@ -1,6 +1,32 @@
 @extends('layouts.main')
 
 @section('container')
+@if (session()->has('Login Gagal'))
+    <script>
+        $(document).ready(function() {
+            swal({
+                title: 'Login Gagal',
+                text: `{{ session('Login Gagal') }}`,
+                icon: "error",
+                button: "Tutup",
+                timer: 6000,
+            });
+        });
+    </script>
+@endif
+@if (session()->has('Login Warning'))
+    <script>
+        $(document).ready(function() {
+            swal({
+                title: 'Warning',
+                text: `{{ session('Login Warning') }}`,
+                icon: "warning",
+                button: "Tutup",
+                timer: 6000,
+            });
+        });
+    </script>
+@endif
     <section class="wrapper">
         <div class="container-fluid vh-100 d-inline-block" id="containerLogin">
             {{-- <div class="row d-flex justify-content-center align-items-center h-100"> --}}
