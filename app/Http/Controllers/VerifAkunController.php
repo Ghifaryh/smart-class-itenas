@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\VerifAkun;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Request;
 use App\Http\Requests\StoreVerifAkunRequest;
 use App\Http\Requests\UpdateVerifAkunRequest;
@@ -13,9 +14,12 @@ class VerifAkunController extends Controller
 {
     public function index()
     {
+        // $password = Crypt::decryptString();
+        $akun = User::whereNot('level','=','admin')->get();
         return view('verifakun', [
             'title' => 'Verifikasi Akun',
             'akuns' => VerifAkun::all(),
+            'users' => $akun,
         ]);
     }
 
