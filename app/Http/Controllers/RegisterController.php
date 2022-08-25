@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\VerifAkun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
@@ -23,6 +22,7 @@ class RegisterController extends Controller
         $check = VerifAkun::where('kode_dosen', '=', $request['kode_dosen'] )->first();
         $validatedData = $request->validate([
             'name' => ['required','max:255'],
+            'email' => ['required','email'],
             'level' => ['required'],
             'kode_dosen' => ['required'],
             'id_status' => ['required'],
@@ -37,10 +37,10 @@ class RegisterController extends Controller
 
         if ($check === null) {
             VerifAkun::create($validatedData);
-            Alert::success('Success','Registrasi Berhasil! Tunggu akun diverifikasi oleh admin');
+            // Alert::success('Success','Registrasi Berhasil! Tunggu akun diverifikasi oleh admin');
             return redirect('/login');
         } else {
-            Alert::warning('Peringatan','Akun dengan kode dosen '. $request['kode_dosen'] .' telah didaftarkan, mohon tunggu verifikasi admin');
+            // Alert::warning('Peringatan','Akun dengan kode dosen '. $request['kode_dosen'] .' telah didaftarkan, mohon tunggu verifikasi admin');
             return redirect('/register');
         }
         // $request->session()->flash('success', 'Registration successfull!vPlease Login');

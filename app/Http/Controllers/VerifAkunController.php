@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\VerifAkun;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreVerifAkunRequest;
 use App\Http\Requests\UpdateVerifAkunRequest;
 
@@ -29,6 +28,7 @@ class VerifAkunController extends Controller
 
         $data = [
             'name' => $akun->name,
+            'email' => $akun->email,
             'level' => $akun->level,
             'kode_dosen' => $akun->kode_dosen,
             'password' => $akun->password,
@@ -37,11 +37,11 @@ class VerifAkunController extends Controller
         if ($check === null) {
             User::create($data);
             VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 7]);
-            Alert::success('Success','Akun Terverifikasi');
+            // Alert::success('Success','Akun Terverifikasi');
             return redirect('/verifakun');
         } else {
             VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 7]);
-            Alert::success('Success','Akun Terverifikasi');
+            // Alert::success('Success','Akun Terverifikasi');
             return redirect('/verifakun');
         }
     }
@@ -50,7 +50,7 @@ class VerifAkunController extends Controller
     {
         User::where('kode_dosen', '=', $kode )->delete();
         VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 8]);
-        Alert::success('Success','Akun Ditolak');
+        // Alert::success('Success','Akun Ditolak');
         return redirect('/verifakun');   
     }
 
@@ -59,7 +59,7 @@ class VerifAkunController extends Controller
         VerifAkun::where('kode_dosen', '=', $kode )->delete();
         User::where('kode_dosen', '=', $kode )->delete();
 
-        Alert::success('Success','Akun berhasil dihapus');
+        // Alert::success('Success','Akun berhasil dihapus');
 
         return redirect('/verifakun');
     }

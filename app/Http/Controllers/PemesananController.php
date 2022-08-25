@@ -10,7 +10,6 @@ use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StorePemesananRequest;
 use App\Http\Requests\UpdatePemesananRequest;
@@ -45,7 +44,7 @@ class PemesananController extends Controller
             $validatedData['fileSertif'] = $request->file('fileSertif')->store('File-Sertif');
         };
 
-        Alert::success('Success','Data pemesanan berhasil diinput!');
+        // Alert::success('Success','Data pemesanan berhasil diinput!');
         
         // ddd($request);
         Pemesanan::create($validatedData);
@@ -79,12 +78,12 @@ class PemesananController extends Controller
     
             if ($request->file('fileRPS')) {
                 $fileNamerps = pathinfo($request->file('fileRPS')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileRPS')->getClientOriginalExtension();
-                $validatedData['fileRPS'] = $request->file('fileRPS')->storeAs('File-RPS',$fileNamerps);
+                $validatedData['fileRPS'] = $request->file('fileRPS')->storeAs('File-RPS',$fileNamerps,'public');
             };
             
             if ($request->file('fileSertif')) {
                 $fileNamesertif = pathinfo($request->file('fileSertif')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileSertif')->getClientOriginalExtension();
-                $validatedData['fileSertif'] = $request->file('fileSertif')->storeAs('File-Sertif',$fileNamesertif);
+                $validatedData['fileSertif'] = $request->file('fileSertif')->storeAs('File-Sertif',$fileNamesertif,'public');
             };
             
             Pemesanan::create($validatedData);
@@ -101,7 +100,7 @@ class PemesananController extends Controller
     {
         Pemesanan::where('id', $id)->update(['id_status' => 4]);
 
-        Alert::success('Success','Data pemesanan berhasil dihapus');
+        // Alert::success('Success','Data pemesanan berhasil dihapus');
 
         return redirect('/dashboard');
     }
@@ -113,8 +112,8 @@ class PemesananController extends Controller
         Storage::delete($check->fileSertif);
         Pemesanan::destroy($id);
 
-        Alert::success('Success','Data pemesanan berhasil dihapus');
-
+        // Alert::toast('Data pemesanan berhasil dihapus','success');
+        
         return redirect('/dashboard');
     }
 
@@ -145,12 +144,12 @@ class PemesananController extends Controller
         if ($check === null) {
             Jadwal::create($data);
             Pemesanan::where('id', $id)->update(['id_status' => 2]);
-            Alert::success('Success','Jadwal diterima');
-            return redirect('/dashboard');
+            // Alert::success('Success','Jadwal diterima');
+            return redirect('/dashboard')->with('success', 'Data pemesanan berhasil ditambahkan!');
         } else {
             Pemesanan::where('id', $id)->update(['id_status' => 2]);
-            Alert::success('Success','Jadwal diterima');
-            return redirect('/dashboard');
+            // Alert::success('Success','Jadwal diterima');
+            return redirect('/dashboard')->with('success', 'Data pemesanan berhasil ditambahkan!');
         }
     }
 
@@ -158,7 +157,7 @@ class PemesananController extends Controller
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 3]);
-        Alert::success('Success','Jadwal dibatalkan');
+        // Alert::success('Success','Jadwal dibatalkan');
         return redirect('/dashboard');   
     }
 
@@ -166,7 +165,7 @@ class PemesananController extends Controller
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 5]);
-        Alert::success('Success','Jadwal dibatalkan karena dihapus');
+        // Alert::success('Success','Jadwal dibatalkan karena dihapus');
         return redirect('/dashboard');   
     }
 

@@ -59,19 +59,21 @@ function bulanIndo($hariInggris)
 {{-- @section('container') --}}
 @section('dashboard-main')
     <!-- Modal -->
-    {{-- <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <iframe id="iframeModal" src="" frameborder="0" width="100%" height="800px"></iframe>
+    <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4">
+            
+            <h3>Succes</h3>
+                <i class="fa fa-bell"></i>
+                <p class="r3 px-md-5 px-sm-1">{{ session('success') }}</p>
+        
+                {{-- <div class="text-center mb-3"> <button class="btn btn-primary w-50 rounded-pill b1">Subscribe</button> </div> --}}
+                
+                {{-- <a href="#">Not now</a> --}}
             </div>
         </div>
-        </div>
-    </div> --}}
+    </div>
+
     <div class="container-fluid dashboard-dosen">
         <div class="row">
             <div class="col-sm-3" id="formPemesanan">
@@ -80,13 +82,39 @@ function bulanIndo($hariInggris)
                         {{-- @if ($param == 'add') --}}
                         <h3 class="fw-bold pt-2 text-nowrap">Pemesanan Ruangan</h3>
                         <h6 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h6>
-                        {{-- @if (session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                        {{-- <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="text-center mt-2"> <img src="{{ asset('https://i.imgur.com/zZUiqsU.png') }}" width="200"> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="text-white mt-4">
+                                                    <span class="intro-1">Succes</span>
+                                                    <div class="mt-2"> <span class="intro-2">{{ session('success') }}</span> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> --}}
+                        @if (session()->has('success'))
+                            <script>
+                                $(function() {
+                                $('#form').modal('show');
+                            });
+                            </script>
+                            {{-- <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
-                            </div>
-                        @endif --}}
+                            </div> --}}
+                        @endif
 
                         <form action="/dashboard" method="post" class="reg-room-form" id="postPemesanan"
                             enctype="multipart/form-data">
