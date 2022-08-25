@@ -1,6 +1,19 @@
 @extends('layouts.main')
 
 @section('container')
+@if (session()->has('Regis Peringatan'))
+    <script>
+        $(document).ready(function() {
+            swal({
+                title: 'Peringatan',
+                text: `{{ session('Regis Peringatan') }}`,
+                icon: "warning",
+                button: "Tutup",
+                timer: 3000,
+            });
+        });
+    </script>
+@endif
     <div class="row justify-content-center vh-100 ">
         {{-- <div class="col-lg-5"> --}}
         <div class="col-sm-5">
@@ -23,7 +36,7 @@
                         <input type="email" name="email"
                             class="form-control rounded-top @error('email') is-invalid @enderror" id="email"
                             placeholder="name@example.com" required value="{{ old('email') }}">
-                        <label for="email">Nama</label>
+                        <label for="email">Email</label>
                         @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -31,7 +44,7 @@
                         @enderror
                     </div>
 
-                    <input type="hidden" name="id_status" class="form-control" id="id_status" placeholder="Level" required
+                    <input type="hidden" name="id_status" class="form-control" id="id_status" placeholder="Id Status" required
                         value="6">
                     <input type="hidden" name="level" class="form-control" id="level" placeholder="Level" required
                         value="dosen">
@@ -55,11 +68,11 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-floating">
-                        <input type="password" name="password"
-                            class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password"
-                            placeholder="Kode Pin" required>
-                        <label for="password">Kode Pin</label>
+                    <div class="input-group">
+                        <input type="password" name="password" class="form-control form-control-lg"
+                            id="password" placeholder="Kode Pin" required>
+                        <span class="input-group-text seepas" onclick="shwpass()"><i class="fa-solid fa-eye"
+                                aria-hidden="true" id="eye"></i></span>
                         @error('password')
                             <div class="invalid-feedback">
                                 {{ $message }}

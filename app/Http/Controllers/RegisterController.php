@@ -38,10 +38,10 @@ class RegisterController extends Controller
         if ($check === null) {
             VerifAkun::create($validatedData);
             // Alert::success('Success','Registrasi Berhasil! Tunggu akun diverifikasi oleh admin');
-            return redirect('/login');
+            return redirect('/login')->with('Regis Sukses', 'Registrasi Berhasil! Tunggu akun diverifikasi oleh admin');
         } else {
             // Alert::warning('Peringatan','Akun dengan kode dosen '. $request['kode_dosen'] .' telah didaftarkan, mohon tunggu verifikasi admin');
-            return redirect('/register');
+            return redirect('/register')->with('Regis Peringatan', 'Akun dengan kode dosen '. $request['kode_dosen'] .' telah didaftarkan, mohon tunggu verifikasi admin');
         }
         // $request->session()->flash('success', 'Registration successfull!vPlease Login');
         // Alert::success('Success','Registrasi Berhasil! Tunggu akun diverifikasi oleh admin');

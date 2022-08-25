@@ -21,26 +21,17 @@ use App\Http\Controllers\VerifAkunController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/', [HomeController::class, 'index']);
-
 Route::get('/about', function () {
     return view('welcome', [
         "title" => "About"
     ]);
 });
 
+Route::get('/', [HomeController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
-
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
-
 Route::get('/register', [RegisterController::class, 'index']);
-
 Route::post('/register', [RegisterController::class, 'store']);
 
 

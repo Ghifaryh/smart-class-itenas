@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('ruangans', function (Blueprint $table) {
             $table->id();
+            $table->integer('no_ruangan');
             $table->string('nama');
             $table->string('fasilitas')->nullable();
             $table->timestamps();

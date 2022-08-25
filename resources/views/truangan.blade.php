@@ -22,6 +22,12 @@ $num = 1;
                         <form action="/truangan" method="post" class="formAddRuangan" id="submitRuangan">
                             @csrf
                             <div class="col-sm-9 form-floating mb-3">
+                                <input type="text" name="no_ruangan" id="no_ruangan" placeholder="Nama Ruangan"
+                                    class="form-control" required>
+                                <label for="no_ruangan">Nomor Ruangan</label>
+                                <span class="text-danger error-text no_ruangan_error"></span>
+                            </div>
+                            <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" name="nama" id="nama" placeholder="Nama Ruangan"
                                     class="form-control" required>
                                 <label for="nama">Nama Ruangan</label>
@@ -51,6 +57,11 @@ $num = 1;
                             id="updateRuangan">
                             @csrf
                             <div class="col-sm-9 form-floating mb-3">
+                                <input type="text" name="no_ruangan" id="no_ruangan" placeholder="Nama Ruangan"
+                                    class="form-control" value="{{ $ruanganedt->no_ruangan }}" required>
+                                <label for="no_ruangan">Nama Ruangan</label>
+                            </div>
+                            <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" name="nama" id="nama" placeholder="Nama Ruangan"
                                     class="form-control" value="{{ $ruanganedt->nama }}" required>
                                 <label for="nama">Nama Ruangan</label>
@@ -75,6 +86,7 @@ $num = 1;
                             <thead class="bg-light text-center">
                                 <tr class="text-nowrap">
                                     <th scope="col">No</th>
+                                    <th scope="col">Nomor Ruangan</th>
                                     <th scope="col">Nama Ruangan</th>
                                     <th scope="col">Fasilitas</th>
                                     <th scope="col">Opsi</th>
@@ -84,6 +96,7 @@ $num = 1;
                                 @foreach ($ruangan as $rn)
                                     <tr>
                                         <th scope="row">{{ $num++ }}</th>
+                                        <th>{{ $rn->no_ruangan }}</th>
                                         <td>{{ $rn->nama }}</td>
                                         <td>{{ $rn->fasilitas }}</td>
                                         <td>

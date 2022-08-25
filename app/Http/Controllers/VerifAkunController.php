@@ -48,7 +48,7 @@ class VerifAkunController extends Controller
     {
         User::where('kode_dosen', '=', $kode )->delete();
         VerifAkun::where('kode_dosen', $kode)->update(['id_status' => 8]);
-        // Alert::success('Success','Akun Ditolak');
+
         return redirect('/verifakun')->with('Verif', 'Akun Ditolak');   
     }
 
@@ -56,8 +56,6 @@ class VerifAkunController extends Controller
     {
         VerifAkun::where('kode_dosen', '=', $kode )->delete();
         User::where('kode_dosen', '=', $kode )->delete();
-
-        // Alert::success('Success','Akun berhasil dihapus');
 
         return redirect('/verifakun')->with('Verif', 'Akun berhasil dihapus');
     }

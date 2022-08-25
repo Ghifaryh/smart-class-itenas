@@ -15,7 +15,7 @@ class JadwalController extends Controller
     {
         Jadwal::destroy($id);
 
-        return redirect('/dashboard')->with('success', 'Jadwal berhasil dihapus!');
+        return redirect('/dashboard')->with('Jadwal Sukses', 'Jadwal berhasil dihapus!');
     }
     
 }

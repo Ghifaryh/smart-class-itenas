@@ -56,7 +56,7 @@ function bulanIndo($hariInggris)
     }
 }
 @endphp
-{{-- @section('container') --}}
+
 @section('dashboard-main')
 @if (session()->has('Login Berhasil'))
     <script>
@@ -75,6 +75,32 @@ function bulanIndo($hariInggris)
         <button type="button" class="btn-close" data-bs-dismiss="alert"
             aria-label="Close"></button>
     </div> --}}
+@endif
+@if (session()->has('Pemesanan Sukses'))
+    <script>
+        $(document).ready(function() {
+            swal({
+                title: 'Berhasil',
+                text: `{{ session('Pemesanan Sukses') }}`,
+                icon: "success",
+                button: "Tutup",
+                timer: 3000,
+            });
+        });
+    </script>
+@endif
+@if (session()->has('Jadwal Sukses'))
+    <script>
+        $(document).ready(function() {
+            swal({
+                title: 'Berhasil',
+                text: `{{ session('Jadwal Sukses') }}`,
+                icon: "success",
+                button: "Tutup",
+                timer: 3000,
+            });
+        });
+    </script>
 @endif
     <div class="container-fluid dashboard-dosen">
         <div class="row">
@@ -209,6 +235,7 @@ function bulanIndo($hariInggris)
                                             <th scope="col">Mata Kuliah</th>
                                             <th scope="col">Kelas</th>
                                             <th scope="col">Dosen</th>
+                                            <th scope="col">Pemesan</th>
                                             <th scope="col">File RPS</th>
                                             <th scope="col">File Sertifikat</th>
                                             <th scope="col">Status</th>
@@ -234,6 +261,7 @@ function bulanIndo($hariInggris)
                                                 <td class="text-wrap">{{ $pesanan->matakuliah }}</td>
                                                 <td class="text-wrap">{{ $pesanan->kelas }}</td>
                                                 <td class="text-wrap">{{ $pesanan->dosen_matkul }}</td>
+                                                <td class="text-wrap">{{ $pesanan->User->name }}</td>
                                                 <td class="text-wrap">
                                                     <!-- Button trigger modal -->
                                                     {{-- <button value="{{ asset('storage/' . $pesanan->fileRPS) }}" type="button" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#myModal" id="btnFileRPS">

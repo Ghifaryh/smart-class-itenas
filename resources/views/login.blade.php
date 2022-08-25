@@ -1,6 +1,19 @@
 @extends('layouts.main')
 
 @section('container')
+@if (session()->has('Regis Sukses'))
+    <script>
+        $(document).ready(function() {
+            swal({
+                title: 'Berhasil',
+                text: `{{ session('Regis Sukses') }}`,
+                icon: "success",
+                button: "Tutup",
+                timer: 6000,
+            });
+        });
+    </script>
+@endif
 @if (session()->has('Login Gagal'))
     <script>
         $(document).ready(function() {
@@ -18,7 +31,7 @@
     <script>
         $(document).ready(function() {
             swal({
-                title: 'Warning',
+                title: 'Peringatan',
                 text: `{{ session('Login Warning') }}`,
                 icon: "warning",
                 button: "Tutup",
@@ -41,20 +54,12 @@
                 <div class="col offset-xl-8" id="colLoginWrapper">
                     {{-- <div class="col h-100 px-6"> --}}
                     <div class="login-wrapper">
-                        @if (session()->has('success'))
+                        {{-- @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        @endif
-
-                        @if (session()->has('loginError'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ session('loginError') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
+                        @endif --}}
 
                         <div class="d-flex flex-row align-items-center justify-content-center justify-content-center">
                             {{-- <p class="lead fw-normal mb-0 text-center">Sign in</p> --}}

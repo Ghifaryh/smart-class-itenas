@@ -14,7 +14,7 @@ class Pemesanan extends Model
 
     public function ruangan()
     {
-        return $this->belongsTo(Ruangan::class);
+        return $this->belongsTo(Ruangan::class, 'id_ruangan', 'no_ruangan');
     }
 
     public function status()
@@ -24,7 +24,7 @@ class Pemesanan extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_dosen');
+        return $this->belongsTo(User::class, 'id_pemesan');
     }
 
     public function prodi()

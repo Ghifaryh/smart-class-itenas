@@ -43,8 +43,6 @@ class PemesananController extends Controller
         if ($request->file('fileSertif')) {
             $validatedData['fileSertif'] = $request->file('fileSertif')->store('File-Sertif');
         };
-
-        // Alert::success('Success','Data pemesanan berhasil diinput!');
         
         // ddd($request);
         Pemesanan::create($validatedData);
@@ -100,9 +98,7 @@ class PemesananController extends Controller
     {
         Pemesanan::where('id', $id)->update(['id_status' => 4]);
 
-        // Alert::success('Success','Data pemesanan berhasil dihapus');
-
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('Pemesanan Sukses', 'Data pemesanan berhasil dihapus');
     }
 
     public function destroy($id)
@@ -111,18 +107,14 @@ class PemesananController extends Controller
         Storage::delete($check->fileRPS);
         Storage::delete($check->fileSertif);
         Pemesanan::destroy($id);
-
-        // Alert::toast('Data pemesanan berhasil dihapus','success');
         
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('Pemesanan Sukses', 'Data pemesanan berhasil dihapus');
     }
 
     public function accept($id)
     {
         $pesanan = Pemesanan::find($id);
         $check = Jadwal::where('id_pemesanan', '=', $id )->first();
-
-        // $checked = $check->id_pemesanan;
 
         $data = [
             'id_pemesanan' => $pesanan->id,
@@ -144,12 +136,10 @@ class PemesananController extends Controller
         if ($check === null) {
             Jadwal::create($data);
             Pemesanan::where('id', $id)->update(['id_status' => 2]);
-            // Alert::success('Success','Jadwal diterima');
-            return redirect('/dashboard')->with('success', 'Data pemesanan berhasil ditambahkan!');
+            return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal diterima');
         } else {
             Pemesanan::where('id', $id)->update(['id_status' => 2]);
-            // Alert::success('Success','Jadwal diterima');
-            return redirect('/dashboard')->with('success', 'Data pemesanan berhasil ditambahkan!');
+            return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal diterima');
         }
     }
 
@@ -157,16 +147,14 @@ class PemesananController extends Controller
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 3]);
-        // Alert::success('Success','Jadwal dibatalkan');
-        return redirect('/dashboard');   
+        return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan');   
     }
 
     public function cancelhapus($id)
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 5]);
-        // Alert::success('Success','Jadwal dibatalkan karena dihapus');
-        return redirect('/dashboard');   
+        return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan karena dihapus');
     }
 
     // public function edit($id)
