@@ -165,13 +165,17 @@ function bulanIndo($hariInggris)
                             </div>
                             <div class="col mb-3">
                                 <label for="fileRPS" class="form-label @error('fileRPS') is-invalid @enderror">Input
-                                    RPS</label>
+                                    RPS <span class="text-end textPeringatan"> <br>*File harus pdf dan berukuran
+                                        &#8804;
+                                        5MB</span></label>
                                 <input class="form-control" type="file" id="fileRPS" name="fileRPS">
                                 <span class="text-danger error-text fileRPS_error"></span>
                             </div>
                             <div class="col mb-3">
                                 <label for="fileSertif" class="form-label @error('fileSertif') is-invalid @enderror">Input
-                                    Sertifikat</label>
+                                    Sertifikat<span class="text-end textPeringatan"> <br>*File harus pdf dan berukuran
+                                        &#8804;
+                                        5MB</span></label>
                                 <input class="form-control" type="file" id="fileSertif" name="fileSertif">
                                 <span class="text-danger error-text fileSertif_error"></span>
                             </div>
@@ -240,10 +244,11 @@ function bulanIndo($hariInggris)
                                                     {{-- <button value="{{ asset('storage/' . $pesanan->fileRPS) }}" type="button" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#myModal" id="btnFileRPS">
                                                         View
                                                     </button> --}}
-                                                
+
                                                     <form action="{{ asset('storage/' . $pesanan->fileRPS) }}">
-                                                        <button class="badge bg-primary border-0"
-                                                            type="submit">Download</button>
+                                                        <button class="badge bg-primary border-0 btnDownload"
+                                                            type="submit"><i
+                                                                class="fa-solid fa-cloud-arrow-down"></i></button>
                                                     </form>
                                                 </td>
                                                 <td class="text-wrap">
@@ -252,12 +257,13 @@ function bulanIndo($hariInggris)
                                                         View
                                                     </button> --}}
                                                     <form action="{{ asset('storage/' . $pesanan->fileSertif) }}">
-                                                        <button class="badge bg-primary border-0"
-                                                            type="submit">Download</button>
+                                                        <button class="badge bg-primary border-0 btnDownload"
+                                                            type="submit"><i
+                                                                class="fa-solid fa-cloud-arrow-down"></i></button>
                                                     </form>
                                                 </td>
                                                 @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi')
-                                                    <td class="fw-bold text-warning text-nowrap">
+                                                    <td class="fw-bold text-warning text-wrap">
                                                         {{ $pesanan->Status->keterangan }}</td>
                                                 @elseif ($pesanan->Status->keterangan == 'Diterima')
                                                     <td class="fw-bold text-success text-nowrap">
@@ -437,19 +443,19 @@ function bulanIndo($hariInggris)
 
         $(document).ready(function() {
             $("#matakuliah").prop('disabled', true);
-            
-            // $('#btnFileRPS').click(function () {            
+
+            // $('#btnFileRPS').click(function () {
             //     $('#iframeModal').attr('src', null);
             //     var fileRPS = $(this).val();
             //     var $iframe = $('#iframeModal').attr('src', fileRPS);
             // })
 
-            // $('#btnFileSertif').click(function () {      
+            // $('#btnFileSertif').click(function () {
             //     $('#iframeModal').attr('src', null);
             //     var fileSertif = $(this).val();
             //     var $iframe = $('#iframeModal').attr('src', fileSertif);
             // })
-            
+
             $('#tanggal_input').datepicker({
                 dateFormat: 'dd/mm/yy'
             });
@@ -649,7 +655,7 @@ function bulanIndo($hariInggris)
                                 // cache: false,
                                 contentType: false,
                                 enctype: $(this).attr('enctype'),
-                                beforeSend:function(){
+                                beforeSend: function() {
                                     $(document).find('span.error-text').text('');
                                 },
                                 success: function(response) {
@@ -660,7 +666,7 @@ function bulanIndo($hariInggris)
                                             location.reload();
                                             // window.location = window.location.href;
                                         });
-                                    }else{
+                                    } else {
                                         swal({
                                             title: "Error",
                                             text: "Pemesanan gagal!",
@@ -668,8 +674,9 @@ function bulanIndo($hariInggris)
                                             button: "Tutup",
                                             timer: 2000,
                                         });
-                                        $.each(response.error, function(prefix, val){
-                                            $('span.'+prefix+'_error').text(val[0]);
+                                        $.each(response.error, function(prefix, val) {
+                                            $('span.' + prefix + '_error').text(val[
+                                                0]);
                                         });
                                     }
                                 }
@@ -717,6 +724,8 @@ function bulanIndo($hariInggris)
 
         $(document).ready(function() {
             $('#table1').DataTable();
+            // $('#table1').css("text-align", "center");
+            // $('#table1').css("color", "orange");
             $('#table2').DataTable();
             $('#jam_masuk').select2({
                 placeholder: "Pilih Jam Masuk",

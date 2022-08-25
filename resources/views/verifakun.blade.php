@@ -55,19 +55,19 @@ $num1 = 1;
                                                 <form action="/verifakun/verifikasi/{{ $akun->kode_dosen }}" method="post"
                                                     class="d-block">
                                                     @csrf
-                                                    <button class="badge bg-success border-0 btn-verif"
+                                                    <button class="badge verifBadge bg-success border-0 btn-verif"
                                                         onclick="return confirm('Apakah anda yakin untuk memverifikasi akun ini?')">Verifikasi</button>
                                                 </form>
                                                 <form action="/verifakun/tolak/{{ $akun->kode_dosen }}" method="post"
                                                     class="d-block">
                                                     @csrf
-                                                    <button class="badge bg-danger border-0 btn-verif"
+                                                    <button class="badge verifBadge bg-danger border-0 btn-verif"
                                                         onclick="return confirm('Apakah anda yakin untuk menolak akun ini?')">Tolak</button>
                                                 </form>
                                                 <form action="/verifakun/hapus/{{ $akun->kode_dosen }}" method="post">
                                                     @method('delete')
                                                     @csrf
-                                                    <button class="badge bg-danger border-0 btn-verif"
+                                                    <button class="badge verifBadge bg-danger border-0 btn-verif"
                                                         onclick="return myFunction();">Hapus</button>
                                                 </form>
                                             </td>

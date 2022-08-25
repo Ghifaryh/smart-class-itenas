@@ -405,11 +405,12 @@ $jumlah = count($images);
                 </div> --}}
                 <a href="" class="map-marker text-center" id="markLokasi">
                     <span aria-hidden="true">
-                        <i class="fa-solid fa-location-dot"></i>
+                        {{-- <i class="fa-solid fa-location-dot"></i> --}}
+                        <i class="fa-solid fa-circle"></i>
                     </span>
-                    <P>
+                    {{-- <P>
                         Gedung 9
-                    </P>
+                    </P> --}}
                 </a>
             </div>
 

@@ -47,7 +47,8 @@ $num = 1;
                                     aria-label="Close"></button>
                             </div>
                         @endif --}}
-                        <form action="/truangan/update/{{ $ruanganedt->id }}" method="post" class="formAddRuangan" id="updateRuangan">
+                        <form action="/truangan/update/{{ $ruanganedt->id }}" method="post" class="formAddRuangan"
+                            id="updateRuangan">
                             @csrf
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" name="nama" id="nama" placeholder="Nama Ruangan"
@@ -61,7 +62,8 @@ $num = 1;
                             </div>
                             <div class="mb-3 me-3 px-5 text-end">
                                 <a href="/truangan" class="btn text-white me-5  add-room-button fw-bold">Cancel</a>
-                                <button type="submit" class="btn text-white me-5  add-room-button fw-bold" onclick="return confirm('Apakah anda yakin untuk mengupdate ruangan?')">Update
+                                <button type="submit" class="btn text-white me-5  add-room-button fw-bold"
+                                    onclick="return confirm('Apakah anda yakin untuk mengupdate ruangan?')">Update
                                     Ruangan</button>
                             </div>
                         </form>
@@ -87,12 +89,14 @@ $num = 1;
                                         <td>
                                             <form action="/truangan/{{ $rn->id }}" method="post" class="d-block">
                                                 @csrf
-                                                <button class="badge bg-primary border-0">Edit</button>
+                                                <button class="badge truanganBadge bg-primary border-0">Edit</button>
                                             </form>
-                                            <form action="/truangan/{{ $rn->id }}" method="post" class="d-block" id="hapusRuangan">
+                                            <form action="/truangan/{{ $rn->id }}" method="post" class="d-block"
+                                                id="hapusRuangan">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="badge bg-danger border-0" onclick="return confirm('Apakah anda yakin untuk menghapus ruangan?')">Hapus</button>
+                                                <button class="badge truanganBadge bg-danger border-0"
+                                                    onclick="return confirm('Apakah anda yakin untuk menghapus ruangan?')">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -139,7 +143,7 @@ $num = 1;
                                 // cache: false,
                                 contentType: false,
                                 // enctype: $(this).attr('enctype'),
-                                beforeSend:function(){
+                                beforeSend: function() {
                                     $(document).find('span.error-text').text('');
                                 },
                                 success: function(response) {
@@ -150,12 +154,13 @@ $num = 1;
                                             location.reload();
                                             // window.location = window.location.href;
                                         });
-                                    }else{
+                                    } else {
                                         swal("Pemesanan gagal!", {
                                             icon: "error",
                                         });
-                                        $.each(response.error, function(prefix, val){
-                                            $('span.'+prefix+'_error').text(val[0]);
+                                        $.each(response.error, function(prefix, val) {
+                                            $('span.' + prefix + '_error').text(val[
+                                                0]);
                                         });
                                     }
                                 }
@@ -163,7 +168,7 @@ $num = 1;
                         };
                     });
             });
-            
+
         });
     </script>
 @endpush
