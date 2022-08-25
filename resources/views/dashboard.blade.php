@@ -635,7 +635,7 @@ function bulanIndo($hariInggris)
                         text: "Jika sudah sesuai maka akan segera diproses oleh admin.",
                         icon: "warning",
                         buttons: true,
-                        dangerMode: true,
+                        dangerMode: false,
                     })
                     .then((willDelete) => {
                         if (willDelete) {
@@ -661,8 +661,12 @@ function bulanIndo($hariInggris)
                                             // window.location = window.location.href;
                                         });
                                     }else{
-                                        swal("Pemesanan gagal!", {
+                                        swal({
+                                            title: "Error",
+                                            text: "Pemesanan gagal!",
                                             icon: "error",
+                                            button: "Tutup",
+                                            timer: 2000,
                                         });
                                         $.each(response.error, function(prefix, val){
                                             $('span.'+prefix+'_error').text(val[0]);

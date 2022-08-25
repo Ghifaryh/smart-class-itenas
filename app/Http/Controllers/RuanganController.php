@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreRuanganRequest;
 use App\Http\Requests\UpdateRuanganRequest;
 
@@ -34,24 +35,30 @@ class RuanganController extends Controller
 
     public function ajaxRequestRuangan(Request $request)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama' => ['required'],
             'fasilitas' => ['required'],
         ]);
-        
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error' => $validator->errors()->toArray()]);
+        }else{
+            $validatedData = $validator->validate();
+            
+            Ruangan::create($validatedData);
+            return response()->json(
+                [
+                    'success' => true,
+                ]
+            );
+        }   
         // dd($request);
-        Ruangan::create($validatedData);
-        return response()->json(
-            [
-                'success' => true,
-            ]
-        );
     }
     
     public function edit($id)
     {
         $ruangan = Ruangan::findorfail($id);
-        
+        Alert::success('Success','Data ruangan siap untuk diedit');
         return view('truangan', [
             'title' => 'Tambah Ruangan',
             'param' => 'edit',

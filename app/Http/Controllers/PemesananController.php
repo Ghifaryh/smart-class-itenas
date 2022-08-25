@@ -134,6 +134,8 @@ class PemesananController extends Controller
             'jam_keluar' => $pesanan->jam_keluar,
             'prodi' => $pesanan->prodi,
             'matakuliah' => $pesanan->matakuliah,
+            'fileRPS' => $pesanan->fileRPS,
+            'fileSertif' => $pesanan->fileSertif,
             'kelas' => $pesanan->kelas,
             'dosen_matkul' => $pesanan->dosen_matkul,
             'id_status' => 2

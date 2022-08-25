@@ -12,31 +12,26 @@ $num = 1;
                 <div class="addRuanganWrapper px-3 py-2">
                     @if ($param == 'add')
                         <h1 class="fw-bold pt-4 border-bottom border-2 border-dark">Penambahan Ruangan</h1>
-                        @if (session()->has('success'))
+                        {{-- @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        @endif
+                        @endif --}}
 
-                        @if (session()->has('failed'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ session('failed') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-                        <form action="" method="" class="formAddRuangan" id="submitRuangan">
+                        <form action="/truangan" method="post" class="formAddRuangan" id="submitRuangan">
                             @csrf
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" name="nama" id="nama" placeholder="Nama Ruangan"
                                     class="form-control" required>
                                 <label for="nama">Nama Ruangan</label>
+                                <span class="text-danger error-text nama_error"></span>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" name="fasilitas" id="fasilitas" placeholder="Fasilitas"
                                     class="form-control" required>
                                 <label for="fasilitas">Fasilitas Ruangan</label>
+                                <span class="text-danger error-text fasilitas_error"></span>
                             </div>
                             <div class="mb-3 me-3 px-5 text-end">
                                 <button type="submit" class="btn text-white me-5 btn-truangan fw-bold text-nowrap">Tambah
@@ -45,22 +40,14 @@ $num = 1;
                         </form>
                     @else
                         <h1 class="fw-bold pt-4 border-bottom border-2 border-dark">Edit Data Ruangan</h1>
-                        @if (session()->has('success'))
+                        {{-- @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                        @endif
-
-                        @if (session()->has('failed'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ session('failed') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-                        <form action="/truangan/update/{{ $ruanganedt->id }}" method="post" class="formAddRuangan">
+                        @endif --}}
+                        <form action="/truangan/update/{{ $ruanganedt->id }}" method="post" class="formAddRuangan" id="updateRuangan">
                             @csrf
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" name="nama" id="nama" placeholder="Nama Ruangan"
@@ -73,7 +60,8 @@ $num = 1;
                                 <label for="fasilitas">Fasilitas Ruangan</label>
                             </div>
                             <div class="mb-3 me-3 px-5 text-end">
-                                <button type="submit" class="btn text-white me-5  add-room-button fw-bold">Update
+                                <a href="/truangan" class="btn text-white me-5  add-room-button fw-bold">Cancel</a>
+                                <button type="submit" class="btn text-white me-5  add-room-button fw-bold" onclick="return confirm('Apakah anda yakin untuk mengupdate ruangan?')">Update
                                     Ruangan</button>
                             </div>
                         </form>
@@ -97,16 +85,14 @@ $num = 1;
                                         <td>{{ $rn->nama }}</td>
                                         <td>{{ $rn->fasilitas }}</td>
                                         <td>
-                                            <form action="/truangan/{{ $rn->id }}"method="post" class="d-block">
+                                            <form action="/truangan/{{ $rn->id }}" method="post" class="d-block">
                                                 @csrf
-                                                <button class="badge bg-primary border-0"
-                                                    onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
+                                                <button class="badge bg-primary border-0">Edit</button>
                                             </form>
-                                            <form action="/truangan/{{ $rn->id }}"method="post" class="d-block">
+                                            <form action="/truangan/{{ $rn->id }}" method="post" class="d-block" id="hapusRuangan">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="badge bg-danger border-0"
-                                                    onclick="return confirm('Apakah anda yakin untuk menghapus ruangan?')">Hapus</button>
+                                                <button class="badge bg-danger border-0" onclick="return confirm('Apakah anda yakin untuk menghapus ruangan?')">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -128,28 +114,33 @@ $num = 1;
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         $(document).ready(function() {
             $('#truangan').DataTable();
+
             $("#submitRuangan").submit(function(e) {
                 e.preventDefault();
-                var url = '{{ url('truangan') }}';
-                var nama = $("#nama").val();
-                var fasilitas = $("#fasilitas").val();
                 swal({
                         title: "Peringatan!",
                         text: "Apakah form tambah ruangan sudah sesuai?",
                         icon: "warning",
                         buttons: true,
-                        dangerMode: true,
+                        dangerMode: false,
                     })
                     .then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                                method: 'POST',
-                                url: url,
-                                data: {
-                                    nama: nama,
-                                    fasilitas: fasilitas,
+                                url: $(this).attr('action'),
+                                method: $(this).attr('method'),
+                                data: new FormData(this),
+                                processData: false,
+                                dataType: 'json',
+                                // async: false,
+                                // cache: false,
+                                contentType: false,
+                                // enctype: $(this).attr('enctype'),
+                                beforeSend:function(){
+                                    $(document).find('span.error-text').text('');
                                 },
                                 success: function(response) {
                                     if (response.success) {
@@ -159,19 +150,20 @@ $num = 1;
                                             location.reload();
                                             // window.location = window.location.href;
                                         });
-                                    } else {
+                                    }else{
                                         swal("Pemesanan gagal!", {
                                             icon: "error",
                                         });
+                                        $.each(response.error, function(prefix, val){
+                                            $('span.'+prefix+'_error').text(val[0]);
+                                        });
                                     }
-                                },
-                                error: function(error) {
-                                    console.log(error)
                                 }
                             });
-                        }
+                        };
                     });
             });
+            
         });
     </script>
 @endpush
