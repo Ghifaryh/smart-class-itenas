@@ -120,8 +120,12 @@ class PemesananController extends Controller
     public function destroy($id)
     {
         $check = Pemesanan::find($id);
-        Storage::delete($check->fileRPS);
-        Storage::delete($check->fileSertif);
+        if ($check->fileRPS !== null) {
+            Storage::delete($check->fileRPS);
+        }
+        if ($check->fileRPS !== null) {
+            Storage::delete($check->fileSertif);
+        }
         Pemesanan::destroy($id);
         
         return redirect('/dashboard')->with('Pemesanan Sukses', 'Data pemesanan berhasil dihapus');
