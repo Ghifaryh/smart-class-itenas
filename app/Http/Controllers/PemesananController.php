@@ -120,8 +120,12 @@ class PemesananController extends Controller
     public function destroy($id)
     {
         $check = Pemesanan::find($id);
-        Storage::delete($check->fileRPS);
-        Storage::delete($check->fileSertif);
+        if ($check->fileRPS !== null) {
+            Storage::delete($check->fileRPS);
+        }
+        if ($check->fileRPS !== null) {
+            Storage::delete($check->fileSertif);
+        }
         Pemesanan::destroy($id);
         
         return redirect('/dashboard')->with('Pemesanan Sukses', 'Data pemesanan berhasil dihapus');
@@ -163,14 +167,14 @@ class PemesananController extends Controller
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 3]);
-        return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan');   
+        return redirect('/dashboard')->with('Pemesanan Batal', 'Jadwal dibatalkan');   
     }
 
     public function cancelhapus($id)
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 5]);
-        return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan karena dihapus');
+        return redirect('/dashboard')->with('Pemesanan Batal', 'Jadwal dibatalkan karena dihapus');
     }
 
     // public function edit($id)
