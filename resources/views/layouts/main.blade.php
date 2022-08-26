@@ -268,7 +268,7 @@
         <div class="container bottom-item text-center mb-5">
             <a href="" class="text-decoration-none cr-text text-white">© Itenas | Institut Teknologi Nasional -
                 Bandung</a>
-            <p>Created by: 152019081 - 152019082 </p>
+            <p>Created by: 304038163 </p>
         </div>
     </footer>
 
