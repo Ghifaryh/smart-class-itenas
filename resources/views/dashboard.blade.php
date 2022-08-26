@@ -78,58 +78,58 @@ function bulanIndo($hariInggris)
         <button type="button" class="btn-close" data-bs-dismiss="alert"
             aria-label="Close"></button>
     </div> --}}
-
-@endif
-@if (session()->has('Pemesanan Sukses'))
-    <script>
-        $(document).ready(function() {
-            swal({
-                title: 'Berhasil',
-                text: `{{ session('Pemesanan Sukses') }}`,
-                icon: "success",
-                button: "Tutup",
-                timer: 3000,
-            }).then(function() {
-                    location.reload();
-            });
-        });
-    </script>
-@endif
-@if (session()->has('Pemesanan Batal'))
-    <script>
-        $(document).ready(function() {
-            swal({
-                title: 'Berhasil',
-                text: `{{ session('Pemesanan Batal') }}`,
-                icon: "success",
-                button: "Tutup",
-                timer: 3000,
-            }).then(function() {
+    @endif
+    @if (session()->has('Pemesanan Sukses'))
+        <script>
+            $(document).ready(function() {
                 swal({
-                title: 'Berhasil',
-                text: `Taro sini Gib`,
-                icon: "success",
-                button: "Tutup",
-            })
-            });
-        });
-    </script>
-@endif
-@if (session()->has('Jadwal Sukses'))
-    <script>
-        $(document).ready(function() {
-            swal({
-                title: 'Berhasil',
-                text: `{{ session('Jadwal Sukses') }}`,
-                icon: "success",
-                button: "Tutup",
-                timer: 3000,
-            }).then(function() {
+                    title: 'Berhasil',
+                    text: `{{ session('Pemesanan Sukses') }}`,
+                    icon: "success",
+                    button: "Tutup",
+                    timer: 3000,
+                }).then(function() {
                     location.reload();
+                });
             });
-        });
-    </script>
-@endif
+        </script>
+    @endif
+    @if (session()->has('Pemesanan Batal'))
+        <script>
+            $(document).ready(function() {
+                swal({
+                    title: 'Berhasil',
+                    text: `{{ session('Pemesanan Batal') }}`,
+                    icon: "success",
+                    button: "Tutup",
+                    timer: 3000,
+                }).then(function() {
+                    // Swal Message
+                    swal("Alasan ditolak:", {
+                            content: "input",
+                        })
+                        .then((value) => {
+                            swal(`You typed: ${value}`);
+                        });
+                });
+            });
+        </script>
+    @endif
+    @if (session()->has('Jadwal Sukses'))
+        <script>
+            $(document).ready(function() {
+                swal({
+                    title: 'Berhasil',
+                    text: `{{ session('Jadwal Sukses') }}`,
+                    icon: "success",
+                    button: "Tutup",
+                    timer: 3000,
+                }).then(function() {
+                    location.reload();
+                });
+            });
+        </script>
+    @endif
 
     <div class="container-fluid dashboard-dosen">
         <div class="row">
