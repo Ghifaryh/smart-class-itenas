@@ -97,8 +97,8 @@
                                 </div>
 
                             </div>
-                            <p class="small fw-bold mt-3 text-end">Don't have an account? <a href="/register"
-                                    class="link-danger">Register</a></p>
+                            {{-- <p class="small fw-bold mt-3 text-end">Don't have an account? <a href="/register"
+                                    class="link-danger">Register</a></p> --}}
 
                             {{-- <div class="d-flex justify-content-between align-items-center"> --}}
                             <!-- Checkbox -->
