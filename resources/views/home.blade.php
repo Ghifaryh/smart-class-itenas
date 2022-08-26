@@ -64,8 +64,6 @@ function bulanIndo($hariInggris)
 @php
 $directory = 'img/ruangan/';
 $filecount = count(glob($directory . '*'));
-// glob($directory . "*.{jpg,png,gif}",GLOB_BRACE)
-// echo "There were $filecount files";
 
 $fileSystemIterator = new FilesystemIterator('img/ruangan/');
 $entries = [];
@@ -73,19 +71,12 @@ foreach ($fileSystemIterator as $fileInfo) {
     $entries[] = $fileInfo->getFilename();
 }
 
-// var_dump($entries);
-// echo implode(', ', $entries);
-
 @endphp
 
 @php
 $dir = 'img/ruangan/';
 $images = glob($dir . '/*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}', GLOB_BRACE);
 $jumlah = count($images);
-// echo $jumlah;
-// for ($i = 1; $i <= $jumlah; $i++) {
-//     echo $i;
-// }
 @endphp
 
 @section('container')
@@ -102,10 +93,6 @@ $jumlah = count($images);
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="img/ruangan/trigger/1.jpeg" class="d-block w-100 h-50 mx-auto" alt="...">
-                    {{-- <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
-                    </div> --}}
                 </div>
                 {{-- Harus nambah style widht and height --}}
                 @foreach ($images as $img)
@@ -129,28 +116,11 @@ $jumlah = count($images);
         <div class="col-sm-6">
             <div class="row">
                 <h2 class="content-title text-center"> About</h2>
-                <p class="text-about" style="text-align: justify">Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit.
-                    Quaerat harum autem,
-                    quia veniam aliquid fugit
-                    qui
-                    non, iure rerum sed minus amet, temporibus tempora necessitatibus. Praesentium, quam ducimus
-                    necessitatibus
-                    voluptatem nulla, accusamus itaque corporis esse ratione magni eum suscipit debitis laboriosam
-                    repellendus
-                    alias. Nesciunt reiciendis quis cupiditate sed consequatur quod nostrum repudiandae obcaecati quaerat
-                    qui
-                    aliquam, eos consequuntur sunt quas esse magni? Eaque, sed ad, porro modi id, laboriosam nobis
-                    praesentium
-                    mollitia quis repudiandae sint! Illum, quasi deserunt corporis aliquam nulla reprehenderit
-                    necessitatibus,
-                    sequi quam porro dicta, deleniti officia voluptates aut nemo et! Sunt, fuga amet placeat at perferendis
-                    pariatur.
-                    {{-- <span class="text-danger fw-bold">
-                        <a href="">
-                            arip kontol
-                        </a>
-                    </span> --}}
+                <p class="text-about" style="text-align: justify">
+                    Smart Classroom adalah sebuah kelas yang memiliki fasilitas teknologi untuk melakukan kegiatan
+                    pembelajaran baik daring maupun luring yang memiliki fasilitas seperti Smart TV, AC, dan teknologi
+                    lainnya.
+
                 </p>
             </div>
             <div class="row ruangan">
@@ -393,31 +363,16 @@ $jumlah = count($images);
             <div class="interactive-map">
                 <img src={{ asset('img/map-smartclassroom.jpg') }} width="100%" alt=""
                     class="rounded-3 shadow-lg">
-
-                {{-- <div class="map-marker">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <h4 class="title-map">
-                        Gedung 9
-                    </h4>
-                    <span class="info-marker">
-                        <p>Pokonya Gedung Smart Classroom disini</p>
-                    </span>
-                </div> --}}
                 <a href="" class="map-marker text-center" id="markLokasi">
                     <span aria-hidden="true">
-                        {{-- <i class="fa-solid fa-location-dot"></i> --}}
                         <i class="fa-solid fa-circle"></i>
                     </span>
-                    {{-- <P>
-                        Gedung 9
-                    </P> --}}
                 </a>
             </div>
 
         </div>
     </div>
     <input type="hidden" name="fotos" value="{{ $filecount }}" id="fotos">
-    {{-- <div class="ignoreThis" data-namaFile="{{ $entries }}"></div> --}}
     <input type="hidden" name="fotoName" id="fotoName" value="{{ implode(',', $entries) }}">
 @endsection
 @push('scripts')
@@ -426,15 +381,9 @@ $jumlah = count($images);
             var fotos = parseInt($('#fotos').val());
 
             var fotoName = $('#fotoName').val().split(",");
-
-            // console.log(fotoName);
             var imgs = [];
-            // var imgs = ["img/ruangan/1.jpeg"];
             for (var i = 0; i < fotoName.length; i++) {
                 imgs.push("img/ruangan/" + fotoName[i]);
-                // imgs.push("img/ruangan/" + i + ".jpeg");
-                // img.push("img/ruangan/")
-                // console.log("img/ruangan/" + fotoName[i]);
             }
 
             $("#carouselStretch").backstretch(
@@ -443,10 +392,6 @@ $jumlah = count($images);
                     fade: 750
                 }
             );
-            // $.backstretch(imgs, {
-            //     duration: 3000,
-            //     fade: 750
-            // });
         });
 
 
