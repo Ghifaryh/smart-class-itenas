@@ -92,12 +92,12 @@ $jumlah = count($images);
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="img/ruangan/trigger/1.jpeg" class="d-block w-100 h-50 mx-auto" alt="...">
+                    <img src="{{ asset('img/ruangan/trigger/1.jpeg') }}" class="d-block w-100 h-50 mx-auto" alt="...">
                 </div>
                 {{-- Harus nambah style widht and height --}}
                 @foreach ($images as $img)
                     <div class="carousel-item">
-                        <img src="{{ $img }}" class="d-block w-100 h-50 mx-auto"
+                        <img src="{{ asset($img) }}" class="d-block w-100 h-50 mx-auto"
                             alt="Foto-foto fasilitas dan ruangan Smart Classsroom">
                     </div>
                 @endforeach
