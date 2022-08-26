@@ -118,9 +118,12 @@ $jumlah = count($images);
                 <h2 class="content-title text-center"> About</h2>
                 <p class="text-about" style="text-align: justify">
                     Smart Classroom adalah sebuah kelas yang memiliki fasilitas teknologi untuk melakukan kegiatan
-                    pembelajaran baik daring maupun luring yang memiliki fasilitas seperti Smart TV, AC, dan teknologi
-                    lainnya.
-
+                    pembelajaran secara hybrid yang memiliki fasilitas seperti Iceboard, AC, Webcam dengan kualitas HD,
+                    Speaker, dan fasilitas Internet yang cepat.
+                </p>
+                <p>
+                    Smart Classroom memiliki 5 ruangan dengan kapasitas masing-masing 20 orang dan disetiap
+                    ruangannya terdapat peredam suara.
                 </p>
             </div>
             <div class="row ruangan">
