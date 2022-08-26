@@ -634,7 +634,7 @@ function bulanIndo($hariInggris)
                 let tanggalPesan = $('#tanggal_input').val().split("/");
                 var tahunPesan = parseInt(tanggalPesan[2]);
                 var bulanPesan = parseInt(tanggalPesan[1]);
-                console.log(tahunPesan);
+                // console.log(tahunPesan);
 
                 var fixSemester;
                 let rumusSemester;
@@ -671,17 +671,17 @@ function bulanIndo($hariInggris)
                 var kalimatkebalik = matkul.split(" ").reverse();
                 var kelas = kalimatkebalik[0];
                 var kode_matkul = kalimat[0];
-                console.log(kelas);
+                // console.log(kelas);
                 $.ajax({
                     type: 'GET',
                     url: '/dosen-matkul/' + fixSemester + '/' + prodi + '/' + kode_matkul + '/' +
                         kelas,
                     success: function(response) {
                         var response = JSON.parse(response);
-                        console.log(response);
+                        // console.log(response);
                         $('#dosen_matkul').val(`${response["data1"]}`);
                         $('#kelas').val(`${response["data2"]}`);
-                        console.log($('#dosen_matkul').val());
+                        // console.log($('#dosen_matkul').val());
                     }
                 });
             });
