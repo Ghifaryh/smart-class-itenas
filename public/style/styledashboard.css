@@ -81,11 +81,12 @@ input:read-only {
 
 /* .table-responsive.table-process { */
 .table-process,
-.truangan {
+.truangan,
+.table-list-pesan {
     width: 100%;
-    font-size: small;
-    overflow-x: hidden;
-    /* overflow-x: auto; */
+    font-size: small !important;
+    /* overflow-x: hidden; */
+    overflow-x: auto;
 }
 
 #table1 thead,
