@@ -167,14 +167,14 @@ class PemesananController extends Controller
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 3]);
-        return redirect('/dashboard')->with('Pemesanan Batal', 'Jadwal dibatalkan');   
+        return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan');   
     }
 
     public function cancelhapus($id)
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 5]);
-        return redirect('/dashboard')->with('Pemesanan Batal', 'Jadwal dibatalkan karena dihapus');
+        return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan karena dihapus');
     }
 
     // public function edit($id)

@@ -94,7 +94,7 @@ function bulanIndo($hariInggris)
             });
         </script>
     @endif
-    @if (session()->has('Pemesanan Batal'))
+    {{-- @if (session()->has('Pemesanan Batal'))
         <script>
             $(document).ready(function() {
                 swal({
@@ -114,7 +114,7 @@ function bulanIndo($hariInggris)
                 });
             });
         </script>
-    @endif
+    @endif --}}
     @if (session()->has('Jadwal Sukses'))
         <script>
             $(document).ready(function() {
