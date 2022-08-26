@@ -76,12 +76,12 @@ class PemesananController extends Controller
     
             if ($request->file('fileRPS')) {
                 $fileNamerps = pathinfo($request->file('fileRPS')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileRPS')->getClientOriginalExtension();
-                $validatedData['fileRPS'] = $request->file('fileRPS')->storeAs('File-RPS',$fileNamerps,'public');
+                $validatedData['fileRPS'] = $request->file('fileRPS')->storePubliclyAs('File-RPS',$fileNamerps,'public');
             };
             
             if ($request->file('fileSertif')) {
                 $fileNamesertif = pathinfo($request->file('fileSertif')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileSertif')->getClientOriginalExtension();
-                $validatedData['fileSertif'] = $request->file('fileSertif')->storeAs('File-Sertif',$fileNamesertif,'public');
+                $validatedData['fileSertif'] = $request->file('fileSertif')->storePubliclyAs('File-Sertif',$fileNamesertif,'public');
             };
             
             Pemesanan::create($validatedData);
