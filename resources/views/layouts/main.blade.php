@@ -72,6 +72,10 @@
     {{-- Swal --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    {{-- Swal2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.29/dist/sweetalert2.all.min.js"
+        integrity="sha256-qxQs7IPMvfbL9ZXhsZ3tG/LuZSjNxPSTBNtzk4j5FiU=" crossorigin="anonymous"></script>
+
     {{-- bactsretch / wallpaper --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.1.18/jquery.backstretch.min.js"></script>
 

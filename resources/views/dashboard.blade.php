@@ -767,6 +767,12 @@ function bulanIndo($hariInggris)
                         button: "Tutup",
                         timer: 2000,
                     });
+                    // Swal.fire({
+                    //     title: 'Error!',
+                    //     text: 'Do you want to continue',
+                    //     icon: 'error',
+                    //     confirmButtonText: 'Cool'
+                    // })
                     $('#jam_keluar').append(
                         `<option value="" selected disabled hidden>Pilih Jam Keluar</option>`
                     );
