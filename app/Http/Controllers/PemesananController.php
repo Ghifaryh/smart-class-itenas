@@ -81,7 +81,7 @@ class PemesananController extends Controller
                 $file_dokumen_name = str_replace(' ', '_', $file_dokumen_name);
                 $file_dokumen_name = str_replace('%', '', $file_dokumen_name);
                 $file_dokumen->move(public_path('storage/File-RPS'), $file_dokumen_name);
-                $validatedData['fileRPS'] = "/File-RPS/". $file_dokumen_name; 
+                $validatedData['fileRPS'] = "File-RPS/". $file_dokumen_name; 
                 // $fileNamerps = pathinfo($request->file('fileRPS')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileRPS')->getClientOriginalExtension();
                 // $validatedData['fileRPS'] = $request->file('fileRPS')->storePubliclyAs('File-RPS',$fileNamerps,'public');
             };
@@ -93,7 +93,7 @@ class PemesananController extends Controller
                 $file_dokumen_sertifname = str_replace(' ', '_', $file_dokumen_sertifname);
                 $file_dokumen_sertifname = str_replace('%', '', $file_dokumen_sertifname);
                 $file_dokumen_sertif->move(public_path('storage/File-Sertif'), $file_dokumen_sertifname);
-                $validatedData['fileSertif'] = "/File-Sertif/". $file_dokumen_sertifname; 
+                $validatedData['fileSertif'] = "File-Sertif/". $file_dokumen_sertifname; 
                 // $fileNamesertif = pathinfo($request->file('fileSertif')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileSertif')->getClientOriginalExtension();
                 // $validatedData['fileSertif'] = $request->file('fileSertif')->storePubliclyAs('File-Sertif',$fileNamesertif,'public');
             };
@@ -167,14 +167,14 @@ class PemesananController extends Controller
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 3]);
-        return redirect('/dashboard')->with('Pemesanan Batal', 'Jadwal dibatalkan');   
+        return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan');   
     }
 
     public function cancelhapus($id)
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 5]);
-        return redirect('/dashboard')->with('Pemesanan Batal', 'Jadwal dibatalkan karena dihapus');
+        return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan karena dihapus');
     }
 
     // public function edit($id)
