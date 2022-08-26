@@ -62,8 +62,8 @@ class PemesananController extends Controller
             'prodi' => ['required'],
             'matakuliah' => ['required'],
             'dosen_matkul' => ['required'],
-            // 'fileRPS' => ['required','file','max:5120','mimes:pdf'],
-            // 'fileSertif' => ['required','file','max:5120','mimes:pdf'],
+            'fileRPS' => ['required','file','max:5120','mimes:pdf'],
+            'fileSertif' => ['required','file','max:5120','mimes:pdf'],
             'kelas' => ['required'],
             'id_pemesan' => ['required'],
             'id_status' => ['required']
@@ -75,14 +75,30 @@ class PemesananController extends Controller
             $validatedData = $validator->validate();
     
             if ($request->file('fileRPS')) {
-                $fileNamerps = pathinfo($request->file('fileRPS')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileRPS')->getClientOriginalExtension();
-                $validatedData['fileRPS'] = $request->file('fileRPS')->storePubliclyAs('File-RPS',$fileNamerps,'public');
+                $file_dokumen = $request->file('fileRPS');
+                $file_dokumen_name = $file_dokumen->getClientOriginalName();
+                $file_dokumen_name = preg_replace('!\s+!', ' ', $file_dokumen_name);
+                $file_dokumen_name = str_replace(' ', '_', $file_dokumen_name);
+                $file_dokumen_name = str_replace('%', '', $file_dokumen_name);
+                $file_dokumen->move(public_path('storage/File-RPS'), $file_dokumen_name);
+                $validatedData['fileRPS'] = "/File-RPS/". $file_dokumen_name; 
+                // $fileNamerps = pathinfo($request->file('fileRPS')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileRPS')->getClientOriginalExtension();
+                // $validatedData['fileRPS'] = $request->file('fileRPS')->storePubliclyAs('File-RPS',$fileNamerps,'public');
             };
             
             if ($request->file('fileSertif')) {
-                $fileNamesertif = pathinfo($request->file('fileSertif')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileSertif')->getClientOriginalExtension();
-                $validatedData['fileSertif'] = $request->file('fileSertif')->storePubliclyAs('File-Sertif',$fileNamesertif,'public');
+                $file_dokumen_sertif = $request->file('fileSertif');
+                $file_dokumen_sertifname = $file_dokumen_sertif->getClientOriginalName();
+                $file_dokumen_sertifname = preg_replace('!\s+!', ' ', $file_dokumen_sertifname);
+                $file_dokumen_sertifname = str_replace(' ', '_', $file_dokumen_sertifname);
+                $file_dokumen_sertifname = str_replace('%', '', $file_dokumen_sertifname);
+                $file_dokumen_sertif->move(public_path('storage/File-Sertif'), $file_dokumen_sertifname);
+                $validatedData['fileSertif'] = "/File-Sertif/". $file_dokumen_sertifname; 
+                // $fileNamesertif = pathinfo($request->file('fileSertif')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileSertif')->getClientOriginalExtension();
+                // $validatedData['fileSertif'] = $request->file('fileSertif')->storePubliclyAs('File-Sertif',$fileNamesertif,'public');
             };
+
+            
             
             Pemesanan::create($validatedData);
             return response()->json(
