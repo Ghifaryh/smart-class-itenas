@@ -67,6 +67,9 @@ function bulanIndo($hariInggris)
                     icon: "success",
                     button: "Tutup",
                     timer: 3000,
+                }).then(function() {
+                    location.reload();
+                    // window.location = window.location.href;
                 });
             });
         </script>
@@ -86,6 +89,28 @@ function bulanIndo($hariInggris)
                 icon: "success",
                 button: "Tutup",
                 timer: 3000,
+            }).then(function() {
+                    location.reload();
+            });
+        });
+    </script>
+@endif
+@if (session()->has('Pemesanan Batal'))
+    <script>
+        $(document).ready(function() {
+            swal({
+                title: 'Berhasil',
+                text: `{{ session('Pemesanan Batal') }}`,
+                icon: "success",
+                button: "Tutup",
+                timer: 3000,
+            }).then(function() {
+                swal({
+                title: 'Berhasil',
+                text: `Taro sini Gib`,
+                icon: "success",
+                button: "Tutup",
+            })
             });
         });
     </script>
@@ -99,6 +124,8 @@ function bulanIndo($hariInggris)
                 icon: "success",
                 button: "Tutup",
                 timer: 3000,
+            }).then(function() {
+                    location.reload();
             });
         });
     </script>
@@ -272,7 +299,7 @@ function bulanIndo($hariInggris)
 
                                                     <form action="{{ asset('storage/' . $pesanan->fileRPS) }}">
                                                         <button class="badge bg-primary border-0 btnDownload"
-                                                            type="submit"><i
+                                                            type="submit" id="btnRPS"><i
                                                                 class="fa-solid fa-cloud-arrow-down"></i></button>
                                                     </form>
                                                 </td>
@@ -283,7 +310,7 @@ function bulanIndo($hariInggris)
                                                     </button> --}}
                                                     <form action="{{ asset('storage/' . $pesanan->fileSertif) }}">
                                                         <button class="badge bg-primary border-0 btnDownload"
-                                                            type="submit"><i
+                                                            type="submit" id="btnSertif"><i
                                                                 class="fa-solid fa-cloud-arrow-down"></i></button>
                                                     </form>
                                                 </td>
