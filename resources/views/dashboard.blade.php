@@ -196,46 +196,6 @@ $num2 = 1;
                                             </tr>
                                         </thead>
                                         <tbody class="text-center align-middle">
-                                            @foreach ($jadwals as $jadwal)
-                                                <tr>
-                                                    <th scope="row">{{ $num2++ }}</th>
-                                                    <td>{{ $jadwal->id_ruangan }}</td>
-                                                    <td class="text-nowrap">
-                                                        {{ hariIndo(date('l', strtotime($jadwal->tanggal_pinjam))) }},
-                                                        {{ date('d', strtotime($jadwal->tanggal_pinjam)) }}
-                                                        {{ bulanIndo(date('M', strtotime($jadwal->tanggal_pinjam))) }} <br>
-                                                        ({{ date('H:i', strtotime($jadwal->jam_masuk)) }} -
-                                                        {{ date('H:i', strtotime($jadwal->jam_keluar)) }})
-                                                    </td>
-                                                    <td class="text-nowrap">{{ $jadwal->Prodi->nama }}</td>
-                                                    <td class="text-wrap">{{ $jadwal->matakuliah }}</td>
-                                                    <td class="text-wrap">{{ $jadwal->kelas }}</td>
-                                                    <td class="text-wrap">{{ $jadwal->dosen_matkul }}</td>
-                                                    @if ($jadwal->Status->keterangan == 'Menunggu Konfirmasi')
-                                                        <td class="fw-bold text-warning text-nowrap">
-                                                            {{ $jadwal->Status->keterangan }}</td>
-                                                    @elseif ($jadwal->Status->keterangan == 'Diterima')
-                                                        <td class="fw-bold text-success text-nowrap">
-                                                            {{ $jadwal->Status->keterangan }}</td>
-                                                    @elseif ($jadwal->Status->keterangan == 'Dijadwalkan')
-                                                        <td class="fw-bold text-primary text-nowrap">
-                                                            {{ $jadwal->Status->keterangan }}</td>
-                                                    @else
-                                                        <td class="fw-bold text-danger text-nowrap">
-                                                            {{ $jadwal->Status->keterangan }}</td>
-                                                    @endif
-
-                                                    <td class="text-nowrap">
-                                                        <form action="/dashboard/hapusjadwal/{{ $jadwal->id }}"
-                                                            method="post">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="btn btn-danger"
-                                                                onclick="return confirm('Apakah anda yakin?')">Hapus</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -282,7 +242,7 @@ $num2 = 1;
                     location.reload();
                 });
             }
-            if (JadwalSuksess) {
+            if (JadwalSukses) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Berhasil',
@@ -373,6 +333,71 @@ $num2 = 1;
             function reload_table(callback, resetPage = false) {
                 table.ajax.reload(callback, resetPage); //reload datatable ajax 
             }
+
+            $('#tabelPemesananDosen').on('click','.hapus_dosen', function(e) {
+                var id = $(this).data('id');
+                let name = $(this).data('name');
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Apakah Yakin?',
+                    text: `Apakah Anda yakin ingin menghapus pemesanan jadwal matakuliah : ${name}`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Hapus'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                        $.ajax({
+                            url: "{{ url('dashboard/hapusketpemesanan/') }}/" + id,
+                            type: 'POST',
+                            data: {
+                                _token: CSRF_TOKEN,
+                                // _method: "delete",
+                            },
+                            dataType: 'JSON',
+                            success: function(response) {
+                                if (response.error) {
+                                    Swal.fire(
+                                        'Error!',
+                                        response.error,
+                                        'error'
+                                    )
+                                } else {
+                                    Swal.fire(
+                                        'Berhasil',
+                                        `Data pemesanan jadwal matakuliah : ${name} berhasil terhapus.`,
+                                        'success'
+                                    )
+                                }
+                                reload_table(null, true)
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    type: 'error',
+                                    title: 'Error saat delete data',
+                                    showConfirmButton: true
+                                })
+                            }
+                        })
+                    }
+                })
+            })
+
+            $('#tabelPemesananDosen').on('click','.ingfo', function(e) {
+                let name = $(this).data('name');
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Alasan ditolak',
+                    text: `${name}`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Tutup'
+                })
+            })
         });
 
         $(document).ready(function() {
@@ -458,6 +483,265 @@ $num2 = 1;
             function reload_table(callback, resetPage = false) {
                 table.ajax.reload(callback, resetPage); //reload datatable ajax 
             }
+
+            $('#tabelPemesananAdmin').on('click','.terima_admin', function(e) {
+                var id = $(this).data('id');
+                let name = $(this).data('name');
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Apakah Yakin?',
+                    text: `Apakah Anda yakin ingin menerima jadwal matakuliah : ${name}`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#14A44D',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Batal',
+                    confirmButtonText: 'Terima'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                        $.ajax({
+                            url: "{{ url('dashboard/terima/') }}/" + id,
+                            type: 'POST',
+                            data: {
+                                _token: CSRF_TOKEN,
+                                // _method: "delete",
+                            },
+                            dataType: 'JSON',
+                            success: function(response) {
+                                if (response.error) {
+                                    Swal.fire(
+                                        'Error!',
+                                        response.error,
+                                        'error'
+                                    ).then(function() {
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire(
+                                        'Berhasil',
+                                        `Data pemesanan jadwal matakuliah : ${name} diterima.`,
+                                        'success'
+                                    ).then(function() {
+                                        location.reload();
+                                    });
+                                }
+                                reload_table(null, true)
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    type: 'error',
+                                    title: 'Error saat delete data',
+                                    showConfirmButton: true
+                                })
+                            }
+                        })
+                    }
+                })
+            })
+
+            $('#tabelPemesananAdmin').on('click','.batal_admin', function(e) {
+                var id = $(this).data('id');
+                // let name = $(this).data('name');
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Inputkan alasan jadwal ditolak',
+                    input: 'text',
+                    inputPlaceholder: 'pesan',
+                    inputAttributes: {
+                        autocapitalize: 'off'
+                    },
+                    showCancelButton: true,
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#14A44D',
+                    confirmButtonText: 'Lanjutkan',
+                    showLoaderOnConfirm: true,
+                    inputValidator: (pesan) => {
+                        if (!pesan) {
+                            return 'You need to write something!'
+                        }else{
+                            let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                            $.ajax({
+                                url: "{{ url('dashboard/batal/') }}/" + id +'/'+ pesan,
+                                type: 'POST',
+                                data: {
+                                    _token: CSRF_TOKEN,
+                                    // _method: "delete",
+                                },
+                                dataType: 'JSON',
+                                success: function(response) {
+                                    if (response.error) {
+                                        Swal.fire(
+                                            'Error!',
+                                            response.error,
+                                            'error'
+                                        )
+                                    } else {
+                                        Swal.fire(
+                                            'Berhasil',
+                                            `Data pemesanan jadwal dibatalkan dengan pesan : "${pesan}"`,
+                                            'success'
+                                        )
+                                    }
+                                    reload_table(null, true)
+                                },
+                                error: function(jqXHR, textStatus, errorThrown) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        type: 'error',
+                                        title: 'Error saat delete data',
+                                        showConfirmButton: true
+                                    })
+                                }
+                            })
+                        }
+                    }
+                    })
+            })
+        });
+
+        $(document).ready(function() {
+            let table = $('#tabelJadwal').DataTable({
+                responsive: true,
+                fixedHeader: true,
+                pageLength: 25,
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('pemesanan-admin.list') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                    },
+                    {
+                        data: 'id_ruangan',
+                        name: 'id_ruangan'
+                    },
+                    {
+                        data: 'waktu_pakai',
+                        name: 'waktu_pakai',
+                        class: "text-nowrap"
+                    },
+                    {
+                        data: 'prodi',
+                        name: 'prodi',
+                        class: "text-nowrap"
+                    },
+                    {
+                        data: 'matakuliah',
+                        name: 'matakuliah',
+                        class: "text-wrap"
+                    },
+                    {
+                        data: 'kelas',
+                        name: 'kelas',
+                        class: "text-wrap"
+                    },
+                    {
+                        data: 'dosen_matkul',
+                        name: 'dosen_matkul',
+                        class: "text-wrap"
+                    },
+                    {
+                        data: 'pemesan',
+                        name: 'pemesan',
+                        class: "text-wrap"
+                    },
+                    {
+                        data: 'fileRPS',
+                        name: 'fileRPS',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'fileSertif',
+                        name: 'fileSertif',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        class: "text-wrap"
+                    },
+                    {
+                        data: 'waktu_pesan',
+                        name: 'waktu_pesan',
+                        class: "text-nowrap"
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            })
+            .columns.adjust()
+            .responsive.recalc();
+
+            
+            function reload_table(callback, resetPage = false) {
+                table.ajax.reload(callback, resetPage); //reload datatable ajax 
+            }
+
+            $('#tabelPemesananAdmin').on('click','.terima_admin', function(e) {
+                var id = $(this).data('id');
+                let name = $(this).data('name');
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Apakah Yakin?',
+                    text: `Apakah Anda yakin ingin menerima jadwal matakuliah : ${name}`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#14A44D',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Batal',
+                    confirmButtonText: 'Terima'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                        $.ajax({
+                            url: "{{ url('dashboard/terima/') }}/" + id,
+                            type: 'POST',
+                            data: {
+                                _token: CSRF_TOKEN,
+                                // _method: "delete",
+                            },
+                            dataType: 'JSON',
+                            success: function(response) {
+                                if (response.error) {
+                                    Swal.fire(
+                                        'Error!',
+                                        response.error,
+                                        'error'
+                                    ).then(function() {
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire(
+                                        'Berhasil',
+                                        `Data pemesanan jadwal matakuliah : ${name} diterima.`,
+                                        'success'
+                                    ).then(function() {
+                                        location.reload();
+                                    });
+                                }
+                                reload_table(null, true)
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    type: 'error',
+                                    title: 'Error saat delete data',
+                                    showConfirmButton: true
+                                })
+                            }
+                        })
+                    }
+                })
+            })
         });
 
 
@@ -684,7 +968,7 @@ $num2 = 1;
                                     Swal.fire({
                                         title: 'Berhasil',
                                         text: 'Data pemesanan berhasil disimpan.',
-                                        icon: 'succes',
+                                        icon: 'success',
                                         button: 'Tutup'
                                     }).then(function() {
                                         location.reload();
