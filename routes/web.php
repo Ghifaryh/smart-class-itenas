@@ -31,19 +31,20 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
-// Route::get('/register', [RegisterController::class, 'index']);
-// Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/register', [RegisterController::class, 'store']);
 
 
 Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/pemesanan/list', [PemesananController::class, 'list'])->name('pemesanan.list');
     Route::get('/get-matkul/{semester}/{prodi}', [DashboardController::class, 'getMatkul']);
     Route::get('/dosen-matkul/{semester}/{prodi}/{kode_matkul}/{kelas}', [DashboardController::class, 'getDosenMatkul']);
     // Route::post('/dashboard', [PemesananController::class, 'daftar']);   
     Route::post('/dashboard', [PemesananController::class, 'ajaxRequestPost']);   
     Route::post('/dashboard/hapusketpemesanan/{id}', [PemesananController::class, 'hapusket']);
-    // Route::post('/dashboard/edit/{id}', [PemesananController::class, 'edit']);
-    // Route::post('/dashboard/update/{id}', [PemesananController::class, 'update']);
+    Route::post('/dashboard/edit/{id}', [PemesananController::class, 'edit']);
+    Route::post('/dashboard/update/{id}', [PemesananController::class, 'update']);
     
 });
 

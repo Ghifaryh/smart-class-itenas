@@ -3,58 +3,6 @@
 @php
 $num1 = 1;
 $num2 = 1;
-function hariIndo($hariInggris)
-{
-    switch ($hariInggris) {
-        case 'Sunday':
-            return 'Minggu';
-        case 'Monday':
-            return 'Senin';
-        case 'Tuesday':
-            return 'Selasa';
-        case 'Wednesday':
-            return 'Rabu';
-        case 'Thursday':
-            return 'Kamis';
-        case 'Friday':
-            return 'Jumat';
-        case 'Saturday':
-            return 'Sabtu';
-        default:
-            return 'hari tidak valid';
-    }
-}
-function bulanIndo($hariInggris)
-{
-    switch ($hariInggris) {
-        case 'Jan':
-            return 'Januari';
-        case 'Feb':
-            return 'Februari';
-        case 'Mar':
-            return 'Maret';
-        case 'Apr':
-            return 'April';
-        case 'May':
-            return 'Mei';
-        case 'Jun':
-            return 'Juni';
-        case 'Jul':
-            return 'Juli';
-        case 'Aug':
-            return 'Agustus';
-        case 'Sep':
-            return 'September';
-        case 'Oct':
-            return 'Oktober';
-        case 'Nov':
-            return 'November';
-        case 'Dec':
-            return 'Desember';
-        default:
-            return 'bulan tidak valid';
-    }
-}
 @endphp
 
 @section('dashboard-main')
@@ -253,7 +201,7 @@ function bulanIndo($hariInggris)
                                 <h2 class="fw-bold border-bottom border-2 border-dark mb-3 pt-2">List Proses Pemesanan
                                     Ruangan
                                 </h2>
-                                <table class="table table-striped table-list-pesan" id="table2">
+                                <table class="table table-striped table-list-pesan" id="tablepemesanan">
                                     {{-- <thead class="bg-light text-center"> --}}
                                     <thead class="bg-light">
                                         <tr class="text-nowrap">
@@ -275,132 +223,19 @@ function bulanIndo($hariInggris)
                                         </tr>
                                     </thead>
                                     <tbody class="text-center align-middle">
-                                        @foreach ($pesanans as $pesanan)
-                                            <tr>
-                                                <th scope="row">{{ $num1++ }}</th>
-                                                <td>{{ $pesanan->id_ruangan }}</td>
-                                                <td class="text-nowrap">
-                                                    {{ hariIndo(date('l', strtotime($pesanan->tanggal_pinjam))) }},
-                                                    {{ date('d', strtotime($pesanan->tanggal_pinjam)) }}
-                                                    {{ bulanIndo(date('M', strtotime($pesanan->tanggal_pinjam))) }} <br>
-                                                    ({{ date('H:i', strtotime($pesanan->jam_masuk)) }} -
-                                                    {{ date('H:i', strtotime($pesanan->jam_keluar)) }})
-                                                </td>
-                                                <td class="text-nowrap">{{ $pesanan->Prodi->nama }}</td>
-                                                <td class="text-wrap">{{ $pesanan->matakuliah }}</td>
-                                                <td class="text-wrap">{{ $pesanan->kelas }}</td>
-                                                <td class="text-wrap">{{ $pesanan->dosen_matkul }}</td>
-                                                <td class="text-wrap">{{ $pesanan->User->name }}</td>
-                                                <td class="text-wrap">
-                                                    <!-- Button trigger modal -->
-                                                    {{-- <button value="{{ asset('storage/' . $pesanan->fileRPS) }}" type="button" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#myModal" id="btnFileRPS">
-                                                        View
-                                                    </button> --}}
-
-                                                    <form action="{{ asset('storage/' . $pesanan->fileRPS) }}">
-                                                        <button class="badge bg-primary border-0 btnDownload"
-                                                            type="submit" id="btnRPS"><i
-                                                                class="fa-solid fa-cloud-arrow-down"></i></button>
-                                                    </form>
-                                                </td>
-                                                <td class="text-wrap">
-                                                    <!-- Button trigger modal -->
-                                                    {{-- <button value="{{ asset('storage/' . $pesanan->fileSertif) }}" type="button" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#myModal" id="btnFileSertif">
-                                                        View
-                                                    </button> --}}
-                                                    <form action="{{ asset('storage/' . $pesanan->fileSertif) }}">
-                                                        <button class="badge bg-primary border-0 btnDownload"
-                                                            type="submit" id="btnSertif"><i
-                                                                class="fa-solid fa-cloud-arrow-down"></i></button>
-                                                    </form>
-                                                </td>
-                                                @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi')
-                                                    <td class="fw-bold text-warning text-wrap">
-                                                        {{ $pesanan->Status->keterangan }}</td>
-                                                @elseif ($pesanan->Status->keterangan == 'Diterima')
-                                                    <td class="fw-bold text-success text-nowrap">
-                                                        {{ $pesanan->Status->keterangan }}</td>
-                                                @elseif ($pesanan->Status->keterangan == 'Dijadwalkan')
-                                                    <td class="fw-bold text-primary text-nowrap">
-                                                        {{ $pesanan->Status->keterangan }}</td>
-                                                @else
-                                                    <td class="fw-bold text-danger text-nowrap">
-                                                        {{ $pesanan->Status->keterangan }}</td>
-                                                @endif
-
-                                                @if (auth()->user()->level == 'admin')
-                                                    <td class="text-nowrap">
-                                                        {{ date('d/m/y h:i:s', strtotime($pesanan->updated_at)) }}</td>
-                                                @endif
-
-                                                @if (auth()->user()->level == 'dosen')
-                                                    <td class="text-nowrap">
-                                                        {{-- @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi' or $pesanan->Status->keterangan == 'dibatalkan')
-                                                            <form
-                                                                action="/dashboard/edit/{{ $pesanan->id }}"method="post"
-                                                                class="d-block">
-                                                                @csrf
-                                                                <button class="badge bg-primary border-0"
-                                                                    onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
-                                                            </form>
-                                                        @endif --}}
-                                                        <form action="/dashboard/hapusketpemesanan/{{ $pesanan->id }}"
-                                                            method="post">
-                                                            @csrf
-                                                            <button class="badge bg-danger border-0"
-                                                                onclick="return confirm('Apakah anda yakin menghapus jadwal?')">Hapus</button>
-                                                        </form>
-                                                    </td>
-                                                @else
-                                                    <td>
-                                                        @if ($pesanan->Status->keterangan == 'Dihapus' or $pesanan->Status->keterangan == 'Ditolak (Dihapus)')
-                                                        @else
-                                                            <form action="/dashboard/terima/{{ $pesanan->id }}"
-                                                                method="post" class="d-block">
-                                                                @csrf
-                                                                <button class="badge bg-success border-0"
-                                                                    onclick="return confirm('Apakah anda yakin untuk menerima jadwal?')">Terima</button>
-                                                            </form>
-                                                        @endif
-
-                                                        {{-- @if ($pesanan->Status->keterangan == 'Menunggu Konfirmasi' or $pesanan->Status->keterangan == 'dibatalkan')
-                                                            <form
-                                                                action="/dashboard/edit/{{ $pesanan->id }}"method="post"
-                                                                class="d-block">
-                                                                @csrf
-                                                                <button class="badge bg-primary border-0"
-                                                                    onclick="return confirm('Apakah anda yakin untuk mengubah?')">Edit</button>
-                                                            </form>
-                                                        @endif --}}
-
-                                                        @if ($pesanan->Status->keterangan == 'Dihapus' or $pesanan->Status->keterangan == 'Ditolak (Dihapus)')
-                                                            <form action="/dashboard/batalhapus/{{ $pesanan->id }}"
-                                                                method="post" class="d-block">
-                                                                @csrf
-                                                                <button class="badge bg-danger border-0"
-                                                                    onclick="return confirm('Apakah anda yakin untuk menolak jadwal?')">Batalkan</button>
-                                                            </form>
-                                                        @else
-                                                            <form action="/dashboard/batal/{{ $pesanan->id }}"
-                                                                method="post" class="d-block">
-                                                                @csrf
-                                                                <button class="badge bg-danger border-0"
-                                                                    onclick="return confirm('Apakah anda yakin untuk membatalkan jadwal?')">Batalkan</button>
-                                                            </form>
-                                                        @endif
-                                                        @if (auth()->user()->level == 'admin')
-                                                            <form action="/dashboard/hapuspemesanan/{{ $pesanan->id }}"
-                                                                method="post" class="d-block">
-                                                                @method('delete')
-                                                                @csrf
-                                                                <button class="badge bg-danger border-0"
-                                                                    onclick="return confirm('Apakah anda yakin untuk menghapus jadwal?')">Hapus</button>
-                                                            </form>
-                                                        @endif
-                                                    </td>
-                                                @endif
-                                            </tr>
-                                        @endforeach
+                                        {{-- <th scope="row"></th>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>    
+                                        <td class="text-nowrap"></td>     --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -490,6 +325,94 @@ function bulanIndo($hariInggris)
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).ready(function() {
+            // let flashdatasukses = $('.success-session').data('flashdata');
+            // if (flashdatasukses) {
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Success!',
+            //         text: flashdatasukses,
+            //         type: 'success'
+            //     })
+            // }
+
+            let table = $('#tablepemesanan').DataTable({
+                responsive: true,
+                fixedHeader: true,
+                pageLength: 25,
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('pemesanan.list') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                    },
+                    {
+                        data: 'id_ruangan',
+                        name: 'id_ruangan'
+                    },
+                    {
+                        data: 'waktu_pakai',
+                        name: 'waktu_pakai',
+                        class: "text-nowrap"
+                    },
+                    {
+                        data: 'prodi',
+                        name: 'prodi',
+                        class: "text-nowrap"
+                    },
+                    {
+                        data: 'matakuliah',
+                        name: 'matakuliah'
+                    },
+                    {
+                        data: 'kelas',
+                        name: 'kelas'
+                    },
+                    {
+                        data: 'dosen_matkul',
+                        name: 'dosen_matkul'
+                    },
+                    {
+                        data: 'pemesan',
+                        name: 'pemesan'
+                    },
+                    {
+                        data: 'fileRPS',
+                        name: 'fileRPS',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'fileSertif',
+                        name: 'fileSertif',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'waktu_pesan',
+                        name: 'waktu_pesan'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            })
+            .columns.adjust()
+            .responsive.recalc();
+
+            function reload_table(callback, resetPage = false) {
+                table.ajax.reload(callback, resetPage); //reload datatable ajax 
             }
         });
 
@@ -687,54 +610,57 @@ function bulanIndo($hariInggris)
             });
             // $("#submitPesan").submit(function(e){
             $("#postPemesanan").submit(function(e) {
-                e.preventDefault();
-                swal({
-                        title: "Apakah form pemesanan sudah sesuai?",
-                        text: "Jika sudah sesuai maka akan segera diproses oleh admin.",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: false,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $.ajax({
-                                url: $(this).attr('action'),
-                                method: $(this).attr('method'),
-                                data: new FormData(this),
-                                processData: false,
-                                dataType: 'json',
-                                // async: false,
-                                // cache: false,
-                                contentType: false,
-                                enctype: $(this).attr('enctype'),
-                                beforeSend: function() {
-                                    $(document).find('span.error-text').text('');
-                                },
-                                success: function(response) {
-                                    if (response.success) {
-                                        swal("Pemesanan berhasil!", {
-                                            icon: "success",
-                                        }).then(function() {
-                                            location.reload();
-                                            // window.location = window.location.href;
-                                        });
-                                    } else {
-                                        swal({
-                                            title: "Error",
-                                            text: "Pemesanan gagal!",
-                                            icon: "error",
-                                            button: "Tutup",
-                                            timer: 2000,
-                                        });
-                                        $.each(response.error, function(prefix, val) {
-                                            $('span.' + prefix + '_error').text(val[
-                                                0]);
-                                        });
-                                    }
+                e.preventDefault(); 
+                Swal.fire({
+                    title: 'Apakah Yakin?',
+                    text: `Jika sudah sesuai maka akan segera diproses oleh admin.`,
+                    icon: 'warning',
+                    cancelButtonColor: '#d33',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: $(this).attr('action'),
+                            method: $(this).attr('method'),
+                            data: new FormData(this),
+                            processData: false,
+                            dataType: 'json',
+                            // async: false,
+                            // cache: false,
+                            contentType: false,
+                            enctype: $(this).attr('enctype'),
+                            beforeSend: function() {
+                                $(document).find('span.error-text').text('');
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: 'Berhasil',
+                                        text: 'Data pemesanan berhasil disimpan.',
+                                        icon: 'succes',
+                                        button: 'Tutup'
+                                    }).then(function() {
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Gagal',
+                                        text: 'Data pemesanan gagal disimpan!',
+                                        icon: 'error',
+                                        button: 'Tutup',
+                                        timer: 2000,
+                                    });
+                                    $.each(response.error, function(prefix, val) {
+                                        $('span.' + prefix + '_error').text(val[
+                                            0]);
+                                    });
                                 }
-                            });
-                        };
-                    });
+                            }
+                        });
+                    };
+                });
             });
         });
 
@@ -797,12 +723,12 @@ function bulanIndo($hariInggris)
             });
             // $('#table1').css("text-align", "center");
             // $('#table1').css("color", "orange");
-            $('#table2').DataTable({
-                dom: 'Brftip',
-                buttons: [
-                    'pdf', 'copy'
-                ]
-            });
+            // $('#table2').DataTable({
+            //     dom: 'Brftip',
+            //     buttons: [
+            //         'pdf', 'copy'
+            //     ]
+            // });
 
             $('#jam_masuk').select2({
                 placeholder: "Pilih Jam Masuk",
