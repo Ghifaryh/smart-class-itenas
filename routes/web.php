@@ -37,7 +37,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::get('/pemesanan/list', [PemesananController::class, 'list'])->name('pemesanan.list');
+    Route::get('/pemesanan/admin/list', [PemesananController::class, 'adminList'])->name('pemesanan-admin.list');
+    Route::get('/pemesanan/dosen/list', [PemesananController::class, 'dosenList'])->name('pemesanan-dosen.list');
     Route::get('/get-matkul/{semester}/{prodi}', [DashboardController::class, 'getMatkul']);
     Route::get('/dosen-matkul/{semester}/{prodi}/{kode_matkul}/{kelas}', [DashboardController::class, 'getDosenMatkul']);
     // Route::post('/dashboard', [PemesananController::class, 'daftar']);   

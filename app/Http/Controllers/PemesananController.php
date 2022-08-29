@@ -109,119 +109,178 @@ class PemesananController extends Controller
 
     }
 
-    public function list(Request $request)
-    {
-        function hariIndo($hariInggris){
-            switch ($hariInggris) {
-                case 'Sunday':
-                    return 'Minggu';
-                case 'Monday':
-                    return 'Senin';
-                case 'Tuesday':
-                    return 'Selasa';
-                case 'Wednesday':
-                    return 'Rabu';
-                case 'Thursday':
-                    return 'Kamis';
-                case 'Friday':
-                    return 'Jumat';
-                case 'Saturday':
-                    return 'Sabtu';
-                default:
-                    return 'hari tidak valid';
-        }}
-        function bulanIndo($bulanInggris){
-            switch ($bulanInggris) {
-                case 'Jan':
-                    return 'Januari';
-                case 'Feb':
-                    return 'Februari';
-                case 'Mar':
-                    return 'Maret';
-                case 'Apr':
-                    return 'April';
-                case 'May':
-                    return 'Mei';
-                case 'Jun':
-                    return 'Juni';
-                case 'Jul':
-                    return 'Juli';
-                case 'Aug':
-                    return 'Agustus';
-                case 'Sep':
-                    return 'September';
-                case 'Oct':
-                    return 'Oktober';
-                case 'Nov':
-                    return 'November';
-                case 'Dec':
-                    return 'Desember';
-                default:
-                    return 'bulan tidak valid';
-        }}
+    public function hariIndo($hariInggris){
+        switch ($hariInggris) {
+            case 'Sunday':
+                return 'Minggu';
+            case 'Monday':
+                return 'Senin';
+            case 'Tuesday':
+                return 'Selasa';
+            case 'Wednesday':
+                return 'Rabu';
+            case 'Thursday':
+                return 'Kamis';
+            case 'Friday':
+                return 'Jumat';
+            case 'Saturday':
+                return 'Sabtu';
+            default:
+                return 'hari tidak valid';
+    }}
 
+    public function bulanIndo($bulanInggris){
+        switch ($bulanInggris) {
+            case 'Jan':
+                return 'Januari';
+            case 'Feb':
+                return 'Februari';
+            case 'Mar':
+                return 'Maret';
+            case 'Apr':
+                return 'April';
+            case 'May':
+                return 'Mei';
+            case 'Jun':
+                return 'Juni';
+            case 'Jul':
+                return 'Juli';
+            case 'Aug':
+                return 'Agustus';
+            case 'Sep':
+                return 'September';
+            case 'Oct':
+                return 'Oktober';
+            case 'Nov':
+                return 'November';
+            case 'Dec':
+                return 'Desember';
+            default:
+                return 'bulan tidak valid';
+    }}
+
+    public function adminList(Request $request)
+    {
+        if ($request->ajax()) {
+            $pesanan = Pemesanan::all();
+            return DataTables::of($pesanan)
+            ->addIndexColumn()
+            ->editColumn('waktu_pakai', function ($row) {
+                $waktupakai = $this->hariIndo(date('l', strtotime($row->tanggal_pinjam))).', '.date('d', strtotime($row->tanggal_pinjam)).' '.$this->bulanIndo(date('M', strtotime($row->tanggal_pinjam))).'<br>'.'('.date('H:i', strtotime($row->jam_masuk)).'-'.date('H:i', strtotime($row->jam_keluar)).')';
+                return $waktupakai;
+            })
+            ->editColumn('prodi', function ($row) {
+                return $row->Prodi->nama;
+            })
+            ->editColumn('status', function ($row) {
+                if($row->Status->keterangan == "Menunggu Konfirmasi"){
+                    return '<font class="fw-bold text-warning" style="">' .$row->Status->keterangan .'</font>';
+                }elseif($row->Status->keterangan == "Diterima"){
+                    return '<font color="fw-bold text-success" style="">' .$row->Status->keterangan .'</font>';
+                }elseif($row->Status->keterangan== "Dijadwalkan"){
+                    return '<font color="fw-bold text-primary" style="">' .$row->Status->keterangan .'</font>';
+                }else{
+                    return '<font color="fw-bold text-danger" style="">' .$row->Status->keterangan .'</font>';
+                }
+            })
+            ->editColumn('pemesan', function ($row) {
+                return $row->User->name;
+            })
+            ->editColumn('fileRPS', function ($row) {
+                $edit_url = asset('storage/'. $row->fileRPS);
+                $action_btn = '
+                <form action="'.$edit_url.'">
+                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button> 
+                </form>';
+                return $action_btn;
+            })
+            ->editColumn('fileSertif', function ($row) {
+                $edit_url = asset('storage/'. $row->fileSertif);
+                $action_btn = '
+                <form action="'.$edit_url.'">
+                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button> 
+                </form>';
+                return $action_btn;
+            })
+            ->addColumn('waktu_pesan', function ($row) {
+                return date('d/m/Y h:i:s', strtotime($row->updated_at));
+            })
+            ->editColumn('action', function ($row) {
+                // $edit_url = route('admin.kecamatan.edit', $row->id);
+                $edit_url = null;
+                $action_btn = '
+                <a href="' . $edit_url . '"
+                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-non focus:ring disabled:opacity-25 transition ease-in-out duration-150 text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-500">
+                    Edit
+                </a>
+                <button
+                    data-id="' . $row->id . '" data-name="' . $row->name . '"
+                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-non focus:ring disabled:opacity-25 transition ease-in-out duration-150 text-white bg-red-600 hover:bg-red-700 focus:ring-red-500 hapus_record">
+                    Hapus
+                </button>
+                ';
+                return $action_btn;
+            })
+            ->rawColumns(['waktu_pakai','action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
+            ->make(true);   
+        }
+    }
+
+    public function dosenList(Request $request)
+    {
         if ($request->ajax()) {
             $pesanan = Pemesanan::where('id_pemesan', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
             return DataTables::of($pesanan)
-                ->addIndexColumn()
-                ->editColumn('waktu_pakai', function ($row) {
-                    $waktupakai = hariIndo(date('l', strtotime($row->tanggal_pinjam))).', '.date('d', strtotime($row->tanggal_pinjam)).' '.bulanIndo(date('M', strtotime($row->tanggal_pinjam))).'<br>'.'('.date('H:i', strtotime($row->jam_masuk)).'-'.date('H:i', strtotime($row->jam_keluar)).')';
-                    return $waktupakai;
-                })
-                ->editColumn('prodi', function ($row) {
-                    return $row->Prodi->nama;
-                })
-                ->addColumn('status', function ($row) {
-                    if($row->Status->keterangan == "Menunggu Konfirmasi"){
-                        return '<font class="fw-bold text-warning" style="">' .$row->Status->keterangan .'</font>';
-                    }elseif($row->Status->keterangan == "Diterima"){
-                        return '<font color="fw-bold text-success" style="">' .$row->Status->keterangan .'</font>';
-                    }elseif($row->Status->keterangan== "Dijadwalkan"){
-                        return '<font color="fw-bold text-primary" style="">' .$row->Status->keterangan .'</font>';
-                    }else{
-                        return '<font color="fw-bold text-danger" style="">' .$row->Status->keterangan .'</font>';
-                    }
-                })
-                ->addColumn('pemesan', function ($row) {
-                    return $row->User->name;
-                })
-                ->addColumn('fileRPS', function ($row) {
-                    $edit_url = asset('storage/'. $row->fileRPS);
-                    $action_btn = '
-                    <form action="'.$edit_url.'">
-                    <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button> 
-                    </form>';
-                    return $action_btn;
-                })
-                ->addColumn('fileSertif', function ($row) {
-                    $edit_url = asset('storage/'. $row->fileSertif);
-                    $action_btn = '
-                    <form action="'.$edit_url.'">
-                    <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button> 
-                    </form>';
-                    return $action_btn;
-                })
-                ->addColumn('waktu_pesan', function ($row) {
-                    return date('d/m/Y h:i:s', strtotime($row->updated_at));
-                })
-                ->addColumn('action', function ($row) {
-                    // $edit_url = route('admin.kecamatan.edit', $row->id);
-                    $edit_url = null;
-                    $action_btn = '
-                    <a href="' . $edit_url . '"
-                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-non focus:ring disabled:opacity-25 transition ease-in-out duration-150 text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-500">
-                        Edit
-                    </a>
-                    <button
-                        data-id="' . $row->id . '" data-name="' . $row->name . '"
-                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-non focus:ring disabled:opacity-25 transition ease-in-out duration-150 text-white bg-red-600 hover:bg-red-700 focus:ring-red-500 hapus_record">
-                        Hapus
-                    </button>
-                    ';
-                    return $action_btn;
-                })
-                ->rawColumns(['waktu_pakai','action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
-                ->make(true);
+            ->addIndexColumn()
+            ->editColumn('waktu_pakai', function ($row) {
+                $waktupakai = $this->hariIndo(date('l', strtotime($row->tanggal_pinjam))).', '.date('d', strtotime($row->tanggal_pinjam)).' '.$this->bulanIndo(date('M', strtotime($row->tanggal_pinjam))).'<br>'.'('.date('H:i', strtotime($row->jam_masuk)).'-'.date('H:i', strtotime($row->jam_keluar)).')';
+                return $waktupakai;
+            })
+            ->editColumn('prodi', function ($row) {
+                return $row->Prodi->nama;
+            })
+            ->editColumn('status', function ($row) {
+                if($row->Status->keterangan == "Menunggu Konfirmasi"){
+                    return '<font class="fw-bold text-warning" style="">' .$row->Status->keterangan .'</font>';
+                }elseif($row->Status->keterangan == "Diterima"){
+                    return '<font color="fw-bold text-success" style="">' .$row->Status->keterangan .'</font>';
+                }elseif($row->Status->keterangan== "Dijadwalkan"){
+                    return '<font color="fw-bold text-primary" style="">' .$row->Status->keterangan .'</font>';
+                }else{
+                    return '<font color="fw-bold text-danger" style="">' .$row->Status->keterangan .'</font>';
+                }
+            })
+            ->editColumn('pemesan', function ($row) {
+                return $row->User->name;
+            })
+            ->editColumn('fileRPS', function ($row) {
+                $edit_url = asset('storage/'. $row->fileRPS);
+                $action_btn = '
+                <form action="'.$edit_url.'">
+                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button> 
+                </form>';
+                return $action_btn;
+            })
+            ->editColumn('fileSertif', function ($row) {
+                $edit_url = asset('storage/'. $row->fileSertif);
+                $action_btn = '
+                <form action="'.$edit_url.'">
+                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button> 
+                </form>';
+                return $action_btn;
+            })
+            ->editColumn('action', function ($row) {
+                // $edit_url = route('admin.kecamatan.edit', $row->id);
+                $action_btn = '
+                <button 
+                    data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                    class="badge bg-danger border-0" id>Hapus
+                </button>
+                ';  
+                return $action_btn;
+            })
+            ->rawColumns(['waktu_pakai','action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
+            ->make(true);
         }
     }
 

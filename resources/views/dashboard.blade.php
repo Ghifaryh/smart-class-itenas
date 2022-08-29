@@ -7,76 +7,13 @@ $num2 = 1;
 
 @section('dashboard-main')
     @if (session()->has('Login Berhasil'))
-        <script>
-            $(document).ready(function() {
-                swal({
-                    title: 'Login Berhasil',
-                    text: `{{ session('Login Berhasil') }}`,
-                    icon: "success",
-                    button: "Tutup",
-                    timer: 3000,
-                }).then(function() {
-                    location.reload();
-                    // window.location = window.location.href;
-                });
-            });
-        </script>
-        {{-- <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"
-            aria-label="Close"></button>
-    </div> --}}
+        <div class="login-berhasil" data-flashdata="{{ session('Login Berhasil') }}"></div>
     @endif
     @if (session()->has('Pemesanan Sukses'))
-        <script>
-            $(document).ready(function() {
-                swal({
-                    title: 'Berhasil',
-                    text: `{{ session('Pemesanan Sukses') }}`,
-                    icon: "success",
-                    button: "Tutup",
-                    timer: 3000,
-                }).then(function() {
-                    location.reload();
-                });
-            });
-        </script>
+    <div class="pemesanan-sukses" data-flashdata="{{ session('Pemesanan Sukses') }}"></div>
     @endif
-    {{-- @if (session()->has('Pemesanan Batal'))
-        <script>
-            $(document).ready(function() {
-                swal({
-                    title: 'Berhasil',
-                    text: `{{ session('Pemesanan Batal') }}`,
-                    icon: "success",
-                    button: "Tutup",
-                    timer: 3000,
-                }).then(function() {
-                    // Swal Message
-                    swal("Alasan ditolak:", {
-                            content: "input",
-                        })
-                        .then((value) => {
-                            swal(`You typed: ${value}`);
-                        });
-                });
-            });
-        </script>
-    @endif --}}
     @if (session()->has('Jadwal Sukses'))
-        <script>
-            $(document).ready(function() {
-                swal({
-                    title: 'Berhasil',
-                    text: `{{ session('Jadwal Sukses') }}`,
-                    icon: "success",
-                    button: "Tutup",
-                    timer: 3000,
-                }).then(function() {
-                    location.reload();
-                });
-            });
-        </script>
+    <div class="jadwal-sukses" data-flashdata="{{ session('Jadwal Sukses') }}"></div>
     @endif
 
     <div class="container-fluid dashboard-dosen">
@@ -201,7 +138,11 @@ $num2 = 1;
                                 <h2 class="fw-bold border-bottom border-2 border-dark mb-3 pt-2">List Proses Pemesanan
                                     Ruangan
                                 </h2>
-                                <table class="table table-striped table-list-pesan" id="tablepemesanan">
+                                @if (auth()->user()->level == 'admin')
+                                <table class="table table-striped table-list-pesan" id="tabelPemesananAdmin">
+                                @else
+                                <table class="table table-striped table-list-pesan" id="tabelPemesananDosen">
+                                @endif
                                     {{-- <thead class="bg-light text-center"> --}}
                                     <thead class="bg-light">
                                         <tr class="text-nowrap">
@@ -223,19 +164,6 @@ $num2 = 1;
                                         </tr>
                                     </thead>
                                     <tbody class="text-center align-middle">
-                                        {{-- <th scope="row"></th>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>    
-                                        <td class="text-nowrap"></td>     --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -329,23 +257,52 @@ $num2 = 1;
         });
 
         $(document).ready(function() {
-            // let flashdatasukses = $('.success-session').data('flashdata');
-            // if (flashdatasukses) {
-            //     Swal.fire({
-            //         icon: 'success',
-            //         title: 'Success!',
-            //         text: flashdatasukses,
-            //         type: 'success'
-            //     })
-            // }
+            let LoginBerhasil = $('.login-berhasil').data('flashdata');
+            let PemesananSukses = $('.pemesanan-sukses').data('flashdata');
+            let JadwalSukses = $('.jadwal-sukses').data('flashdata');
+            if (LoginBerhasil) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Berhasil',
+                    text: LoginBerhasil,
+                    type: 'success',
+                    timer: 3000,
+                }).then(function() {
+                    location.reload();
+                });
+            }
+            if (PemesananSukses) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: PemesananSukses,
+                    type: 'success',
+                    timer: 6000,
+                }).then(function() {
+                    location.reload();
+                });
+            }
+            if (JadwalSuksess) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: JadwalSukses,
+                    type: 'success',
+                    timer: 6000,
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
 
-            let table = $('#tablepemesanan').DataTable({
+        $(document).ready(function() {
+            let table = $('#tabelPemesananDosen').DataTable({
                 responsive: true,
                 fixedHeader: true,
                 pageLength: 25,
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('pemesanan.list') }}",
+                ajax: "{{ route('pemesanan-dosen.list') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -366,19 +323,23 @@ $num2 = 1;
                     },
                     {
                         data: 'matakuliah',
-                        name: 'matakuliah'
+                        name: 'matakuliah',
+                        class: "text-wrap"
                     },
                     {
                         data: 'kelas',
-                        name: 'kelas'
+                        name: 'kelas',
+                        class: "text-wrap"
                     },
                     {
                         data: 'dosen_matkul',
-                        name: 'dosen_matkul'
+                        name: 'dosen_matkul',
+                        class: "text-wrap"
                     },
                     {
                         data: 'pemesan',
-                        name: 'pemesan'
+                        name: 'pemesan',
+                        class: "text-wrap"
                     },
                     {
                         data: 'fileRPS',
@@ -394,11 +355,8 @@ $num2 = 1;
                     },
                     {
                         data: 'status',
-                        name: 'status'
-                    },
-                    {
-                        data: 'waktu_pesan',
-                        name: 'waktu_pesan'
+                        name: 'status',
+                        class: "text-wrap"
                     },
                     {
                         data: 'action',
@@ -411,10 +369,97 @@ $num2 = 1;
             .columns.adjust()
             .responsive.recalc();
 
+            
             function reload_table(callback, resetPage = false) {
                 table.ajax.reload(callback, resetPage); //reload datatable ajax 
             }
         });
+
+        $(document).ready(function() {
+            let table = $('#tabelPemesananAdmin').DataTable({
+                responsive: true,
+                fixedHeader: true,
+                pageLength: 25,
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('pemesanan-admin.list') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                    },
+                    {
+                        data: 'id_ruangan',
+                        name: 'id_ruangan'
+                    },
+                    {
+                        data: 'waktu_pakai',
+                        name: 'waktu_pakai',
+                        class: "text-nowrap"
+                    },
+                    {
+                        data: 'prodi',
+                        name: 'prodi',
+                        class: "text-nowrap"
+                    },
+                    {
+                        data: 'matakuliah',
+                        name: 'matakuliah',
+                        class: "text-wrap"
+                    },
+                    {
+                        data: 'kelas',
+                        name: 'kelas',
+                        class: "text-wrap"
+                    },
+                    {
+                        data: 'dosen_matkul',
+                        name: 'dosen_matkul',
+                        class: "text-wrap"
+                    },
+                    {
+                        data: 'pemesan',
+                        name: 'pemesan',
+                        class: "text-wrap"
+                    },
+                    {
+                        data: 'fileRPS',
+                        name: 'fileRPS',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'fileSertif',
+                        name: 'fileSertif',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        class: "text-wrap"
+                    },
+                    {
+                        data: 'waktu_pesan',
+                        name: 'waktu_pesan',
+                        class: "text-nowrap"
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            })
+            .columns.adjust()
+            .responsive.recalc();
+
+            
+            function reload_table(callback, resetPage = false) {
+                table.ajax.reload(callback, resetPage); //reload datatable ajax 
+            }
+        });
+
 
         $(document).ready(function() {
             $("#matakuliah").prop('disabled', true);
