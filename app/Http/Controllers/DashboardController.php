@@ -19,11 +19,11 @@ class DashboardController extends Controller
         $datenow = Carbon::now()->format('Y-m-d');
         // $date = Carbon::now()->format('Y-m-d');
         
-        if (auth()->user()->level == 'dosen') {
-            $pesanan = Pemesanan::where('id_pemesan', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
-        } else {
-            $pesanan = Pemesanan::all();
-        }
+        // if (auth()->user()->level == 'dosen') {
+        //     $pesanan = Pemesanan::where('id_pemesan', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
+        // } else {
+        //     $pesanan = Pemesanan::all();
+        // }
 
         // ->where('jadwal_masuk', date())->
         
@@ -31,8 +31,8 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'ruangan' => Ruangan::all(),
             'jam' => Jam::all(),
-            'pesanans' => $pesanan,
-            'jadwals' => Jadwal::all(),
+            // 'pesanans' => $pesanan,
+            // 'jadwals' => Jadwal::all(),
             'prodis' => Prodi::all(),
 
         ]);

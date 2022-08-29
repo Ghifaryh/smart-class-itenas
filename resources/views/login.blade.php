@@ -138,7 +138,7 @@
                 Swal.fire({
                     icon: 'warning',
                     title: 'Gagal',
-                    text: loginGagal,
+                    text: loginWarning,
                     type: 'warning',
                     timer: 6000
                 }).then(function() {

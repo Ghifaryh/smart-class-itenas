@@ -222,8 +222,8 @@ class PemesananController extends Controller
                         class="badge bg-danger border-0 hapus_admin">Hapus
                     </button>
                     ';
-
                         return $btnAdmin;
+
                     } else {
                         $btnAdmin = '
                     <button
@@ -326,7 +326,8 @@ class PemesananController extends Controller
         }
         Pemesanan::destroy($id);
 
-        return redirect('/dashboard')->with('Pemesanan Sukses', 'Data pemesanan berhasil dihapus');
+        // return redirect('/dashboard')->with('Pemesanan Sukses', 'Data pemesanan berhasil dihapus');
+        return response()->json(['status' => TRUE]);
     }
 
     public function accept($id)
@@ -370,11 +371,11 @@ class PemesananController extends Controller
         return response()->json(['status' => TRUE]);
     }
 
-    public function cancelhapus($id)
+    public function cancelhapus($id, $pesan)
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
-        Pemesanan::where('id', $id)->update(['id_status' => 5]);
-        return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan karena dihapus');
+        Pemesanan::where('id', $id)->update(['id_status' => 5, 'pesan' => $pesan]);
+        return response()->json(['status' => TRUE]);
     }
 
     // public function edit($id)

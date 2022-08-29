@@ -180,7 +180,7 @@ $num2 = 1;
                                         Disetujui
                                     </h2>
                                     {{-- <table class="table sh-table" id="table1"> --}}
-                                    <table class="table table-striped table-list-pesan" id="table1"
+                                    <table class="table table-striped table-list-pesan" id="tabelJadwal"
                                         style="width:100%">
                                         <thead class="bg-light text-center">
                                             <tr>
@@ -259,7 +259,7 @@ $num2 = 1;
             let table = $('#tabelPemesananDosen').DataTable({
                     responsive: true,
                     fixedHeader: true,
-                    pageLength: 25,
+                    pageLength: 10,
                     processing: true,
                     serverSide: true,
                     ajax: "{{ route('pemesanan-dosen.list') }}",
@@ -393,9 +393,7 @@ $num2 = 1;
                     title: 'Alasan ditolak',
                     text: `${name}`,
                     icon: 'warning',
-                    showCancelButton: true,
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Tutup'
+                    showConfirmButton: true,
                 })
             })
         });
@@ -532,7 +530,7 @@ $num2 = 1;
                                 Swal.fire({
                                     icon: 'error',
                                     type: 'error',
-                                    title: 'Error saat delete data',
+                                    title: 'Error saat menerima jadwal',
                                     showConfirmButton: true
                                 })
                             }
@@ -543,10 +541,9 @@ $num2 = 1;
 
             $('#tabelPemesananAdmin').on('click','.batal_admin', function(e) {
                 var id = $(this).data('id');
-                // let name = $(this).data('name');
                 e.preventDefault()
                 Swal.fire({
-                    title: 'Inputkan alasan jadwal ditolak',
+                    title: 'Inputkan alasan jadwal dibatalkan',
                     input: 'text',
                     inputPlaceholder: 'pesan',
                     inputAttributes: {
@@ -560,7 +557,7 @@ $num2 = 1;
                     showLoaderOnConfirm: true,
                     inputValidator: (pesan) => {
                         if (!pesan) {
-                            return 'You need to write something!'
+                            return 'Wajib memberikan alasan pembatalan!'
                         }else{
                             let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                             $.ajax({
@@ -568,7 +565,6 @@ $num2 = 1;
                                 type: 'POST',
                                 data: {
                                     _token: CSRF_TOKEN,
-                                    // _method: "delete",
                                 },
                                 dataType: 'JSON',
                                 success: function(response) {
@@ -591,14 +587,129 @@ $num2 = 1;
                                     Swal.fire({
                                         icon: 'error',
                                         type: 'error',
-                                        title: 'Error saat delete data',
+                                        title: 'Error saat membatalkan pesanan',
                                         showConfirmButton: true
                                     })
                                 }
                             })
                         }
                     }
-                    })
+                })
+            })
+
+            $('#tabelPemesananAdmin').on('click','.batalhapus_admin', function(e) {
+                var id = $(this).data('id');
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Inputkan alasan jadwal dibatalkan',
+                    input: 'text',
+                    inputPlaceholder: 'pesan',
+                    inputAttributes: {
+                        autocapitalize: 'off'
+                    },
+                    showCancelButton: true,
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#14A44D',
+                    confirmButtonText: 'Lanjutkan',
+                    showLoaderOnConfirm: true,
+                    inputValidator: (pesan) => {
+                        if (!pesan) {
+                            return 'Wajib memberikan alasan pembatalan!'
+                        }else{
+                            let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                            $.ajax({
+                                url: "{{ url('dashboard/batalhapus/') }}/" + id +'/'+ pesan,
+                                type: 'POST',
+                                data: {
+                                    _token: CSRF_TOKEN,
+                                },
+                                dataType: 'JSON',
+                                success: function(response) {
+                                    if (response.error) {
+                                        Swal.fire(
+                                            'Error!',
+                                            response.error,
+                                            'error'
+                                        )
+                                    } else {
+                                        Swal.fire(
+                                            'Berhasil',
+                                            `Data pemesanan jadwal dibatalkan dengan pesan : "${pesan}"`,
+                                            'success'
+                                        )
+                                    }
+                                    reload_table(null, true)
+                                },
+                                error: function(jqXHR, textStatus, errorThrown) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        type: 'error',
+                                        title: 'Error saat membatalkan pemesanan',
+                                        showConfirmButton: true
+                                    })
+                                }
+                            })
+                        }
+                    }
+                })
+            })
+
+            $('#tabelPemesananAdmin').on('click','.hapus_admin', function(e) {
+                var id = $(this).data('id');
+                let name = $(this).data('name');
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Apakah Yakin?',
+                    text: `Apakah Anda yakin ingin menghapus data pemesanan jadwal matakuliah : ${name}`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#14A44D',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Batal',
+                    confirmButtonText: 'Terima'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                        $.ajax({
+                            url: "{{ url('dashboard/hapuspemesanan/') }}/" + id,
+                            type: 'POST',
+                            data: {
+                                _token: CSRF_TOKEN,
+                                _method: "delete",
+                            },
+                            dataType: 'JSON',
+                            success: function(response) {
+                                if (response.error) {
+                                    Swal.fire(
+                                        'Error!',
+                                        response.error,
+                                        'error'
+                                    ).then(function() {
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire(
+                                        'Berhasil',
+                                        `Data pemesanan jadwal matakuliah : ${name} berhasil dihapus.`,
+                                        'success'
+                                    ).then(function() {
+                                        location.reload();
+                                    });
+                                }
+                                reload_table(null, true)
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    type: 'error',
+                                    title: 'Error saat delete data',
+                                    showConfirmButton: true
+                                })
+                            }
+                        })
+                    }
+                })
             })
         });
 
@@ -609,7 +720,7 @@ $num2 = 1;
                 pageLength: 25,
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('pemesanan-admin.list') }}",
+                ajax: "{{ route('jadwal.list') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -644,31 +755,9 @@ $num2 = 1;
                         class: "text-wrap"
                     },
                     {
-                        data: 'pemesan',
-                        name: 'pemesan',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'fileRPS',
-                        name: 'fileRPS',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'fileSertif',
-                        name: 'fileSertif',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
                         data: 'status',
                         name: 'status',
                         class: "text-wrap"
-                    },
-                    {
-                        data: 'waktu_pesan',
-                        name: 'waktu_pesan',
-                        class: "text-nowrap"
                     },
                     {
                         data: 'action',
@@ -686,13 +775,13 @@ $num2 = 1;
                 table.ajax.reload(callback, resetPage); //reload datatable ajax 
             }
 
-            $('#tabelPemesananAdmin').on('click','.terima_admin', function(e) {
+            $('#tabelJadwal').on('click','.hapus_jadwal', function(e) {
                 var id = $(this).data('id');
                 let name = $(this).data('name');
                 e.preventDefault()
                 Swal.fire({
                     title: 'Apakah Yakin?',
-                    text: `Apakah Anda yakin ingin menerima jadwal matakuliah : ${name}`,
+                    text: `Apakah Anda yakin ingin menghapus jadwal matakuliah : ${name}`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#14A44D',
@@ -703,11 +792,11 @@ $num2 = 1;
                     if (result.isConfirmed) {
                         let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         $.ajax({
-                            url: "{{ url('dashboard/terima/') }}/" + id,
+                            url: "{{ url('dashboard/hapusjadwal/') }}/" + id,
                             type: 'POST',
                             data: {
                                 _token: CSRF_TOKEN,
-                                // _method: "delete",
+                                _method: "delete",
                             },
                             dataType: 'JSON',
                             success: function(response) {
@@ -722,7 +811,7 @@ $num2 = 1;
                                 } else {
                                     Swal.fire(
                                         'Berhasil',
-                                        `Data pemesanan jadwal matakuliah : ${name} diterima.`,
+                                        `Data jadwal matakuliah : ${name} berhasil dihapus.`,
                                         'success'
                                     ).then(function() {
                                         location.reload();
@@ -1036,20 +1125,20 @@ $num2 = 1;
         });
 
         $(document).ready(function() {
-            $('#table1').DataTable({
-                dom: 'Bfrtip',
-                // button: [{
-                //         extend: 'pdf',
-                //         oriented: 'potrait',
-                //         // title: 'Data Pasien',
-                //         download: 'open'
-                //     },
-                //     'excel', 'print'
-                // ]
-                buttons: [
-                    'pdf', 'copy'
-                ]
-            });
+            // $('#table1').DataTable({
+            //     dom: 'Bfrtip',
+            //     // button: [{
+            //     //         extend: 'pdf',
+            //     //         oriented: 'potrait',
+            //     //         // title: 'Data Pasien',
+            //     //         download: 'open'
+            //     //     },
+            //     //     'excel', 'print'
+            //     // ]
+            //     buttons: [
+            //         'pdf', 'copy'
+            //     ]
+            // });
             // $('#table1').css("text-align", "center");
             // $('#table1').css("color", "orange");
             // $('#table2').DataTable({
