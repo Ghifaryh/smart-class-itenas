@@ -503,17 +503,17 @@ $num2 = 1;
                 let bulan = parseInt(splitTanggal[1]);
                 let tahun = parseInt(splitTanggal[2]);
                 if (tahun < tahunSekarang) {
-                    swal({
-                        title: "Error",
-                        text: "Tidak bisa memesan tahun kurang dari tahun ini!",
-                        icon: "error",
-                        button: "Tutup",
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Tidak bisa memesan tahun kurang dari tahun ini!',
+                        type: 'error',
                         timer: 2000,
                     });
                     $('#tanggal_input').val(tanggalSekarangFull);
                 } else if (tahun == tahunSekarang) {
                     if (bulan < bulanSekarang) {
-                        swal({
+                        Swal.fire({
                             title: "Error",
                             text: "Tidak bisa memesan bulan kurang dari bulan ini!",
                             icon: "error",
@@ -523,7 +523,7 @@ $num2 = 1;
                         $('#tanggal_input').val(tanggalSekarangFull);
                     } else if (bulan == bulanSekarang) {
                         if (tanggal < tanggalSekarang) {
-                            swal({
+                            Swal.fire({
                                 title: "Error",
                                 text: "Tidak bisa memesan tanggal kurang dari hari ini!",
                                 icon: "error",
@@ -731,7 +731,7 @@ $num2 = 1;
                 if (jamKeluar <= jamMasuk) {
                     // alert('Jam Keluar harus lebih dari Jam Masuk!');
                     // swal("Hello world!");
-                    swal({
+                    Swal.fire({
                         title: "Error",
                         text: "Jam Keluar harus lebih dari Jam Masuk!",
                         icon: "error",
