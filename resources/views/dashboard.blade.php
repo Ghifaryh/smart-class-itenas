@@ -334,7 +334,7 @@ $num2 = 1;
                 table.ajax.reload(callback, resetPage); //reload datatable ajax
             }
 
-            $('#tabelPemesananDosen').on('click','.hapus_dosen', function(e) {
+            $('#tabelPemesananDosen').on('click', '.hapus_dosen', function(e) {
                 var id = $(this).data('id');
                 let name = $(this).data('name');
                 e.preventDefault()
@@ -386,11 +386,11 @@ $num2 = 1;
                 })
             })
 
-            $('#tabelPemesananDosen').on('click','.ingfo', function(e) {
+            $('#tabelPemesananDosen').on('click', '.ingfo', function(e) {
                 let name = $(this).data('name');
                 e.preventDefault()
                 Swal.fire({
-                    title: 'Alasan ditolak',
+                    title: 'Alasan ditolak:',
                     text: `${name}`,
                     icon: 'warning',
                     showConfirmButton: true,
@@ -482,7 +482,7 @@ $num2 = 1;
                 table.ajax.reload(callback, resetPage); //reload datatable ajax
             }
 
-            $('#tabelPemesananAdmin').on('click','.terima_admin', function(e) {
+            $('#tabelPemesananAdmin').on('click', '.terima_admin', function(e) {
                 var id = $(this).data('id');
                 let name = $(this).data('name');
                 e.preventDefault()
@@ -539,7 +539,7 @@ $num2 = 1;
                 })
             })
 
-            $('#tabelPemesananAdmin').on('click','.batal_admin', function(e) {
+            $('#tabelPemesananAdmin').on('click', '.batal_admin', function(e) {
                 var id = $(this).data('id');
                 e.preventDefault()
                 Swal.fire({
@@ -558,10 +558,11 @@ $num2 = 1;
                     inputValidator: (pesan) => {
                         if (!pesan) {
                             return 'Wajib memberikan alasan pembatalan!'
-                        }else{
+                        } else {
                             let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                             $.ajax({
-                                url: "{{ url('dashboard/batal/') }}/" + id +'/'+ pesan,
+                                url: "{{ url('dashboard/batal/') }}/" + id + '/' +
+                                    pesan,
                                 type: 'POST',
                                 data: {
                                     _token: CSRF_TOKEN,
@@ -597,7 +598,7 @@ $num2 = 1;
                 })
             })
 
-            $('#tabelPemesananAdmin').on('click','.batalhapus_admin', function(e) {
+            $('#tabelPemesananAdmin').on('click', '.batalhapus_admin', function(e) {
                 var id = $(this).data('id');
                 e.preventDefault()
                 Swal.fire({
@@ -616,10 +617,11 @@ $num2 = 1;
                     inputValidator: (pesan) => {
                         if (!pesan) {
                             return 'Wajib memberikan alasan pembatalan!'
-                        }else{
+                        } else {
                             let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                             $.ajax({
-                                url: "{{ url('dashboard/batalhapus/') }}/" + id +'/'+ pesan,
+                                url: "{{ url('dashboard/batalhapus/') }}/" + id + '/' +
+                                    pesan,
                                 type: 'POST',
                                 data: {
                                     _token: CSRF_TOKEN,
@@ -655,7 +657,7 @@ $num2 = 1;
                 })
             })
 
-            $('#tabelPemesananAdmin').on('click','.hapus_admin', function(e) {
+            $('#tabelPemesananAdmin').on('click', '.hapus_admin', function(e) {
                 var id = $(this).data('id');
                 let name = $(this).data('name');
                 e.preventDefault()
@@ -715,67 +717,67 @@ $num2 = 1;
 
         $(document).ready(function() {
             let table = $('#tabelJadwal').DataTable({
-                responsive: true,
-                fixedHeader: true,
-                pageLength: 25,
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('jadwal.list') }}",
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                    },
-                    {
-                        data: 'id_ruangan',
-                        name: 'id_ruangan'
-                    },
-                    {
-                        data: 'waktu_pakai',
-                        name: 'waktu_pakai',
-                        class: "text-nowrap"
-                    },
-                    {
-                        data: 'prodi',
-                        name: 'prodi',
-                        class: "text-nowrap"
-                    },
-                    {
-                        data: 'matakuliah',
-                        name: 'matakuliah',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'kelas',
-                        name: 'kelas',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'dosen_matkul',
-                        name: 'dosen_matkul',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'status',
-                        name: 'status',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-                ]
-            })
-            .columns.adjust()
-            .responsive.recalc();
+                    responsive: true,
+                    fixedHeader: true,
+                    pageLength: 25,
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('jadwal.list') }}",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                        },
+                        {
+                            data: 'id_ruangan',
+                            name: 'id_ruangan'
+                        },
+                        {
+                            data: 'waktu_pakai',
+                            name: 'waktu_pakai',
+                            class: "text-nowrap"
+                        },
+                        {
+                            data: 'prodi',
+                            name: 'prodi',
+                            class: "text-nowrap"
+                        },
+                        {
+                            data: 'matakuliah',
+                            name: 'matakuliah',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'kelas',
+                            name: 'kelas',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'dosen_matkul',
+                            name: 'dosen_matkul',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'status',
+                            name: 'status',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        },
+                    ]
+                })
+                .columns.adjust()
+                .responsive.recalc();
 
-            
+
             function reload_table(callback, resetPage = false) {
-                table.ajax.reload(callback, resetPage); //reload datatable ajax 
+                table.ajax.reload(callback, resetPage); //reload datatable ajax
             }
 
-            $('#tabelJadwal').on('click','.hapus_jadwal', function(e) {
+            $('#tabelJadwal').on('click', '.hapus_jadwal', function(e) {
                 var id = $(this).data('id');
                 let name = $(this).data('name');
                 e.preventDefault()
