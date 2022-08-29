@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('dosen_matkul');
             $table->string('fileRPS')->nullable();
             $table->string('fileSertif')->nullable();
+            $table->string('pesan')->nullable();
             $table->foreignId('id_status');
             $table->timestamps();
         });

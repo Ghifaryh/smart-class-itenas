@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StorePemesananRequest;
 use App\Http\Requests\UpdatePemesananRequest;
 use Illuminate\Validation\ValidationException;
+use phpDocumentor\Reflection\PseudoTypes\False_;
 
 class PemesananController extends Controller
 {
@@ -175,12 +176,12 @@ class PemesananController extends Controller
             ->editColumn('status', function ($row) {
                 if($row->Status->keterangan == "Menunggu Konfirmasi"){
                     return '<font class="fw-bold text-warning" style="">' .$row->Status->keterangan .'</font>';
-                }elseif($row->Status->keterangan == "Diterima"){
-                    return '<font color="fw-bold text-success" style="">' .$row->Status->keterangan .'</font>';
-                }elseif($row->Status->keterangan== "Dijadwalkan"){
-                    return '<font color="fw-bold text-primary" style="">' .$row->Status->keterangan .'</font>';
+                }else if($row->Status->keterangan == "Diterima"){
+                    return '<font class="fw-bold text-success" style="">' .$row->Status->keterangan .'</font>';
+                }else if($row->Status->keterangan== "Dijadwalkan"){
+                    return '<font class="fw-bold text-primary" style="">' .$row->Status->keterangan .'</font>';
                 }else{
-                    return '<font color="fw-bold text-danger" style="">' .$row->Status->keterangan .'</font>';
+                    return '<font class="fw-bold text-danger" style="">' .$row->Status->keterangan .'</font>';
                 }
             })
             ->editColumn('pemesan', function ($row) {
@@ -203,25 +204,46 @@ class PemesananController extends Controller
                 return $action_btn;
             })
             ->addColumn('waktu_pesan', function ($row) {
-                return date('d/m/Y h:i:s', strtotime($row->updated_at));
+                return date('d/m/Y', strtotime($row->updated_at)).'<br>'.date('H : i : s', strtotime($row->updated_at));
             })
             ->editColumn('action', function ($row) {
                 // $edit_url = route('admin.kecamatan.edit', $row->id);
-                $edit_url = null;
-                $action_btn = '
-                <a href="' . $edit_url . '"
-                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-non focus:ring disabled:opacity-25 transition ease-in-out duration-150 text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-500">
-                    Edit
-                </a>
-                <button
-                    data-id="' . $row->id . '" data-name="' . $row->name . '"
-                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-non focus:ring disabled:opacity-25 transition ease-in-out duration-150 text-white bg-red-600 hover:bg-red-700 focus:ring-red-500 hapus_record">
-                    Hapus
-                </button>
-                ';
-                return $action_btn;
+                if ($row->Status->keterangan == 'Dihapus' or $row->Status->keterangan == 'Dibatalkan (Dihapus)') {
+                    $btnAdmin = '
+                    <button
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        class="badge bg-danger border-0 batalhapus_admin">Batal
+                    </button>
+                    <button
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        class="badge bg-danger border-0 hapus_admin">Hapus
+                    </button>
+                    ';
+
+                    return $btnAdmin;
+
+                } else {
+                    $btnAdmin = '
+                    <button
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        class="badge bg-success border-0 terima_admin">Terima
+                    </button>
+                    <button
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        class="badge bg-danger border-0 batal_admin">Batal
+                    </button>
+                    <button
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        class="badge bg-danger border-0 hapus_admin">Hapus
+                    </button>
+                    ';
+
+                    return $btnAdmin;
+                    
+                }
+                
             })
-            ->rawColumns(['waktu_pakai','action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
+            ->rawColumns(['waktu_pakai', 'waktu_pesan', 'action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
             ->make(true);   
         }
     }
@@ -243,11 +265,11 @@ class PemesananController extends Controller
                 if($row->Status->keterangan == "Menunggu Konfirmasi"){
                     return '<font class="fw-bold text-warning" style="">' .$row->Status->keterangan .'</font>';
                 }elseif($row->Status->keterangan == "Diterima"){
-                    return '<font color="fw-bold text-success" style="">' .$row->Status->keterangan .'</font>';
+                    return '<font class="fw-bold text-success" style="">' .$row->Status->keterangan .'</font>';
                 }elseif($row->Status->keterangan== "Dijadwalkan"){
-                    return '<font color="fw-bold text-primary" style="">' .$row->Status->keterangan .'</font>';
+                    return '<font class="fw-bold text-primary" style="">' .$row->Status->keterangan .'</font>';
                 }else{
-                    return '<font color="fw-bold text-danger" style="">' .$row->Status->keterangan .'</font>';
+                    return '<font class="fw-bold text-danger" style="">' .$row->Status->keterangan .'</font>'.'<br>'.'<button data-name="' . $row->pesan . '" class="badge bg-danger border-0 btnDownload ingfo"><i class="fa-solid fa-circle-info"></i></button>';
                 }
             })
             ->editColumn('pemesan', function ($row) {
@@ -269,17 +291,19 @@ class PemesananController extends Controller
                 </form>';
                 return $action_btn;
             })
-            ->editColumn('action', function ($row) {
+            ->addColumn('action', function ($row) {
                 // $edit_url = route('admin.kecamatan.edit', $row->id);
-                $action_btn = '
+                $id = $row->id;
+                $nama = $row->matakuliah;
+                $btn = '
                 <button 
-                    data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
-                    class="badge bg-danger border-0" id>Hapus
+                    data-id="' . $id . '" data-name="' . $nama . '"
+                    class="badge bg-danger border-0 hapus_dosen">Hapus
                 </button>
                 ';  
-                return $action_btn;
+                return $btn;
             })
-            ->rawColumns(['waktu_pakai','action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
+            ->rawColumns(['waktu_pakai', 'action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
             ->make(true);
         }
     }
@@ -288,7 +312,7 @@ class PemesananController extends Controller
     {
         Pemesanan::where('id', $id)->update(['id_status' => 4]);
 
-        return redirect('/dashboard')->with('Pemesanan Sukses', 'Data pemesanan berhasil dihapus');
+        return response()->json(['status' => TRUE]);
     }
 
     public function destroy($id)
@@ -330,18 +354,20 @@ class PemesananController extends Controller
         if ($check === null) {
             Jadwal::create($data);
             Pemesanan::where('id', $id)->update(['id_status' => 2]);
-            return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal diterima');
+            // return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal diterima');
+            return response()->json(['status' => TRUE]);
         } else {
             Pemesanan::where('id', $id)->update(['id_status' => 2]);
-            return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal diterima');
+            return response()->json(['status' => TRUE]);
         }
     }
 
-    public function cancel($id)
+    public function cancel($id, $pesan)
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
-        Pemesanan::where('id', $id)->update(['id_status' => 3]);
-        return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan');   
+        Pemesanan::where('id', $id)->update(['id_status' => 3, 'pesan' => $pesan]);
+        // return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan'); 
+        return response()->json(['status' => TRUE]); 
     }
 
     public function cancelhapus($id)
