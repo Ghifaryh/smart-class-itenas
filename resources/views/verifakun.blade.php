@@ -7,17 +7,7 @@ $num2 = 1;
 
 @section('verif-akun')
     @if (session()->has('Verif'))
-        <script>
-            $(document).ready(function() {
-                swal({
-                    title: 'Berhasil',
-                    text: `{{ session('Verif') }}`,
-                    icon: "success",
-                    button: "Tutup",
-                    timer: 3000,
-                });
-            });
-        </script>
+        <div class="verif-berhasil" data-flashdata="{{ session('Verif') }}"></div>
     @endif
     {{-- <div class="container-fluid dashboard-dosen ms-5"> --}}
     <div class="container-fluid dashboard-verif mb-5">
@@ -176,6 +166,19 @@ $num2 = 1;
         $(document).ready(function() {
             $('#tableVerif').DataTable();
             $('#tableAkun').DataTable();
+
+            let verifBehasil = $('.verif-berhasil').data('flashdata');
+            if (verifBerhasil) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Verifikasi Berhasil',
+                    text: verifBehasil,
+                    type: 'success',
+                    timer: 3000
+                }).then(function() {
+                    location.reload();
+                })
+            }
         });
 
         function myFunction() {

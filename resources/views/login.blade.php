@@ -1,45 +1,15 @@
 @extends('layouts.main')
 
 @section('container')
-@if (session()->has('Regis Sukses'))
-    <script>
-        $(document).ready(function() {
-            swal({
-                title: 'Berhasil',
-                text: `{{ session('Regis Sukses') }}`,
-                icon: "success",
-                button: "Tutup",
-                timer: 6000,
-            });
-        });
-    </script>
-@endif
-@if (session()->has('Login Gagal'))
-    <script>
-        $(document).ready(function() {
-            swal({
-                title: 'Login Gagal',
-                text: `{{ session('Login Gagal') }}`,
-                icon: "error",
-                button: "Tutup",
-                timer: 6000,
-            });
-        });
-    </script>
-@endif
-@if (session()->has('Login Warning'))
-    <script>
-        $(document).ready(function() {
-            swal({
-                title: 'Peringatan',
-                text: `{{ session('Login Warning') }}`,
-                icon: "warning",
-                button: "Tutup",
-                timer: 6000,
-            });
-        });
-    </script>
-@endif
+    @if (session()->has('Regis Sukses'))
+        <div class="regis-berhasil" data-flashdata="{{ session('Regis Sukses') }}"></div>
+    @endif
+    @if (session()->has('Login Gagal'))
+        <div class="login-gagal" data-flashdata="{{ session('Login Gagal') }}"></div>
+    @endif
+    @if (session()->has('Login Warning'))
+        <div class="login-warning" data-flashdata="{{ session('Login Warning') }}"></div>
+    @endif
     <section class="wrapper">
         <div class="container-fluid vh-100 d-inline-block" id="containerLogin">
             {{-- <div class="row d-flex justify-content-center align-items-center h-100"> --}}
@@ -135,6 +105,45 @@
                 $("#colLoginWrapper").addClass("col");
                 // $("#colLoginWrapper").addClass("mx-auto");
 
+            }
+
+            let regisBerhasil = $('.regis-berhasil').data('flashdata');
+            if (regisBerhasil) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: regisBerhasil,
+                    type: 'success',
+                    timer: 3000
+                }).then(function() {
+                    location.reload();
+                });
+            }
+
+            let loginGagal = $('.login-gagal').data('flashdata');
+            if (loginGagal) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: loginGagal,
+                    type: 'error',
+                    timer: 5000
+                }).then(function() {
+                    location.reload();
+                });
+            }
+
+            let loginWarning = $('.login-warning').data('flashdata');
+            if (loginWarning) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Gagal',
+                    text: loginGagal,
+                    type: 'warning',
+                    timer: 6000
+                }).then(function() {
+                    location.reload();
+                });
             }
         });
     </script>
