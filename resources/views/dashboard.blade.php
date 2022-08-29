@@ -10,10 +10,10 @@ $num2 = 1;
         <div class="login-berhasil" data-flashdata="{{ session('Login Berhasil') }}"></div>
     @endif
     @if (session()->has('Pemesanan Sukses'))
-    <div class="pemesanan-sukses" data-flashdata="{{ session('Pemesanan Sukses') }}"></div>
+        <div class="pemesanan-sukses" data-flashdata="{{ session('Pemesanan Sukses') }}"></div>
     @endif
     @if (session()->has('Jadwal Sukses'))
-    <div class="jadwal-sukses" data-flashdata="{{ session('Jadwal Sukses') }}"></div>
+        <div class="jadwal-sukses" data-flashdata="{{ session('Jadwal Sukses') }}"></div>
     @endif
 
     <div class="container-fluid dashboard-dosen">
@@ -139,32 +139,32 @@ $num2 = 1;
                                     Ruangan
                                 </h2>
                                 @if (auth()->user()->level == 'admin')
-                                <table class="table table-striped table-list-pesan" id="tabelPemesananAdmin">
-                                @else
-                                <table class="table table-striped table-list-pesan" id="tabelPemesananDosen">
+                                    <table class="table table-striped table-list-pesan" id="tabelPemesananAdmin">
+                                    @else
+                                        <table class="table table-striped table-list-pesan" id="tabelPemesananDosen">
                                 @endif
-                                    {{-- <thead class="bg-light text-center"> --}}
-                                    <thead class="bg-light">
-                                        <tr class="text-nowrap">
-                                            <th scope="col">No</th>
-                                            <th scope="col">Ruangan</th>
-                                            <th scope="col">Waktu Pakai</th>
-                                            <th scope="col">Prodi</th>
-                                            <th scope="col">Mata Kuliah</th>
-                                            <th scope="col">Kelas</th>
-                                            <th scope="col">Dosen</th>
-                                            <th scope="col">Pemesan</th>
-                                            <th scope="col">File RPS</th>
-                                            <th scope="col">File Sertifikat</th>
-                                            <th scope="col">Status</th>
-                                            @if (auth()->user()->level == 'admin')
-                                                <th scope="col">Waktu Pemesanan</th>
-                                            @endif
-                                            <th scope="col">Opsi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-center align-middle">
-                                    </tbody>
+                                {{-- <thead class="bg-light text-center"> --}}
+                                <thead class="bg-light">
+                                    <tr class="text-nowrap">
+                                        <th scope="col">No</th>
+                                        <th scope="col">Ruangan</th>
+                                        <th scope="col">Waktu Pakai</th>
+                                        <th scope="col">Prodi</th>
+                                        <th scope="col">Mata Kuliah</th>
+                                        <th scope="col">Kelas</th>
+                                        <th scope="col">Dosen</th>
+                                        <th scope="col">Pemesan</th>
+                                        <th scope="col">File RPS</th>
+                                        <th scope="col">File Sertifikat</th>
+                                        <th scope="col">Status</th>
+                                        @if (auth()->user()->level == 'admin')
+                                            <th scope="col">Waktu Pemesanan</th>
+                                        @endif
+                                        <th scope="col">Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center align-middle">
+                                </tbody>
                                 </table>
                             </div>
                         </div>
@@ -297,166 +297,166 @@ $num2 = 1;
 
         $(document).ready(function() {
             let table = $('#tabelPemesananDosen').DataTable({
-                responsive: true,
-                fixedHeader: true,
-                pageLength: 25,
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('pemesanan-dosen.list') }}",
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                    },
-                    {
-                        data: 'id_ruangan',
-                        name: 'id_ruangan'
-                    },
-                    {
-                        data: 'waktu_pakai',
-                        name: 'waktu_pakai',
-                        class: "text-nowrap"
-                    },
-                    {
-                        data: 'prodi',
-                        name: 'prodi',
-                        class: "text-nowrap"
-                    },
-                    {
-                        data: 'matakuliah',
-                        name: 'matakuliah',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'kelas',
-                        name: 'kelas',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'dosen_matkul',
-                        name: 'dosen_matkul',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'pemesan',
-                        name: 'pemesan',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'fileRPS',
-                        name: 'fileRPS',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'fileSertif',
-                        name: 'fileSertif',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'status',
-                        name: 'status',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-                ]
-            })
-            .columns.adjust()
-            .responsive.recalc();
+                    responsive: true,
+                    fixedHeader: true,
+                    pageLength: 25,
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('pemesanan-dosen.list') }}",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                        },
+                        {
+                            data: 'id_ruangan',
+                            name: 'id_ruangan'
+                        },
+                        {
+                            data: 'waktu_pakai',
+                            name: 'waktu_pakai',
+                            class: "text-nowrap"
+                        },
+                        {
+                            data: 'prodi',
+                            name: 'prodi',
+                            class: "text-nowrap"
+                        },
+                        {
+                            data: 'matakuliah',
+                            name: 'matakuliah',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'kelas',
+                            name: 'kelas',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'dosen_matkul',
+                            name: 'dosen_matkul',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'pemesan',
+                            name: 'pemesan',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'fileRPS',
+                            name: 'fileRPS',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'fileSertif',
+                            name: 'fileSertif',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'status',
+                            name: 'status',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        },
+                    ]
+                })
+                .columns.adjust()
+                .responsive.recalc();
 
-            
+
             function reload_table(callback, resetPage = false) {
-                table.ajax.reload(callback, resetPage); //reload datatable ajax 
+                table.ajax.reload(callback, resetPage); //reload datatable ajax
             }
         });
 
         $(document).ready(function() {
             let table = $('#tabelPemesananAdmin').DataTable({
-                responsive: true,
-                fixedHeader: true,
-                pageLength: 25,
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('pemesanan-admin.list') }}",
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                    },
-                    {
-                        data: 'id_ruangan',
-                        name: 'id_ruangan'
-                    },
-                    {
-                        data: 'waktu_pakai',
-                        name: 'waktu_pakai',
-                        class: "text-nowrap"
-                    },
-                    {
-                        data: 'prodi',
-                        name: 'prodi',
-                        class: "text-nowrap"
-                    },
-                    {
-                        data: 'matakuliah',
-                        name: 'matakuliah',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'kelas',
-                        name: 'kelas',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'dosen_matkul',
-                        name: 'dosen_matkul',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'pemesan',
-                        name: 'pemesan',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'fileRPS',
-                        name: 'fileRPS',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'fileSertif',
-                        name: 'fileSertif',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'status',
-                        name: 'status',
-                        class: "text-wrap"
-                    },
-                    {
-                        data: 'waktu_pesan',
-                        name: 'waktu_pesan',
-                        class: "text-nowrap"
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-                ]
-            })
-            .columns.adjust()
-            .responsive.recalc();
+                    responsive: true,
+                    fixedHeader: true,
+                    pageLength: 25,
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('pemesanan-admin.list') }}",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                        },
+                        {
+                            data: 'id_ruangan',
+                            name: 'id_ruangan'
+                        },
+                        {
+                            data: 'waktu_pakai',
+                            name: 'waktu_pakai',
+                            class: "text-nowrap"
+                        },
+                        {
+                            data: 'prodi',
+                            name: 'prodi',
+                            class: "text-nowrap"
+                        },
+                        {
+                            data: 'matakuliah',
+                            name: 'matakuliah',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'kelas',
+                            name: 'kelas',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'dosen_matkul',
+                            name: 'dosen_matkul',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'pemesan',
+                            name: 'pemesan',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'fileRPS',
+                            name: 'fileRPS',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'fileSertif',
+                            name: 'fileSertif',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'status',
+                            name: 'status',
+                            class: "text-wrap"
+                        },
+                        {
+                            data: 'waktu_pesan',
+                            name: 'waktu_pesan',
+                            class: "text-nowrap"
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        },
+                    ]
+                })
+                .columns.adjust()
+                .responsive.recalc();
 
-            
+
             function reload_table(callback, resetPage = false) {
-                table.ajax.reload(callback, resetPage); //reload datatable ajax 
+                table.ajax.reload(callback, resetPage); //reload datatable ajax
             }
         });
 
@@ -655,7 +655,7 @@ $num2 = 1;
             });
             // $("#submitPesan").submit(function(e){
             $("#postPemesanan").submit(function(e) {
-                e.preventDefault(); 
+                e.preventDefault();
                 Swal.fire({
                     title: 'Apakah Yakin?',
                     text: `Jika sudah sesuai maka akan segera diproses oleh admin.`,

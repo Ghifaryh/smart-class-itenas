@@ -1,19 +1,9 @@
 @extends('layouts.main')
 
 @section('container')
-@if (session()->has('Regis Peringatan'))
-    <script>
-        $(document).ready(function() {
-            swal({
-                title: 'Peringatan',
-                text: `{{ session('Regis Peringatan') }}`,
-                icon: "warning",
-                button: "Tutup",
-                timer: 3000,
-            });
-        });
-    </script>
-@endif
+    @if (session()->has('Regis Peringatan'))
+        <div class="regis-peringatan" data-flashdata="{{ session('Regis Peringatan') }}"></div>
+    @endif
     <div class="row justify-content-center vh-100 ">
         {{-- <div class="col-lg-5"> --}}
         <div class="col-sm-5">
@@ -44,8 +34,8 @@
                         @enderror
                     </div>
 
-                    <input type="hidden" name="id_status" class="form-control" id="id_status" placeholder="Id Status" required
-                        value="6">
+                    <input type="hidden" name="id_status" class="form-control" id="id_status" placeholder="Id Status"
+                        required value="6">
                     <input type="hidden" name="level" class="form-control" id="level" placeholder="Level" required
                         value="dosen">
                     {{-- <div class="form-floating">
@@ -69,8 +59,8 @@
                         @enderror
                     </div>
                     <div class="input-group">
-                        <input type="password" name="password" class="form-control form-control-lg"
-                            id="password" placeholder="Kode Pin" required>
+                        <input type="password" name="password" class="form-control form-control-lg" id="password"
+                            placeholder="Kode Pin" required>
                         <span class="input-group-text seepas" onclick="shwpass()"><i class="fa-solid fa-eye"
                                 aria-hidden="true" id="eye"></i></span>
                         @error('password')
@@ -87,3 +77,22 @@
         </div>
     </div>
 @endsection
+
+@push('loginJs')
+    <script>
+        $(document).ready(function() {
+            let regisPeringatan = $('.regis-peringatan').data('flashdata');
+            if (regisPeringatan) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Registrasi Bermasalah',
+                    text: regisPeringatan,
+                    type: 'warning',
+                    time: 6000
+                }).then(function() {
+                    location.reload();
+                })
+            }
+        });
+    </script>
+@endpush
