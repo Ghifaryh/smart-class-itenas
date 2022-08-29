@@ -24,31 +24,31 @@ class PemesananController extends Controller
         // return ([$request->file('fileRPS')->store('File-RPS'),$request->file('fileSertif')->store('File-Sertif')]);
 
         $validatedData = $request->validate([
-            'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
+            'tanggal_pinjam' => ['required', 'after_or_equal:' . Carbon::now()->format('d-m-Y')],
             'jam_masuk' => ['required'],
-            'jam_keluar' => ['required','after:jam_masuk'],
+            'jam_keluar' => ['required', 'after:jam_masuk'],
             'id_ruangan' => ['required'],
             'prodi' => ['required'],
             'matakuliah' => ['required'],
             'dosen_matkul' => ['required'],
-            'fileRPS' => ['required','file','max:5120','mimes:pdf'],
-            'fileSertif' => ['required','file','max:5120','mimes:pdf'],
+            'fileRPS' => ['required', 'file', 'max:5120', 'mimes:pdf'],
+            'fileSertif' => ['required', 'file', 'max:5120', 'mimes:pdf'],
             'kelas' => ['required'],
             'id_pemesan' => ['required'],
             'id_status' => ['required']
         ]);
-        
+
         if ($request->file('fileRPS')) {
             $validatedData['fileRPS'] = $request->file('fileRPS')->store('File-RPS');
         };
-        
+
         if ($request->file('fileSertif')) {
             $validatedData['fileSertif'] = $request->file('fileSertif')->store('File-Sertif');
         };
-        
+
         // ddd($request);
         Pemesanan::create($validatedData);
-        
+
         return redirect('/dashboard');
     }
 
@@ -57,15 +57,15 @@ class PemesananController extends Controller
         // dd($request);
 
         $validator = Validator::make($request->all(), [
-            'tanggal_pinjam' => ['required','after_or_equal:' . Carbon::now()->format('d-m-Y')],
+            'tanggal_pinjam' => ['required', 'after_or_equal:' . Carbon::now()->format('d-m-Y')],
             'jam_masuk' => ['required'],
-            'jam_keluar' => ['required','after:jam_masuk'],
+            'jam_keluar' => ['required', 'after:jam_masuk'],
             'id_ruangan' => ['required'],
             'prodi' => ['required'],
             'matakuliah' => ['required'],
             'dosen_matkul' => ['required'],
-            'fileRPS' => ['required','file','max:5120','mimes:pdf'],
-            'fileSertif' => ['required','file','max:5120','mimes:pdf'],
+            'fileRPS' => ['required', 'file', 'max:5120', 'mimes:pdf'],
+            'fileSertif' => ['required', 'file', 'max:5120', 'mimes:pdf'],
             'kelas' => ['required'],
             'id_pemesan' => ['required'],
             'id_status' => ['required']
@@ -73,9 +73,9 @@ class PemesananController extends Controller
 
         if ($validator->fails()) {
             return response()->json(['success' => false, 'error' => $validator->errors()->toArray()]);
-        }else{
+        } else {
             $validatedData = $validator->validate();
-    
+
             if ($request->file('fileRPS')) {
                 $file_dokumen = $request->file('fileRPS');
                 $file_dokumen_name = $file_dokumen->getClientOriginalName();
@@ -83,11 +83,11 @@ class PemesananController extends Controller
                 $file_dokumen_name = str_replace(' ', '_', $file_dokumen_name);
                 $file_dokumen_name = str_replace('%', '', $file_dokumen_name);
                 $file_dokumen->move(public_path('storage/File-RPS'), $file_dokumen_name);
-                $validatedData['fileRPS'] = "File-RPS/". $file_dokumen_name; 
+                $validatedData['fileRPS'] = "File-RPS/" . $file_dokumen_name;
                 // $fileNamerps = pathinfo($request->file('fileRPS')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileRPS')->getClientOriginalExtension();
                 // $validatedData['fileRPS'] = $request->file('fileRPS')->storePubliclyAs('File-RPS',$fileNamerps,'public');
             };
-            
+
             if ($request->file('fileSertif')) {
                 $file_dokumen_sertif = $request->file('fileSertif');
                 $file_dokumen_sertifname = $file_dokumen_sertif->getClientOriginalName();
@@ -95,11 +95,11 @@ class PemesananController extends Controller
                 $file_dokumen_sertifname = str_replace(' ', '_', $file_dokumen_sertifname);
                 $file_dokumen_sertifname = str_replace('%', '', $file_dokumen_sertifname);
                 $file_dokumen_sertif->move(public_path('storage/File-Sertif'), $file_dokumen_sertifname);
-                $validatedData['fileSertif'] = "File-Sertif/". $file_dokumen_sertifname; 
+                $validatedData['fileSertif'] = "File-Sertif/" . $file_dokumen_sertifname;
                 // $fileNamesertif = pathinfo($request->file('fileSertif')->getClientOriginalName(), PATHINFO_FILENAME) . '-' . $request->id_pemesan . '.' . $request->file('fileSertif')->getClientOriginalExtension();
                 // $validatedData['fileSertif'] = $request->file('fileSertif')->storePubliclyAs('File-Sertif',$fileNamesertif,'public');
             };
-           
+
             Pemesanan::create($validatedData);
             return response()->json(
                 [
@@ -107,10 +107,10 @@ class PemesananController extends Controller
                 ]
             );
         }
-
     }
 
-    public function hariIndo($hariInggris){
+    public function hariIndo($hariInggris)
+    {
         switch ($hariInggris) {
             case 'Sunday':
                 return 'Minggu';
@@ -128,9 +128,11 @@ class PemesananController extends Controller
                 return 'Sabtu';
             default:
                 return 'hari tidak valid';
-    }}
+        }
+    }
 
-    public function bulanIndo($bulanInggris){
+    public function bulanIndo($bulanInggris)
+    {
         switch ($bulanInggris) {
             case 'Jan':
                 return 'Januari';
@@ -158,58 +160,59 @@ class PemesananController extends Controller
                 return 'Desember';
             default:
                 return 'bulan tidak valid';
-    }}
+        }
+    }
 
     public function adminList(Request $request)
     {
         if ($request->ajax()) {
             $pesanan = Pemesanan::all();
             return DataTables::of($pesanan)
-            ->addIndexColumn()
-            ->editColumn('waktu_pakai', function ($row) {
-                $waktupakai = $this->hariIndo(date('l', strtotime($row->tanggal_pinjam))).', '.date('d', strtotime($row->tanggal_pinjam)).' '.$this->bulanIndo(date('M', strtotime($row->tanggal_pinjam))).'<br>'.'('.date('H:i', strtotime($row->jam_masuk)).'-'.date('H:i', strtotime($row->jam_keluar)).')';
-                return $waktupakai;
-            })
-            ->editColumn('prodi', function ($row) {
-                return $row->Prodi->nama;
-            })
-            ->editColumn('status', function ($row) {
-                if($row->Status->keterangan == "Menunggu Konfirmasi"){
-                    return '<font class="fw-bold text-warning" style="">' .$row->Status->keterangan .'</font>';
-                }else if($row->Status->keterangan == "Diterima"){
-                    return '<font class="fw-bold text-success" style="">' .$row->Status->keterangan .'</font>';
-                }else if($row->Status->keterangan== "Dijadwalkan"){
-                    return '<font class="fw-bold text-primary" style="">' .$row->Status->keterangan .'</font>';
-                }else{
-                    return '<font class="fw-bold text-danger" style="">' .$row->Status->keterangan .'</font>';
-                }
-            })
-            ->editColumn('pemesan', function ($row) {
-                return $row->User->name;
-            })
-            ->editColumn('fileRPS', function ($row) {
-                $edit_url = asset('storage/'. $row->fileRPS);
-                $action_btn = '
-                <form action="'.$edit_url.'">
-                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button> 
+                ->addIndexColumn()
+                ->editColumn('waktu_pakai', function ($row) {
+                    $waktupakai = $this->hariIndo(date('l', strtotime($row->tanggal_pinjam))) . ', ' . date('d', strtotime($row->tanggal_pinjam)) . ' ' . $this->bulanIndo(date('M', strtotime($row->tanggal_pinjam))) . '<br>' . '(' . date('H:i', strtotime($row->jam_masuk)) . '-' . date('H:i', strtotime($row->jam_keluar)) . ')';
+                    return $waktupakai;
+                })
+                ->editColumn('prodi', function ($row) {
+                    return $row->Prodi->nama;
+                })
+                ->editColumn('status', function ($row) {
+                    if ($row->Status->keterangan == "Menunggu Konfirmasi") {
+                        return '<font class="fw-bold text-warning" style="">' . $row->Status->keterangan . '</font>';
+                    } else if ($row->Status->keterangan == "Diterima") {
+                        return '<font class="fw-bold text-success" style="">' . $row->Status->keterangan . '</font>';
+                    } else if ($row->Status->keterangan == "Dijadwalkan") {
+                        return '<font class="fw-bold text-primary" style="">' . $row->Status->keterangan . '</font>';
+                    } else {
+                        return '<font class="fw-bold text-danger" style="">' . $row->Status->keterangan . '</font>';
+                    }
+                })
+                ->editColumn('pemesan', function ($row) {
+                    return $row->User->name;
+                })
+                ->editColumn('fileRPS', function ($row) {
+                    $edit_url = asset('storage/' . $row->fileRPS);
+                    $action_btn = '
+                <form action="' . $edit_url . '">
+                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button>
                 </form>';
-                return $action_btn;
-            })
-            ->editColumn('fileSertif', function ($row) {
-                $edit_url = asset('storage/'. $row->fileSertif);
-                $action_btn = '
-                <form action="'.$edit_url.'">
-                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button> 
+                    return $action_btn;
+                })
+                ->editColumn('fileSertif', function ($row) {
+                    $edit_url = asset('storage/' . $row->fileSertif);
+                    $action_btn = '
+                <form action="' . $edit_url . '">
+                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button>
                 </form>';
-                return $action_btn;
-            })
-            ->addColumn('waktu_pesan', function ($row) {
-                return date('d/m/Y', strtotime($row->updated_at)).'<br>'.date('H : i : s', strtotime($row->updated_at));
-            })
-            ->editColumn('action', function ($row) {
-                // $edit_url = route('admin.kecamatan.edit', $row->id);
-                if ($row->Status->keterangan == 'Dihapus' or $row->Status->keterangan == 'Dibatalkan (Dihapus)') {
-                    $btnAdmin = '
+                    return $action_btn;
+                })
+                ->addColumn('waktu_pesan', function ($row) {
+                    return date('d/m/Y', strtotime($row->updated_at)) . '<br>' . date('H : i : s', strtotime($row->updated_at));
+                })
+                ->editColumn('action', function ($row) {
+                    // $edit_url = route('admin.kecamatan.edit', $row->id);
+                    if ($row->Status->keterangan == 'Dihapus' or $row->Status->keterangan == 'Dibatalkan (Dihapus)') {
+                        $btnAdmin = '
                     <button
                         data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
                         class="badge bg-danger border-0 batalhapus_admin">Batal
@@ -220,10 +223,9 @@ class PemesananController extends Controller
                     </button>
                     ';
 
-                    return $btnAdmin;
-
-                } else {
-                    $btnAdmin = '
+                        return $btnAdmin;
+                    } else {
+                        $btnAdmin = '
                     <button
                         data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
                         class="badge bg-success border-0 terima_admin">Terima
@@ -238,13 +240,11 @@ class PemesananController extends Controller
                     </button>
                     ';
 
-                    return $btnAdmin;
-                    
-                }
-                
-            })
-            ->rawColumns(['waktu_pakai', 'waktu_pesan', 'action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
-            ->make(true);   
+                        return $btnAdmin;
+                    }
+                })
+                ->rawColumns(['waktu_pakai', 'waktu_pesan', 'action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
+                ->make(true);
         }
     }
 
@@ -253,58 +253,58 @@ class PemesananController extends Controller
         if ($request->ajax()) {
             $pesanan = Pemesanan::where('id_pemesan', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
             return DataTables::of($pesanan)
-            ->addIndexColumn()
-            ->editColumn('waktu_pakai', function ($row) {
-                $waktupakai = $this->hariIndo(date('l', strtotime($row->tanggal_pinjam))).', '.date('d', strtotime($row->tanggal_pinjam)).' '.$this->bulanIndo(date('M', strtotime($row->tanggal_pinjam))).'<br>'.'('.date('H:i', strtotime($row->jam_masuk)).'-'.date('H:i', strtotime($row->jam_keluar)).')';
-                return $waktupakai;
-            })
-            ->editColumn('prodi', function ($row) {
-                return $row->Prodi->nama;
-            })
-            ->editColumn('status', function ($row) {
-                if($row->Status->keterangan == "Menunggu Konfirmasi"){
-                    return '<font class="fw-bold text-warning" style="">' .$row->Status->keterangan .'</font>';
-                }elseif($row->Status->keterangan == "Diterima"){
-                    return '<font class="fw-bold text-success" style="">' .$row->Status->keterangan .'</font>';
-                }elseif($row->Status->keterangan== "Dijadwalkan"){
-                    return '<font class="fw-bold text-primary" style="">' .$row->Status->keterangan .'</font>';
-                }else{
-                    return '<font class="fw-bold text-danger" style="">' .$row->Status->keterangan .'</font>'.'<br>'.'<button data-name="' . $row->pesan . '" class="badge bg-danger border-0 btnDownload ingfo"><i class="fa-solid fa-circle-info"></i></button>';
-                }
-            })
-            ->editColumn('pemesan', function ($row) {
-                return $row->User->name;
-            })
-            ->editColumn('fileRPS', function ($row) {
-                $edit_url = asset('storage/'. $row->fileRPS);
-                $action_btn = '
-                <form action="'.$edit_url.'">
-                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button> 
+                ->addIndexColumn()
+                ->editColumn('waktu_pakai', function ($row) {
+                    $waktupakai = $this->hariIndo(date('l', strtotime($row->tanggal_pinjam))) . ', ' . date('d', strtotime($row->tanggal_pinjam)) . ' ' . $this->bulanIndo(date('M', strtotime($row->tanggal_pinjam))) . '<br>' . '(' . date('H:i', strtotime($row->jam_masuk)) . '-' . date('H:i', strtotime($row->jam_keluar)) . ')';
+                    return $waktupakai;
+                })
+                ->editColumn('prodi', function ($row) {
+                    return $row->Prodi->nama;
+                })
+                ->editColumn('status', function ($row) {
+                    if ($row->Status->keterangan == "Menunggu Konfirmasi") {
+                        return '<font class="fw-bold text-warning" style="">' . $row->Status->keterangan . '</font>';
+                    } elseif ($row->Status->keterangan == "Diterima") {
+                        return '<font class="fw-bold text-success" style="">' . $row->Status->keterangan . '</font>';
+                    } elseif ($row->Status->keterangan == "Dijadwalkan") {
+                        return '<font class="fw-bold text-primary" style="">' . $row->Status->keterangan . '</font>';
+                    } else {
+                        return '<font class="fw-bold text-danger" style="">' . $row->Status->keterangan . '</font>' . '<br>' . '<button data-name="' . $row->pesan . '" class="badge border-0 btnInfo ingfo text-danger"><i class="fa-solid fa-circle-info"></i></button>';
+                    }
+                })
+                ->editColumn('pemesan', function ($row) {
+                    return $row->User->name;
+                })
+                ->editColumn('fileRPS', function ($row) {
+                    $edit_url = asset('storage/' . $row->fileRPS);
+                    $action_btn = '
+                <form action="' . $edit_url . '">
+                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button>
                 </form>';
-                return $action_btn;
-            })
-            ->editColumn('fileSertif', function ($row) {
-                $edit_url = asset('storage/'. $row->fileSertif);
-                $action_btn = '
-                <form action="'.$edit_url.'">
-                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button> 
+                    return $action_btn;
+                })
+                ->editColumn('fileSertif', function ($row) {
+                    $edit_url = asset('storage/' . $row->fileSertif);
+                    $action_btn = '
+                <form action="' . $edit_url . '">
+                <button class="badge bg-primary border-0 btnDownload" type="submit" ><i class="fa-solid fa-cloud-arrow-down"></i></button>
                 </form>';
-                return $action_btn;
-            })
-            ->addColumn('action', function ($row) {
-                // $edit_url = route('admin.kecamatan.edit', $row->id);
-                $id = $row->id;
-                $nama = $row->matakuliah;
-                $btn = '
-                <button 
+                    return $action_btn;
+                })
+                ->addColumn('action', function ($row) {
+                    // $edit_url = route('admin.kecamatan.edit', $row->id);
+                    $id = $row->id;
+                    $nama = $row->matakuliah;
+                    $btn = '
+                <button
                     data-id="' . $id . '" data-name="' . $nama . '"
                     class="badge bg-danger border-0 hapus_dosen">Hapus
                 </button>
-                ';  
-                return $btn;
-            })
-            ->rawColumns(['waktu_pakai', 'action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
-            ->make(true);
+                ';
+                    return $btn;
+                })
+                ->rawColumns(['waktu_pakai', 'action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
+                ->make(true);
         }
     }
 
@@ -325,14 +325,14 @@ class PemesananController extends Controller
             Storage::delete($check->fileSertif);
         }
         Pemesanan::destroy($id);
-        
+
         return redirect('/dashboard')->with('Pemesanan Sukses', 'Data pemesanan berhasil dihapus');
     }
 
     public function accept($id)
     {
         $pesanan = Pemesanan::find($id);
-        $check = Jadwal::where('id_pemesanan', '=', $id )->first();
+        $check = Jadwal::where('id_pemesanan', '=', $id)->first();
 
         $data = [
             'id_pemesanan' => $pesanan->id,
@@ -366,8 +366,8 @@ class PemesananController extends Controller
     {
         Jadwal::where('id_pemesanan', '=', $id)->delete();
         Pemesanan::where('id', $id)->update(['id_status' => 3, 'pesan' => $pesan]);
-        // return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan'); 
-        return response()->json(['status' => TRUE]); 
+        // return redirect('/dashboard')->with('Pemesanan Sukses', 'Jadwal dibatalkan');
+        return response()->json(['status' => TRUE]);
     }
 
     public function cancelhapus($id)
@@ -386,7 +386,7 @@ class PemesananController extends Controller
     //     } else {
     //         $pesanan = Pemesanan::all();
     //     }
-        
+
     //     return view('dashboard', [
     //         'title' => 'Dashboard',
     //         'param' => 'edit',
@@ -417,7 +417,7 @@ class PemesananController extends Controller
     //     ]);
 
     //     $pesanan->update($request->all());
-        
+
     //     return redirect('/dashboard')->with('success', 'Data pemesanan ruangan berhasil diupdate!');
     // }
 }

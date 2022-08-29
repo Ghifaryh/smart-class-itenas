@@ -55,6 +55,17 @@ body {
     background-color: orange !important;
 }
 
+.btnInfo {
+    font-size: 1.5em;
+    /* border-radius: 10px !important; */
+    /* height: 20px !important; */
+    /* width: 20px !important; */
+    /* display: inline-block !important; */
+    color: rgb(186, 7, 7) !important;
+    text-align: center !important;
+    /* background-color: white !important; */
+}
+
 .textPeringatan {
     font-size: smaller;
     color: orange;
@@ -75,7 +86,7 @@ input:read-only {
     width: 100%;
 }
 
-.badge:not(.btnDownload, .truanganBadge, .verifBadge) {
+.badge:not(.btnDownload, .truanganBadge, .verifBadge, .btnInfo) {
     width: 110% !important;
 }
 
