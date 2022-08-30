@@ -86,9 +86,19 @@ input:read-only {
     width: 100%;
 }
 
-.badge:not(.btnDownload, .truanganBadge, .verifBadge, .btnInfo) {
-    width: 110% !important;
+.badge:not(.btnDownload, .truanganBadge, .verifBadge, .btnInfo, .hapus_jadwal) {
+    width: 60% !important;
 }
+
+.hapus_jadwal {
+    width: 6em;
+}
+/* .terima_admin,
+.batal_admin,
+.hapus_admin {
+    width: 110%;
+    display: block;
+} */
 
 /* .table-responsive.table-process { */
 .table-process,
