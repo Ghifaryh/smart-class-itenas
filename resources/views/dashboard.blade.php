@@ -580,7 +580,9 @@ $num2 = 1;
                                             'Berhasil',
                                             `Data pemesanan jadwal dibatalkan dengan pesan : "${pesan}"`,
                                             'success'
-                                        )
+                                        ).then(function() {
+                                            location.reload();
+                                        });
                                     }
                                     reload_table(null, true)
                                 },
@@ -639,7 +641,9 @@ $num2 = 1;
                                             'Berhasil',
                                             `Data pemesanan jadwal dibatalkan dengan pesan : "${pesan}"`,
                                             'success'
-                                        )
+                                        ).then(function() {
+                                            location.reload();
+                                        });
                                     }
                                     reload_table(null, true)
                                 },
@@ -711,6 +715,17 @@ $num2 = 1;
                             }
                         })
                     }
+                })
+            })
+
+            $('#tabelPemesananAdmin').on('click', '.ingfo', function(e) {
+                let name = $(this).data('name');
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Alasan ditolak:',
+                    text: `${name}`,
+                    icon: 'warning',
+                    showConfirmButton: true,
                 })
             })
         });

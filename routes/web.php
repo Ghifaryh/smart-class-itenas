@@ -58,9 +58,10 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::delete('/dashboard/hapusjadwal/{id}', [JadwalController::class, 'destroy']);
     Route::delete('/dashboard/hapuspemesanan/{id}', [PemesananController::class, 'destroy']);
     Route::get('/truangan', [RuanganController::class, 'index']);
+    Route::get('/truangan/list', [RuanganController::class, 'list'])->name('truangan.list');
     // Route::post('/truangan', [RuanganController::class, 'tambah']);
     Route::post('/truangan', [RuanganController::class, 'ajaxRequestRuangan']);
-    Route::post('/truangan/{id}', [RuanganController::class, 'edit']);
+    Route::get('/truangan/{id}', [RuanganController::class, 'edit']);
     Route::post('/truangan/update/{id}', [RuanganController::class, 'update']);
     Route::delete('/truangan/{id}', [RuanganController::class, 'destroy']);
     Route::get('/verifakun', [VerifAkunController::class, 'index']);

@@ -184,7 +184,7 @@ class PemesananController extends Controller
                     } else if ($row->Status->keterangan == "Dijadwalkan") {
                         return '<font class="fw-bold text-primary" style="">' . $row->Status->keterangan . '</font>';
                     } else {
-                        return '<font class="fw-bold text-danger" style="">' . $row->Status->keterangan . '</font>';
+                        return '<font class="fw-bold text-danger" style="">' . $row->Status->keterangan . '</font>' . '<br>' . '<button data-name="' . $row->pesan . '" class="badge border-0 btnInfo ingfo text-danger"><i class="fa-solid fa-circle-info"></i></button>';
                     }
                 })
                 ->editColumn('pemesan', function ($row) {
