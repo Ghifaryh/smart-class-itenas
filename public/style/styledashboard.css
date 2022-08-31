@@ -86,7 +86,7 @@ input:read-only {
     width: 100%;
 }
 
-.badge:not(.btnDownload, .truanganBadge, .verifBadge, .btnInfo, .hapus_jadwal) {
+.badge:not(.btnDownload, .truanganBadge, .verifBadge, .btnInfo, .hapus_jadwal, .hapus_dosen) {
     width: 60% !important;
 }
 
