@@ -113,8 +113,8 @@ $jumlah = count($images);
         </div>
     </div>
     <div class="row contents-wrapper">
-        <div class="col-sm-6 kiriHome">
-            <div class="row">
+        <div class="col-sm-6">
+            <div class="row kiriHome mb-4">
                 <h2 class="content-title text-center"> About</h2>
                 <p class="text-about" style="text-align: justify">
                     Smart Classroom adalah sebuah kelas yang memiliki fasilitas teknologi untuk melakukan kegiatan
@@ -126,7 +126,7 @@ $jumlah = count($images);
                     ruangannya terdapat peredam suara.
                 </p>
             </div>
-            <div class="row ruangan">
+            <div class="row ruangan kiriHome">
                 <h2 class="content-title text-center mt-3"> List Ruangan</h2>
                 <input type="text" id="searchHome" placeholder="Cari Matakuliah/Dosen/prodi" class="my-3 py-2">
 
