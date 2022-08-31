@@ -81,7 +81,7 @@ $jumlah = count($images);
 
 @section('container')
     <div class="container-fluid mb-4" id="">
-        <div id="carouselFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div id="carouselFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselFade" data-bs-slide-to="0" class="active" aria-current="true"
                     aria-label="Slide 1"></button>
