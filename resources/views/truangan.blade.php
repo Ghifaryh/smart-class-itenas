@@ -51,8 +51,8 @@ $num = 1;
                             @csrf
                             <div class="col-sm-9 form-floating mb-3">
                                 <input type="text" name="no_ruangan" id="no_ruangan" placeholder="Nama Ruangan"
-                                    class="form-control" value="{{ $ruanganedt->no_ruangan }}" required>
-                                <label for="no_ruangan">Nama Ruangan</label>
+                                    class="form-control" value="{{ $ruanganedt->no_ruangan }}" required readonly>
+                                <label for="no_ruangan">No Ruangan</label>
                                 <span class="text-danger error-text no_ruangan_error"></span>
                             </div>
                             <div class="col-sm-9 form-floating mb-3">
