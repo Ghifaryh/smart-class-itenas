@@ -20,6 +20,12 @@ body {
     /* text-shadow: 100px; */
     /* background-color: rgb(0, 0, 0, 0.5); */
 }
+
+.kiriHome {
+    background-color: rgb(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 10px 25px 0;
+}
 /* .carousel-item img {
         width: 50%;
     } */

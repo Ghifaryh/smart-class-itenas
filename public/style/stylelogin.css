@@ -5,6 +5,10 @@ body {
     /* overflow-y: hidden; */
 }
 
+header {
+    background-color: white !important;
+}
+
 .login-wrapper,
 .form-registration {
     background: rgba(255, 255, 255, 0.9);

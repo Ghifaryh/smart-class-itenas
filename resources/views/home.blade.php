@@ -113,7 +113,7 @@ $jumlah = count($images);
         </div>
     </div>
     <div class="row contents-wrapper">
-        <div class="col-sm-6">
+        <div class="col-sm-6 kiriHome">
             <div class="row">
                 <h2 class="content-title text-center"> About</h2>
                 <p class="text-about" style="text-align: justify">
@@ -361,7 +361,7 @@ $jumlah = count($images);
         </div>
 
 
-        <div class="col-sm-6">
+        <div class="col-sm-6 ">
             <h2 class="content-title text-center"> Lokasi Gedung</h2>
             <div class="interactive-map">
                 <img src={{ asset('img/map-smartclassroom.jpg') }} width="100%" alt="" class="rounded-3">
