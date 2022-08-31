@@ -1,4 +1,5 @@
-<header class="py-3 mb-3 border-bottom">
+<header class="py-3 mb-3">
+    {{-- <header class="py-3 mb-3 border-bottom"> --}}
     <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
         {{-- <div class="logo-header d-flex align-items-center col-lg-4 mb-2 mb-lg-0" aria-expanded="true">
             <a href="https://www.itenas.ac.id/">
@@ -59,14 +60,14 @@
                                 Pemesanan</a>
                         </li>
                         @if (auth()->user()->level == 'admin')
-                        <li>
-                            <a class="dropdown-item d-block" href="/truangan"><i
-                            class="fa-solid fa-plus logowsidebarnv me-2"></i>Tambah Ruangan</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-block" href="/verifakun"><i
-                            class="fa-solid fa-user-shield logowsidebarnv me-2"></i>Verifikasi Akun</a>
-                        </li>
+                            <li>
+                                <a class="dropdown-item d-block" href="/truangan"><i
+                                        class="fa-solid fa-plus logowsidebarnv me-2"></i>Tambah Ruangan</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-block" href="/verifakun"><i
+                                        class="fa-solid fa-user-shield logowsidebarnv me-2"></i>Verifikasi Akun</a>
+                            </li>
                         @endif
                         <li>
                             <hr class="dropdown-divider">

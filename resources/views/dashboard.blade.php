@@ -132,7 +132,7 @@ $num2 = 1;
             </div>
             <div class="col-sm-9">
                 <div class="row-sm-9 mb-3">
-                    <div class="reg-room-wrapper px-4 py-2">
+                    <div class="table-wrapper px-4 py-2">
                         <div class="reg-room">
                             <div class="table-responsive table-process">
                                 <h2 class="fw-bold border-bottom border-2 border-dark mb-3 pt-2">List Proses Pemesanan
@@ -173,7 +173,7 @@ $num2 = 1;
 
                 @if (auth()->user()->level == 'admin')
                     <div class="row-sm-9 mb-3">
-                        <div class="reg-room-wrapper px-4 py-2">
+                        <div class="table-wrapper px-4 py-2">
                             <div class="reg-room">
                                 <div class="table-responsive">
                                     <h2 class="fw-bold border-bottom border-2 border-dark mb-3 pt-2">Jadwal Ruangan Yang

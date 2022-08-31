@@ -2,10 +2,19 @@ body {
     background-image: url("https://www.itenas.ac.id/wp-content/uploads/2020/10/Tentang-Itenas-scaled.jpg");
     background-size: 100%;
 }
+header {
+    background-color: white !important;
+}
 
-.reg-room-wrapper,
-.addRuanganWrapper {
+.reg-room-wrapper {
     background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+}
+
+.table-wrapper,
+.addRuanganWrapper {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
 }
 
 .reg-room-button,

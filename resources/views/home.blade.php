@@ -81,7 +81,7 @@ $jumlah = count($images);
 
 @section('container')
     <div class="container-fluid mb-4" id="">
-        <div id="carouselFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div id="carouselFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselFade" data-bs-slide-to="0" class="active" aria-current="true"
                     aria-label="Slide 1"></button>
@@ -102,14 +102,14 @@ $jumlah = count($images);
                     </div>
                 @endforeach
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselFade" data-bs-slide="prev">
+            {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselFade" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselFade" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
-            </button>
+            </button> --}}
         </div>
     </div>
     <div class="row contents-wrapper">
@@ -364,8 +364,7 @@ $jumlah = count($images);
         <div class="col-sm-6">
             <h2 class="content-title text-center"> Lokasi Gedung</h2>
             <div class="interactive-map">
-                <img src={{ asset('img/map-smartclassroom.jpg') }} width="100%" alt=""
-                    class="rounded-3 shadow-lg">
+                <img src={{ asset('img/map-smartclassroom.jpg') }} width="100%" alt="" class="rounded-3">
                 <a href="" class="map-marker text-center" id="markLokasi">
                     <span aria-hidden="true">
                         <i class="fa-solid fa-circle"></i>
