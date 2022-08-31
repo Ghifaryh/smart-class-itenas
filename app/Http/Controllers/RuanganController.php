@@ -62,7 +62,7 @@ class RuanganController extends Controller
     public function ajaxRequestRuangan(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'no_ruangan' => ['required'],
+            'no_ruangan' => ['required','integer'],
             'nama' => ['required'],
             'fasilitas' => ['required'],
         ]);
