@@ -390,7 +390,7 @@ $num2 = 1;
                 let name = $(this).data('name');
                 e.preventDefault()
                 Swal.fire({
-                    title: 'Alasan ditolak:',
+                    title: 'Alasan dibatalkan:',
                     text: `${name}`,
                     icon: 'warning',
                     showConfirmButton: true,
@@ -722,7 +722,7 @@ $num2 = 1;
                 let name = $(this).data('name');
                 e.preventDefault()
                 Swal.fire({
-                    title: 'Alasan ditolak:',
+                    title: 'Alasan dibatalkan:',
                     text: `${name}`,
                     icon: 'warning',
                     showConfirmButton: true,
