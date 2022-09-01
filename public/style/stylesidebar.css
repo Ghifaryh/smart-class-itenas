@@ -58,6 +58,13 @@
     background-color: #ff7b01;
 }
 
+#side5 {
+    color: #000000;
+    outline: 2px solid #ff7b01;
+    top: 280px;
+    /* background-color: #04AA6D; */
+    background-color: #ffffff;
+}
 
 .logowsidebaro {
     padding-right: 20px;

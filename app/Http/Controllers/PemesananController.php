@@ -206,7 +206,7 @@ class PemesananController extends Controller
                 </form>';
                     return $action_btn;
                 })
-                ->addColumn('waktu_pesan', function ($row) {
+                ->editColumn('waktu_pesan', function ($row) {
                     return date('d/m/Y', strtotime($row->updated_at)) . '<br>' . date('H : i : s', strtotime($row->updated_at));
                 })
                 ->editColumn('action', function ($row) {
@@ -214,11 +214,11 @@ class PemesananController extends Controller
                     if ($row->Status->keterangan == 'Dihapus' or $row->Status->keterangan == 'Dibatalkan (Dihapus)') {
                         $btnAdmin = '
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
                         class="badge bg-danger border-0 batalhapus_admin">Batal
                     </button>
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
                         class="badge bg-danger border-0 hapus_admin">Hapus
                     </button>
                     ';
@@ -226,15 +226,15 @@ class PemesananController extends Controller
                     } else {
                         $btnAdmin = '
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
                         class="badge bg-success border-0 terima_admin">Terima
                     </button>
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
                         class="badge bg-danger border-0 batal_admin">Batal
                     </button>
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
                         class="badge bg-danger border-0 hapus_admin">Hapus
                     </button>
                     ';
@@ -317,11 +317,18 @@ class PemesananController extends Controller
     public function destroy($id)
     {
         $check = Pemesanan::find($id);
-        if ($check->fileRPS !== null) {
-            Storage::delete($check->fileRPS);
+        $fileRPScount = Pemesanan::where("fileRPS","=",$check->fileRPS)->count();
+        $fileSertifcount = Pemesanan::where("fileSertif","=",$check->fileSertif)->count();
+        
+        if ($fileRPScount == 1) {
+            if ($check->fileRPS !== null) {
+                Storage::delete($check->fileRPS);
+            }
         }
-        if ($check->fileRPS !== null) {
-            Storage::delete($check->fileSertif);
+        if ($fileSertifcount == 1) {
+            if ($check->fileSertif !== null) {
+                Storage::delete($check->fileSertif);
+            }
         }
         Pemesanan::destroy($id);
 
