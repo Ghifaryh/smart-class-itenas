@@ -317,7 +317,7 @@ $jumlah = count($images);
                     </div>
                 </div>
 
-                <div class="container r-wrapper">
+                {{-- <div class="container r-wrapper">
                     <i class="fa-solid fa-list" id="icon-btn-shtable6"></i> <span class="fw-bold btn-shtable"
                         onclick="showTable6()">
                         Ruangan 6
@@ -352,7 +352,7 @@ $jumlah = count($images);
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="container-fluid text-center mt-3 pb-4">
                     <a href="/dashboard" class="btn btn-book">+ Booking Ruangan</a>
