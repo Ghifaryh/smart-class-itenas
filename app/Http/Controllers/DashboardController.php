@@ -29,7 +29,7 @@ class DashboardController extends Controller
         
         return view('dashboard', [
             'title' => 'Dashboard',
-            'ruangan' => Ruangan::all(),
+            'ruangan' => Ruangan::all()->sortBy('no_ruangan'),
             'jam' => Jam::all(),
             // 'pesanans' => $pesanan,
             // 'jadwals' => Jadwal::all(),

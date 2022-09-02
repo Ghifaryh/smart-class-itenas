@@ -68,6 +68,10 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::post('/verifakun/verifikasi/{kode}', [VerifAkunController::class, 'verifikasi']);
     Route::post('/verifakun/tolak/{kode}', [VerifAkunController::class, 'cancel']);
     Route::delete('/verifakun/hapus/{kode}', [VerifAkunController::class, 'destroy']);
+    Route::get('/pengaturan', [HomeController::class, 'pengaturan']);
+    Route::get('/pengaturan/imagelist', [HomeController::class, 'listGambar'])->name('image.list');
+    Route::post('/pengaturan/update/{id}', [HomeController::class, 'update']);
+    Route::post('/pengaturan/image', [HomeController::class, 'addImage']);
+    Route::delete('/pengaturan/image/{id}', [HomeController::class, 'destroy']);
 
 });
-// Route::get('/statuspesan', [DashboardController::class, 'status']);

@@ -74,6 +74,7 @@ foreach ($fileSystemIterator as $fileInfo) {
 @endphp
 
 @php
+$numImg = 0;
 $dir = 'img/ruangan/';
 $images = glob($dir . '/*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}', GLOB_BRACE);
 $jumlah = count($images);
@@ -83,48 +84,28 @@ $jumlah = count($images);
     <div class="container-fluid mb-4" id="">
         <div id="carouselFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselFade" data-bs-slide-to="0" class="active" aria-current="true"
-                    aria-label="Slide 1"></button>
-                @for ($i = 1; $i <= $jumlah; $i++)
-                    <button type="button" data-bs-target="#carouselFade" data-bs-slide-to="{{ $i }}"
+                @for ($i = 0; $i < $jmlImage; $i++)
+                    <button type="button" data-bs-target="#carouselFade" data-bs-slide-to="{{ $i }}" class="{{ $i == '0' ? 'active' : '' }}"
                         aria-label="Slide {{ $i }}"></button>
                 @endfor
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{{ asset('img/ruangan/trigger/1.jpeg') }}" class="d-block w-100 h-50 mx-auto" alt="...">
-                </div>
                 {{-- Harus nambah style widht and height --}}
-                @foreach ($images as $img)
-                    <div class="carousel-item">
-                        <img src="{{ asset($img) }}" class="d-block w-100 h-50 mx-auto"
+                @foreach ($image as $img)
+                    <div class="carousel-item {{ $numImg == '0' ? 'active' : '' }}">
+                        @php $numImg++; @endphp
+                        <img src="{{ asset('storage/Image/'.$img->deskripsi) }}" class="d-block w-100 h-50 mx-auto"
                             alt="Foto-foto fasilitas dan ruangan Smart Classsroom">
                     </div>
                 @endforeach
             </div>
-            {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselFade" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselFade" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button> --}}
         </div>
     </div>
     <div class="row contents-wrapper">
         <div class="col-sm-6">
             <div class="row kiriHome mb-4">
-                <h2 class="content-title text-center"> About</h2>
-                <p class="text-about" style="text-align: justify">
-                    Smart Classroom adalah sebuah kelas yang memiliki fasilitas teknologi untuk melakukan kegiatan
-                    pembelajaran secara hybrid yang memiliki fasilitas seperti Iceboard, AC, Webcam dengan kualitas HD,
-                    Speaker, dan fasilitas Internet yang cepat.
-                </p>
-                <p>
-                    Smart Classroom memiliki 5 ruangan dengan kapasitas masing-masing 20 orang dan disetiap
-                    ruangannya terdapat peredam suara.
-                </p>
+            <h2 class="content-title text-center"> {{ $homeabout->kategori }}</h2>
+                {!! $homeabout->deskripsi !!}
             </div>
             <div class="row ruangan kiriHome">
                 <h2 class="content-title text-center mt-3"> List Ruangan</h2>

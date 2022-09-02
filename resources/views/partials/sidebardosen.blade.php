@@ -11,6 +11,6 @@
         <a href="/truangan" id="side3" class="asettext"><i class="fa-solid fa-plus logowsidebaro"></i>Tambah
             Ruangan</a>
         <a href="/verifakun" id="side4" class="asettext"><i class="fa-solid fa-user-shield logowsidebarw"></i>Verifikasi Akun</a>
-        {{-- <a href="/pengaturan" id="side5" class="asettext"><i class="fa-solid fa-gear logowsidebaro"></i>Pengaturan</a> --}}
+        <a href="/pengaturan" id="side5" class="asettext"><i class="fa-solid fa-gear logowsidebaro"></i>Pengaturan</a>
     @endif
 </div>

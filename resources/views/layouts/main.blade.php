@@ -23,14 +23,13 @@
     <link rel="stylesheet" href={{ asset('style/style.css') }}>
     <link rel="stylesheet" href={{ asset('style/stylesidebar.css') }}>
     <link rel="stylesheet" href={{ asset('style/styleujicoba.css') }}>
-    @if ($title === 'Dashboard' or $title == 'Tambah Ruangan' or $title == 'Verifikasi Akun')
+    @if ($title === 'Dashboard' or $title == 'Tambah Ruangan' or $title == 'Verifikasi Akun' or $title == 'Pengaturan')
         <link rel="stylesheet" href={{ asset('style/styledashboard.css') }}>
     @endif
 
     @if ($title === 'Login' or $title === 'Register')
         <link rel="stylesheet" href={{ asset('style/stylelogin.css') }}>
     @endif
-
 
     {{-- <link rel="stylesheet" href="style/styledashboard.css"> --}}
     <script src={{ asset('scripts/script.js') }}></script>
@@ -84,8 +83,9 @@
     {{-- Dashboard Aestehtic --}}
     @stack('scriptsDashboard')
     @stack('scriptsVerification')
-
     @stack('scriptsTruangan')
+    @stack('scriptsPengaturan')
+    @stack('stylePengaturan')
 
     {{-- Login Aestehtic --}}
     @stack('loginJs')
@@ -96,7 +96,7 @@
     <header>
         {{-- navbar --}}
         @include('partials.navbar')
-        @if ($title === 'Dashboard' or $title === 'Home' or $title === 'Tambah Ruangan' or $title === 'Verifikasi Akun')
+        @if ($title === 'Dashboard' or $title === 'Home' or $title === 'Tambah Ruangan' or $title === 'Verifikasi Akun' or $title === 'Pengaturan')
             @auth
                 @include('partials.sidebardosen')
             @else
@@ -121,6 +121,10 @@
     @elseif ($title === 'Verifikasi Akun')
         <div class="truangan-wrapper-main">
             @yield('verif-akun')
+        </div>
+    @elseif ($title === 'Pengaturan')
+        <div class="truangan-wrapper-main">
+            @yield('pengaturan-home')
         </div>
     @endif
 
