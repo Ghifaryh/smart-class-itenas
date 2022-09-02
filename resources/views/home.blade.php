@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @php
+$numImg = 0;
 $numton = 1;
 $num1 = 1;
 $num2 = 1;
@@ -61,7 +62,7 @@ function bulanIndo($hariInggris)
     }
 }
 @endphp
-@php
+{{-- @php
 $directory = 'img/ruangan/';
 $filecount = count(glob($directory . '*'));
 
@@ -70,15 +71,13 @@ $entries = [];
 foreach ($fileSystemIterator as $fileInfo) {
     $entries[] = $fileInfo->getFilename();
 }
+@endphp --}}
 
-@endphp
-
-@php
-$numImg = 0;
+{{-- @php
 $dir = 'img/ruangan/';
 $images = glob($dir . '/*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}', GLOB_BRACE);
 $jumlah = count($images);
-@endphp
+@endphp --}}
 
 @section('container')
     <div class="container-fluid mb-4" id="">
@@ -355,8 +354,8 @@ $jumlah = count($images);
 
         </div>
     </div>
-    <input type="hidden" name="fotos" value="{{ $filecount }}" id="fotos">
-    <input type="hidden" name="fotoName" id="fotoName" value="{{ implode(',', $entries) }}">
+    {{-- <input type="hidden" name="fotos" value="{{ $filecount }}" id="fotos">
+    <input type="hidden" name="fotoName" id="fotoName" value="{{ implode(',', $entries) }}"> --}}
 @endsection
 @push('scripts')
     <script>
