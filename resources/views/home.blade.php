@@ -354,29 +354,10 @@ $jumlah = count($images);
 
         </div>
     </div>
-    {{-- <input type="hidden" name="fotos" value="{{ $filecount }}" id="fotos">
-    <input type="hidden" name="fotoName" id="fotoName" value="{{ implode(',', $entries) }}"> --}}
 @endsection
+
 @push('scripts')
     <script>
-        $(document).ready(function() {
-            var fotos = parseInt($('#fotos').val());
-
-            var fotoName = $('#fotoName').val().split(",");
-            var imgs = [];
-            for (var i = 0; i < fotoName.length; i++) {
-                imgs.push("img/ruangan/" + fotoName[i]);
-            }
-
-            $("#carouselStretch").backstretch(
-                imgs, {
-                    duration: 3000,
-                    fade: 750
-                }
-            );
-        });
-
-
         $(document).ready(function() {
             if (window.matchMedia("(max-width: 767px)").matches) {
 
