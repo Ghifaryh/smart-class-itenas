@@ -17,8 +17,9 @@ body {
 .carousel-item img {
     border: 5;
     border-radius: 15px !important;
-    /* text-shadow: 100px; */
-    /* background-color: rgb(0, 0, 0, 0.5); */
+    max-width: 100% !important;
+    height: 800px !important;
+    object-fit: cover;
 }
 
 .kiriHome {
@@ -274,6 +275,10 @@ footer {
     /* .carousel-item img {
         width: 50%;
     } */
+
+    .carousel-item img {
+        height: 400px !important;
+    }
 
     .login-text {
         margin-right: 0rem;
