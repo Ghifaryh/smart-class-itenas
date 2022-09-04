@@ -2,6 +2,7 @@ body {
     background-image: url("https://www.itenas.ac.id/wp-content/uploads/2020/10/Tentang-Itenas-scaled.jpg");
     /* background-size: 120%; */
     background-size: auto;
+
     /* overflow-y: hidden; */
 }
 
@@ -12,6 +13,7 @@ header {
 .login-wrapper,
 .form-registration {
     background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px !important;
 }
 
 .form-registration {
