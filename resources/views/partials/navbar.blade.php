@@ -50,26 +50,26 @@
                         {{-- </div> --}}
                     </a>
 
-                    <ul class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2"
-                        style="">
-                        <li><a class="dropdown-item d-block" href="/"><i
+                    <ul class="dropdown-menu shadow dropdown-menu-end" aria-labelledby="dropdownUser2" style="">
+                        <li><a class="dropdown-item d-block " href="/"><i
                                     class="fa-solid fa-house logowsidebarnv me-2"></i>Home</a>
                         </li>
-                        <li><a class="dropdown-item d-block" href="/dashboard"><i
-                                    class="fa-solid fa-building-circle-exclamation logowsidebarnv me-2"></i>Status
+                        <li><a class="dropdown-item d-block " href="/dashboard"><i
+                                    class="fa-solid fa-building-circle-exclamation fs-6 logowsidebarnv me-2"></i>Status
                                 Pemesanan</a>
                         </li>
                         @if (auth()->user()->level == 'admin')
                             <li>
-                                <a class="dropdown-item d-block" href="/truangan"><i
-                                        class="fa-solid fa-plus logowsidebarnv me-2"></i>Tambah Ruangan</a>
+                                <a class="dropdown-item d-block text-medium" href="/truangan"><i
+                                        class="fa-solid fa-plus logowsidebarnv me-2 fs-5"></i>Tambah Ruangan</a>
                             </li>
                             <li>
                                 <a class="dropdown-item d-block" href="/verifakun"><i
                                         class="fa-solid fa-user-shield logowsidebarnv me-2"></i>Verifikasi Akun</a>
                             </li>
                             <li>
-                                <a class="dropdown-item d-block" href="/pengaturan"><i class="fa-solid fa-gear logowsidebarnv me-2"></i>Pengaturan</a>
+                                <a class="dropdown-item d-block" href="/pengaturan"><i
+                                        class="fa-solid fa-gear fs-5 logowsidebarnv me-2"></i>Pengaturan</a>
                             </li>
                         @endif
                         <li>
