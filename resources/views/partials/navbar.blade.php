@@ -68,6 +68,9 @@
                                 <a class="dropdown-item d-block" href="/verifakun"><i
                                         class="fa-solid fa-user-shield logowsidebarnv me-2"></i>Verifikasi Akun</a>
                             </li>
+                            <li>
+                                <a class="dropdown-item d-block" href="/pengaturan"><i class="fa-solid fa-gear logowsidebarnv me-2"></i>Pengaturan</a>
+                            </li>
                         @endif
                         <li>
                             <hr class="dropdown-divider">
