@@ -16,7 +16,7 @@ class HomeSeeder extends Seeder
     public function run()
     {
         Home::create([
-            'kategori' => 'about',
+            'kategori' => 'About',
             'deskripsi' => '<p class="text-about" style="text-align: justify">
                 Smart Classroom adalah sebuah kelas yang memiliki fasilitas teknologi untuk melakukan kegiatan
                 pembelajaran secara hybrid yang memiliki fasilitas seperti Iceboard, AC, Webcam dengan kualitas HD,
