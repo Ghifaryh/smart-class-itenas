@@ -210,37 +210,39 @@ class PemesananController extends Controller
                     return date('d/m/Y', strtotime($row->updated_at)) . '<br>' . date('H : i : s', strtotime($row->updated_at));
                 })
                 ->editColumn('action', function ($row) {
-                    // $edit_url = route('admin.kecamatan.edit', $row->id);
-                    if ($row->Status->keterangan == 'Dihapus' or $row->Status->keterangan == 'Dibatalkan (Dihapus)') {
-                        $btnAdmin = '
-                    <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
-                        class="badge bg-danger border-0 batalhapus_admin">Batal
-                    </button>
-                    <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
-                        class="badge bg-danger border-0 hapus_admin">Hapus
-                    </button>
-                    ';
-                        return $btnAdmin;
-                    } else {
-                        $btnAdmin = '
+                    $btnTerimaAdmin = '
                     <button
                         data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
                         class="badge bg-success border-0 terima_admin">Terima
-                    </button>
+                    </button>';
+                    $btnPrintAdmin = '
+                    <button
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
+                        class="badge bg-primary border-0 print_bukti">Cetak
+                    </button>';
+                    $btnBatalAdmin = '
                     <button
                         data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
                         class="badge bg-danger border-0 batal_admin">Batal
-                    </button>
+                    </button>';
+                    $btnBatalHapusAdmin = '
+                    <button
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
+                        class="badge bg-danger border-0 batalhapus_admin">Batal
+                    </button>';
+                    $btnHapusAdmin = '
                     <button
                         data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
                         class="badge bg-danger border-0 hapus_admin">Hapus
-                    </button>
-                    ';
-
-                        return $btnAdmin;
+                    </button>';
+                    if ($row->Status->keterangan == 'Dihapus' or $row->Status->keterangan == 'Dibatalkan (Dihapus)') {
+                        return $btnBatalHapusAdmin . $btnHapusAdmin;
+                    } elseif ($row->Status->keterangan == 'Diterima') {
+                        return $btnTerimaAdmin. $btnPrintAdmin. $btnBatalAdmin. $btnHapusAdmin;
+                    } else{
+                        return $btnTerimaAdmin. $btnBatalAdmin. $btnHapusAdmin;
                     }
+                    
                 })
                 ->rawColumns(['waktu_pakai', 'waktu_pesan', 'action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
                 ->make(true);
@@ -292,15 +294,23 @@ class PemesananController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     // $edit_url = route('admin.kecamatan.edit', $row->id);
-                    $id = $row->id;
-                    $nama = $row->matakuliah;
-                    $btn = '
-                <button
-                    data-id="' . $id . '" data-name="' . $nama . '"
-                    class="badge bg-danger border-0 hapus_dosen">Hapus
-                </button>
-                ';
-                    return $btn;
+                    $btnHapusDosen = '
+                    <button
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
+                        class="badge bg-danger border-0 hapus_dosen">Hapus
+                    </button>';
+                    $btnPrintDosen = '
+                    <button
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
+                        class="badge bg-primary border-0 print_bukti">Cetak
+                    </button>';
+                    if ($row->Status->keterangan == 'Diterima') {
+                        return $btnPrintDosen . $btnHapusDosen;
+                    } else {
+                        return $btnHapusDosen;
+                    }
+                    
+                    
                 })
                 ->rawColumns(['waktu_pakai', 'action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
                 ->make(true);
@@ -312,6 +322,14 @@ class PemesananController extends Controller
         Pemesanan::where('id', $id)->update(['id_status' => 4]);
 
         return response()->json(['status' => TRUE]);
+    }
+
+    public function bukti($id)
+    {
+        return view('bukti', [
+            'title' => 'Print Bukti',
+            'buktis' => Pemesanan::find($id),
+        ]);
     }
 
     public function destroy($id)

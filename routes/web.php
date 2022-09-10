@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
     Route::post('/dashboard/hapusketpemesanan/{id}', [PemesananController::class, 'hapusket']);
     Route::post('/dashboard/edit/{id}', [PemesananController::class, 'edit']);
     Route::post('/dashboard/update/{id}', [PemesananController::class, 'update']);
+    Route::get('/dashboard/bukti/{id}', [PemesananController::class, 'bukti']);
     
 });
 

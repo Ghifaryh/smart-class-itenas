@@ -334,6 +334,25 @@ $num2 = 1;
                 table.ajax.reload(callback, resetPage); //reload datatable ajax
             }
 
+            $('#tabelPemesananDosen').on('click', '.print_bukti', function(e) {
+                let id = $(this).data('id');
+                let name = $(this).data('name');
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Apakah Yakin?',
+                    text: `Apakah Anda yakin ingin mencetak bukti jadwal matakuliah : ${name}`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Cetak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "{{ url('dashboard/bukti/') }}/" + id;
+                    }
+                })
+            })
+
             $('#tabelPemesananDosen').on('click', '.hapus_dosen', function(e) {
                 var id = $(this).data('id');
                 let name = $(this).data('name');
@@ -481,6 +500,25 @@ $num2 = 1;
             function reload_table(callback, resetPage = false) {
                 table.ajax.reload(callback, resetPage); //reload datatable ajax
             }
+
+            $('#tabelPemesananAdmin').on('click', '.print_bukti', function(e) {
+                let id = $(this).data('id');
+                let name = $(this).data('name');
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Apakah Yakin?',
+                    text: `Apakah Anda yakin ingin mencetak bukti jadwal matakuliah : ${name}`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Cetak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "{{ url('dashboard/bukti/') }}/" + id;
+                    }
+                })
+            })
 
             $('#tabelPemesananAdmin').on('click', '.terima_admin', function(e) {
                 var id = $(this).data('id');
