@@ -5,7 +5,8 @@
     margin-top: 7%;
     position: absolute;
     /* Position them relative to the browser window */
-    left: -250px;
+    /* left: -250px; */
+    left: -245px;
     /* Position them outside of the screen */
     transition: 0.3s;
     /* Add transition on hover */
@@ -61,20 +62,22 @@
 #side5 {
     color: #000000;
     outline: 2px solid #ff7b01;
-    top: 280px;
+    top: 277px;
     /* background-color: #04AA6D; */
     background-color: #ffffff;
 }
 
 .logowsidebaro {
-    padding-right: 20px;
+    /* padding-right: 20px; */
+    padding-right: -10px;
     color: orange;
     text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
     font-size: 1.8vw;
 }
 
 .logowsidebarw {
-    padding-right: 20px;
+    /* padding-right: 20px; */
+    padding-right: -10px;
     color: white;
     text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
     font-size: 1.8vw;
