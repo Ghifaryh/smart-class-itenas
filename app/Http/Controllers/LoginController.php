@@ -35,11 +35,15 @@ class LoginController extends Controller
             }
         }
 
+        // dd($check);
         if ($check === null) {
             return back()->with('Login Gagal', 'Pastikan kode dosen dan password sudah benar!');
-        } else {
+        } elseif ($check->id_status == 6) {
             return back()->with('Login Warning', 'Akun dengan kode dosen '. $request['kode_dosen'] .' telah didaftarkan, mohon tunggu verifikasi admin');
+        } else{
+            return back()->with('Login Warning', 'Akun dengan kode dosen '. $request['kode_dosen'] .' telah diblock oleh admin');
         }
+
 
         // Alert::error('Login Gagal','Pastikan kode dosen dan password sudah benar!');
         // return back();

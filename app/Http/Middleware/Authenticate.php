@@ -17,7 +17,7 @@ class Authenticate extends Middleware
     {
         if (Auth::guest()) {
             return ('/login');
-            // return redirect('/login');
         }
     }
 }
+
