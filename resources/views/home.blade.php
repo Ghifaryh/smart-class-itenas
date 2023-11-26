@@ -1,66 +1,66 @@
 @extends('layouts.main')
 
 @php
-$numImg = 0;
-$numton = 1;
-$num1 = 1;
-$num2 = 1;
-$num3 = 1;
-$num4 = 1;
-$num5 = 1;
-$num6 = 1;
-function hariIndo($hariInggris)
-{
-    switch ($hariInggris) {
-        case 'Sunday':
-            return 'Minggu';
-        case 'Monday':
-            return 'Senin';
-        case 'Tuesday':
-            return 'Selasa';
-        case 'Wednesday':
-            return 'Rabu';
-        case 'Thursday':
-            return 'Kamis';
-        case 'Friday':
-            return 'Jumat';
-        case 'Saturday':
-            return 'Sabtu';
-        default:
-            return 'hari tidak valid';
+    $numImg = 0;
+    $numton = 1;
+    $num1 = 1;
+    $num2 = 1;
+    $num3 = 1;
+    $num4 = 1;
+    $num5 = 1;
+    $num6 = 1;
+    function hariIndo($hariInggris)
+    {
+        switch ($hariInggris) {
+            case 'Sunday':
+                return 'Minggu';
+            case 'Monday':
+                return 'Senin';
+            case 'Tuesday':
+                return 'Selasa';
+            case 'Wednesday':
+                return 'Rabu';
+            case 'Thursday':
+                return 'Kamis';
+            case 'Friday':
+                return 'Jumat';
+            case 'Saturday':
+                return 'Sabtu';
+            default:
+                return 'hari tidak valid';
+        }
     }
-}
-function bulanIndo($hariInggris)
-{
-    switch ($hariInggris) {
-        case 'Jan':
-            return 'Januari';
-        case 'Feb':
-            return 'Februari';
-        case 'Mar':
-            return 'Maret';
-        case 'Apr':
-            return 'April';
-        case 'May':
-            return 'Mei';
-        case 'Jun':
-            return 'Juni';
-        case 'Jul':
-            return 'Juli';
-        case 'Aug':
-            return 'Agustus';
-        case 'Sep':
-            return 'September';
-        case 'Oct':
-            return 'Oktober';
-        case 'Nov':
-            return 'November';
-        case 'Dec':
-            return 'Desember';
-        default:
-            return 'bulan tidak valid';
+    function bulanIndo($hariInggris)
+    {
+        switch ($hariInggris) {
+            case 'Jan':
+                return 'Januari';
+            case 'Feb':
+                return 'Februari';
+            case 'Mar':
+                return 'Maret';
+            case 'Apr':
+                return 'April';
+            case 'May':
+                return 'Mei';
+            case 'Jun':
+                return 'Juni';
+            case 'Jul':
+                return 'Juli';
+            case 'Aug':
+                return 'Agustus';
+            case 'Sep':
+                return 'September';
+            case 'Oct':
+                return 'Oktober';
+            case 'Nov':
+                return 'November';
+            case 'Dec':
+                return 'Desember';
+            default:
+                return 'bulan tidak valid';
+        }
     }
-}
 @endphp
 {{-- @php
 $directory = 'img/ruangan/';
@@ -84,8 +84,8 @@ $jumlah = count($images);
         <div id="carouselFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000">
             <div class="carousel-indicators">
                 @for ($i = 0; $i < $jmlImage; $i++)
-                    <button type="button" data-bs-target="#carouselFade" data-bs-slide-to="{{ $i }}" class="{{ $i == '0' ? 'active' : '' }}"
-                        aria-label="Slide {{ $i }}"></button>
+                    <button type="button" data-bs-target="#carouselFade" data-bs-slide-to="{{ $i }}"
+                        class="{{ $i == '0' ? 'active' : '' }}" aria-label="Slide {{ $i }}"></button>
                 @endfor
             </div>
             <div class="carousel-inner">
@@ -93,7 +93,7 @@ $jumlah = count($images);
                 @foreach ($image as $img)
                     <div class="carousel-item {{ $numImg == '0' ? 'active' : '' }}">
                         @php $numImg++; @endphp
-                        <img src="{{ asset('storage/Image/'.$img->deskripsi) }}" class="d-block w-100 h-50 mx-auto"
+                        <img src="{{ asset('img/ruangan/' . $img->deskripsi) }}" class="d-block w-100 h-50 mx-auto"
                             alt="Foto-foto fasilitas dan ruangan Smart Classsroom">
                     </div>
                 @endforeach
@@ -103,7 +103,7 @@ $jumlah = count($images);
     <div class="row contents-wrapper">
         <div class="col-sm-6">
             <div class="row kiriHome mb-4">
-            <h2 class="content-title text-center"> {{ $homeabout->kategori }}</h2>
+                <h2 class="content-title text-center"> {{ $homeabout->kategori }}</h2>
                 {!! $homeabout->deskripsi !!}
             </div>
             <div class="row ruangan kiriHome">

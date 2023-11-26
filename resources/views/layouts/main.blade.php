@@ -90,13 +90,25 @@
     {{-- Login Aestehtic --}}
     @stack('loginJs')
 
+    {{-- vite x tailwinds  --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
+    {{-- <h1 class="text-3xl font-bold underline">
+        Hello world!
+    </h1> --}}
+    <a href="{{ route('lab.index') }}">Ke Halaman Lab</a>
+
     <header>
         {{-- navbar --}}
         @include('partials.navbar')
-        @if ($title === 'Dashboard' or $title === 'Home' or $title === 'Tambah Ruangan' or $title === 'Verifikasi Akun' or $title === 'Pengaturan')
+        @if (
+            $title === 'Dashboard' or
+                $title === 'Home' or
+                $title === 'Tambah Ruangan' or
+                $title === 'Verifikasi Akun' or
+                $title === 'Pengaturan')
             @auth
                 @include('partials.sidebardosen')
             @else

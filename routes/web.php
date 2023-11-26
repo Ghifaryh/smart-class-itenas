@@ -21,6 +21,7 @@ use App\Http\Controllers\VerifAkunController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/about', function () {
     return view('welcome', [
         "title" => "About"
@@ -35,22 +36,21 @@ Route::post('/logout', [LoginController::class, 'logout']);
 // Route::post('/register', [RegisterController::class, 'store']);
 
 
-Route::group(['middleware' => ['auth','ceklevel:dosen,admin']], function(){
+Route::group(['middleware' => ['auth', 'ceklevel:dosen,admin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/pemesanan/admin/list', [PemesananController::class, 'adminList'])->name('pemesanan-admin.list');
     Route::get('/pemesanan/dosen/list', [PemesananController::class, 'dosenList'])->name('pemesanan-dosen.list');
     Route::get('/get-matkul/{semester}/{prodi}', [DashboardController::class, 'getMatkul']);
     Route::get('/dosen-matkul/{semester}/{prodi}/{kode_matkul}/{kelas}', [DashboardController::class, 'getDosenMatkul']);
-    // Route::post('/dashboard', [PemesananController::class, 'daftar']);   
-    Route::post('/dashboard', [PemesananController::class, 'ajaxRequestPost']);   
+    // Route::post('/dashboard', [PemesananController::class, 'daftar']);
+    Route::post('/dashboard', [PemesananController::class, 'ajaxRequestPost']);
     Route::post('/dashboard/hapusketpemesanan/{id}', [PemesananController::class, 'hapusket']);
     Route::post('/dashboard/edit/{id}', [PemesananController::class, 'edit']);
     Route::post('/dashboard/update/{id}', [PemesananController::class, 'update']);
     Route::get('/dashboard/bukti/{id}', [PemesananController::class, 'bukti']);
-    
 });
 
-Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
+Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::post('/dashboard/terima/{id}', [PemesananController::class, 'accept']);
     Route::post('/dashboard/batal/{id}/{pesan}', [PemesananController::class, 'cancel']);
     Route::post('/dashboard/batalhapus/{id}/{pesan}', [PemesananController::class, 'cancelhapus']);
@@ -74,5 +74,6 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::post('/pengaturan/update/{id}', [HomeController::class, 'update']);
     Route::post('/pengaturan/image', [HomeController::class, 'addImage']);
     Route::delete('/pengaturan/image/{id}', [HomeController::class, 'destroy']);
-
 });
+
+include __DIR__ . '/lab/web.php';
