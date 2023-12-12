@@ -32,6 +32,7 @@
     @endif
 
     {{-- <link rel="stylesheet" href="style/styledashboard.css"> --}}
+    {{-- Custom Scripts --}}
     <script src={{ asset('scripts/script.js') }}></script>
 
     {{-- JQ --}}

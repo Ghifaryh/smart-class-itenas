@@ -1,4 +1,6 @@
-console.log("Here the prize: www.bit.do/YeetYeet ");
+console.log(
+    "Here the prize: https://youtu.be/dQw4w9WgXcQ?si=Noapcy0RJH6U33pE "
+);
 // Show - Hide table
 function showTable1() {
     var t1 = document.getElementById("table1");
