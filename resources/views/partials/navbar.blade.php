@@ -12,7 +12,8 @@
         </div> --}}
 
         <div class="logo-header">
-            <a href="/" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none"
+            <a href="{{ route('scr.index') }}"
+                class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none"
                 aria-expanded="true">
                 <img src="https://www.itenas.ac.id/wp-content/uploads/2021/01/Varian-Logo-Itenas-FULL-02.png"
                     alt="" width="80%">
@@ -51,24 +52,24 @@
                     </a>
 
                     <ul class="dropdown-menu shadow dropdown-menu-end" aria-labelledby="dropdownUser2" style="">
-                        <li><a class="dropdown-item d-block " href="/"><i
+                        <li><a class="dropdown-item d-block " href="{{ route('scr.index') }}"><i
                                     class="fa-solid fa-house logowsidebarnv me-2"></i>Home</a>
                         </li>
-                        <li><a class="dropdown-item d-block " href="/dashboard"><i
+                        <li><a class="dropdown-item d-block " href="{{ route('scr.dashboard') }}"><i
                                     class="fa-solid fa-building-circle-exclamation fs-6 logowsidebarnv me-2"></i>Status
                                 Pemesanan</a>
                         </li>
                         @if (auth()->user()->level == 'admin')
                             <li>
-                                <a class="dropdown-item d-block text-medium" href="/truangan"><i
+                                <a class="dropdown-item d-block text-medium" href="{{ route('scr.truangan') }}"><i
                                         class="fa-solid fa-plus logowsidebarnv me-2 fs-5"></i>Tambah Ruangan</a>
                             </li>
                             <li>
-                                <a class="dropdown-item d-block" href="/verifakun"><i
+                                <a class="dropdown-item d-block" href="{{ route('scr.verifakun') }}"><i
                                         class="fa-solid fa-user-shield logowsidebarnv me-2"></i>Verifikasi Akun</a>
                             </li>
                             <li>
-                                <a class="dropdown-item d-block" href="/pengaturan"><i
+                                <a class="dropdown-item d-block" href="{{ route('scr.pengaturan') }}"><i
                                         class="fa-solid fa-gear fs-5 logowsidebarnv me-2"></i>Pengaturan</a>
                             </li>
                         @endif
@@ -76,7 +77,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <form action="/logout" method="post">
+                            <form action="{{ route('scr.logout') }}" method="post">
                                 @csrf
                                 <button type="submit" class="d-block dropdown-item logout"><i
                                         class="fa-solid
@@ -88,7 +89,8 @@
                     @if ($title == 'Login' or $title == 'Register')
                         {{-- If else login or not --}}
                     @else
-                        <a href="/login" class="d-block link-dark text-decoration-none text-nowrap align-items-center"><i
+                        <a href="{{ route('scr.login') }}"
+                            class="d-block link-dark text-decoration-none text-nowrap align-items-center"><i
                                 class="fa-solid fa-right-to-bracket logowsidebarnv pe-1" aria-expanded="false"></i>
                             <span class="login-text fw-bold">
                                 Login

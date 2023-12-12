@@ -37,7 +37,7 @@
                             </h1>
                         </div>
 
-                        <form action="/login" method="post" class="px-4 pb-5">
+                        <form action="{{ route('scr.login.authenticate') }}" method="post" class="px-4 pb-5">
                             @csrf
 
                             <div class="divider d-flex align-items-center my-4"></div>

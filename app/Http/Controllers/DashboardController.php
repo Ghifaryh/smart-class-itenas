@@ -15,10 +15,10 @@ use Illuminate\Support\Carbon;
 class DashboardController extends Controller
 {
     public function index()
-    {   
+    {
         $datenow = Carbon::now()->format('Y-m-d');
         // $date = Carbon::now()->format('Y-m-d');
-        
+
         // if (auth()->user()->level == 'dosen') {
         //     $pesanan = Pemesanan::where('id_pemesan', auth()->user()->id)->whereNot('id_status', 4)->whereNot('id_status', 5)->get();
         // } else {
@@ -26,7 +26,7 @@ class DashboardController extends Controller
         // }
 
         // ->where('jadwal_masuk', date())->
-        
+
         return view('dashboard', [
             'title' => 'Dashboard',
             'ruangan' => Ruangan::all()->sortBy('no_ruangan'),
@@ -51,12 +51,11 @@ class DashboardController extends Controller
         $output = json_decode($output, true);
 
         isset($output["data"]);
-        
+
         $output = isset($output["data"]) ? ($output["data"]) : null;
 
         // error_log($output);
         echo json_encode($output);
-    
     }
 
     public function getDosenMatkul($semester, $prodi, $kode_matkul, $kelas)
@@ -72,22 +71,19 @@ class DashboardController extends Controller
         $output = json_decode($output, true);
 
         isset($output["data"]);
-        
+
         $output = isset($output["data"]) ? ($output["data"]) : null;
-        
+
         foreach ($output as $key => $value) {
             if (($value['Disp_Kode'] == $kode_matkul) && ($value['Disp_Kelas'] == $kelas) && ($value['Disp_Semester'] == $semester)) {
                 //if magicRankis not 8, ignore and move on to the next entry
-                $data = array("data1"=>$value['Disp_NamaDosen'], "data2"=>$value['Disp_Kelas']);
+                $data = array("data1" => $value['Disp_NamaDosen'], "data2" => $value['Disp_Kelas']);
             }
             continue;
             //magicRank is 8, do something
-            }
+        }
 
         // error_log($output);
         echo json_encode($data);
-    
     }
-
-    
 }

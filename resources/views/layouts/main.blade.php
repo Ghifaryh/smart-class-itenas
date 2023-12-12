@@ -32,6 +32,7 @@
     @endif
 
     {{-- <link rel="stylesheet" href="style/styledashboard.css"> --}}
+
     {{-- Custom Scripts --}}
     <script src={{ asset('scripts/script.js') }}></script>
 
@@ -52,18 +53,8 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
     {{-- Datatables --}}
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js">
-    </script> --}}
-
-    <link rel="stylesheet" type="text/css" href="scripts/DataTables/datatables.min.css" />
-    <script type="text/javascript" src="scripts/DataTables/datatables.min.js"></script>
-
-    {{-- <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script> --}}
-    {{-- <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"> --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('scripts/DataTables/datatables.min.css') }}" />
+    <script type="text/javascript" src="{{ asset('scripts/DataTables/datatables.min.js') }}"></script>
 
     {{-- select2.org --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

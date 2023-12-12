@@ -17,21 +17,20 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
-        $check = VerifAkun::where('kode_dosen', '=', $request['kode_dosen'] )->first();
+        $check = VerifAkun::where('kode_dosen', '=', $request['kode_dosen'])->first();
         $credentials = $request->validate([
             'kode_dosen' => ['required'],
             'password' => ['required'],
         ]);
 
-        if(Auth::attemptWhen($credentials)){
+        if (Auth::attemptWhen($credentials)) {
             $request->session()->regenerate();
-            if(Auth::user()->level == "dosen"){
+            if (Auth::user()->level == "dosen") {
                 $request->session()->regenerate();
-                return redirect()->intended('/dashboard')->with('Login Berhasil', 'Selamat Datang');
-            }else{
+                return redirect()->intended('scr/dashboard')->with('Login Berhasil', 'Selamat Datang');
+            } else {
                 $request->session()->regenerate();
-                return redirect()->intended('/dashboard')->with('Login Berhasil', 'Selamat Datang Admin');
-
+                return redirect()->intended('scr/dashboard')->with('Login Berhasil', 'Selamat Datang Admin');
             }
         }
 
@@ -39,9 +38,9 @@ class LoginController extends Controller
         if ($check === null) {
             return back()->with('Login Gagal', 'Pastikan kode dosen dan password sudah benar!');
         } elseif ($check->id_status == 6) {
-            return back()->with('Login Warning', 'Akun dengan kode dosen '. $request['kode_dosen'] .' telah didaftarkan, mohon tunggu verifikasi admin');
-        } else{
-            return back()->with('Login Warning', 'Akun dengan kode dosen '. $request['kode_dosen'] .' telah diblock oleh admin');
+            return back()->with('Login Warning', 'Akun dengan kode dosen ' . $request['kode_dosen'] . ' telah didaftarkan, mohon tunggu verifikasi admin');
+        } else {
+            return back()->with('Login Warning', 'Akun dengan kode dosen ' . $request['kode_dosen'] . ' telah diblock oleh admin');
         }
 
 
@@ -49,7 +48,7 @@ class LoginController extends Controller
         // return back();
 
         // dd('berhasil login!');
-        
+
     }
 
     public function logout(Request $request)
@@ -59,7 +58,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-        
+
         return redirect('/');
     }
 }

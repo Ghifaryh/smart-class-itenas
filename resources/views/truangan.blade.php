@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @php
-$num = 1;
+    $num = 1;
 @endphp
 
 @section('tambah-ruangan')
@@ -114,7 +114,7 @@ $num = 1;
                     pageLength: 10,
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('truangan.list') }}",
+                    ajax: "{{ route('scr.truangan.list') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex',

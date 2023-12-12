@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @php
-$num1 = 1;
-$num2 = 1;
+    $num1 = 1;
+    $num2 = 1;
 @endphp
 
 @section('dashboard-main')
@@ -23,7 +23,7 @@ $num2 = 1;
                     <div class="reg-room">
                         <h3 class="fw-bold pt-2 text-nowrap">Pemesanan Ruangan</h3>
                         <h6 class="reg-room-title border-bottom border-2 border-dark mb-3">Data</h6>
-                        <form action="/dashboard" method="post" class="reg-room-form" id="postPemesanan"
+                        <form action="/scr/dashboard" method="post" class="reg-room-form" id="postPemesanan"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="col mb-3">
@@ -208,6 +208,8 @@ $num2 = 1;
     </div>
 @endsection
 
+
+
 @push('scriptsDashboard')
     <script type="text/javascript">
         $.ajaxSetup({
@@ -262,7 +264,7 @@ $num2 = 1;
                     pageLength: 10,
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('pemesanan-dosen.list') }}",
+                    ajax: "{{ route('scr.listdosen') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex',
@@ -348,7 +350,7 @@ $num2 = 1;
                     confirmButtonText: 'Cetak'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        location.href = "{{ url('dashboard/bukti/') }}/" + id;
+                        location.href = "{{ url('scr/dashboard/bukti/') }}/" + id;
                     }
                 })
             })
@@ -369,7 +371,7 @@ $num2 = 1;
                     if (result.isConfirmed) {
                         let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         $.ajax({
-                            url: "{{ url('dashboard/hapusketpemesanan/') }}/" + id,
+                            url: "{{ url('scr/dashboard/hapusketpemesanan/') }}/" + id,
                             type: 'POST',
                             data: {
                                 _token: CSRF_TOKEN,
@@ -424,7 +426,7 @@ $num2 = 1;
                     pageLength: 25,
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('pemesanan-admin.list') }}",
+                    ajax: "{{ route('scr.listadmin') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex',
@@ -515,7 +517,7 @@ $num2 = 1;
                     confirmButtonText: 'Cetak'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        location.href = "{{ url('dashboard/bukti/') }}/" + id;
+                        location.href = "{{ url('scr/dashboard/bukti/') }}/" + id;
                     }
                 })
             })
@@ -537,7 +539,7 @@ $num2 = 1;
                     if (result.isConfirmed) {
                         let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         $.ajax({
-                            url: "{{ url('dashboard/terima/') }}/" + id,
+                            url: "{{ url('scr/dashboard/terima/') }}/" + id,
                             type: 'POST',
                             data: {
                                 _token: CSRF_TOKEN,
@@ -599,7 +601,7 @@ $num2 = 1;
                         } else {
                             let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                             $.ajax({
-                                url: "{{ url('dashboard/batal/') }}/" + id + '/' +
+                                url: "{{ url('scr/dashboard/batal/') }}/" + id + '/' +
                                     pesan,
                                 type: 'POST',
                                 data: {
@@ -660,7 +662,8 @@ $num2 = 1;
                         } else {
                             let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                             $.ajax({
-                                url: "{{ url('dashboard/batalhapus/') }}/" + id + '/' +
+                                url: "{{ url('scr/dashboard/batalhapus/') }}/" + id +
+                                    '/' +
                                     pesan,
                                 type: 'POST',
                                 data: {
@@ -716,7 +719,7 @@ $num2 = 1;
                     if (result.isConfirmed) {
                         let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         $.ajax({
-                            url: "{{ url('dashboard/hapuspemesanan/') }}/" + id,
+                            url: "{{ url('scr/dashboard/hapuspemesanan/') }}/" + id,
                             type: 'POST',
                             data: {
                                 _token: CSRF_TOKEN,
@@ -775,7 +778,7 @@ $num2 = 1;
                     pageLength: 25,
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('jadwal.list') }}",
+                    ajax: "{{ route('scr.jadwallist') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex',
@@ -847,7 +850,7 @@ $num2 = 1;
                     if (result.isConfirmed) {
                         let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         $.ajax({
-                            url: "{{ url('dashboard/hapusjadwal/') }}/" + id,
+                            url: "{{ url('scr/dashboard/hapusjadwal/') }}/" + id,
                             type: 'POST',
                             data: {
                                 _token: CSRF_TOKEN,
@@ -1011,7 +1014,7 @@ $num2 = 1;
                     let prodi = $('#prodi').val();
                     $.ajax({
                         type: 'GET',
-                        url: '/get-matkul/' + fixSemester + '/' + prodi,
+                        url: '/scr/get-matkul/' + fixSemester + '/' + prodi,
                         success: function(response) {
                             var response = JSON.parse(response);
                             response.forEach(element => {
@@ -1070,7 +1073,8 @@ $num2 = 1;
                 // console.log(kelas);
                 $.ajax({
                     type: 'GET',
-                    url: '/dosen-matkul/' + fixSemester + '/' + prodi + '/' + kode_matkul + '/' +
+                    url: '/scr/dosen-matkul/' + fixSemester + '/' + prodi + '/' + kode_matkul +
+                        '/' +
                         kelas,
                     success: function(response) {
                         var response = JSON.parse(response);

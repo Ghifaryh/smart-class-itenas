@@ -335,7 +335,7 @@ $jumlah = count($images);
                 </div> --}}
 
                 <div class="container-fluid text-center mt-3 pb-4">
-                    <a href="/dashboard" class="btn btn-book">+ Booking Ruangan</a>
+                    <a href="{{ route('scr.dashboard') }}" class="btn btn-book">+ Booking Ruangan</a>
                 </div>
             </div>
         </div>

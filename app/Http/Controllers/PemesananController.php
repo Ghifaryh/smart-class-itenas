@@ -49,7 +49,7 @@ class PemesananController extends Controller
         // ddd($request);
         Pemesanan::create($validatedData);
 
-        return redirect('/dashboard');
+        return redirect('scr/dashboard');
     }
 
     public function ajaxRequestPost(Request $request)
@@ -212,37 +212,36 @@ class PemesananController extends Controller
                 ->editColumn('action', function ($row) {
                     $btnTerimaAdmin = '
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
                         class="badge bg-success border-0 terima_admin">Terima
                     </button>';
                     $btnPrintAdmin = '
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
                         class="badge bg-primary border-0 print_bukti">Cetak
                     </button>';
                     $btnBatalAdmin = '
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
                         class="badge bg-danger border-0 batal_admin">Batal
                     </button>';
                     $btnBatalHapusAdmin = '
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
                         class="badge bg-danger border-0 batalhapus_admin">Batal
                     </button>';
                     $btnHapusAdmin = '
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
                         class="badge bg-danger border-0 hapus_admin">Hapus
                     </button>';
                     if ($row->Status->keterangan == 'Dihapus' or $row->Status->keterangan == 'Dibatalkan (Dihapus)') {
                         return $btnBatalHapusAdmin . $btnHapusAdmin;
                     } elseif ($row->Status->keterangan == 'Diterima') {
-                        return $btnTerimaAdmin. $btnPrintAdmin. $btnBatalAdmin. $btnHapusAdmin;
-                    } else{
-                        return $btnTerimaAdmin. $btnBatalAdmin. $btnHapusAdmin;
+                        return $btnTerimaAdmin . $btnPrintAdmin . $btnBatalAdmin . $btnHapusAdmin;
+                    } else {
+                        return $btnTerimaAdmin . $btnBatalAdmin . $btnHapusAdmin;
                     }
-                    
                 })
                 ->rawColumns(['waktu_pakai', 'waktu_pesan', 'action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
                 ->make(true);
@@ -301,7 +300,7 @@ class PemesananController extends Controller
                     </button>';
                     $btnPrintDosen = '
                     <button
-                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '" 
+                        data-id="' . $row->id . '" data-name="' . $row->matakuliah . '"
                         class="badge bg-primary border-0 print_bukti">Cetak
                     </button>';
                     if ($row->Status->keterangan == 'Diterima') {
@@ -309,8 +308,6 @@ class PemesananController extends Controller
                     } else {
                         return $btnHapusDosen;
                     }
-                    
-                    
                 })
                 ->rawColumns(['waktu_pakai', 'action', 'fileRPS', 'fileSertif', 'status', 'prodi'])
                 ->make(true);
@@ -335,9 +332,9 @@ class PemesananController extends Controller
     public function destroy($id)
     {
         $check = Pemesanan::find($id);
-        $fileRPScount = Pemesanan::where("fileRPS","=",$check->fileRPS)->count();
-        $fileSertifcount = Pemesanan::where("fileSertif","=",$check->fileSertif)->count();
-        
+        $fileRPScount = Pemesanan::where("fileRPS", "=", $check->fileRPS)->count();
+        $fileSertifcount = Pemesanan::where("fileSertif", "=", $check->fileSertif)->count();
+
         if ($fileRPScount == 1) {
             if ($check->fileRPS !== null) {
                 Storage::delete($check->fileRPS);

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @php
-$num = 1;
+    $num = 1;
 @endphp
 
 @section('pengaturan-home')
@@ -18,7 +18,8 @@ $num = 1;
                         </div>
                     @endif --}}
 
-                    <form action="/pengaturan/update/{{ $homeabout->id }}" method="post" class="formAddRuangan" id="updateAbout">
+                    <form action="/pengaturan/update/{{ $homeabout->id }}" method="post" class="formAddRuangan"
+                        id="updateAbout">
                         @csrf
                         <div class="col mb-3">
                             <label class="col-form-label" for="deskripsi"><b>About</b></label>
@@ -26,7 +27,8 @@ $num = 1;
                             <span class="text-danger error-text deskripsi_error"></span>
                         </div>
                         <div class="mb-3 me-3 px-5 text-end">
-                            <button type="submit" class="btn text-white me-5 btn-truangan fw-bold text-nowrap">Update</button>
+                            <button type="submit"
+                                class="btn text-white me-5 btn-truangan fw-bold text-nowrap">Update</button>
                         </div>
                     </form>
 
@@ -34,7 +36,8 @@ $num = 1;
                         @csrf
                         <div class="col mb-3">
                             <label for="image" class="form-label @error('image') is-invalid @enderror"><b>File
-                                Gambar</b><span class="text-end textPeringatan"> <br>*File harus berupa image dan berukuran
+                                    Gambar</b><span class="text-end textPeringatan"> <br>*File harus berupa image dan
+                                    berukuran
                                     &#8804;
                                     5MB</span></label>
                             <input class="form-control" type="file" id="image" name="image" required>
@@ -70,28 +73,26 @@ $num = 1;
 @endsection
 
 @push('stylePengaturan')
-<style>
-    /* Style summernote */
-    .note-editor .dropdown-toggle::after{
-    all: unset;
-    }
+    <style>
+        /* Style summernote */
+        .note-editor .dropdown-toggle::after {
+            all: unset;
+        }
 
-    .note-editor .note-dropdown-menu {
-        box-sizing: content-box;
-    }
+        .note-editor .note-dropdown-menu {
+            box-sizing: content-box;
+        }
 
-    .note-editor .note-modal-footer {
-        box-sizing: content-box;
-    }
-</style>
+        .note-editor .note-modal-footer {
+            box-sizing: content-box;
+        }
+    </style>
 @endpush
 
 @push('scriptsPengaturan')
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <script>
-        
-    </script>
+    <script></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -101,19 +102,19 @@ $num = 1;
 
         $(document).ready(function() {
             $('.summernote').summernote({
-            placeholder: 'Isi kolom about home',
-            tabsize: 2,
-            height: 120,
-            width: 900,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['codeview', 'help']]
-            ]
+                placeholder: 'Isi kolom about home',
+                tabsize: 2,
+                height: 120,
+                width: 900,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['codeview', 'help']]
+                ]
             });
         });
 
@@ -124,7 +125,7 @@ $num = 1;
                     pageLength: 10,
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('image.list') }}",
+                    ajax: "{{ route('scr.image.list') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex',
